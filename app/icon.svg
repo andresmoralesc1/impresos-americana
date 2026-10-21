@@ -1,0 +1,24 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rounded Brand Shield -->
+  <rect width="64" height="64" rx="14" fill="#121212"/>
+  <rect x="1" y="1" width="62" height="62" rx="13" stroke="#E30613" stroke-width="2" stroke-opacity="0.6"/>
+
+  <!-- Geometric 'iA' Brandmark scaled to center -->
+  <g transform="translate(6, 8) scale(0.26)">
+    <!-- Dynamic speed accents -->
+    <line x1="30" y1="140" x2="55" y2="115" stroke="#E30613" stroke-width="7" stroke-linecap="round"/>
+    <line x1="155" y1="38" x2="180" y2="14" stroke="#E30613" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- 'i' dot (Americana Red) -->
+    <circle cx="78" cy="44" r="16" fill="#E30613"/>
+
+    <!-- 'i' stem (Americana Red) -->
+    <path d="M62 66L42 114C40.5 117.5 42.5 121.5 46.5 122.5L62 126C65.5 127 69 124.5 70.5 121L90 73C91.5 69.5 89.5 65.5 85.5 64.5L70 61C66.5 60 63 62.5 62 66Z" fill="#E30613"/>
+
+    <!-- 'A' geometric body (Crisp Paper White) -->
+    <path d="M96 28C99 23 105 20 111 20H132C140 20 147 25 151 32L182 88C185 94 185 101 182 107L167 132C163 138 156 142 148 142H88C80 142 74 136 74 128V126C74 121 78 116 83 116H142L154 94H114L105 110H86L116 52H128L144 80H160L135 36H114L96 28Z" fill="#FFFFFF"/>
+
+    <!-- Inner counter-space -->
+    <path d="M125 56L142 82H118L125 56Z" fill="#121212"/>
+  </g>
+</svg>

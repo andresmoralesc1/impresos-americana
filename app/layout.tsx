@@ -77,6 +77,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://impresosamericana.com",
   },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+  },
   robots: {
     index: true,
     follow: true,
@@ -172,7 +181,9 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${montserrat.variable} ${inter.variable} scroll-smooth`}>
       <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/icon.svg" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

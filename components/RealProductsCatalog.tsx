@@ -180,13 +180,13 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-red-400 font-bold block mb-2">
             CATÁLOGO OFICIAL DE ARTÍCULOS PUBLICITARIOS
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none mb-4">
             PRODUCTOS CORPORATIVOS & MERCHANDISING
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
             Referencias reales extraídas de nuestros catálogos impresos oficiales de producción 2024.
             Marcación con tampografía, grabado láser, sublimación o impresión UV directa.
           </p>
@@ -202,7 +202,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                   className={`px-5 py-2.5 min-h-[44px] shrink-0 rounded-full text-xs font-montserrat font-semibold transition-all duration-300 ${
                     isActive
                       ? "bg-[#E30613] text-white shadow-[0_0_15px_rgba(227,6,19,0.5)] scale-105"
-                      : "bg-[#1A1A22] text-zinc-300 hover:text-white hover:bg-[#252530] border border-white/5"
+                      : "bg-[#1A1A22] text-zinc-200 hover:text-white hover:bg-[#252530] border border-white/10"
                   }`}
                 >
                   {cat.label}
@@ -238,7 +238,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                   </div>
 
                   {/* Top Badges */}
-                  <div className="absolute top-3 left-3 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-[#E30613] font-bold border border-white/10">
+                  <div className="absolute top-3 left-3 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-red-400 font-bold border border-white/10">
                     {prod.reference}
                   </div>
 
@@ -255,10 +255,10 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#E30613] font-semibold">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-red-400 font-bold">
                         {prod.categoryLabel}
                       </span>
-                      <span className="text-[11px] text-zinc-400 font-mono">
+                      <span className="text-[11px] text-zinc-300 font-mono">
                         {prod.minOrder}
                       </span>
                     </div>
@@ -272,7 +272,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                       {prod.specs.map((sp, i) => (
                         <span
                           key={i}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#131318] text-zinc-300 border border-white/5"
+                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#131318] text-zinc-200 border border-white/10"
                         >
                           {sp}
                         </span>
@@ -283,7 +283,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                   {/* Pricing and Action */}
                   <div className="pt-4 border-t border-white/10 flex items-center justify-between">
                     <div>
-                      <span className="text-[10px] font-mono text-zinc-400 block">
+                      <span className="text-[10px] font-mono text-zinc-300 block">
                         Desde:
                       </span>
                       <span className="font-montserrat font-black text-lg text-white">
@@ -314,7 +314,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
               PDF
             </div>
             <div>
-              <span className="text-[10px] font-mono text-[#E30613] font-bold uppercase tracking-widest block">
+              <span className="text-[10px] font-mono text-red-400 font-bold uppercase tracking-widest block">
                 DOCUMENTACIÓN Y TARIFARIOS OFICIALES
               </span>
               <h3 className="font-montserrat font-bold text-xl text-white">
@@ -323,7 +323,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
             </div>
           </div>
 
-          <p className="text-xs text-zinc-300 max-w-3xl mb-6 leading-relaxed">
+          <p className="text-xs text-zinc-200 max-w-3xl mb-6 leading-relaxed">
             Si eres director de mercadeo, agencia o compras institucionales, descarga los
             documentos oficiales con todas las referencias, medidas técnicas y escalas de precios al por mayor.
           </p>
@@ -332,11 +332,11 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
             {/* Catalog 1 */}
             <div className="p-4 rounded-xl bg-[#121217] border border-white/10 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono text-zinc-400 uppercase">116 Páginas • 98 MB</span>
+                <span className="text-[10px] font-mono text-zinc-300 uppercase">116 Páginas • 98 MB</span>
                 <h4 className="font-montserrat font-bold text-sm text-white mt-1 mb-2">
                   Catálogo Maestro Impresos Americana
                 </h4>
-                <p className="text-[11px] text-zinc-400">
+                <p className="text-[11px] text-zinc-300">
                   Material POP, oficina, termos de temperatura, agendas y tecnología.
                 </p>
               </div>
@@ -353,11 +353,11 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
             {/* Catalog 2 */}
             <div className="p-4 rounded-xl bg-[#121217] border border-white/10 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono text-zinc-400 uppercase">Edición 2024 • 192 MB</span>
+                <span className="text-[10px] font-mono text-zinc-300 uppercase">Edición 2024 • 192 MB</span>
                 <h4 className="font-montserrat font-bold text-sm text-white mt-1 mb-2">
                   Esferos y Llaveros Publicitarios
                 </h4>
-                <p className="text-[11px] text-zinc-400">
+                <p className="text-[11px] text-zinc-300">
                   Línea completa de lapiceros plásticos, metálicos, ecológicos y llaveros en aluminio.
                 </p>
               </div>
@@ -374,11 +374,11 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
             {/* Catalog 3 */}
             <div className="p-4 rounded-xl bg-[#121217] border border-white/10 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono text-zinc-400 uppercase">Regalos & POP • 188 MB</span>
+                <span className="text-[10px] font-mono text-zinc-300 uppercase">Regalos & POP • 188 MB</span>
                 <h4 className="font-montserrat font-bold text-sm text-white mt-1 mb-2">
                   Productos Publicitarios Especiales
                 </h4>
-                <p className="text-[11px] text-zinc-400">
+                <p className="text-[11px] text-zinc-300">
                   Bolsas ecológicas, paraguas, artículos de viaje y kits corporativos para eventos.
                 </p>
               </div>

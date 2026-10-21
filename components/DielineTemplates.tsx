@@ -106,13 +106,13 @@ export function DielineTemplates() {
     <section id="plantillas" className="py-24 bg-[#121212] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-red-400 font-bold block mb-2">
             CENTRO DE DESCARGAS DE PREPRENSA
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none mb-4">
             PLANTILLAS Y PLANOS DE TROQUEL
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
             Descarga planos mecánicos aprobados para producción industrial. Listos con guías
             de corte, líneas de hendido y áreas de sangrado para Adobe Illustrator y PDF.
           </p>
@@ -123,19 +123,19 @@ export function DielineTemplates() {
           {templates.map((tpl) => (
             <div
               key={tpl.id}
-              className="p-6 rounded-2xl bg-[#181820] border border-white/10 hover:border-[#E30613]/50 transition-all flex flex-col justify-between shadow-xl"
+              className="p-6 rounded-2xl bg-[#181820] border border-white/10 hover:border-red-500/50 transition-all flex flex-col justify-between shadow-xl"
             >
               <div>
-                <span className="text-[10px] font-mono text-[#E30613] font-bold uppercase tracking-wider block mb-1">
+                <span className="text-[10px] font-mono text-red-400 font-bold uppercase tracking-wider block mb-1">
                   {tpl.category}
                 </span>
                 <h3 className="font-montserrat font-bold text-base text-white mb-3">
                   {tpl.name}
                 </h3>
 
-                <div className="space-y-1.5 text-xs text-zinc-300 font-mono mb-6">
-                  <div className="flex items-center gap-1.5 text-zinc-400">
-                    <Ruler className="w-3.5 h-3.5 text-zinc-500" />
+                <div className="space-y-1.5 text-xs text-zinc-200 font-mono mb-6">
+                  <div className="flex items-center gap-1.5 text-zinc-200">
+                    <Ruler className="w-3.5 h-3.5 text-zinc-400" />
                     <span>Medidas: {tpl.dimensions}</span>
                   </div>
                   <div>• Escala: {tpl.scale}</div>
@@ -149,7 +149,7 @@ export function DielineTemplates() {
                 onClick={() => handleDownload(tpl)}
                 className="w-full py-2.5 px-4 rounded-xl bg-[#22222B] hover:bg-[#E30613] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 group"
               >
-                <Download className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
+                <Download className="w-4 h-4 text-zinc-300 group-hover:text-white transition-colors" />
                 <span>
                   {downloadSuccess === tpl.id ? "¡Descargado!" : "Descargar Troquel"}
                 </span>
@@ -161,14 +161,14 @@ export function DielineTemplates() {
         {/* Technical Checklist Box */}
         <div className="rounded-2xl bg-[#16161D] border border-white/10 p-6 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-[#E30613]/10 text-[#E30613] shrink-0">
+            <div className="p-3 rounded-xl bg-[#E30613]/10 text-red-400 shrink-0">
               <AlertTriangle className="w-6 h-6" />
             </div>
             <div>
               <h4 className="font-montserrat font-bold text-sm text-white uppercase">
                 Guía Rápida de Envío de Archivos a Máquina
               </h4>
-              <p className="text-xs text-zinc-400 mt-1 max-w-2xl leading-relaxed">
+              <p className="text-xs text-zinc-200 mt-1 max-w-2xl leading-relaxed">
                 1. Textos convertidos a curvas (Ctrl+Shift+O) • 2. Perfil de color CMYK FOGRA39 (sin RGB ni tintas directas sin especificar) • 3. Imágenes incrustadas a 300 DPI • 4. Sangría mínima de 5 mm por lado.
               </p>
             </div>

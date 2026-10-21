@@ -78,13 +78,13 @@ export function CapabilitiesSection() {
     <section id="servicios" className="py-24 bg-[#0F0F14] relative overflow-hidden border-t border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-red-400 font-bold block mb-2">
             INFRAESTRUCTURA Y PARQUE DE MAQUINARIA
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none mb-4">
             POTENCIA INDUSTRIAL DE IMPRESIÓN
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
             Nuestra planta en Cali cuenta con tecnología alemana, suiza y japonesa de última
             generación para garantizar tiempos de respuesta inalcanzables para talleres convencionales.
           </p>
@@ -99,15 +99,15 @@ export function CapabilitiesSection() {
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-mono text-[#E30613] font-bold uppercase tracking-wider">
+                  <span className="text-xs font-mono text-red-400 font-bold uppercase tracking-wider">
                     {item.brand}
                   </span>
-                  <Factory className="w-4 h-4 text-zinc-500" />
+                  <Factory className="w-4 h-4 text-zinc-400" />
                 </div>
                 <h3 className="font-montserrat font-bold text-lg text-white mb-2">
                   {item.name}
                 </h3>
-                <p className="text-xs text-zinc-400 leading-relaxed mb-4">
+                <p className="text-xs text-zinc-200 leading-relaxed mb-4">
                   {item.specs}
                 </p>
               </div>
@@ -126,11 +126,11 @@ export function CapabilitiesSection() {
               <h3 className="font-montserrat font-black text-xl text-white uppercase">
                 Matriz de Sustratos & Acabados Industriales
               </h3>
-              <p className="text-xs text-zinc-400 font-mono mt-0.5">
+              <p className="text-xs text-zinc-300 font-mono mt-0.5">
                 Especificaciones de stock permanente en almacén central
               </p>
             </div>
-            <span className="hidden sm:inline-block text-xs font-mono bg-white/5 text-zinc-300 px-3 py-1 rounded-full border border-white/10">
+            <span className="hidden sm:inline-block text-xs font-mono bg-white/5 text-zinc-200 px-3 py-1 rounded-full border border-white/10 font-medium">
               Certificaciones FSC & ISO 14001
             </span>
           </div>
@@ -138,16 +138,16 @@ export function CapabilitiesSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {substrates.map((sub, idx) => (
               <div key={idx} className="space-y-3">
-                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#E30613] border-b border-white/10 pb-2">
+                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-red-400 border-b border-white/10 pb-2">
                   {sub.category}
                 </h4>
                 <ul className="space-y-2">
                   {sub.items.map((item, itemIdx) => (
                     <li
                       key={itemIdx}
-                      className="text-xs text-zinc-300 flex items-start gap-2 leading-tight"
+                      className="text-xs text-zinc-200 flex items-start gap-2 leading-tight"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-white/40 mt-1 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1 shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}

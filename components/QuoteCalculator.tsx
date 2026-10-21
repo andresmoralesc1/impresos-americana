@@ -198,15 +198,15 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Title matching Image 1 */}
         <div className="text-center mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
-            CALCULADOR INDUSTRIAL EN TIEMPO REAL
-          </span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/50 border border-red-500/40 text-xs font-mono font-bold text-red-300 mb-3 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#E30613]" />
+            COTIZADOR DE PLANTA EN TIEMPO REAL
+          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none">
-            CONFIGURA TU PROYECTO
+            COTIZA TU PROYECTO INDUSTRIAL
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base mt-3 max-w-2xl mx-auto">
-            Configura parámetros exactos de impresión, sustratos y acabados para recibir
-            precios en tiempo real, descargar ficha técnica en PDF y formalizar vía WhatsApp.
+          <p className="text-zinc-200 text-sm sm:text-base mt-3 max-w-2xl mx-auto font-normal leading-relaxed">
+            Selecciona el sustrato, acabados y volumen deseado. Obtén el valor exacto en Pesos Colombianos (COP), descarga tu cotización formal en PDF con membrete oficial o transfierela a un asesor técnico por WhatsApp.
           </p>
         </div>
 
@@ -325,8 +325,8 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
             <div className="space-y-6">
               {/* STEP 1: Categoría de Producto */}
               <div>
-                <label className="text-xs font-mono font-bold uppercase tracking-wider text-[#E30613] block mb-2">
-                  STEP 1: Categoría de Producto
+                <label className="text-xs font-mono font-bold uppercase tracking-wider text-red-400 block mb-2">
+                  PASO 1: Categoría de Producto
                 </label>
                 <div className="relative">
                   <select
@@ -336,7 +336,7 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                       setCategory(newCat);
                       setSubstrate(substratesByCategory[newCat][0].id);
                     }}
-                    className="w-full bg-[#121216] border border-white/15 rounded-xl px-4 py-3.5 text-white font-montserrat font-semibold text-sm appearance-none focus:outline-none focus:border-[#E30613] transition-colors cursor-pointer"
+                    className="w-full bg-[#121216] border border-white/20 rounded-xl px-4 py-3.5 text-white font-montserrat font-bold text-sm appearance-none focus:outline-none focus:border-[#E30613] transition-colors cursor-pointer"
                   >
                     {categories.map((c) => (
                       <option key={c.id} value={c.id} className="bg-[#18181F] text-white">
@@ -344,14 +344,14 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                       </option>
                     ))}
                   </select>
-                  <ChevronDown className="w-4 h-4 text-zinc-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <ChevronDown className="w-4 h-4 text-zinc-300 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
               </div>
 
               {/* STEP 2: Material y Sustrato */}
               <div>
-                <label className="text-xs font-mono font-bold uppercase tracking-wider text-[#E30613] block mb-2">
-                  STEP 2: Material y Sustrato
+                <label className="text-xs font-mono font-bold uppercase tracking-wider text-red-400 block mb-2">
+                  PASO 2: Material y Sustrato
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {currentSubstrates.map((s) => {
@@ -363,19 +363,19 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                         onClick={() => setSubstrate(s.id)}
                         className={`p-3.5 rounded-xl text-left border transition-all duration-200 flex flex-col justify-between ${
                           isSelected
-                            ? "border-[#E30613] bg-[#E30613]/10 ring-1 ring-[#E30613]"
-                            : "border-white/10 bg-[#121216] hover:border-white/20"
+                            ? "border-[#E30613] bg-[#E30613]/20 ring-2 ring-[#E30613]"
+                            : "border-white/20 bg-[#121216] hover:border-white/40"
                         }`}
                       >
                         <span
                           className={`text-xs font-montserrat font-bold leading-tight ${
-                            isSelected ? "text-white" : "text-zinc-300"
+                            isSelected ? "text-white" : "text-zinc-200"
                           }`}
                         >
                           {s.name}
                         </span>
                         {s.recommended && (
-                          <span className="text-[10px] font-mono text-[#E30613] font-semibold mt-2 block">
+                          <span className="text-[10px] font-mono text-red-400 font-bold mt-2 block">
                             (Recomendado)
                           </span>
                         )}
@@ -387,8 +387,8 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
 
               {/* STEP 3: Acabados Especiales */}
               <div>
-                <label className="text-xs font-mono font-bold uppercase tracking-wider text-[#E30613] block mb-2">
-                  STEP 3: Acabados Especiales
+                <label className="text-xs font-mono font-bold uppercase tracking-wider text-red-400 block mb-2">
+                  PASO 3: Acabados Especiales
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {finishesList.map((finish) => {
@@ -401,19 +401,19 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                         className={`flex items-center gap-3 p-3 rounded-xl border text-left transition-all ${
                           isChecked
                             ? "bg-[#1E1E28] border-[#E30613] text-white"
-                            : "bg-[#121216] border-white/10 text-zinc-400 hover:text-zinc-200"
+                            : "bg-[#121216] border-white/20 text-zinc-200 hover:text-white"
                         }`}
                       >
                         <div
                           className={`w-5 h-5 rounded flex items-center justify-center border transition-colors ${
                             isChecked
                               ? "bg-[#E30613] border-[#E30613] text-white"
-                              : "border-zinc-600 bg-transparent"
+                              : "border-zinc-400 bg-transparent"
                           }`}
                         >
                           {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                         </div>
-                        <span className="text-xs font-medium">{finish.name}</span>
+                        <span className="text-xs font-semibold">{finish.name}</span>
                       </button>
                     );
                   })}
@@ -423,42 +423,42 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
               {/* STEP 4: Cantidad con Volume Discount Badges */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-mono font-bold uppercase tracking-wider text-[#E30613]">
-                    STEP 4: Cantidad
+                  <label className="text-xs font-mono font-bold uppercase tracking-wider text-red-400">
+                    PASO 4: Cantidad
                   </label>
-                  <span className="text-[11px] text-zinc-400 font-mono">
+                  <span className="text-xs text-zinc-300 font-mono font-medium">
                     Escala de Descuento por Volumen
                   </span>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-4">
                   {/* Stepper buttons (44x44px touch targets) */}
-                  <div className="flex items-center bg-[#121212] border border-white/15 rounded-xl p-1">
+                  <div className="flex items-center bg-[#121212] border border-white/25 rounded-xl p-1">
                     <button
                       type="button"
                       onClick={() => setQuantity(Math.max(10, quantity - 25))}
-                      className="w-11 h-11 flex items-center justify-center hover:bg-white/10 active:bg-white/20 text-zinc-300 rounded-lg transition-colors"
+                      className="w-11 h-11 flex items-center justify-center hover:bg-white/10 active:bg-white/20 text-white rounded-lg transition-colors font-bold"
                       aria-label="Disminuir cantidad"
                     >
                       <Minus className="w-4 h-4" />
                     </button>
-                    <span className="w-16 text-center font-montserrat font-bold text-lg text-white">
+                    <span className="w-16 text-center font-montserrat font-black text-xl text-white">
                       {quantity}
                     </span>
                     <button
                       type="button"
                       onClick={() => setQuantity(quantity + 25)}
-                      className="w-11 h-11 flex items-center justify-center hover:bg-white/10 active:bg-white/20 text-zinc-300 rounded-lg transition-colors"
+                      className="w-11 h-11 flex items-center justify-center hover:bg-white/10 active:bg-white/20 text-white rounded-lg transition-colors font-bold"
                       aria-label="Aumentar cantidad"
                     >
                       <Plus className="w-4 h-4" />
                     </button>
                   </div>
 
-                  <span className="text-sm font-medium text-zinc-300">unidades</span>
+                  <span className="text-sm font-semibold text-zinc-100">unidades</span>
 
                   {discountPercentage > 0 && (
-                    <div className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-montserrat font-bold animate-pulse">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-500/25 border border-emerald-500/50 text-emerald-300 text-xs font-montserrat font-bold animate-pulse">
                       <Sparkles className="w-3.5 h-3.5" />
                       <span>Ahorra {discountPercentage}%</span>
                     </div>
@@ -470,10 +470,10 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                         key={tier}
                         type="button"
                         onClick={() => setQuantity(tier)}
-                        className={`flex-1 sm:flex-none text-xs font-mono py-2 px-3 rounded-lg border transition-colors min-h-[40px] flex items-center justify-center ${
+                        className={`flex-1 sm:flex-none text-xs font-mono font-bold py-2 px-3 rounded-lg border transition-colors min-h-[40px] flex items-center justify-center ${
                           quantity === tier
-                            ? "bg-[#E30613] text-white border-[#E30613]"
-                            : "bg-[#121216] text-zinc-400 border-white/10 hover:text-white"
+                            ? "bg-[#E30613] text-white border-[#E30613] shadow-md"
+                            : "bg-[#121216] text-zinc-200 border-white/20 hover:text-white hover:border-white/40"
                         }`}
                       >
                         {tier}u
@@ -485,7 +485,7 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
 
               {/* Delivery destination selector */}
               <div>
-                <label className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 block mb-1.5">
+                <label className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300 block mb-1.5">
                   Ciudad de Despacho (Colombia)
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -495,10 +495,10 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                         key={city}
                         type="button"
                         onClick={() => setCustomerCity(city)}
-                        className={`text-xs px-3.5 py-2.5 min-h-[42px] rounded-lg border transition-all flex items-center ${
+                        className={`text-xs px-3.5 py-2.5 min-h-[42px] rounded-lg border transition-all flex items-center font-medium ${
                           customerCity === city
-                            ? "bg-white/15 border-white text-white font-semibold"
-                            : "bg-[#121216] border-white/10 text-zinc-400 hover:text-white"
+                            ? "bg-white/20 border-white text-white font-bold"
+                            : "bg-[#121216] border-white/20 text-zinc-200 hover:text-white"
                         }`}
                       >
                         {city}
@@ -512,33 +512,33 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
         </div>
 
         {/* Bottom Price & CTA Floating Panel matching Image 1 */}
-        <div className="mt-8 rounded-2xl bg-[#181820]/95 backdrop-blur-xl border border-white/15 p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative overflow-hidden">
+        <div className="mt-8 rounded-2xl bg-[#181820]/98 backdrop-blur-xl border border-white/20 p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             {/* Left Summary Box with exact COP Totals */}
-            <div className="md:col-span-5 border-b md:border-b-0 md:border-r border-white/10 pb-4 md:pb-0 md:pr-6">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#E30613] font-bold block mb-1">
-                Resumen de Configuración & Valor Formal
+            <div className="md:col-span-5 border-b md:border-b-0 md:border-r border-white/15 pb-4 md:pb-0 md:pr-6">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-red-400 font-bold block mb-1">
+                Resumen de Configuración & Cotización Formal
               </span>
-              <h4 className="text-lg font-montserrat font-bold text-white mb-1">
+              <h4 className="text-xl font-montserrat font-bold text-white mb-2">
                 {currentCategoryData?.label} x {quantity} uds
               </h4>
-              <p className="text-xs text-zinc-300 font-mono">
-                • Sustrato: {activeSubstrateName} <br />
-                • Acabados: {selectedFinishNames || "Estándar"} <br />
-                • Subtotal: ${totalSubtotalCOP.toLocaleString("es-CO")} COP <br />
-                • Total con IVA (19%):{" "}
-                <strong className="text-white">
+              <p className="text-xs text-zinc-200 font-sans leading-relaxed">
+                • <strong className="text-white">Sustrato:</strong> {activeSubstrateName} <br />
+                • <strong className="text-white">Acabados:</strong> {selectedFinishNames || "Estándar"} <br />
+                • <strong className="text-white">Subtotal:</strong> ${totalSubtotalCOP.toLocaleString("es-CO")} COP <br />
+                • <strong className="text-white">Total con IVA (19% DIAN):</strong>{" "}
+                <span className="text-white font-bold text-sm bg-white/10 px-2 py-0.5 rounded">
                   ${totalConIVACOP.toLocaleString("es-CO")} COP
-                </strong>
+                </span>
               </p>
-              <div className="mt-3 flex items-center gap-3 text-xs text-zinc-400">
-                <span className="flex items-center gap-1 text-emerald-400">
+              <div className="mt-3 flex items-center gap-3 text-xs text-zinc-300 font-medium">
+                <span className="flex items-center gap-1 text-emerald-400 font-semibold">
                   <Clock className="w-3.5 h-3.5" />
                   Entrega: 3-5 días hábiles
                 </span>
                 <span>•</span>
-                <span className="flex items-center gap-1 text-zinc-300">
-                  <Truck className="w-3.5 h-3.5 text-[#E30613]" />
+                <span className="flex items-center gap-1 text-zinc-100">
+                  <Truck className="w-3.5 h-3.5 text-red-400" />
                   {customerCity}
                 </span>
               </div>
@@ -549,14 +549,14 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
               <button
                 type="button"
                 onClick={() => setShowUploadModal(true)}
-                className="w-full h-full p-4 rounded-xl border border-dashed border-white/20 hover:border-[#E30613] bg-[#121216]/60 hover:bg-[#121216] transition-all flex flex-col items-center justify-center text-center group"
+                className="w-full h-full p-4 rounded-xl border border-dashed border-white/30 hover:border-red-400 bg-[#121216]/80 hover:bg-[#121216] transition-all flex flex-col items-center justify-center text-center group"
               >
-                <UploadCloud className="w-6 h-6 text-zinc-400 group-hover:text-[#E30613] transition-colors mb-1.5" />
+                <UploadCloud className="w-6 h-6 text-zinc-300 group-hover:text-red-400 transition-colors mb-1.5" />
                 <span className="text-xs font-montserrat font-bold text-white block">
-                  {uploadedFile ? uploadedFile.name : "Subir mi Diseño"}
+                  {uploadedFile ? uploadedFile.name : "Subir mi Diseño (Preflight)"}
                 </span>
-                <span className="text-[10px] text-zinc-400 font-mono">
-                  {uploadedFile ? "Archivo cargado" : "(.PDF, .AI, .CDR)"}
+                <span className="text-[11px] text-zinc-300 font-mono mt-0.5">
+                  {uploadedFile ? "Arte Validado ✓" : "(.PDF, .AI, .CDR a 300 DPI)"}
                 </span>
               </button>
             </div>

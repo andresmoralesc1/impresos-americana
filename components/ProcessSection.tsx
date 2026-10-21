@@ -60,13 +60,13 @@ export function ProcessSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-red-400 font-bold block mb-2">
             FLUJO INDUSTRIAL CERTIFICADO
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none mb-4">
             DE LA IDEA AL PUNTO DE VENTA
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
             Un pipeline de ingeniería gráfica estructurado para eliminar reprocesos,
             garantizar fidelidad cromática y cumplir fechas de lanzamiento corporativas.
           </p>
@@ -83,12 +83,12 @@ export function ProcessSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.12 }}
-                className="group relative rounded-2xl bg-[#18181F] border border-white/10 hover:border-[#E30613]/50 p-6 flex flex-col justify-between transition-all duration-300 shadow-xl corner-slash-red"
+                className="group relative rounded-2xl bg-[#18181F] border border-white/10 hover:border-red-500/50 p-6 flex flex-col justify-between transition-all duration-300 shadow-xl corner-slash-red"
               >
                 <div>
                   {/* Step Number & Icon */}
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-montserrat font-black text-3xl text-white/20 group-hover:text-[#E30613] transition-colors">
+                    <span className="font-montserrat font-black text-3xl text-white/20 group-hover:text-red-400 transition-colors">
                       {step.number}
                     </span>
                     <div className="w-12 h-12 rounded-xl bg-[#23232C] group-hover:bg-[#E30613] text-white flex items-center justify-center transition-all duration-300 shadow-md">
@@ -99,10 +99,10 @@ export function ProcessSection() {
                   <h3 className="font-montserrat font-bold text-lg text-white mb-1 group-hover:text-red-400 transition-colors">
                     {step.title}
                   </h3>
-                  <p className="text-xs font-mono text-[#E30613] font-semibold mb-3">
+                  <p className="text-xs font-mono text-red-400 font-bold mb-3">
                     {step.subtitle}
                   </p>
-                  <p className="text-xs text-zinc-400 leading-relaxed mb-6">
+                  <p className="text-xs text-zinc-200 leading-relaxed mb-6">
                     {step.desc}
                   </p>
                 </div>
@@ -110,18 +110,18 @@ export function ProcessSection() {
                 {/* Bottom Metadata Badges */}
                 <div className="pt-4 border-t border-white/10 space-y-2">
                   <div className="flex items-center justify-between text-[11px] font-mono">
-                    <span className="text-zinc-400 flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-zinc-500" />
+                    <span className="text-zinc-300 flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 text-zinc-400" />
                       Tiempo estimado:
                     </span>
-                    <span className="text-zinc-200 font-semibold">{step.time}</span>
+                    <span className="text-zinc-100 font-semibold">{step.time}</span>
                   </div>
                   <div className="flex items-center justify-between text-[11px] font-mono">
-                    <span className="text-zinc-400 flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                    <span className="text-zinc-300 flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                       Entregable:
                     </span>
-                    <span className="text-zinc-300">{step.deliverable}</span>
+                    <span className="text-zinc-100 font-medium">{step.deliverable}</span>
                   </div>
                 </div>
               </motion.div>
@@ -133,13 +133,13 @@ export function ProcessSection() {
         <div className="mt-12 rounded-xl bg-[#16161D] border border-white/10 p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <ShieldCheck className="w-6 h-6 text-emerald-400 shrink-0" />
-            <p className="text-xs sm:text-sm text-zinc-300 font-medium">
+            <p className="text-xs sm:text-sm text-zinc-200 font-medium">
               <strong className="text-white">Política de Cero Desperdicio:</strong> Si el producto final presenta discrepancia técnica con la muestra física aprobada, reimprimimos el lote sin costo adicional.
             </p>
           </div>
           <a
             href="#cotizador"
-            className="shrink-0 text-xs font-montserrat font-bold uppercase text-[#E30613] hover:text-white flex items-center gap-1 tracking-wider"
+            className="shrink-0 text-xs font-montserrat font-bold uppercase text-red-400 hover:text-white flex items-center gap-1 tracking-wider"
           >
             Solicitar Muestra Técnica
             <ChevronRight className="w-4 h-4" />

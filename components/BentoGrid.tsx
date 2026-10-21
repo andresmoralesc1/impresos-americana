@@ -119,15 +119,15 @@ export function BentoGrid() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header matching Image 2 */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
-            PROYECTOS DESTACADOS
-          </span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/50 border border-red-500/40 text-xs font-mono font-bold text-red-300 mb-3 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#E30613]" />
+            CASOS REALES EN RETAIL COLOMBIANO
+          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none mb-4">
             NUESTRO TRABAJO EN ACCIÓN
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
-            Explora instalaciones reales en almacenes de cadena, eventos masivos y sedes
-            corporativas a lo largo y ancho de Colombia.
+          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed font-normal">
+            Fabricaciones e instalaciones reales en cadenas de supermercados, retail farmacéutico, eventos feriales y sedes corporativas en toda Colombia.
           </p>
 
           {/* Category Filter Pills (Mobile horizontal scroll + 44px touch target) */}
@@ -318,10 +318,10 @@ export function BentoGrid() {
                   <div className="p-6 flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="text-xs font-mono uppercase tracking-wider text-[#E30613] font-semibold">
+                        <span className="text-xs font-mono uppercase tracking-wider text-red-400 font-bold">
                           {project.categoryLabel}
                         </span>
-                        <span className="text-[11px] text-zinc-400 font-mono">
+                        <span className="text-[11px] text-zinc-300 font-mono">
                           {project.clientSector}
                         </span>
                       </div>
@@ -335,7 +335,7 @@ export function BentoGrid() {
                         {project.specs.map((spec, i) => (
                           <span
                             key={i}
-                            className="text-[11px] px-2.5 py-1 rounded bg-[#18181F] text-zinc-300 border border-white/5 font-mono"
+                            className="text-[11px] px-2.5 py-1 rounded bg-[#18181F] text-zinc-200 border border-white/10 font-mono"
                           >
                             {spec}
                           </span>
@@ -347,12 +347,12 @@ export function BentoGrid() {
                     <div className="pt-3 border-t border-white/10 flex items-center justify-between">
                       <a
                         href="#cotizador"
-                        className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-300 group-hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-100 group-hover:text-white transition-colors"
                       >
                         <span>Cotizar Proyecto Similar</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-[#E30613] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        <ArrowUpRight className="w-3.5 h-3.5 text-red-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </a>
-                      <span className="text-[11px] text-zinc-500 font-mono">
+                      <span className="text-[11px] text-zinc-300 font-mono">
                         Producción Industrial
                       </span>
                     </div>
@@ -369,10 +369,10 @@ export function BentoGrid() {
 
           <div className="relative z-10 text-center md:text-left">
             <h3 className="text-xl sm:text-2xl lg:text-3xl font-montserrat font-black text-white uppercase tracking-tight leading-tight">
-              TRANSFORMAMOS TUS IDEAS EN IMPACTO VISUAL
+              ¿LISTO PARA EXHIBIR TU MARCA EN PUNTOS DE VENTA NACIONALES?
             </h3>
-            <p className="text-white/90 text-sm mt-1 max-w-xl">
-              Agenda una sesión con nuestro equipo de ingeniería de empaque y diseño estructural.
+            <p className="text-white text-sm font-medium mt-1 max-w-xl">
+              Ingeniería de empaque, prototipado estructural en 24h y despacho industrial desde Cali a toda Colombia.
             </p>
           </div>
 
@@ -380,7 +380,7 @@ export function BentoGrid() {
             href="#cotizador"
             className="relative z-10 shrink-0 bg-white hover:bg-zinc-100 text-[#121212] font-montserrat font-black text-xs uppercase tracking-wider px-7 py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:scale-105"
           >
-            Inicia tu proyecto hoy
+            Cotizar Producción Industrial
           </a>
         </div>
       </div>

@@ -41,13 +41,13 @@ export function CaseStudiesSection() {
     <section className="py-24 bg-[#0B0B0E] relative overflow-hidden border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-red-400 font-bold block mb-2">
             MÉTRICAS Y RESULTADOS COMPROBADOS
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none mb-4">
             IMPACTO REAL EN EL PUNTO DE VENTA
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
             No solo imprimimos sustratos: diseñamos soluciones de ingeniería gráfica que
             aceleran la decisión de compra del consumidor y resisten la operación física del retail.
           </p>
@@ -58,10 +58,10 @@ export function CaseStudiesSection() {
           {cases.map((cs, idx) => (
             <div
               key={idx}
-              className="p-8 rounded-2xl bg-[#15151D] border border-white/10 hover:border-[#E30613]/50 transition-all flex flex-col justify-between shadow-2xl relative overflow-hidden group corner-slash-red"
+              className="p-8 rounded-2xl bg-[#15151D] border border-white/10 hover:border-red-500/50 transition-all flex flex-col justify-between shadow-2xl relative overflow-hidden group corner-slash-red"
             >
               <div>
-                <span className="text-[10px] font-mono uppercase text-[#E30613] font-bold tracking-wider block mb-3">
+                <span className="text-[10px] font-mono uppercase text-red-400 font-bold tracking-wider block mb-3">
                   {cs.brand}
                 </span>
 
@@ -69,7 +69,7 @@ export function CaseStudiesSection() {
                   <span className="text-4xl sm:text-5xl font-montserrat font-black text-white group-hover:text-red-400 transition-colors">
                     {cs.metric}
                   </span>
-                  <span className="text-xs font-mono text-zinc-400 font-semibold uppercase">
+                  <span className="text-xs font-mono text-zinc-300 font-semibold uppercase">
                     {cs.metricLabel}
                   </span>
                 </div>
@@ -78,7 +78,7 @@ export function CaseStudiesSection() {
                   {cs.headline}
                 </h3>
 
-                <p className="text-xs text-zinc-400 leading-relaxed mb-6">
+                <p className="text-xs text-zinc-200 leading-relaxed mb-6">
                   {cs.description}
                 </p>
 
@@ -86,7 +86,7 @@ export function CaseStudiesSection() {
                   {cs.tags.map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#1C1C26] text-zinc-300 border border-white/5"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#1C1C26] text-zinc-200 border border-white/10"
                     >
                       {tag}
                     </span>

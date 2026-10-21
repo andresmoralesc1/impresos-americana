@@ -29,13 +29,13 @@ export function FinishComparator() {
     <section className="py-20 bg-[#0E0E12] relative overflow-hidden border-t border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-red-400 font-bold block mb-2">
             LABORATORIO DE ACABADOS INDUSTRIALES
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none mb-4">
             LAMINADO MATE VS. BRILLO UV SECTORIZADO
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
             Arrastra el divisor interactivo para apreciar el contraste óptico y táctil
             entre la elegancia antirreflejo del mate y el impacto refractivo del barniz UV de alto relieve.
           </p>
@@ -47,7 +47,7 @@ export function FinishComparator() {
               className={`px-4 py-1.5 rounded-full text-xs font-montserrat font-bold transition-all ${
                 activeItem === "pop"
                   ? "bg-[#E30613] text-white shadow-[0_0_15px_rgba(227,6,19,0.5)]"
-                  : "bg-[#181820] text-zinc-400 hover:text-white"
+                  : "bg-[#181820] text-zinc-300 hover:text-white"
               }`}
             >
               Exhibidor POP
@@ -57,7 +57,7 @@ export function FinishComparator() {
               className={`px-4 py-1.5 rounded-full text-xs font-montserrat font-bold transition-all ${
                 activeItem === "catalogo"
                   ? "bg-[#E30613] text-white shadow-[0_0_15px_rgba(227,6,19,0.5)]"
-                  : "bg-[#181820] text-zinc-400 hover:text-white"
+                  : "bg-[#181820] text-zinc-300 hover:text-white"
               }`}
             >
               Portada Catálogo
@@ -67,7 +67,7 @@ export function FinishComparator() {
               className={`px-4 py-1.5 rounded-full text-xs font-montserrat font-bold transition-all ${
                 activeItem === "empaque"
                   ? "bg-[#E30613] text-white shadow-[0_0_15px_rgba(227,6,19,0.5)]"
-                  : "bg-[#181820] text-zinc-400 hover:text-white"
+                  : "bg-[#181820] text-zinc-300 hover:text-white"
               }`}
             >
               Caja Rígida
@@ -172,11 +172,11 @@ export function FinishComparator() {
           {/* Comparison Specs Table */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
             <div className="p-4 rounded-xl bg-[#181820] border border-white/10">
-              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300 mb-2 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-zinc-400" />
+              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-200 mb-2 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-zinc-300" />
                 Cuándo Elegir Laminado Mate:
               </h4>
-              <ul className="text-xs text-zinc-400 space-y-1.5">
+              <ul className="text-xs text-zinc-200 space-y-1.5">
                 <li>• Ambientes con iluminación directa intensa en tienda para evitar reflejos.</li>
                 <li>• Packaging de lujo, productos gourmet y cosméticos de alta gama.</li>
                 <li>• Tacto sedoso premium que protege contra grasa y huellas dactilares.</li>
@@ -184,11 +184,11 @@ export function FinishComparator() {
             </div>
 
             <div className="p-4 rounded-xl bg-[#181820] border border-[#E30613]/30">
-              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#E30613] mb-2 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#E30613]" />
+              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-red-400 mb-2 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-red-400" />
                 Cuándo Elegir Brillo UV Sectorizado:
               </h4>
-              <ul className="text-xs text-zinc-400 space-y-1.5">
+              <ul className="text-xs text-zinc-200 space-y-1.5">
                 <li>• Para resaltar el logotipo de marca, títulos o fotografías de producto.</li>
                 <li>• Exhibidores POP en retail donde la luz cenital crea destellos comerciales.</li>
                 <li>• Combinado sobre base mate crea un contraste táctil inolvidable.</li>

@@ -30,7 +30,7 @@ export function Footer() {
   ];
 
   return (
-    <footer id="contacto" className="bg-[#0A0A0D] border-t border-white/10 text-zinc-400 text-xs relative pt-16 pb-12 overflow-hidden">
+    <footer id="contacto" className="bg-[#0A0A0D] border-t border-white/10 text-zinc-300 text-xs relative pt-16 pb-12 overflow-hidden">
       {/* Ambient background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#E30613]/8 rounded-full blur-[140px] pointer-events-none" />
 
@@ -41,28 +41,28 @@ export function Footer() {
             <Link href="/" className="inline-block">
               <IALogo size="md" />
             </Link>
-            <p className="text-zinc-400 text-xs leading-relaxed max-w-sm">
-              <strong className="text-white">Impresos Americana S.A.S.</strong> — Planta industrial de producción gráfica, material POP, empaques y gran formato. Más de 18 años transformando ideas en impacto visual para marcas líderes en Colombia.
+            <p className="text-zinc-300 text-xs leading-relaxed max-w-sm">
+              <strong className="text-white">Impresos Americana S.A.S.</strong> — Planta industrial de producción gráfica, material POP, empaques y gran formato. Litografía offset Heidelberg, corte digital Zünd y cama plana UV en Cali, despachos a nivel nacional.
             </p>
 
             <div className="space-y-2 pt-2">
-              <div className="flex items-start gap-2.5 text-zinc-300">
-                <MapPin className="w-4 h-4 text-[#E30613] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5 text-zinc-200">
+                <MapPin className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                 <span>
                   Calle 25 # 4-38, Barrio San Nicolás / Zona Industrial <br />
-                  <span className="text-zinc-400">Cali, Valle del Cauca, Colombia • C.P. 760010</span>
+                  <span className="text-zinc-300">Cali, Valle del Cauca, Colombia • C.P. 760010</span>
                 </span>
               </div>
-              <div className="flex items-center gap-2.5 text-zinc-300">
-                <Phone className="w-4 h-4 text-[#E30613] shrink-0" />
+              <div className="flex items-center gap-2.5 text-zinc-200">
+                <Phone className="w-4 h-4 text-red-400 shrink-0" />
                 <span>PBX Planta: (602) 885-4000 • Móvil / WhatsApp: +57 316 320 0181</span>
               </div>
-              <div className="flex items-center gap-2.5 text-zinc-300">
-                <Mail className="w-4 h-4 text-[#E30613] shrink-0" />
+              <div className="flex items-center gap-2.5 text-zinc-200">
+                <Mail className="w-4 h-4 text-red-400 shrink-0" />
                 <span>cotizaciones@impresosamericana.com</span>
               </div>
-              <div className="flex items-center gap-2.5 text-zinc-300">
-                <Clock className="w-4 h-4 text-[#E30613] shrink-0" />
+              <div className="flex items-center gap-2.5 text-zinc-200">
+                <Clock className="w-4 h-4 text-red-400 shrink-0" />
                 <span>Lunes a Viernes: 7:30 AM a 5:30 PM (Jornada Continua)</span>
               </div>
             </div>
@@ -73,7 +73,7 @@ export function Footer() {
             <h4 className="font-montserrat font-bold text-xs uppercase tracking-wider text-white">
               Líneas de Producción
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2 text-xs text-zinc-300">
               <li>
                 <a href="#cotizador" className="hover:text-white transition-colors">
                   Exhibidores POP de Piso
@@ -112,14 +112,14 @@ export function Footer() {
             <h4 className="font-montserrat font-bold text-xs uppercase tracking-wider text-white">
               Cobertura Nacional de Despachos
             </h4>
-            <p className="text-[11px] text-zinc-400 leading-tight">
+            <p className="text-[11px] text-zinc-300 leading-tight">
               Envíos diarios coordinados con transportadoras de carga y guías con seguimiento en tiempo real:
             </p>
             <div className="flex flex-wrap gap-1.5 pt-1">
               {coverageCities.map((city, idx) => (
                 <span
                   key={idx}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#16161D] text-zinc-300 border border-white/5"
+                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#16161D] text-zinc-200 border border-white/10"
                 >
                   {city}
                 </span>
@@ -140,24 +140,24 @@ export function Footer() {
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20necesito%20cotizaci%C3%B3n%20urgente%20para%20un%20proyecto."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition-colors shadow-md"
               >
                 <MessageCircle className="w-3.5 h-3.5" />
                 WhatsApp Directo
               </a>
             </div>
 
-            <div className="flex items-center gap-2 text-[11px] text-zinc-400 bg-white/5 p-2.5 rounded-lg border border-white/5">
+            <div className="flex items-center gap-2 text-[11px] text-zinc-300 bg-white/5 p-2.5 rounded-lg border border-white/10">
               <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
               <span>
-                <strong>Factura Electrónica DIAN</strong> emitida en cada orden según normativa colombiana vigente.
+                <strong className="text-white">Factura Electrónica DIAN</strong> emitida en cada orden según normativa colombiana vigente.
               </span>
             </div>
           </div>
         </div>
 
         {/* DIAN and Legal Footer Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-zinc-500 font-mono">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-zinc-400 font-mono">
           <div>
             © {new Date().getFullYear()} Impresos Americana S.A.S. • NIT 900.384.912-4 • Todos los derechos reservados.
           </div>
@@ -165,21 +165,21 @@ export function Footer() {
           <div className="flex items-center space-x-4 text-xs">
             <button
               onClick={() => setActiveLegalModal("terms")}
-              className="hover:text-zinc-300 transition-colors underline"
+              className="text-zinc-300 hover:text-white transition-colors underline"
             >
               Términos de Fabricación
             </button>
-            <span>•</span>
+            <span className="text-zinc-500">•</span>
             <button
               onClick={() => setActiveLegalModal("privacy")}
-              className="hover:text-zinc-300 transition-colors underline"
+              className="text-zinc-300 hover:text-white transition-colors underline"
             >
               Política de Datos (Ley 1581)
             </button>
-            <span>•</span>
+            <span className="text-zinc-500">•</span>
             <Link
               href="/progress"
-              className="text-[#E30613] hover:underline font-bold flex items-center gap-1"
+              className="text-red-400 hover:text-red-300 hover:underline font-bold flex items-center gap-1"
             >
               <Sparkles className="w-3 h-3" />
               Auditoría & Progreso
