@@ -56,7 +56,7 @@ export default function Home() {
     {
       title: "Contacto & Planta Cali",
       badge: "San Nicolás",
-      desc: "Calle 25 # 4-38, PBX (602) 885-4000 y atención inmediata en WhatsApp.",
+      desc: "Calle 16 # 4-37, PBX (602) 885-4000 y atención inmediata en WhatsApp.",
       href: "/contacto",
       icon: PhoneCall,
     },

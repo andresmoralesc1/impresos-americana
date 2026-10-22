@@ -84,7 +84,7 @@ _Solicitud generada a través del formulario de contacto oficial de Impresos Ame
                 <div>
                   <h3 className="font-montserrat font-bold text-sm text-white">Dirección de Planta</h3>
                   <p className="text-xs text-zinc-300 mt-0.5 leading-relaxed">
-                    Calle 25 # 4-38, Barrio San Nicolás / Zona Industrial <br />
+                    Calle 16 # 4-37, Barrio San Nicolás <br />
                     Cali, Valle del Cauca, Colombia • Código Postal 760010
                   </p>
                 </div>

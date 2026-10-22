@@ -115,7 +115,7 @@ const jsonLd = {
       },
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Calle 25 # 4-38, Barrio San Nicolás",
+        streetAddress: "Calle 16 # 4-37, Barrio San Nicolás",
         addressLocality: "Cali",
         addressRegion: "Valle del Cauca",
         postalCode: "760010",

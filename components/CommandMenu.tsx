@@ -130,7 +130,7 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
       id: "accion-contacto",
       title: "Contacto & Ubicación de Planta en Cali",
       category: "Acción",
-      description: "Calle 25 # 4-38 San Nicolás • PBX (602) 885-4000",
+      description: "Calle 16 # 4-37 San Nicolás • PBX (602) 885-4000",
       actionUrl: "/contacto",
     },
     {

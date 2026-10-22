@@ -49,7 +49,7 @@ export function Footer() {
               <div className="flex items-start gap-2.5 text-zinc-200">
                 <MapPin className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                 <span>
-                  Calle 25 # 4-38, Barrio San Nicolás / Zona Industrial <br />
+                  Calle 16 # 4-37, Barrio San Nicolás <br />
                   <span className="text-zinc-300">Cali, Valle del Cauca, Colombia • C.P. 760010</span>
                 </span>
               </div>

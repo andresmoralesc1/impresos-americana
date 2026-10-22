@@ -174,7 +174,7 @@ export default function ProgressPage() {
       status: "APPROVED",
       score: "100/100",
       criticVerdict:
-        "Comprehensive Colombian commercial printing compliance. Explicit DIAN electronic invoicing disclaimer (NIT 900.384.912-4), real Cali industrial plant address (Calle 25 # 4-38, San Nicolás), PBX, national WhatsApp channel, coverage pills across all Colombian metropolitan areas, and interactive legal modal for fabrication terms and Ley 1581 data policy.",
+        "Comprehensive Colombian commercial printing compliance. Explicit DIAN electronic invoicing disclaimer (NIT 900.384.912-4), real Cali industrial plant address (Calle 16 # 4-37, San Nicolás), PBX, national WhatsApp channel, coverage pills across all Colombian metropolitan areas, and interactive legal modal for fabrication terms and Ley 1581 data policy.",
       targetRef: "Colombian Commercial Printing Regulations & Brand Identity",
       checks: [
         "DIAN electronic invoicing compliance disclaimer",
