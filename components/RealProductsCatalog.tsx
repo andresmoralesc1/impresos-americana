@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, MessageCircle, Eye } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
+import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { PRODUCTS_QUERY, CATEGORIES_QUERY } from "@/sanity/lib/queries";
+import { urlForImage } from "@/sanity/lib/image";
 
-type CatalogCategory = "todos" | "termos" | "agendas" | "esferos" | "llaveros-usb";
+type CatalogCategory = string;
 
 interface ProductCatalogItem {
   id: string;
@@ -20,19 +23,15 @@ interface ProductCatalogItem {
   minOrder: string;
 }
 
-export function RealProductsCatalog() {
-  const [selectedCategory, setSelectedCategory] = useState<CatalogCategory>("todos");
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+const defaultCategories = [
+  { id: "todos", label: "Todos los Productos" },
+  { id: "termos", label: "Termos & Botellas" },
+  { id: "agendas", label: "Agendas & Libretas" },
+  { id: "esferos", label: "Esferos & Bolígrafos" },
+  { id: "llaveros-usb", label: "Llaveros & USBs" },
+];
 
-  const categories = [
-    { id: "todos", label: "Todos los Productos" },
-    { id: "termos", label: "Termos & Botellas" },
-    { id: "agendas", label: "Agendas & Libretas" },
-    { id: "esferos", label: "Esferos & Bolígrafos" },
-    { id: "llaveros-usb", label: "Llaveros & USBs" },
-  ];
-
-  const products: ProductCatalogItem[] = [
+const defaultProducts: ProductCatalogItem[] = [
     {
       id: "termo-digital",
       name: "Termo Inteligente con Pantalla LED de Temperatura",
@@ -154,12 +153,80 @@ export function RealProductsCatalog() {
       specs: ["Aleación Zinc Zamak", "Argolla Plana Reforzada", "Grabado Láser o Doming"],
       minOrder: "Mínimo 100 uds",
     },
-  ];
+];
+
+export function RealProductsCatalog() {
+  const [selectedCategory, setSelectedCategory] = useState<CatalogCategory>("todos");
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [categories, setCategories] = useState(defaultCategories);
+  const [productsList, setProductsList] = useState<ProductCatalogItem[]>(defaultProducts);
+  const [isFromSanity, setIsFromSanity] = useState(false);
+
+  useEffect(() => {
+    if (!isSanityConfigured || !client) return;
+
+    let isMounted = true;
+
+    Promise.all([
+      client.fetch<Array<{ id: string; label: string }>>(CATEGORIES_QUERY),
+      client.fetch<
+        Array<{
+          id: string;
+          name: string;
+          slug?: string;
+          reference?: string;
+          category?: string;
+          categoryLabel?: string;
+          priceCOP?: string;
+          image?: Parameters<typeof urlForImage>[0];
+          specs?: string[];
+          minOrder?: string;
+        }>
+      >(PRODUCTS_QUERY),
+    ])
+      .then(([sanityCategories, sanityProducts]) => {
+        if (!isMounted) return;
+
+        if (sanityCategories && sanityCategories.length > 0) {
+          setCategories([
+            { id: "todos", label: "Todos los Productos" },
+            ...sanityCategories.map((c) => ({ id: c.id, label: c.label })),
+          ]);
+        }
+
+        if (sanityProducts && sanityProducts.length > 0) {
+          const mapped: ProductCatalogItem[] = sanityProducts.map((p) => {
+            const imgUrl = p.image ? urlForImage(p.image)?.width(800).url() : null;
+            return {
+              id: p.id || p.slug || Math.random().toString(),
+              name: p.name,
+              reference: p.reference || "Ref. Oficial",
+              category: p.category || "termos",
+              categoryLabel: p.categoryLabel || "General",
+              priceCOP: p.priceCOP || "$0 COP",
+              imageSrc: imgUrl || "/products/termo-temperatura.jpg",
+              specs: Array.isArray(p.specs) ? p.specs : [],
+              minOrder: p.minOrder || "Mínimo 25 uds",
+            };
+          });
+
+          setProductsList(mapped);
+          setIsFromSanity(true);
+        }
+      })
+      .catch((err) => {
+        console.warn("Sanity fetch skipped (using default catalog):", err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const filteredProducts =
     selectedCategory === "todos"
-      ? products
-      : products.filter((p) => p.category === selectedCategory);
+      ? productsList
+      : productsList.filter((p) => p.category === selectedCategory);
 
   const generateWhatsAppInquiry = (prod: ProductCatalogItem) => {
     const text = `*CONSULTA DE PRODUCTO - IMPRESOS AMERICANA*
@@ -191,6 +258,13 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
             Referencias reales extraídas de nuestros catálogos impresos oficiales de producción 2024.
             Marcación con tampografía, grabado láser, sublimación o impresión UV directa.
           </p>
+
+          {isFromSanity && (
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-mono mt-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Sincronizado en vivo con Panel CMS
+            </div>
+          )}
 
           {/* Category Filter Pills (Mobile swipeable + 44px touch targets) */}
           <div className="flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 mt-8 overflow-x-auto pb-2 sm:pb-0 px-1 -mx-4 sm:mx-0 px-4 scrollbar-none">

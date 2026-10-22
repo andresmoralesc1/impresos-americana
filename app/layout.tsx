@@ -173,10 +173,7 @@ const jsonLd = {
   ],
 };
 
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { MobileStickyBar } from "@/components/MobileStickyBar";
-import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { PublicLayoutWrapper } from "@/components/PublicLayoutWrapper";
 
 export default function RootLayout({
   children,
@@ -195,11 +192,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#121212] text-white font-sans antialiased selection:bg-[#E30613] selection:text-white pb-16 lg:pb-0 flex flex-col justify-between">
-        <Navbar />
-        <main className="flex-1 w-full">{children}</main>
-        <Footer />
-        <MobileStickyBar />
-        <FloatingWhatsApp />
+        <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
       </body>
     </html>
   );

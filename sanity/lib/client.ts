@@ -1,0 +1,13 @@
+import { createClient } from "next-sanity";
+import { apiVersion, dataset, projectId, useCdn } from "../env";
+
+export const isSanityConfigured = Boolean(projectId && projectId.trim() !== "");
+
+export const client = isSanityConfigured
+  ? createClient({
+      projectId,
+      dataset,
+      apiVersion,
+      useCdn,
+    })
+  : null;
