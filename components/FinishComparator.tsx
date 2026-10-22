@@ -2,15 +2,18 @@
 
 import React, { useState, useRef } from "react";
 import { Sparkles, SlidersHorizontal, CheckCircle2, Shield } from "lucide-react";
+import { triggerHaptic } from "@/lib/haptics";
 
 export function FinishComparator() {
   const [sliderPos, setSliderPos] = useState<number>(50);
   const [activeItem, setActiveItem] = useState<"pop" | "catalogo" | "empaque">("pop");
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef<boolean>(false);
+  const lastDetentCrossed = useRef<number>(50);
 
   const handlePointerDown = () => {
     isDragging.current = true;
+    triggerHaptic(10);
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -18,11 +21,28 @@ export function FinishComparator() {
     const rect = containerRef.current.getBoundingClientRect();
     const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
     const percent = Math.round((x / rect.width) * 100);
+    
+    // Tactile detent at midpoint (50%) and boundaries (25%, 75%)
+    if (
+      (percent === 50 && lastDetentCrossed.current !== 50) ||
+      (Math.abs(percent - 50) < 2 && lastDetentCrossed.current !== 50)
+    ) {
+      triggerHaptic(15);
+      lastDetentCrossed.current = 50;
+    } else if (Math.abs(percent - 50) > 4) {
+      lastDetentCrossed.current = percent;
+    }
+
     setSliderPos(percent);
   };
 
   const handlePointerUp = () => {
     isDragging.current = false;
+  };
+
+  const selectTab = (item: "pop" | "catalogo" | "empaque") => {
+    setActiveItem(item);
+    triggerHaptic(12);
   };
 
   return (
@@ -43,7 +63,7 @@ export function FinishComparator() {
           {/* Preset Product Selector */}
           <div className="flex items-center justify-center gap-2 mt-6">
             <button
-              onClick={() => setActiveItem("pop")}
+              onClick={() => selectTab("pop")}
               className={`px-4 py-1.5 rounded-full text-xs font-montserrat font-bold transition-all ${
                 activeItem === "pop"
                   ? "bg-[#E30613] text-white shadow-[0_0_15px_rgba(227,6,19,0.5)]"
@@ -53,7 +73,7 @@ export function FinishComparator() {
               Exhibidor POP
             </button>
             <button
-              onClick={() => setActiveItem("catalogo")}
+              onClick={() => selectTab("catalogo")}
               className={`px-4 py-1.5 rounded-full text-xs font-montserrat font-bold transition-all ${
                 activeItem === "catalogo"
                   ? "bg-[#E30613] text-white shadow-[0_0_15px_rgba(227,6,19,0.5)]"
@@ -63,7 +83,7 @@ export function FinishComparator() {
               Portada Catálogo
             </button>
             <button
-              onClick={() => setActiveItem("empaque")}
+              onClick={() => selectTab("empaque")}
               className={`px-4 py-1.5 rounded-full text-xs font-montserrat font-bold transition-all ${
                 activeItem === "empaque"
                   ? "bg-[#E30613] text-white shadow-[0_0_15px_rgba(227,6,19,0.5)]"

@@ -12,10 +12,12 @@ import {
   Minus,
   Truck,
   Download,
+  Printer,
 } from "lucide-react";
 import { ThreePOPViewer } from "./ThreePOPViewer";
 import { generateQuotePDF } from "@/lib/generateQuotePDF";
 import { PreflightModal } from "./PreflightModal";
+import { triggerHaptic } from "@/lib/haptics";
 import confetti from "canvas-confetti";
 
 type ProductCategory = "pop" | "gran-formato" | "litografia" | "empaques";
@@ -99,10 +101,39 @@ export function QuoteCalculator() {
   ];
 
   const toggleFinish = (id: string) => {
+    triggerHaptic(10);
     if (finishes.includes(id)) {
       setFinishes(finishes.filter((f) => f !== id));
     } else {
       setFinishes([...finishes, id]);
+    }
+  };
+
+  const selectSubstrate = (id: string) => {
+    triggerHaptic(10);
+    setSubstrate(id);
+  };
+
+  const changeCategory = (newCat: ProductCategory) => {
+    triggerHaptic(12);
+    setCategory(newCat);
+    setSubstrate(substratesByCategory[newCat][0].id);
+  };
+
+  const changeQuantity = (newQty: number) => {
+    triggerHaptic(10);
+    setQuantity(newQty);
+  };
+
+  const selectCity = (city: string) => {
+    triggerHaptic(10);
+    setCustomerCity(city);
+  };
+
+  const handlePrint = () => {
+    triggerHaptic(12);
+    if (typeof window !== "undefined") {
+      window.print();
     }
   };
 
@@ -331,11 +362,7 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                 <div className="relative">
                   <select
                     value={category}
-                    onChange={(e) => {
-                      const newCat = e.target.value as ProductCategory;
-                      setCategory(newCat);
-                      setSubstrate(substratesByCategory[newCat][0].id);
-                    }}
+                    onChange={(e) => changeCategory(e.target.value as ProductCategory)}
                     className="w-full bg-[#121216] border border-white/20 rounded-xl px-4 py-3.5 text-white font-montserrat font-bold text-sm appearance-none focus:outline-none focus:border-[#E30613] transition-colors cursor-pointer"
                   >
                     {categories.map((c) => (
@@ -360,7 +387,7 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                       <button
                         key={s.id}
                         type="button"
-                        onClick={() => setSubstrate(s.id)}
+                        onClick={() => selectSubstrate(s.id)}
                         className={`p-3.5 rounded-xl text-left border transition-all duration-200 flex flex-col justify-between ${
                           isSelected
                             ? "border-[#E30613] bg-[#E30613]/20 ring-2 ring-[#E30613]"
@@ -436,7 +463,7 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                   <div className="flex items-center bg-[#121212] border border-white/25 rounded-xl p-1">
                     <button
                       type="button"
-                      onClick={() => setQuantity(Math.max(10, quantity - 25))}
+                      onClick={() => changeQuantity(Math.max(10, quantity - 25))}
                       className="w-11 h-11 flex items-center justify-center hover:bg-white/10 active:bg-white/20 text-white rounded-lg transition-colors font-bold"
                       aria-label="Disminuir cantidad"
                     >
@@ -447,7 +474,7 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                     </span>
                     <button
                       type="button"
-                      onClick={() => setQuantity(quantity + 25)}
+                      onClick={() => changeQuantity(quantity + 25)}
                       className="w-11 h-11 flex items-center justify-center hover:bg-white/10 active:bg-white/20 text-white rounded-lg transition-colors font-bold"
                       aria-label="Aumentar cantidad"
                     >
@@ -469,7 +496,7 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                       <button
                         key={tier}
                         type="button"
-                        onClick={() => setQuantity(tier)}
+                        onClick={() => changeQuantity(tier)}
                         className={`flex-1 sm:flex-none text-xs font-mono font-bold py-2 px-3 rounded-lg border transition-colors min-h-[40px] flex items-center justify-center ${
                           quantity === tier
                             ? "bg-[#E30613] text-white border-[#E30613] shadow-md"
@@ -494,7 +521,7 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                       <button
                         key={city}
                         type="button"
-                        onClick={() => setCustomerCity(city)}
+                        onClick={() => selectCity(city)}
                         className={`text-xs px-3.5 py-2.5 min-h-[42px] rounded-lg border transition-all flex items-center font-medium ${
                           customerCity === city
                             ? "bg-white/20 border-white text-white font-bold"
@@ -561,11 +588,14 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
               </button>
             </div>
 
-            {/* Right Giant WhatsApp Action Button + Download PDF Button */}
+            {/* Right Giant WhatsApp Action Button + Download PDF + Print Button */}
             <div className="md:col-span-4 space-y-2.5">
               <a
                 href={generateWhatsAppLink()}
-                onClick={triggerConfetti}
+                onClick={() => {
+                  triggerConfetti();
+                  triggerHaptic(20);
+                }}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full relative group overflow-hidden bg-gradient-to-r from-[#C50510] via-[#E30613] to-[#FF1E27] hover:from-[#E30613] hover:to-[#C50510] text-white font-montserrat font-black text-sm sm:text-base uppercase tracking-wider py-4 px-6 rounded-xl shadow-[0_0_40px_rgba(227,6,19,0.7)] hover:shadow-[0_0_60px_rgba(227,6,19,0.9)] transition-all duration-300 flex items-center justify-center gap-3 transform hover:scale-[1.02]"
@@ -577,20 +607,34 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                 <div className="absolute inset-0 bg-white/20 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
               </a>
 
-              {/* Download Formal PDF Quote Button */}
-              <button
-                type="button"
-                onClick={handleDownloadPDF}
-                disabled={isGeneratingPDF}
-                className="w-full py-2.5 px-4 rounded-xl bg-[#121216] hover:bg-white/10 text-zinc-200 hover:text-white border border-white/15 font-montserrat font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
-              >
-                <Download className="w-4 h-4 text-[#E30613]" />
-                <span>
-                  {isGeneratingPDF
-                    ? "Generando Documento..."
-                    : "Descargar Cotización Formal (PDF)"}
-                </span>
-              </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {/* Download Formal PDF Quote Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    triggerHaptic(12);
+                    handleDownloadPDF();
+                  }}
+                  disabled={isGeneratingPDF}
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#121216] hover:bg-white/10 text-zinc-200 hover:text-white border border-white/15 font-montserrat font-bold text-[11px] uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <Download className="w-4 h-4 text-red-400 shrink-0" />
+                  <span className="truncate">
+                    {isGeneratingPDF ? "Generando..." : "Descargar PDF"}
+                  </span>
+                </button>
+
+                {/* Print Sheet Button */}
+                <button
+                  type="button"
+                  onClick={handlePrint}
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#121216] hover:bg-white/10 text-zinc-200 hover:text-white border border-white/15 font-montserrat font-bold text-[11px] uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5"
+                  title="Imprimir resumen de cotización (Ctrl+P)"
+                >
+                  <Printer className="w-4 h-4 text-zinc-400 shrink-0" />
+                  <span>Imprimir Ficha</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

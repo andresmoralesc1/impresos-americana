@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, MessageCircle, Eye } from "lucide-react";
+import { triggerHaptic } from "@/lib/haptics";
 
 type CatalogCategory = "todos" | "termos" | "agendas" | "esferos" | "llaveros-usb";
 
@@ -198,7 +199,10 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
               return (
                 <button
                   key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id as CatalogCategory)}
+                  onClick={() => {
+                    triggerHaptic(10);
+                    setSelectedCategory(cat.id as CatalogCategory);
+                  }}
                   className={`px-5 py-2.5 min-h-[44px] shrink-0 rounded-full text-xs font-montserrat font-semibold transition-all duration-300 ${
                     isActive
                       ? "bg-[#E30613] text-white shadow-[0_0_15px_rgba(227,6,19,0.5)] scale-105"

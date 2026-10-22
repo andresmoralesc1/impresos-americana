@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { triggerHaptic } from "@/lib/haptics";
 
 type ProjectCategory = "Todos" | "Material POP" | "Gran Formato" | "Litografía" | "Merchandising";
 
@@ -137,7 +138,10 @@ export function BentoGrid() {
               return (
                 <button
                   key={cat}
-                  onClick={() => setActiveCategory(cat)}
+                  onClick={() => {
+                    triggerHaptic(10);
+                    setActiveCategory(cat);
+                  }}
                   className={`px-5 py-2.5 min-h-[44px] shrink-0 rounded-full text-xs font-montserrat font-semibold transition-all duration-300 ${
                     isActive
                       ? "bg-[#E30613] text-white shadow-[0_0_15px_rgba(227,6,19,0.5)] scale-105"

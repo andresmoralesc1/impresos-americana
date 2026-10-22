@@ -127,3 +127,43 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #E30613;
 }
+
+/* High-Contrast Print Stylesheet (@media print) */
+@media print {
+  body {
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
+    font-size: 11pt !important;
+  }
+
+  header,
+  nav,
+  footer,
+  #whatsapp-floating,
+  button,
+  .bg-faceted-pattern,
+  [aria-label="Abrir chat de WhatsApp"] {
+    display: none !important;
+  }
+
+  /* Force light surfaces and dark text on cards */
+  div, section, article {
+    background-color: transparent !important;
+    color: #111827 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Ensure headings and badges are crisp */
+  h1, h2, h3, h4, h5, h6 {
+    color: #111827 !important;
+    page-break-after: avoid;
+  }
+
+  /* Break pages gracefully */
+  section {
+    page-break-inside: avoid;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+}
