@@ -75,34 +75,34 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-xs text-zinc-300">
               <li>
-                <a href="#cotizador" className="hover:text-white transition-colors">
+                <Link href="/cotizador" className="hover:text-white transition-colors">
                   Exhibidores POP de Piso
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#cotizador" className="hover:text-white transition-colors">
-                  Exhibidores de Mostrador
-                </a>
-              </li>
-              <li>
-                <a href="#cotizador" className="hover:text-white transition-colors">
+                <Link href="/servicios" className="hover:text-white transition-colors">
                   Gran Formato UV Cama Plana
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#cotizador" className="hover:text-white transition-colors">
-                  Banners & Vallas Exteriores
-                </a>
-              </li>
-              <li>
-                <a href="#cotizador" className="hover:text-white transition-colors">
+                <Link href="/cotizador" className="hover:text-white transition-colors">
                   Cajas Rígidas & Plegadizas
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#cotizador" className="hover:text-white transition-colors">
-                  Litografía Comercial & Catálogos
-                </a>
+                <Link href="/servicios" className="hover:text-white transition-colors">
+                  Litografía Comercial Offset
+                </Link>
+              </li>
+              <li>
+                <Link href="/catalogo" className="hover:text-white transition-colors">
+                  Catálogo de Merchandising
+                </Link>
+              </li>
+              <li>
+                <Link href="/plantillas" className="hover:text-white transition-colors">
+                  Planos & Troqueles (.AI / .PDF)
+                </Link>
               </li>
             </ul>
           </div>

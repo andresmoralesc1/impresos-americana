@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
@@ -349,13 +350,13 @@ export function BentoGrid() {
 
                     {/* Bottom CTA to quote this exact product */}
                     <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-                      <a
-                        href="#cotizador"
+                      <Link
+                        href="/cotizador"
                         className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-100 group-hover:text-white transition-colors"
                       >
                         <span>Cotizar Proyecto Similar</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-red-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </a>
+                      </Link>
                       <span className="text-[11px] text-zinc-300 font-mono">
                         Producción Industrial
                       </span>
@@ -380,12 +381,12 @@ export function BentoGrid() {
             </p>
           </div>
 
-          <a
-            href="#cotizador"
+          <Link
+            href="/cotizador"
             className="relative z-10 shrink-0 bg-white hover:bg-zinc-100 text-[#121212] font-montserrat font-black text-xs uppercase tracking-wider px-7 py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:scale-105"
           >
             Cotizar Producción Industrial
-          </a>
+          </Link>
         </div>
       </div>
     </section>

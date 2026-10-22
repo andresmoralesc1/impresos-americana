@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import {
   Search,
   Sparkles,
@@ -27,6 +28,7 @@ interface CommandMenuProps {
 }
 
 export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuProps) {
+  const router = useRouter();
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -36,56 +38,56 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
       title: "Termo Inteligente con Pantalla LED (500 ml)",
       category: "Producto",
       description: "$25.635 COP • Acero 304 con sensor táctil de temperatura",
-      actionUrl: "#catalogo",
+      actionUrl: "/catalogo",
     },
     {
       id: "termo-subli",
       title: "Termo de Sublimación Doble Pared (500 ml)",
       category: "Producto",
       description: "$10.881 COP • Sublimación full color perimetral",
-      actionUrl: "#catalogo",
+      actionUrl: "/catalogo",
     },
     {
       id: "libreta-ejec",
       title: "Libreta Ejecutiva de Cuero Ecológico 14x21",
       category: "Producto",
       description: "$14.500 COP • 80 hojas rayadas con elástico y cinta",
-      actionUrl: "#catalogo",
+      actionUrl: "/catalogo",
     },
     {
       id: "esfero-calima",
       title: "Lapicero Plástico Calima con Grip",
       category: "Producto",
       description: "$500 a $580 COP • Marcación en tampografía",
-      actionUrl: "#catalogo",
+      actionUrl: "/catalogo",
     },
     {
       id: "tarjeta-usb",
       title: "Memoria USB Tipo Tarjeta Ultradelgada",
       category: "Producto",
       description: "$18.500 COP • Impresión UV digital 2 caras",
-      actionUrl: "#catalogo",
+      actionUrl: "/catalogo",
     },
     {
       id: "exhibidor-pop",
       title: "Exhibidor POP de Piso Modular 160 cm",
       category: "Producto",
       description: "Cartón Corrugado 4mm estructural • Capacidad 35 kg",
-      actionUrl: "#cotizador",
+      actionUrl: "/cotizador",
     },
     {
       id: "troquel-pop-160",
       title: "Plano de Troquel: Exhibidor POP 160x55 cm",
       category: "Troquel",
       description: "Vector listo para Illustrator con líneas de corte y hendido",
-      actionUrl: "#plantillas",
+      actionUrl: "/plantillas",
     },
     {
       id: "troquel-caja",
       title: "Plano de Troquel: Caja Rígida Imantada 25x20 cm",
       category: "Troquel",
       description: "Dieline mecánico con sangría perimetral de 5 mm",
-      actionUrl: "#plantillas",
+      actionUrl: "/plantillas",
     },
     {
       id: "cat-maestro-pdf",
@@ -108,7 +110,28 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
       title: "Configurar Cotización Online en Tiempo Real",
       category: "Acción",
       description: "Calcula precios en COP, sustratos y acabados UV",
-      actionUrl: "#cotizador",
+      actionUrl: "/cotizador",
+    },
+    {
+      id: "accion-servicios",
+      title: "Infraestructura & Parque de Maquinaria Industrial",
+      category: "Acción",
+      description: "Offset Heidelberg, Zünd CNC y cama plana UV 3.20m",
+      actionUrl: "/servicios",
+    },
+    {
+      id: "accion-proyectos",
+      title: "Ver Proyectos Reales & Casos en Retail",
+      category: "Acción",
+      description: "Éxito, Jumbo, Carulla, ferias y stands comerciales",
+      actionUrl: "/proyectos",
+    },
+    {
+      id: "accion-contacto",
+      title: "Contacto & Ubicación de Planta en Cali",
+      category: "Acción",
+      description: "Calle 25 # 4-38 San Nicolás • PBX (602) 885-4000",
+      actionUrl: "/contacto",
     },
     {
       id: "accion-muestras",
@@ -145,11 +168,13 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
         onOpenSampleModal();
       } else if (item.isExternal) {
         window.open(item.actionUrl, "_blank");
+      } else if (item.actionUrl.startsWith("/")) {
+        router.push(item.actionUrl);
       } else {
-        window.location.hash = item.actionUrl;
+        window.location.href = item.actionUrl;
       }
     },
-    [onClose, onOpenSampleModal]
+    [onClose, onOpenSampleModal, router]
   );
 
   // Keyboard navigation & global Cmd+K trigger

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
@@ -16,9 +17,9 @@ import { SampleBoxModal } from "./SampleBoxModal";
 import { CommandMenu } from "./CommandMenu";
 
 export function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("cotizar");
   const [commandMenuOpen, setCommandMenuOpen] = useState(false);
   const [sampleModalOpen, setSampleModalOpen] = useState(false);
   const [cartCount] = useState(1); // Sample kit in cart
@@ -44,15 +45,13 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#hero", id: "home" },
-    { name: "Material POP", href: "#servicios", id: "pop" },
-    { name: "Gran Formato", href: "#servicios", id: "formato" },
-    { name: "Proyectos", href: "#proyectos", id: "proyectos" },
-    { name: "Cotizar", href: "#cotizador", id: "cotizar", isHighlight: true },
-    { name: "Catálogo", href: "#catalogo", id: "catalogo" },
-    { name: "Plantillas", href: "#plantillas", id: "plantillas" },
-    { name: "Proceso", href: "#proceso", id: "proceso" },
-    { name: "Contacto", href: "#contacto", id: "contacto" },
+    { name: "Inicio", href: "/" },
+    { name: "Servicios", href: "/servicios" },
+    { name: "Proyectos", href: "/proyectos" },
+    { name: "Cotizador", href: "/cotizador", isHighlight: true },
+    { name: "Catálogo", href: "/catalogo" },
+    { name: "Plantillas", href: "/plantillas" },
+    { name: "Contacto", href: "/contacto" },
   ];
 
   return (
@@ -77,12 +76,15 @@ export function Navbar() {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
               {navLinks.map((link) => {
-                const isActive = activeTab === link.id;
+                const isActive =
+                  link.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(link.href);
+
                 return (
-                  <a
+                  <Link
                     key={link.name}
                     href={link.href}
-                    onClick={() => setActiveTab(link.id)}
                     className={`relative px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
                       isActive
                         ? "text-white font-semibold"
@@ -97,7 +99,7 @@ export function Navbar() {
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
-                  </a>
+                  </Link>
                 );
               })}
             </nav>
@@ -136,8 +138,8 @@ export function Navbar() {
               </button>
 
               {/* High-impact Americana Red CTA Button */}
-              <a
-                href="#cotizador"
+              <Link
+                href="/cotizador"
                 className="relative group overflow-hidden bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-lg shadow-[0_0_20px_rgba(227,6,19,0.45)] hover:shadow-[0_0_30px_rgba(227,6,19,0.7)] transition-all duration-300 flex items-center gap-2"
               >
                 <span className="relative z-10 flex items-center gap-2">
@@ -145,7 +147,7 @@ export function Navbar() {
                   Cotizar Ahora
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
-              </a>
+              </Link>
 
               {/* Direct WhatsApp Call */}
               <a
@@ -169,12 +171,12 @@ export function Navbar() {
               >
                 <Search className="w-5 h-5" />
               </button>
-              <a
-                href="#cotizador"
+              <Link
+                href="/cotizador"
                 className="bg-[#E30613] text-white text-xs font-montserrat font-bold px-3 py-1.5 rounded-md"
               >
                 Cotizar
-              </a>
+              </Link>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2 text-zinc-300 hover:text-white rounded-lg focus:outline-none"
@@ -202,21 +204,25 @@ export function Navbar() {
                   Menú Principal
                 </p>
                 <div className="flex flex-col space-y-3">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => {
-                        setActiveTab(link.id);
-                        setMobileMenuOpen(false);
-                      }}
-                      className={`text-xl font-montserrat font-bold transition-colors ${
-                        link.id === activeTab ? "text-[#E30613]" : "text-zinc-200"
-                      }`}
-                    >
-                      {link.name}
-                    </a>
-                  ))}
+                  {navLinks.map((link) => {
+                    const isActive =
+                      link.href === "/"
+                        ? pathname === "/"
+                        : pathname.startsWith(link.href);
+
+                    return (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`text-xl font-montserrat font-bold transition-colors ${
+                          isActive ? "text-[#E30613]" : "text-zinc-200"
+                        }`}
+                      >
+                        {link.name}
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -230,13 +236,13 @@ export function Navbar() {
             </div>
 
             <div className="space-y-3">
-              <a
-                href="#cotizador"
+              <Link
+                href="/cotizador"
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full py-3.5 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-center text-sm uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(227,6,19,0.4)] block"
               >
                 Configurar Cotización Online
-              </a>
+              </Link>
               <a
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20inmediata."
                 target="_blank"

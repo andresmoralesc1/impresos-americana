@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { MessageCircle, Sparkles } from "lucide-react";
 
 export function MobileStickyBar() {
@@ -37,13 +38,13 @@ export function MobileStickyBar() {
         </a>
 
         {/* High-Impact Red Cotizar Action */}
-        <a
-          href="#cotizador"
+        <Link
+          href="/cotizador"
           className="flex-1 min-h-[46px] rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white flex items-center justify-center gap-2 px-3 text-xs font-montserrat font-black uppercase tracking-wider shadow-[0_0_20px_rgba(227,6,19,0.5)] transition-all"
         >
           <Sparkles className="w-3.5 h-3.5 shrink-0" />
           <span className="truncate">Cotizar en Línea</span>
-        </a>
+        </Link>
       </div>
     </aside>
   );

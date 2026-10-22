@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -68,8 +69,8 @@ export function Hero() {
 
             {/* Dual CTAs & Instant Quotation launcher */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
-              <a
-                href="#cotizador"
+              <Link
+                href="/cotizador"
                 className="group relative inline-flex items-center justify-center gap-3 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-sm uppercase tracking-wider px-8 py-4 rounded-xl shadow-[0_0_30px_rgba(227,6,19,0.5)] hover:shadow-[0_0_45px_rgba(227,6,19,0.8)] transition-all duration-300"
               >
                 <span>Configurar Cotización Online</span>
@@ -77,7 +78,7 @@ export function Hero() {
                 <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
                   <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
                 </div>
-              </a>
+              </Link>
 
               <a
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20solicito%20asesor%C3%ADa%20para%20un%20proyecto%20de%20branding%20y%20material%20POP."
