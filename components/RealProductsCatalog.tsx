@@ -187,14 +187,29 @@ export function RealProductsCatalog() {
       .then(([sanityCategories, sanityProducts]) => {
         if (!isMounted) return;
 
-        if (sanityCategories && sanityCategories.length > 0) {
+        if (sanityProducts && sanityProducts.length > 0) {
+          // Dynamic category detection
+          const foundCategories = new Map<string, string>();
+          defaultCategories.forEach((c) => {
+            if (c.id !== "todos") foundCategories.set(c.id, c.label);
+          });
+          if (sanityCategories && sanityCategories.length > 0) {
+            sanityCategories.forEach((c) => foundCategories.set(c.id, c.label));
+          }
+          sanityProducts.forEach((p) => {
+            if (p.category && !foundCategories.has(p.category)) {
+              foundCategories.set(p.category, p.categoryLabel || p.category);
+            }
+          });
+
           setCategories([
             { id: "todos", label: "Todos los Productos" },
-            ...sanityCategories.map((c) => ({ id: c.id, label: c.label })),
+            ...Array.from(foundCategories.entries()).map(([id, label]) => ({
+              id,
+              label,
+            })),
           ]);
-        }
 
-        if (sanityProducts && sanityProducts.length > 0) {
           const mapped: ProductCatalogItem[] = sanityProducts.map((p) => {
             const imgUrl = p.image ? urlForImage(p.image)?.width(800).url() : null;
             return {
