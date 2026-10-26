@@ -104,6 +104,11 @@ export function Footer() {
                   Planos & Troqueles (.AI / .PDF)
                 </Link>
               </li>
+              <li>
+                <Link href="/guia-admin" className="hover:text-white transition-colors text-zinc-400 hover:text-red-400">
+                  Manual del Editor CMS
+                </Link>
+              </li>
             </ul>
           </div>
 

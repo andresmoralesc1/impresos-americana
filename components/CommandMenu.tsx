@@ -134,6 +134,13 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
       actionUrl: "/contacto",
     },
     {
+      id: "accion-guia-admin",
+      title: "Manual del Cliente: Guía del Editor de Productos CMS",
+      category: "Acción",
+      description: "Instructivo paso a paso con capturas para subir, editar y eliminar productos",
+      actionUrl: "/guia-admin",
+    },
+    {
       id: "accion-muestras",
       title: "Solicitar Muestrario Físico Corporativo (Sample Box)",
       category: "Acción",

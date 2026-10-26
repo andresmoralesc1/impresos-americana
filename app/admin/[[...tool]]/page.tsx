@@ -52,6 +52,16 @@ export default function AdminPage() {
           <p className="text-zinc-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             Desde este panel administrativo tú o tu cliente podrán <strong>subir nuevos productos</strong>, <strong>editar precios y fotos</strong>, o <strong>eliminar artículos</strong> del catálogo público sin tocar código.
           </p>
+
+          <div className="pt-2">
+            <Link
+              href="/guia-admin"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-950/40 hover:bg-red-900/60 text-red-300 hover:text-white border border-red-500/40 text-xs font-montserrat font-bold transition-all shadow-md group"
+            >
+              <span>Ver Guía Visual Paso a Paso con Capturas para el Cliente</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
 
         {/* 3 Core Capabilities Overview Cards */}
