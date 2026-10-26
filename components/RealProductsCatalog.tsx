@@ -425,7 +425,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
             {/* Catalog 1 */}
             <div className="p-4 rounded-xl bg-[#121217] border border-white/10 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono text-zinc-300 uppercase">116 Páginas • 98 MB</span>
+                <span className="text-[10px] font-mono text-emerald-400 uppercase font-bold">116 Páginas • 6.6 MB (Optimizado)</span>
                 <h4 className="font-montserrat font-bold text-sm text-white mt-1 mb-2">
                   Catálogo Maestro Impresos Americana
                 </h4>
@@ -439,14 +439,14 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                 className="mt-4 w-full py-2 px-3 rounded-lg bg-[#22222D] hover:bg-[#E30613] text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Descargar PDF</span>
+                <span>Descargar PDF (6.6 MB)</span>
               </a>
             </div>
 
             {/* Catalog 2 */}
             <div className="p-4 rounded-xl bg-[#121217] border border-white/10 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono text-zinc-300 uppercase">Edición 2024 • 192 MB</span>
+                <span className="text-[10px] font-mono text-emerald-400 uppercase font-bold">Edición 2024 • 24 MB (Optimizado)</span>
                 <h4 className="font-montserrat font-bold text-sm text-white mt-1 mb-2">
                   Esferos y Llaveros Publicitarios
                 </h4>
@@ -460,14 +460,14 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                 className="mt-4 w-full py-2 px-3 rounded-lg bg-[#22222D] hover:bg-[#E30613] text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Descargar PDF</span>
+                <span>Descargar PDF (24 MB)</span>
               </a>
             </div>
 
             {/* Catalog 3 */}
             <div className="p-4 rounded-xl bg-[#121217] border border-white/10 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono text-zinc-300 uppercase">Regalos & POP • 188 MB</span>
+                <span className="text-[10px] font-mono text-emerald-400 uppercase font-bold">Regalos & POP • 31 MB (Optimizado)</span>
                 <h4 className="font-montserrat font-bold text-sm text-white mt-1 mb-2">
                   Productos Publicitarios Especiales
                 </h4>
@@ -481,7 +481,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                 className="mt-4 w-full py-2 px-3 rounded-lg bg-[#22222D] hover:bg-[#E30613] text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Descargar PDF</span>
+                <span>Descargar PDF (31 MB)</span>
               </a>
             </div>
           </div>
