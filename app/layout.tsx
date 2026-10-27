@@ -79,12 +79,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      { url: "/icon.svg", type: "image/svg+xml" },
     ],
     apple: [
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
+    shortcut: ["/favicon.ico"],
   },
   robots: {
     index: true,
@@ -101,7 +103,7 @@ const jsonLd = {
       name: "Impresos Americana S.A.S.",
       alternateName: "Impresos Americana",
       url: "https://impresosamericana.com",
-      logo: "https://impresosamericana.com/logo.png",
+      logo: "https://impresosamericana.com/logo-ia.png",
       image: "https://impresosamericana.com/og-image.jpg",
       description:
         "Planta industrial de producción gráfica, material POP, exhibidores de piso y mostrador, impresión de gran formato UV, litografía comercial y merchandising corporativo en Colombia.",
@@ -183,9 +185,10 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${montserrat.variable} ${inter.variable} scroll-smooth`}>
       <head>
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/icon.svg" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="512x512" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
