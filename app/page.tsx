@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero";
 import { ServicesOverview } from "@/components/ServicesOverview";
 import { ProcessSection } from "@/components/ProcessSection";
 import { FeaturedProjects } from "@/components/FeaturedProjects";
+import { ProductShowcase } from "@/components/ProductShowcase";
 import { MessageCircle, MapPin, ArrowRight } from "lucide-react";
 
 export default function Home() {
@@ -18,7 +19,7 @@ export default function Home() {
 
   return (
     <div className="text-white selection:bg-[#E30613] selection:text-white">
-      {/* 1. Hero Principal */}
+      {/* 1. Hero Principal con Showcase de Fotos Reales */}
       <Hero />
 
       {/* 2. Franja de Confianza / Sectores Atendidos (Minimalist Trust Strip) */}
@@ -40,16 +41,19 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 3. Servicios Industriales Principales (4 Pilares) */}
+      {/* 3. Servicios Industriales Principales (4 Pilares con Fotos Reales) */}
       <ServicesOverview />
 
       {/* 4. Flujo de Trabajo Industrial en 4 Pasos */}
       <ProcessSection />
 
-      {/* 5. Proyectos Reales Destacados (3 Casos Curados con enlace a /proyectos) */}
+      {/* 5. Trabajos Instalados en Retail (Fotos Reales de Proyectos) */}
       <FeaturedProjects />
 
-      {/* 6. Banner de Conversión Directo y Contacto de Planta */}
+      {/* 6. Catálogo de Artículos & Merchandising (Fotos Reales de Producto) */}
+      <ProductShowcase />
+
+      {/* 7. Banner de Conversión Directo y Contacto de Planta */}
       <section className="py-20 bg-[#0B0B0E] border-t border-white/10 relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/40 border border-red-500/30 text-xs font-mono font-bold text-red-300 mb-4">

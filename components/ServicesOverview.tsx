@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Boxes,
   Sparkles,
@@ -18,6 +19,7 @@ interface ServiceItem {
   title: string;
   tagline: string;
   description: string;
+  image: string;
   highlights: string[];
   ctaText: string;
   ctaLink: string;
@@ -33,6 +35,7 @@ export function ServicesOverview() {
       tagline: "Ingeniería de cartón corrugado y MDF",
       description:
         "Diseño y fabricación de exhibidores modulares de alta resistencia estructural para supermercados y farmacias. Resistencia de 15 a 40 kg por entrepaño y ensamble rápido sin herramientas.",
+      image: "/images/real/exhibidor-bebidas.jpg",
       highlights: ["Corrugado & MDF", "Muestra Zünd 24h", "Tirajes 25 a 10.000+ uds"],
       ctaText: "Cotizar POP",
       ctaLink: "/cotizador",
@@ -45,6 +48,7 @@ export function ServicesOverview() {
       tagline: "Impresión directa sobre rígidos y flexibles",
       description:
         "Soluciones a gran escala para fachadas, vitrinas y eventos. Impresión directa sobre acrílico, MDF, polionda, PVC espumado y alucobond de hasta 50 mm con tintas UV curables.",
+      image: "/images/real/pop-supermercados.jpg",
       highlights: ["Ancho 3.20m continuo", "Rígidos hasta 50mm", "Exterior 36 meses"],
       ctaText: "Consultar",
       ctaLink: "/contacto",
@@ -56,7 +60,8 @@ export function ServicesOverview() {
       title: "Cajas, Plegadizas & Empaques",
       tagline: "Protección y presencia de marca",
       description:
-        "Cajas plegadizas en sulfatada calibres 14 a 18 pt y cajas e-commerce en microcorrugado anti-impacto. Acabados con barniz UV sectorizado, estampado foil y cierre imantado.",
+        "Cajas plegadizas en sulfatada calibres 14 a 18 pt y cajas e-commerce en microcorrugado anti-impacto. Acabados con barniz UV sectorizado, estampado foil y kits corporativos.",
+      image: "/images/real/kit-corporativo.jpg",
       highlights: ["Sulfatada 14-18 pt", "Microcorrugado Onda E", "Planos vectoriales"],
       ctaText: "Ver Troqueles",
       ctaLink: "/plantillas",
@@ -69,6 +74,7 @@ export function ServicesOverview() {
       tagline: "Alta velocidad con registro cromático exacto",
       description:
         "Producción continua de catálogos corporativos, revistas, carpetas y afiches. Hasta 15.000 pliegos/hora con fidelidad cromática certificada bajo norma FOGRA39 / ISO 12647.",
+      image: "/images/real/litografia-papeleria.jpg",
       highlights: ["15.000 pliegos/hora", "Propalcote 115g a 300g", "Norma FOGRA39"],
       ctaText: "Solicitar Muestra",
       ctaLink: "/contacto",
@@ -97,34 +103,44 @@ export function ServicesOverview() {
           {services.map((service) => (
             <div
               key={service.id}
-              className="rounded-2xl p-6 bg-[#14141B] border border-white/5 hover:border-white/20 transition-all duration-300 flex flex-col justify-between group hover:bg-[#181822]"
+              className="rounded-2xl p-5 bg-[#14141B] border border-white/5 hover:border-white/20 transition-all duration-300 flex flex-col justify-between group hover:bg-[#181822] overflow-hidden"
             >
               <div>
-                {/* Step & Badge */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="font-montserrat font-black text-2xl text-zinc-600 group-hover:text-red-400 transition-colors">
+                {/* Real Photo Thumbnail */}
+                <div className="relative h-36 w-full rounded-xl overflow-hidden mb-4 bg-[#0A0A0E] border border-white/5">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#14141B] via-transparent to-transparent pointer-events-none" />
+
+                  {/* Step & Badge inside image */}
+                  <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm border border-white/10 text-white font-montserrat font-black text-xs">
                     {service.step}
-                  </span>
-                  <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-white/5 text-zinc-400 border border-white/5 font-semibold">
+                  </div>
+                  <div className="absolute top-2.5 right-2.5 text-[9px] font-mono uppercase px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm text-zinc-300 border border-white/10 font-bold">
                     {service.badge}
-                  </span>
+                  </div>
                 </div>
 
-                <h3 className="text-base sm:text-lg font-montserrat font-bold text-white group-hover:text-red-400 transition-colors leading-snug mb-1">
+                <h3 className="text-base font-montserrat font-bold text-white group-hover:text-red-400 transition-colors leading-snug mb-1">
                   {service.title}
                 </h3>
-                <p className="text-xs text-zinc-400 font-mono mb-3">
+                <p className="text-[11px] text-zinc-400 font-mono mb-2.5">
                   {service.tagline}
                 </p>
 
-                <p className="text-xs text-zinc-400 leading-relaxed mb-5">
+                <p className="text-xs text-zinc-400 leading-relaxed mb-4">
                   {service.description}
                 </p>
               </div>
 
               <div>
                 {/* Highlights */}
-                <div className="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-white/5">
+                <div className="flex flex-wrap gap-1.5 mb-4 pt-3 border-t border-white/5">
                   {service.highlights.map((h, i) => (
                     <span
                       key={i}
@@ -155,10 +171,10 @@ export function ServicesOverview() {
             <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 hidden sm:block" />
             <div>
               <p className="text-sm font-montserrat font-bold text-white">
-                ¿Necesitas artículos promocionales o calcular un empaque en 3D?
+                ¿Buscas artículos promocionales o calcular un empaque en 3D?
               </p>
               <p className="text-xs text-zinc-400">
-                Consulta el catálogo de referencias con precios o ingresa al cotizador interactivo.
+                Consulta el catálogo de referencias con fotos y precios o ingresa al cotizador interactivo.
               </p>
             </div>
           </div>
