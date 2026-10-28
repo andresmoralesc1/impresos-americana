@@ -155,7 +155,7 @@ export function ServicesOverview() {
                 <Link
                   href={service.ctaLink}
                   onClick={() => triggerHaptic(8)}
-                  className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold uppercase tracking-wider text-red-400 group-hover:text-white transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-red-400 hover:text-white transition-colors py-2.5 px-3.5 sm:p-0 rounded-xl bg-red-950/40 sm:bg-transparent border border-red-500/30 sm:border-0 min-h-[42px] sm:min-h-0"
                 >
                   <span>{service.ctaText}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -166,24 +166,24 @@ export function ServicesOverview() {
         </div>
 
         {/* Minimalist Subpage Hub Bar */}
-        <div className="p-6 rounded-2xl bg-[#14141B] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-5 sm:p-6 rounded-2xl bg-[#14141B] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-center sm:text-left">
             <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 hidden sm:block" />
             <div>
               <p className="text-sm font-montserrat font-bold text-white">
                 ¿Buscas artículos promocionales o calcular un empaque en 3D?
               </p>
-              <p className="text-xs text-zinc-400">
+              <p className="text-xs text-zinc-400 mt-0.5">
                 Consulta el catálogo de referencias con fotos y precios o ingresa al cotizador interactivo.
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto shrink-0">
             <Link
               href="/catalogo"
               onClick={() => triggerHaptic(8)}
-              className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/15 text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 border border-white/10"
+              className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 border border-white/10 min-h-[44px]"
             >
               <Boxes className="w-3.5 h-3.5 text-zinc-400" />
               <span>Ver Catálogo</span>
@@ -191,7 +191,7 @@ export function ServicesOverview() {
             <Link
               href="/cotizador"
               onClick={() => triggerHaptic(8)}
-              className="px-4 py-2 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5"
+              className="px-4 py-2.5 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-1.5 min-h-[44px]"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>Cotizador 3D</span>

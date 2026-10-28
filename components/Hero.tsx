@@ -69,14 +69,14 @@ export function Hero() {
             className="lg:col-span-7 text-left"
           >
             {/* Top Badge: Industry Leadership */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1E1E26] border border-white/15 text-xs font-mono uppercase tracking-wider text-zinc-200 mb-6 shadow-md">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#E30613] animate-pulse" />
-              <span className="font-semibold">Planta Industrial Directa • San Nicolás, Cali</span>
-              <span className="text-red-400 font-bold">| NIT 900.384.912-4</span>
+            <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#1E1E26] border border-white/15 text-[11px] sm:text-xs font-mono uppercase tracking-wider text-zinc-200 mb-6 shadow-md max-w-full">
+              <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#E30613] animate-pulse shrink-0" />
+              <span className="font-semibold">Planta Directa • San Nicolás, Cali</span>
+              <span className="text-red-400 font-bold hidden sm:inline">| NIT 900.384.912-4</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl xl:text-6xl font-montserrat font-black tracking-tight text-white uppercase leading-[1.06] mb-6">
+            <h1 className="text-3xl sm:text-5xl xl:text-6xl font-montserrat font-black tracking-tight text-white uppercase leading-[1.08] mb-5 sm:mb-6">
               FABRICACIÓN DE <br />
               <span className="text-white">MATERIAL POP &</span> <br />
               <span className="text-[#FF2A36] drop-shadow-[0_0_35px_rgba(227,6,19,0.6)]">
@@ -85,7 +85,7 @@ export function Hero() {
             </h1>
 
             {/* Subheading / Commercial Description */}
-            <p className="text-base sm:text-lg text-zinc-100 max-w-2xl font-normal leading-relaxed mb-8">
+            <p className="text-sm sm:text-base lg:text-lg text-zinc-100 max-w-2xl font-normal leading-relaxed mb-8">
               Planta de producción gráfica directa en Cali con despachos diarios a todo el país. Desarrollamos{" "}
               <strong className="text-white font-bold underline decoration-[#E30613] decoration-2 underline-offset-4">
                 Exhibidores POP de piso y mostrador
@@ -94,11 +94,11 @@ export function Hero() {
             </p>
 
             {/* Dual CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
               <Link
                 href="/cotizador"
                 onClick={() => triggerHaptic(10)}
-                className="group relative inline-flex items-center justify-center gap-3 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-sm uppercase tracking-wider px-8 py-4 rounded-xl shadow-[0_0_30px_rgba(227,6,19,0.5)] hover:shadow-[0_0_45px_rgba(227,6,19,0.8)] transition-all duration-300"
+                className="group relative inline-flex items-center justify-center gap-2.5 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs sm:text-sm uppercase tracking-wider px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl shadow-[0_0_30px_rgba(227,6,19,0.5)] hover:shadow-[0_0_45px_rgba(227,6,19,0.8)] transition-all duration-300 min-h-[48px]"
               >
                 <span>Configurar Cotización Online</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -108,15 +108,15 @@ export function Hero() {
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20solicito%20asesor%C3%ADa%20para%20un%20proyecto%20de%20branding%20y%20material%20POP."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 bg-[#1E1E24] hover:bg-[#282832] text-white border border-white/15 hover:border-white/30 font-montserrat font-bold text-sm px-6 py-4 rounded-xl transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 bg-[#1E1E24] hover:bg-[#282832] text-white border border-white/15 hover:border-white/30 font-montserrat font-bold text-xs sm:text-sm px-6 py-3.5 sm:py-4 rounded-xl transition-all duration-200 min-h-[48px]"
               >
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                 <span>Asesor Comercial Inmediato</span>
               </a>
             </div>
 
             {/* Key Trust Checkpoints */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/15 text-xs font-semibold text-zinc-100">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-white/15 text-xs font-semibold text-zinc-100">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>Sin Intermediarios</span>
@@ -166,7 +166,7 @@ export function Hero() {
                 </div>
 
                 {/* Real Photography Stage */}
-                <div className="relative h-72 sm:h-80 w-full rounded-xl bg-[#0F0F13] border border-white/10 overflow-hidden group">
+                <div className="relative h-64 sm:h-80 w-full rounded-xl bg-[#0F0F13] border border-white/10 overflow-hidden group">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentPhoto.id}

@@ -67,7 +67,7 @@ export function FeaturedProjects() {
           <Link
             href="/proyectos"
             onClick={() => triggerHaptic(8)}
-            className="inline-flex items-center gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-300 hover:text-white transition-colors shrink-0"
+            className="inline-flex items-center justify-center gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-200 hover:text-white transition-colors shrink-0 py-2.5 px-4 rounded-xl bg-white/5 border border-white/10 hover:border-red-500/40 min-h-[44px] w-full sm:w-auto"
           >
             <span>Ver portafolio completo</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#E30613]" />

@@ -50,16 +50,22 @@ export function Footer() {
                 <MapPin className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                 <span>
                   Calle 16 # 4-37, Barrio San Nicolás <br />
-                  <span className="text-zinc-300">Cali, Valle del Cauca, Colombia • C.P. 760010</span>
+                  <span className="text-zinc-400">Cali, Valle del Cauca, Colombia • C.P. 760010</span>
                 </span>
               </div>
               <div className="flex items-center gap-2.5 text-zinc-200">
                 <Phone className="w-4 h-4 text-red-400 shrink-0" />
-                <span>PBX Planta: (602) 885-4000 • Móvil / WhatsApp: +57 316 320 0181</span>
+                <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span>PBX: <a href="tel:+576028854000" className="hover:text-red-400 underline underline-offset-2 transition-colors font-mono">(602) 885-4000</a></span>
+                  <span className="text-zinc-500">•</span>
+                  <span>Móvil: <a href="tel:+573163200181" className="hover:text-red-400 underline underline-offset-2 transition-colors font-mono">+57 316 320 0181</a></span>
+                </span>
               </div>
               <div className="flex items-center gap-2.5 text-zinc-200">
                 <Mail className="w-4 h-4 text-red-400 shrink-0" />
-                <span>cotizaciones@impresosamericana.com</span>
+                <a href="mailto:cotizaciones@impresosamericana.com" className="hover:text-red-400 underline underline-offset-2 transition-colors break-all">
+                  cotizaciones@impresosamericana.com
+                </a>
               </div>
               <div className="flex items-center gap-2.5 text-zinc-200">
                 <Clock className="w-4 h-4 text-red-400 shrink-0" />
@@ -73,39 +79,39 @@ export function Footer() {
             <h4 className="font-montserrat font-bold text-xs uppercase tracking-wider text-white">
               Líneas de Producción
             </h4>
-            <ul className="space-y-2 text-xs text-zinc-300">
+            <ul className="space-y-1 text-xs text-zinc-300">
               <li>
-                <Link href="/cotizador" className="hover:text-white transition-colors">
+                <Link href="/cotizador" className="inline-block py-1.5 hover:text-white transition-colors">
                   Exhibidores POP de Piso
                 </Link>
               </li>
               <li>
-                <Link href="/servicios" className="hover:text-white transition-colors">
+                <Link href="/servicios" className="inline-block py-1.5 hover:text-white transition-colors">
                   Gran Formato UV Cama Plana
                 </Link>
               </li>
               <li>
-                <Link href="/cotizador" className="hover:text-white transition-colors">
+                <Link href="/cotizador" className="inline-block py-1.5 hover:text-white transition-colors">
                   Cajas Rígidas & Plegadizas
                 </Link>
               </li>
               <li>
-                <Link href="/servicios" className="hover:text-white transition-colors">
+                <Link href="/servicios" className="inline-block py-1.5 hover:text-white transition-colors">
                   Litografía Comercial Offset
                 </Link>
               </li>
               <li>
-                <Link href="/catalogo" className="hover:text-white transition-colors">
+                <Link href="/catalogo" className="inline-block py-1.5 hover:text-white transition-colors">
                   Catálogo de Merchandising
                 </Link>
               </li>
               <li>
-                <Link href="/plantillas" className="hover:text-white transition-colors">
+                <Link href="/plantillas" className="inline-block py-1.5 hover:text-white transition-colors">
                   Planos & Troqueles (.AI / .PDF)
                 </Link>
               </li>
               <li>
-                <Link href="/guia-admin" className="hover:text-white transition-colors text-zinc-400 hover:text-red-400">
+                <Link href="/guia-admin" className="inline-block py-1.5 hover:text-white transition-colors text-zinc-400 hover:text-red-400">
                   Manual del Editor CMS
                 </Link>
               </li>
@@ -145,7 +151,7 @@ export function Footer() {
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20necesito%20cotizaci%C3%B3n%20urgente%20para%20un%20proyecto."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition-colors shadow-md"
+                className="w-full inline-flex items-center justify-center gap-2 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider py-3 rounded-lg transition-colors shadow-md min-h-[44px]"
               >
                 <MessageCircle className="w-3.5 h-3.5" />
                 WhatsApp Directo
@@ -163,28 +169,28 @@ export function Footer() {
 
         {/* DIAN and Legal Footer Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-zinc-400 font-mono">
-          <div>
+          <div className="text-center md:text-left">
             © {new Date().getFullYear()} Impresos Americana S.A.S. • NIT 900.384.912-4 • Todos los derechos reservados.
           </div>
 
-          <div className="flex items-center space-x-4 text-xs">
+          <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-xs">
             <button
               onClick={() => setActiveLegalModal("terms")}
-              className="text-zinc-300 hover:text-white transition-colors underline"
+              className="text-zinc-300 hover:text-white transition-colors underline py-1"
             >
               Términos de Fabricación
             </button>
-            <span className="text-zinc-500">•</span>
+            <span className="text-zinc-600 hidden sm:inline">•</span>
             <button
               onClick={() => setActiveLegalModal("privacy")}
-              className="text-zinc-300 hover:text-white transition-colors underline"
+              className="text-zinc-300 hover:text-white transition-colors underline py-1"
             >
               Política de Datos (Ley 1581)
             </button>
-            <span className="text-zinc-500">•</span>
+            <span className="text-zinc-600 hidden sm:inline">•</span>
             <Link
               href="/progress"
-              className="text-red-400 hover:text-red-300 hover:underline font-bold flex items-center gap-1"
+              className="text-red-400 hover:text-red-300 hover:underline font-bold flex items-center gap-1 py-1"
             >
               <Sparkles className="w-3 h-3" />
               Auditoría & Progreso

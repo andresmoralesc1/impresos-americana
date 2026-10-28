@@ -147,10 +147,10 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shrink-0 w-full md:w-auto">
             <a
               href="tel:+576028854000"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-zinc-200 hover:text-white border border-white/10 text-xs font-montserrat font-bold transition-all"
+              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-zinc-200 hover:text-white border border-white/10 text-xs font-montserrat font-bold transition-all min-h-[44px]"
             >
               <Phone className="w-3.5 h-3.5 text-red-400" />
               <span>PBX (602) 885-4000</span>
@@ -159,7 +159,7 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
               href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20comunicarme%20con%20un%20asesor%20comercial"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 text-emerald-300 border border-[#25D366]/40 text-xs font-montserrat font-bold transition-all"
+              className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 text-emerald-300 border border-[#25D366]/40 text-xs font-montserrat font-bold transition-all min-h-[44px]"
             >
               <span className="w-2 h-2 rounded-full bg-[#25D366]" />
               <span>WhatsApp Directo</span>
@@ -230,12 +230,26 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
                     Central Telefónica & WhatsApp
                   </h3>
                   <div className="mt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div>
+                    <div className="space-y-1">
                       <p className="text-xs text-zinc-300">
-                        PBX: <strong className="text-white">(602) 885-4000</strong>
+                        PBX:{" "}
+                        <a
+                          href="tel:+576028854000"
+                          className="text-white hover:text-red-400 font-bold underline underline-offset-2 transition-colors font-mono"
+                        >
+                          (602) 885-4000
+                        </a>
                       </p>
                       <p className="text-xs text-zinc-300">
-                        WhatsApp: <strong className="text-emerald-400">+57 316 320 0181</strong>
+                        WhatsApp:{" "}
+                        <a
+                          href="https://wa.me/573163200181"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-emerald-400 hover:underline font-bold font-mono"
+                        >
+                          +57 316 320 0181
+                        </a>
                       </p>
                     </div>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 w-fit">
@@ -466,12 +480,12 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
             </div>
 
             {/* GPS Navigation Links (Google Maps & Waze apps) */}
-            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto">
               <a
                 href="https://www.google.com/maps/search/?api=1&query=Calle+16+%23+4-37+San+Nicolas+Cali+Colombia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-montserrat font-bold uppercase transition-all shadow-md"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-montserrat font-bold uppercase transition-all shadow-md min-h-[44px]"
               >
                 <Navigation className="w-3.5 h-3.5 text-blue-400" />
                 <span>Abrir en Google Maps</span>
@@ -482,7 +496,7 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
                 href="https://waze.com/ul?q=Calle%2016%204-37%20San%20Nicolas%20Cali"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600/30 hover:bg-blue-600/40 text-blue-200 border border-blue-500/30 text-xs font-montserrat font-bold uppercase transition-all shadow-md"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-blue-600/30 hover:bg-blue-600/40 text-blue-200 border border-blue-500/30 text-xs font-montserrat font-bold uppercase transition-all shadow-md min-h-[44px]"
               >
                 <Car className="w-3.5 h-3.5 text-blue-400" />
                 <span>Navegar con Waze</span>

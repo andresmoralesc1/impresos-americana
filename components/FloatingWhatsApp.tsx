@@ -30,11 +30,11 @@ export function FloatingWhatsApp() {
   return (
     <aside
       aria-label="Atención al cliente por WhatsApp"
-      className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end pointer-events-none select-none"
+      className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end pointer-events-none select-none pb-[env(safe-area-inset-bottom)]"
     >
       {/* Speech Bubble / Tooltip */}
       {showTooltip && (
-        <div className="pointer-events-auto mb-3 max-w-xs bg-[#181822]/95 backdrop-blur-md border border-emerald-500/30 text-white p-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative animate-in fade-in slide-in-from-bottom-2 duration-300">
+        <div className="pointer-events-auto mb-3 max-w-[calc(100vw-2.5rem)] sm:max-w-xs bg-[#181822]/95 backdrop-blur-md border border-emerald-500/30 text-white p-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative animate-in fade-in slide-in-from-bottom-2 duration-300">
           <button
             type="button"
             onClick={handleCloseTooltip}

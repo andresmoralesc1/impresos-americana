@@ -61,7 +61,7 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
       <div className="bg-[#181820] border border-white/15 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-1.5 rounded-lg text-zinc-400 hover:text-white bg-white/5 transition-colors"
+          className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-zinc-400 hover:text-white bg-white/5 border border-white/10 transition-colors"
           aria-label="Cerrar modal"
         >
           <X className="w-5 h-5" />
@@ -175,14 +175,14 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
                     key={sample}
                     type="button"
                     onClick={() => toggleSample(sample)}
-                    className={`flex items-center gap-2 p-2 rounded-lg border text-left text-xs transition-colors ${
+                    className={`flex items-center gap-2.5 p-2.5 min-h-[44px] rounded-xl border text-left text-xs transition-colors ${
                       isSelected
-                        ? "border-[#E30613] bg-[#E30613]/10 text-white"
-                        : "border-white/10 bg-[#121216] text-zinc-400"
+                        ? "border-[#E30613] bg-[#E30613]/15 text-white font-medium"
+                        : "border-white/10 bg-[#121216] text-zinc-300 hover:border-white/20"
                     }`}
                   >
                     <div
-                      className={`w-4 h-4 rounded flex items-center justify-center border text-[10px] ${
+                      className={`w-4 h-4 rounded flex items-center justify-center border text-[10px] shrink-0 ${
                         isSelected
                           ? "bg-[#E30613] border-[#E30613] text-white"
                           : "border-zinc-600"

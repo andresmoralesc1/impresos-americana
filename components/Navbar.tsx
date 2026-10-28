@@ -105,7 +105,7 @@ export function Navbar() {
             </nav>
 
             {/* Right Action Icons & CTA */}
-            <div className="hidden md:flex items-center space-x-3">
+            <div className="hidden lg:flex items-center space-x-3">
               {/* Search Omnibox Trigger */}
               <button
                 type="button"
@@ -161,25 +161,25 @@ export function Navbar() {
               </a>
             </div>
 
-            {/* Mobile Hamburger & Actions */}
-            <div className="flex md:hidden items-center space-x-2">
+            {/* Mobile Hamburger & Actions (Active below 1024px) */}
+            <div className="flex lg:hidden items-center space-x-1.5 sm:space-x-2">
               <button
                 type="button"
                 onClick={() => setCommandMenuOpen(true)}
-                className="p-2 text-zinc-300 hover:text-white rounded-lg focus:outline-none"
+                className="p-2.5 text-zinc-300 hover:text-white rounded-lg focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Buscar productos (Cmd+K)"
               >
                 <Search className="w-5 h-5" />
               </button>
               <Link
                 href="/cotizador"
-                className="bg-[#E30613] text-white text-xs font-montserrat font-bold px-3 py-1.5 rounded-md"
+                className="bg-[#E30613] hover:bg-[#C50510] text-white text-xs font-montserrat font-bold px-3 py-2 rounded-lg min-h-[40px] flex items-center"
               >
                 Cotizar
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-zinc-300 hover:text-white rounded-lg focus:outline-none"
+                className="p-2.5 text-zinc-300 hover:text-white rounded-lg focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Abrir menú de navegación"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -189,21 +189,21 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay with Safe Area and Smooth Scrolling */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-[#121212]/98 backdrop-blur-xl pt-24 px-6 flex flex-col justify-between pb-10 lg:hidden"
+            className="fixed inset-0 z-40 bg-[#121212]/98 backdrop-blur-2xl pt-24 px-5 sm:px-6 flex flex-col justify-between pb-8 overflow-y-auto lg:hidden"
           >
             <div className="space-y-4">
-              <div className="border-b border-white/10 pb-4 mb-4">
-                <p className="text-xs font-mono uppercase text-zinc-400 tracking-widest mb-3">
+              <div className="border-b border-white/10 pb-4 mb-3">
+                <p className="text-[11px] font-mono uppercase text-zinc-400 tracking-widest mb-2">
                   Menú Principal
                 </p>
-                <div className="flex flex-col space-y-3">
+                <div className="flex flex-col space-y-1">
                   {navLinks.map((link) => {
                     const isActive =
                       link.href === "/"
@@ -215,31 +215,64 @@ export function Navbar() {
                         key={link.name}
                         href={link.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`text-xl font-montserrat font-bold transition-colors ${
-                          isActive ? "text-[#E30613]" : "text-zinc-200"
+                        className={`text-lg sm:text-xl font-montserrat font-bold py-2.5 px-3 rounded-xl transition-colors flex items-center justify-between min-h-[48px] ${
+                          isActive
+                            ? "text-[#E30613] bg-red-950/20"
+                            : "text-zinc-200 hover:bg-white/5"
                         }`}
                       >
-                        {link.name}
+                        <span>{link.name}</span>
+                        {isActive && (
+                          <span className="w-2 h-2 rounded-full bg-[#E30613]" />
+                        )}
                       </Link>
                     );
                   })}
                 </div>
               </div>
 
+              {/* Sample Box Trigger inside mobile menu */}
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setSampleModalOpen(true);
+                }}
+                className="w-full p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-left hover:bg-white/10 transition-colors min-h-[48px]"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Box className="w-5 h-5 text-[#E30613]" />
+                  <div>
+                    <span className="text-xs font-montserrat font-bold text-white block">
+                      Pedir Muestrario Físico (Sample Box)
+                    </span>
+                    <span className="text-[10px] text-zinc-400 font-mono">
+                      Muestras reales a domicilio
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs text-red-400 font-bold">Solicitar →</span>
+              </button>
+
               <div className="bg-[#1E1E24] p-4 rounded-xl border border-white/10">
-                <p className="text-xs text-zinc-400 mb-1 font-mono uppercase">
+                <p className="text-[11px] text-zinc-400 mb-1 font-mono uppercase">
                   Atención Directa Cali & Nacional
                 </p>
-                <p className="text-sm font-semibold text-white">PBX: (602) 885-4000</p>
-                <p className="text-xs text-zinc-400">Lun - Vie: 7:30 AM - 5:30 PM</p>
+                <a
+                  href="tel:+576028854000"
+                  className="text-sm font-semibold text-white hover:text-red-400 transition-colors block"
+                >
+                  PBX Planta: (602) 885-4000
+                </a>
+                <p className="text-xs text-zinc-400 mt-0.5">Lun - Vie: 7:30 AM - 5:30 PM</p>
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 pt-6 mt-4 border-t border-white/10">
               <Link
                 href="/cotizador"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3.5 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-center text-sm uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(227,6,19,0.4)] block"
+                className="w-full py-3.5 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-center text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(227,6,19,0.4)] flex items-center justify-center min-h-[48px]"
               >
                 Configurar Cotización Online
               </Link>
@@ -247,7 +280,7 @@ export function Navbar() {
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20inmediata."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 bg-[#1E1E24] hover:bg-[#272730] text-emerald-400 border border-emerald-500/30 font-montserrat font-semibold text-center text-sm rounded-xl flex items-center justify-center gap-2"
+                className="w-full py-3 bg-[#1E1E24] hover:bg-[#272730] text-emerald-400 border border-emerald-500/30 font-montserrat font-semibold text-center text-xs rounded-xl flex items-center justify-center gap-2 min-h-[48px]"
               >
                 <MessageCircle className="w-4 h-4" />
                 Asesoría WhatsApp Inmediata

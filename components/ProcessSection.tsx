@@ -140,9 +140,9 @@ export function ProcessSection() {
           </div>
           <Link
             href="/cotizador"
-            className="shrink-0 text-xs font-montserrat font-bold uppercase text-red-400 hover:text-white flex items-center gap-1 tracking-wider transition-colors"
+            className="w-full sm:w-auto shrink-0 text-xs font-montserrat font-bold uppercase text-red-400 hover:text-white flex items-center justify-center gap-1.5 tracking-wider transition-colors py-2.5 px-4 rounded-xl bg-red-950/40 sm:bg-transparent border border-red-500/30 sm:border-0 min-h-[44px] sm:min-h-0"
           >
-            Solicitar Muestra Técnica
+            <span>Solicitar Muestra Técnica</span>
             <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
