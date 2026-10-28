@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   FileCheck2,
@@ -137,13 +138,13 @@ export function ProcessSection() {
               <strong className="text-white">Política de Cero Desperdicio:</strong> Si el producto final presenta discrepancia técnica con la muestra física aprobada, reimprimimos el lote sin costo adicional.
             </p>
           </div>
-          <a
-            href="#cotizador"
-            className="shrink-0 text-xs font-montserrat font-bold uppercase text-red-400 hover:text-white flex items-center gap-1 tracking-wider"
+          <Link
+            href="/cotizador"
+            className="shrink-0 text-xs font-montserrat font-bold uppercase text-red-400 hover:text-white flex items-center gap-1 tracking-wider transition-colors"
           >
             Solicitar Muestra Técnica
             <ChevronRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
