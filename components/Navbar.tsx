@@ -22,7 +22,6 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [commandMenuOpen, setCommandMenuOpen] = useState(false);
   const [sampleModalOpen, setSampleModalOpen] = useState(false);
-  const [cartCount] = useState(1); // Sample kit in cart
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,23 +31,36 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Global Cmd+K / Ctrl+K Omnibox shortcut
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  // Global Keyboard shortcuts: Cmd+K / Ctrl+K and Escape
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setCommandMenuOpen((prev) => !prev);
+      } else if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { name: "Inicio", href: "/" },
     { name: "Servicios", href: "/servicios" },
     { name: "Proyectos", href: "/proyectos" },
-    { name: "Cotizador", href: "/cotizador", isHighlight: true },
     { name: "Catálogo", href: "/catalogo" },
     { name: "Plantillas", href: "/plantillas" },
     { name: "Contacto", href: "/contacto" },
@@ -60,7 +72,7 @@ export function Navbar() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-white/95 backdrop-blur-md border-b border-zinc-200/80 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
-            : "bg-white/80 backdrop-blur-sm border-b border-zinc-100 py-4.5"
+            : "bg-white/80 backdrop-blur-sm border-b border-zinc-100 py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,13 +80,17 @@ export function Navbar() {
             {/* Brand Logo */}
             <Link
               href="/"
-              className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30613] rounded-lg p-1"
+              className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30613] rounded-lg p-1 transition-transform"
+              aria-label="Impresos Americana - Página de inicio"
             >
               <IALogo size="md" theme="light" />
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+            <nav
+              aria-label="Navegación principal"
+              className="hidden lg:flex items-center space-x-1 xl:space-x-2"
+            >
               {navLinks.map((link) => {
                 const isActive =
                   link.href === "/"
@@ -85,7 +101,8 @@ export function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative px-3.5 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
+                    aria-current={isActive ? "page" : undefined}
+                    className={`relative px-3.5 py-2 text-sm font-medium transition-colors duration-200 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30613] ${
                       isActive
                         ? "text-zinc-950 font-bold"
                         : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100/60"
@@ -105,13 +122,13 @@ export function Navbar() {
             </nav>
 
             {/* Right Action Icons & CTA */}
-            <div className="hidden lg:flex items-center space-x-3">
+            <div className="hidden lg:flex items-center space-x-2.5">
               {/* Search Omnibox Trigger */}
               <button
                 type="button"
                 onClick={() => setCommandMenuOpen(true)}
                 aria-label="Buscar producto o sustrato (Cmd+K)"
-                className="p-2 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 rounded-full transition-colors flex items-center gap-1.5"
+                className="p-2 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30613]"
                 title="Buscador global Omnibox (Cmd+K)"
               >
                 <Search className="w-4.5 h-4.5" />
@@ -125,22 +142,32 @@ export function Navbar() {
                 type="button"
                 onClick={() => setSampleModalOpen(true)}
                 aria-label="Solicitar kit de muestras físicas (Sample Box)"
-                className="relative p-2 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 rounded-full transition-colors flex items-center gap-1.5"
+                className="p-2 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30613]"
                 title="Pedir Muestrario Físico a Domicilio"
               >
                 <Box className="w-4.5 h-4.5 text-[#E30613]" />
                 <span className="hidden xl:inline text-xs font-mono text-zinc-700 font-medium">Muestras</span>
-                {cartCount > 0 && (
-                  <span className="absolute top-1 right-1 w-4 h-4 bg-[#E30613] text-[10px] font-bold text-white rounded-full flex items-center justify-center">
-                    {cartCount}
-                  </span>
-                )}
+                <span className="hidden xl:inline-flex text-[9px] font-mono uppercase font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                  Kit Gratis
+                </span>
               </button>
+
+              {/* Direct WhatsApp Action - Harmonious and clean */}
+              <a
+                href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20para%20un%20proyecto%20gr%C3%A1fico."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 bg-zinc-50 hover:bg-emerald-50 text-zinc-700 hover:text-emerald-700 border border-zinc-200 hover:border-emerald-300 rounded-lg transition-colors flex items-center justify-center shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                title="Llamar o chatear por WhatsApp (+57 316 320 0181)"
+                aria-label="Chatear por WhatsApp con un asesor"
+              >
+                <MessageCircle className="w-4 h-4" />
+              </a>
 
               {/* High-impact Americana Red CTA Button */}
               <Link
                 href="/cotizador"
-                className="relative group overflow-hidden bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-lg shadow-sm shadow-red-500/20 hover:shadow-md hover:shadow-red-500/30 transition-all duration-300 flex items-center gap-2"
+                className="relative group overflow-hidden bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-lg shadow-sm shadow-red-500/20 hover:shadow-md hover:shadow-red-500/30 transition-all duration-300 flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E30613]"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5 text-white/90 group-hover:rotate-12 transition-transform" />
@@ -148,17 +175,6 @@ export function Navbar() {
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
               </Link>
-
-              {/* Direct WhatsApp Call */}
-              <a
-                href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20para%20un%20proyecto%20gr%C3%A1fico."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-lg transition-colors flex items-center justify-center shadow-xs"
-                title="Llamar o chatear por WhatsApp (+57 316 320 0181)"
-              >
-                <MessageCircle className="w-4 h-4" />
-              </a>
             </div>
 
             {/* Mobile Hamburger & Actions (Active below 1024px) */}
@@ -166,22 +182,24 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setCommandMenuOpen(true)}
-                className="p-2 text-zinc-600 hover:text-zinc-950 rounded-lg focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="p-2 text-zinc-600 hover:text-zinc-950 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30613] min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Buscar productos (Cmd+K)"
               >
                 <Search className="w-5 h-5" />
               </button>
               <Link
                 href="/cotizador"
-                className="bg-[#E30613] hover:bg-[#C50510] text-white text-xs font-montserrat font-bold px-3 py-2 rounded-lg min-h-[40px] flex items-center shadow-xs"
+                className="bg-[#E30613] hover:bg-[#C50510] text-white text-xs font-montserrat font-bold px-3.5 py-2 rounded-lg min-h-[40px] flex items-center shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E30613]"
               >
                 Cotizar
               </Link>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-zinc-700 hover:text-zinc-950 rounded-lg focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
-                aria-label="Abrir menú de navegación"
+                className="p-2 text-zinc-700 hover:text-zinc-950 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30613] min-h-[44px] min-w-[44px] flex items-center justify-center"
+                aria-label={mobileMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-navigation-menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -194,6 +212,10 @@ export function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            id="mobile-navigation-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú de navegación móvil"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -216,7 +238,8 @@ export function Navbar() {
                         key={link.name}
                         href={link.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`text-lg sm:text-xl font-montserrat font-bold py-2.5 px-3 rounded-xl transition-colors flex items-center justify-between min-h-[48px] ${
+                        aria-current={isActive ? "page" : undefined}
+                        className={`text-lg sm:text-xl font-montserrat font-bold py-2.5 px-3 rounded-xl transition-colors flex items-center justify-between min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30613] ${
                           isActive
                             ? "text-[#E30613] bg-red-50"
                             : "text-zinc-800 hover:bg-zinc-100"
@@ -239,7 +262,7 @@ export function Navbar() {
                   setMobileMenuOpen(false);
                   setSampleModalOpen(true);
                 }}
-                className="w-full p-3 rounded-xl bg-zinc-50 border border-zinc-200 flex items-center justify-between text-left hover:bg-zinc-100 transition-colors min-h-[48px]"
+                className="w-full p-3 rounded-xl bg-zinc-50 border border-zinc-200 flex items-center justify-between text-left hover:bg-zinc-100 transition-colors min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30613]"
               >
                 <div className="flex items-center gap-2.5">
                   <Box className="w-5 h-5 text-[#E30613]" />
@@ -248,7 +271,7 @@ export function Navbar() {
                       Pedir Muestrario Físico (Sample Box)
                     </span>
                     <span className="text-[10px] text-zinc-500 font-mono">
-                      Muestras reales a domicilio
+                      Muestras reales a domicilio en Colombia
                     </span>
                   </div>
                 </div>
@@ -273,7 +296,7 @@ export function Navbar() {
               <Link
                 href="/cotizador"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3.5 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-center text-xs uppercase tracking-wider rounded-xl shadow-md shadow-red-500/20 flex items-center justify-center min-h-[48px]"
+                className="w-full py-3.5 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-center text-xs uppercase tracking-wider rounded-xl shadow-md shadow-red-500/20 flex items-center justify-center min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E30613]"
               >
                 Configurar Cotización Online
               </Link>
@@ -281,7 +304,7 @@ export function Navbar() {
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20inmediata."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-montserrat font-semibold text-center text-xs rounded-xl flex items-center justify-center gap-2 min-h-[48px]"
+                className="w-full py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-montserrat font-semibold text-center text-xs rounded-xl flex items-center justify-center gap-2 min-h-[48px] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-600" />
                 Asesoría WhatsApp Inmediata
