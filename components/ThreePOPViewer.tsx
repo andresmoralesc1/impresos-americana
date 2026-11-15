@@ -18,6 +18,7 @@ export function ThreePOPViewer({
   const [textureTheme, setTextureTheme] = useState<"kraft" | "blanco" | "negro" | "acrilico">(
     materialType.includes("acrilico") ? "acrilico" : "kraft"
   );
+  const [lightingPreset, setLightingPreset] = useState<"estudio" | "retail" | "contraste">("estudio");
   const [brandName, setBrandName] = useState("IMPRESOS AMERICANA");
   const [customLogoImg, setCustomLogoImg] = useState<HTMLImageElement | null>(null);
   const [showLogoInput, setShowLogoInput] = useState(false);
@@ -73,11 +74,28 @@ export function ThreePOPViewer({
     container.innerHTML = "";
     container.appendChild(renderer.domElement);
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    // Lighting Presets (Modo Estudio, Retail Gondola, Contraste Técnico)
+    let ambientIntensity = 1.3;
+    let dirIntensity = 2.0;
+    let dirColor = 0xffffff;
+    let pointIntensity = 2.5;
+
+    if (lightingPreset === "retail") {
+      ambientIntensity = 1.0;
+      dirIntensity = 2.8;
+      dirColor = 0xfffaea; // Warm retail spotlight
+      pointIntensity = 3.5;
+    } else if (lightingPreset === "contraste") {
+      ambientIntensity = 0.8;
+      dirIntensity = 3.2;
+      dirColor = 0xf0f7ff; // Crisp cool dieline light
+      pointIntensity = 1.8;
+    }
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, ambientIntensity);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 2.2);
+    const dirLight = new THREE.DirectionalLight(dirColor, dirIntensity);
     dirLight.position.set(4, 6, 4);
     dirLight.castShadow = true;
     dirLight.shadow.mapSize.width = 1024;
@@ -85,7 +103,7 @@ export function ThreePOPViewer({
     scene.add(dirLight);
 
     // Red ambient accent light matching Americana Action Red
-    const redLight = new THREE.PointLight(0xe30613, 3, 8);
+    const redLight = new THREE.PointLight(0xe30613, pointIntensity, 8);
     redLight.position.set(-2.5, 2, -1);
     scene.add(redLight);
 
@@ -362,7 +380,7 @@ export function ThreePOPViewer({
         container.removeChild(domElement);
       }
     };
-  }, [textureTheme, isRotating, hasUVVarnish, brandName, customLogoImg]);
+  }, [textureTheme, isRotating, hasUVVarnish, brandName, customLogoImg, lightingPreset]);
 
   return (
     <div className="relative w-full h-80 sm:h-96 rounded-2xl bg-gradient-to-b from-zinc-50/90 to-zinc-100/70 border border-zinc-200/90 shadow-inner overflow-hidden flex flex-col justify-between">
@@ -374,31 +392,77 @@ export function ThreePOPViewer({
       />
 
       {/* Floating 3D Control Badges */}
-      <div className="absolute top-3 left-3 flex items-center gap-2 z-20">
-        <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-[#E30613] text-white uppercase tracking-wider flex items-center gap-1 shadow-sm">
-          <Sparkles className="w-3 h-3" />
-          WebGL 360°
-        </span>
-        <button
-          onClick={() => setIsRotating(!isRotating)}
-          className={`p-1.5 rounded-md text-[10px] font-mono border transition-colors shadow-sm ${
-            isRotating
-              ? "bg-white text-zinc-900 border-zinc-300"
-              : "bg-white/80 text-zinc-600 border-zinc-200"
-          }`}
-          title={isRotating ? "Pausar autorrotación" : "Activar autorrotación"}
-        >
-          <RotateCw className={`w-3.5 h-3.5 ${isRotating ? "animate-spin" : ""}`} />
-        </button>
+      <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-20 pointer-events-none">
+        <div className="flex items-center gap-2 pointer-events-auto">
+          <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-[#E30613] text-white uppercase tracking-wider flex items-center gap-1 shadow-sm">
+            <Sparkles className="w-3 h-3" />
+            WebGL 360°
+          </span>
+          <button
+            onClick={() => setIsRotating(!isRotating)}
+            className={`p-1.5 rounded-md text-[10px] font-mono border transition-colors shadow-sm ${
+              isRotating
+                ? "bg-white text-zinc-900 border-zinc-300"
+                : "bg-white/80 text-zinc-600 border-zinc-200"
+            }`}
+            title={isRotating ? "Pausar autorrotación" : "Activar autorrotación"}
+          >
+            <RotateCw className={`w-3.5 h-3.5 ${isRotating ? "animate-spin" : ""}`} />
+          </button>
 
-        {/* Live Logo Customizer Trigger */}
-        <button
-          onClick={() => setShowLogoInput(!showLogoInput)}
-          className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-sm flex items-center gap-1.5 transition-colors"
-        >
-          <Upload className="w-3 h-3 text-[#E30613]" />
-          <span>Ver Mi Logo en el 3D</span>
-        </button>
+          {/* Live Logo Customizer Trigger */}
+          <button
+            onClick={() => setShowLogoInput(!showLogoInput)}
+            className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-sm flex items-center gap-1.5 transition-colors"
+          >
+            <Upload className="w-3 h-3 text-[#E30613]" />
+            <span className="hidden sm:inline">Ver Mi Logo en el 3D</span>
+            <span className="sm:hidden">Logo</span>
+          </button>
+        </div>
+
+        {/* Lighting Mode Studio Switcher */}
+        <div className="flex items-center gap-1 bg-white/95 backdrop-blur-md p-1 rounded-lg border border-zinc-200/80 shadow-sm pointer-events-auto">
+          <span className="text-[9px] font-mono uppercase text-zinc-400 font-bold px-1 hidden md:inline">
+            Luz:
+          </span>
+          <button
+            type="button"
+            onClick={() => setLightingPreset("estudio")}
+            className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold transition-colors ${
+              lightingPreset === "estudio"
+                ? "bg-zinc-900 text-white shadow-2xs"
+                : "text-zinc-600 hover:text-zinc-950"
+            }`}
+            title="Luz suave de estudio fotográfico"
+          >
+            Estudio
+          </button>
+          <button
+            type="button"
+            onClick={() => setLightingPreset("retail")}
+            className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold transition-colors ${
+              lightingPreset === "retail"
+                ? "bg-[#E30613] text-white shadow-2xs"
+                : "text-zinc-600 hover:text-zinc-950"
+            }`}
+            title="Luz cálida de punto de venta retail"
+          >
+            Retail
+          </button>
+          <button
+            type="button"
+            onClick={() => setLightingPreset("contraste")}
+            className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold transition-colors ${
+              lightingPreset === "contraste"
+                ? "bg-blue-600 text-white shadow-2xs"
+                : "text-zinc-600 hover:text-zinc-950"
+            }`}
+            title="Luz técnica de contraste y aristas de corte"
+          >
+            Técnico
+          </button>
+        </div>
       </div>
 
       {/* Logo Customizer Floating Dropdown */}

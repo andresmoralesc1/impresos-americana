@@ -13,6 +13,7 @@ import {
   Truck,
   Download,
   Printer,
+  TrendingDown,
 } from "lucide-react";
 import { ThreePOPViewer } from "./ThreePOPViewer";
 import { generateQuotePDF } from "@/lib/generateQuotePDF";
@@ -492,7 +493,7 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                   )}
 
                   <div className="flex items-center gap-1.5 w-full sm:w-auto sm:ml-auto pt-2 sm:pt-0">
-                    {[25, 50, 100, 250].map((tier) => (
+                    {[25, 50, 100, 250, 500].map((tier) => (
                       <button
                         key={tier}
                         type="button"
@@ -506,6 +507,52 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                         {tier}u
                       </button>
                     ))}
+                  </div>
+                </div>
+
+                {/* Interactive Scale Economy Curve */}
+                <div className="mt-3.5 p-3.5 rounded-2xl bg-zinc-50 border border-zinc-200 shadow-2xs">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-zinc-600 mb-2">
+                    <span className="font-bold uppercase tracking-wider text-zinc-900 flex items-center gap-1.5">
+                      <TrendingDown className="w-3.5 h-3.5 text-emerald-600" />
+                      Economía de Escala Industrial
+                    </span>
+                    <span className="text-emerald-700 font-bold">Hasta -30% por volumen</span>
+                  </div>
+
+                  <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
+                    {[
+                      { qty: 25, disc: 10 },
+                      { qty: 50, disc: 15 },
+                      { qty: 100, disc: 20 },
+                      { qty: 250, disc: 25 },
+                      { qty: 500, disc: 30 },
+                    ].map((tierItem) => {
+                      const tierUnitPrice = Math.round(baseUnitRaw * (1 - tierItem.disc / 100));
+                      const isSelected = quantity === tierItem.qty;
+                      return (
+                        <button
+                          key={tierItem.qty}
+                          type="button"
+                          onClick={() => changeQuantity(tierItem.qty)}
+                          className={`p-2 rounded-xl text-center border transition-all ${
+                            isSelected
+                              ? "bg-white border-[#E30613] shadow-sm ring-2 ring-red-500/20 scale-[1.03]"
+                              : "bg-white/80 border-zinc-200 hover:border-zinc-300 hover:bg-white"
+                          }`}
+                        >
+                          <span className={`block font-montserrat font-bold text-xs ${isSelected ? "text-[#E30613]" : "text-zinc-800"}`}>
+                            {tierItem.qty}u
+                          </span>
+                          <span className="block text-[10px] font-mono text-emerald-600 font-bold mt-0.5">
+                            -{tierItem.disc}%
+                          </span>
+                          <span className="block text-[9px] font-mono text-zinc-500 truncate mt-0.5">
+                            ${Math.round(tierUnitPrice / 1000)}k/u
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

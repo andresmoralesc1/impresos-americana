@@ -156,198 +156,17 @@ export function BentoGrid() {
           </div>
         </div>
 
-        {/* Bento Grid layout */}
+        {/* Bento Grid layout with interactive Cursor Spotlight */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence>
             {filteredProjects.map((project, index) => {
               const isLarge = project.size === "large" && index === 0;
-
               return (
-                <motion.div
-                  layout
+                <BentoCard
                   key={project.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4 }}
-                  className={`group relative rounded-2xl bg-white border border-zinc-200 hover:border-[#E30613]/50 transition-all duration-300 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl flex flex-col justify-between corner-slash-red ${
-                    isLarge ? "md:col-span-2 lg:col-span-2" : ""
-                  }`}
-                >
-                  {/* Decorative corner slash in bottom right */}
-                  <div className="absolute bottom-0 right-0 w-0 h-0 border-style-solid border-b-[34px] border-l-[34px] border-b-[#E30613] border-l-transparent z-10 pointer-events-none" />
-
-                  {/* Visual Simulation Stage representing the physical product */}
-                  <div className={`relative w-full ${isLarge ? "h-64 sm:h-72" : "h-56"} bg-zinc-50 overflow-hidden flex items-center justify-center p-6 border-b border-zinc-100`}>
-                    {/* Realistic Visual Mockup Illustrations */}
-                    {project.id === "supermercados" && (
-                      <div className="w-full h-full relative flex items-center justify-center">
-                        <svg viewBox="0 0 460 220" fill="none" className="w-full h-full max-h-56">
-                          <line x1="20" y1="40" x2="440" y2="40" stroke="#E2E8F0" strokeWidth="2" />
-                          <line x1="20" y1="90" x2="440" y2="90" stroke="#E2E8F0" strokeWidth="2" />
-                          <line x1="20" y1="140" x2="440" y2="140" stroke="#E2E8F0" strokeWidth="2" />
-
-                          <rect x="40" y="20" width="160" height="90" rx="4" fill="#E30613" />
-                          <rect x="46" y="26" width="148" height="78" rx="2" fill="#0F172A" />
-                          <text x="120" y="58" textAnchor="middle" fill="#FFFFFF" fontSize="13" fontFamily="Montserrat" fontWeight="900">
-                            PUNTO DE VENTA
-                          </text>
-                          <text x="120" y="74" textAnchor="middle" fill="#E30613" fontSize="9" fontFamily="Inter" fontWeight="700">
-                            IMPACTO NACIONAL
-                          </text>
-
-                          <path d="M260 50L360 40L380 200L250 210Z" fill="#C50510" />
-                          <path d="M280 60L350 50L360 190L270 200Z" fill="#334155" />
-                          <polygon points="280,100 350,92 345,108 276,116" fill="#D97706" />
-                          <polygon points="277,140 347,132 342,148 273,156" fill="#D97706" />
-                          <polygon points="274,180 344,172 339,188 270,196" fill="#D97706" />
-
-                          <rect x="180" y="10" width="220" height="30" rx="3" fill="#E30613" />
-                          <text x="290" y="29" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontFamily="Montserrat" fontWeight="800">
-                            CAMPAÑA NACIONAL DE VERANO
-                          </text>
-                        </svg>
-                      </div>
-                    )}
-
-                    {project.id === "bebidas" && (
-                      <div className="w-full h-full relative flex items-center justify-center">
-                        <svg viewBox="0 0 240 200" fill="none" className="h-full">
-                          <path d="M60 30L180 30L170 190L70 190Z" fill="#D97706" />
-                          <path d="M60 30L180 30L175 60H65Z" fill="#E30613" />
-                          <text x="120" y="50" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontFamily="Montserrat" fontWeight="800">
-                            BEBIDAS PREMIUM
-                          </text>
-                          <rect x="75" y="90" width="90" height="8" rx="1" fill="#B45309" />
-                          <rect x="85" y="70" width="12" height="20" rx="2" fill="#E30613" />
-                          <rect x="105" y="70" width="12" height="20" rx="2" fill="#FFFFFF" />
-                          <rect x="125" y="70" width="12" height="20" rx="2" fill="#1E293B" />
-                          <rect x="145" y="70" width="12" height="20" rx="2" fill="#E30613" />
-                          <rect x="73" y="140" width="94" height="8" rx="1" fill="#B45309" />
-                          <rect x="83" y="120" width="12" height="20" rx="2" fill="#FFFFFF" />
-                          <rect x="103" y="120" width="12" height="20" rx="2" fill="#E30613" />
-                          <rect x="123" y="120" width="12" height="20" rx="2" fill="#FFFFFF" />
-                          <rect x="143" y="120" width="12" height="20" rx="2" fill="#1E293B" />
-                          <text x="120" y="178" textAnchor="middle" fill="#FFFFFF" fontSize="8" fontFamily="Montserrat" fontWeight="800">
-                            IMPRESOS AMERICANA
-                          </text>
-                        </svg>
-                      </div>
-                    )}
-
-                    {project.id === "acrilico" && (
-                      <div className="w-full h-full relative flex items-center justify-center">
-                        <svg viewBox="0 0 240 180" fill="none" className="h-full">
-                          <rect x="40" y="30" width="160" height="110" rx="8" fill="rgba(241,245,249,0.8)" stroke="#CBD5E1" strokeWidth="2" />
-                          <circle cx="55" cy="45" r="4" fill="#94A3B8" />
-                          <circle cx="185" cy="45" r="4" fill="#94A3B8" />
-                          <circle cx="55" cy="125" r="4" fill="#94A3B8" />
-                          <circle cx="185" cy="125" r="4" fill="#94A3B8" />
-                          <circle cx="85" cy="75" r="10" fill="#E30613" />
-                          <text x="105" y="80" fill="#0F172A" fontSize="12" fontFamily="Montserrat" fontWeight="800">
-                            SEÑALÉTICA UV
-                          </text>
-                          <text x="105" y="95" fill="#64748B" fontSize="8" fontFamily="Inter">
-                            Acrílico Cristal 6mm
-                          </text>
-                          <line x1="60" y1="110" x2="180" y2="110" stroke="#E30613" strokeWidth="2" />
-                        </svg>
-                      </div>
-                    )}
-
-                    {project.id === "kit-corporativo" && (
-                      <div className="w-full h-full relative flex items-center justify-center p-2">
-                        <Image
-                          src="/products/libreta-ejecutiva.jpg"
-                          alt="Kit Corporativo de Agendas y Termos Impresos Americana"
-                          width={480}
-                          height={320}
-                          className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                    )}
-
-                    {project.id === "litografia-catalogos" && (
-                      <div className="w-full h-full relative flex items-center justify-center p-2">
-                        <Image
-                          src="/products/catalogo-cover.jpg"
-                          alt="Catálogo Litográfico Impresos Americana"
-                          width={480}
-                          height={320}
-                          className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                    )}
-
-                    {project.id === "vallas-gran-formato" && (
-                      <div className="w-full h-full relative flex items-center justify-center">
-                        <svg viewBox="0 0 360 200" fill="none" className="w-full h-full">
-                          <line x1="180" y1="80" x2="180" y2="180" stroke="#94A3B8" strokeWidth="8" />
-                          <rect x="60" y="30" width="240" height="90" rx="3" fill="#0F172A" stroke="#CBD5E1" strokeWidth="2" />
-                          <rect x="65" y="35" width="230" height="80" fill="#E30613" />
-                          <text x="180" y="70" textAnchor="middle" fill="#FFFFFF" fontSize="16" fontFamily="Montserrat" fontWeight="900">
-                            GRAN FORMATO UV
-                          </text>
-                          <text x="180" y="90" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontFamily="Inter" fontWeight="600">
-                            ALTA RESOLUCIÓN • 1440 DPI
-                          </text>
-                        </svg>
-                      </div>
-                    )}
-
-                    {/* Badge top-right */}
-                    {project.badge && (
-                      <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md border border-zinc-200 px-2.5 py-1 rounded-md text-[10px] font-montserrat font-bold text-zinc-800 uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E30613]" />
-                        {project.badge}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Card Content Footer */}
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="text-xs font-mono uppercase tracking-wider text-[#E30613] font-bold">
-                          {project.categoryLabel}
-                        </span>
-                        <span className="text-[11px] text-zinc-500 font-mono">
-                          {project.clientSector}
-                        </span>
-                      </div>
-
-                      <h3 className="text-lg sm:text-xl font-montserrat font-bold text-zinc-900 group-hover:text-[#E30613] transition-colors mb-3 leading-snug">
-                        {project.title}
-                      </h3>
-
-                      {/* Technical Specs tags */}
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {project.specs.map((spec, i) => (
-                          <span
-                            key={i}
-                            className="text-[11px] px-2.5 py-1 rounded bg-zinc-100 text-zinc-600 border border-zinc-200 font-mono"
-                          >
-                            {spec}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Bottom CTA to quote this exact product */}
-                    <div className="pt-3 border-t border-zinc-100 flex items-center justify-between">
-                      <Link
-                        href="/cotizador"
-                        className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-700 hover:text-zinc-950 transition-colors"
-                      >
-                        <span>Cotizar Proyecto Similar</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-[#E30613] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </Link>
-                      <span className="text-[11px] text-zinc-400 font-mono">
-                        Producción Industrial
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
+                  project={project}
+                  isLarge={isLarge}
+                />
               );
             })}
           </AnimatePresence>
@@ -375,5 +194,222 @@ export function BentoGrid() {
         </div>
       </div>
     </section>
+  );
+}
+
+function BentoCard({
+  project,
+  isLarge,
+}: {
+  project: ProjectItem;
+  isLarge: boolean;
+}) {
+  const cardRef = React.useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  return (
+    <motion.div
+      layout
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4 }}
+      className={`group relative rounded-3xl bg-white border border-zinc-200/90 hover:border-[#E30613]/50 transition-all duration-300 overflow-hidden shadow-[0_4px_24px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-8px_rgba(0,0,0,0.08)] hover:-translate-y-1 flex flex-col justify-between corner-slash-red ${
+        isLarge ? "md:col-span-2 lg:col-span-2" : ""
+      }`}
+    >
+      {/* Subtle cursor spotlight effect */}
+      <div
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300 z-10"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          background: `radial-gradient(450px circle at ${mousePos.x}px ${mousePos.y}px, rgba(227, 6, 19, 0.05), transparent 45%)`,
+        }}
+      />
+
+      {/* Decorative corner slash in bottom right */}
+      <div className="absolute bottom-0 right-0 w-0 h-0 border-style-solid border-b-[34px] border-l-[34px] border-b-[#E30613] border-l-transparent z-10 pointer-events-none" />
+
+      {/* Visual Simulation Stage */}
+      <div className={`relative w-full ${isLarge ? "h-64 sm:h-72" : "h-56"} bg-zinc-50 overflow-hidden flex items-center justify-center p-6 border-b border-zinc-100`}>
+        {project.id === "supermercados" && (
+          <div className="w-full h-full relative flex items-center justify-center">
+            <svg viewBox="0 0 460 220" fill="none" className="w-full h-full max-h-56">
+              <line x1="20" y1="40" x2="440" y2="40" stroke="#E2E8F0" strokeWidth="2" />
+              <line x1="20" y1="90" x2="440" y2="90" stroke="#E2E8F0" strokeWidth="2" />
+              <line x1="20" y1="140" x2="440" y2="140" stroke="#E2E8F0" strokeWidth="2" />
+
+              <rect x="40" y="20" width="160" height="90" rx="4" fill="#E30613" />
+              <rect x="46" y="26" width="148" height="78" rx="2" fill="#0F172A" />
+              <text x="120" y="58" textAnchor="middle" fill="#FFFFFF" fontSize="13" fontFamily="Montserrat" fontWeight="900">
+                PUNTO DE VENTA
+              </text>
+              <text x="120" y="74" textAnchor="middle" fill="#E30613" fontSize="9" fontFamily="Inter" fontWeight="700">
+                IMPACTO NACIONAL
+              </text>
+
+              <path d="M260 50L360 40L380 200L250 210Z" fill="#C50510" />
+              <path d="M280 60L350 50L360 190L270 200Z" fill="#334155" />
+              <polygon points="280,100 350,92 345,108 276,116" fill="#D97706" />
+              <polygon points="277,140 347,132 342,148 273,156" fill="#D97706" />
+              <polygon points="274,180 344,172 339,188 270,196" fill="#D97706" />
+
+              <rect x="180" y="10" width="220" height="30" rx="3" fill="#E30613" />
+              <text x="290" y="29" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontFamily="Montserrat" fontWeight="800">
+                CAMPAÑA NACIONAL DE VERANO
+              </text>
+            </svg>
+          </div>
+        )}
+
+        {project.id === "bebidas" && (
+          <div className="w-full h-full relative flex items-center justify-center">
+            <svg viewBox="0 0 240 200" fill="none" className="h-full">
+              <path d="M60 30L180 30L170 190L70 190Z" fill="#D97706" />
+              <path d="M60 30L180 30L175 60H65Z" fill="#E30613" />
+              <text x="120" y="50" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontFamily="Montserrat" fontWeight="800">
+                BEBIDAS PREMIUM
+              </text>
+              <rect x="75" y="90" width="90" height="8" rx="1" fill="#B45309" />
+              <rect x="85" y="70" width="12" height="20" rx="2" fill="#E30613" />
+              <rect x="105" y="70" width="12" height="20" rx="2" fill="#FFFFFF" />
+              <rect x="125" y="70" width="12" height="20" rx="2" fill="#1E293B" />
+              <rect x="145" y="70" width="12" height="20" rx="2" fill="#E30613" />
+              <rect x="73" y="140" width="94" height="8" rx="1" fill="#B45309" />
+              <rect x="83" y="120" width="12" height="20" rx="2" fill="#FFFFFF" />
+              <rect x="103" y="120" width="12" height="20" rx="2" fill="#E30613" />
+              <rect x="123" y="120" width="12" height="20" rx="2" fill="#FFFFFF" />
+              <rect x="143" y="120" width="12" height="20" rx="2" fill="#1E293B" />
+              <text x="120" y="178" textAnchor="middle" fill="#FFFFFF" fontSize="8" fontFamily="Montserrat" fontWeight="800">
+                IMPRESOS AMERICANA
+              </text>
+            </svg>
+          </div>
+        )}
+
+        {project.id === "acrilico" && (
+          <div className="w-full h-full relative flex items-center justify-center">
+            <svg viewBox="0 0 240 180" fill="none" className="h-full">
+              <rect x="40" y="30" width="160" height="110" rx="8" fill="rgba(241,245,249,0.8)" stroke="#CBD5E1" strokeWidth="2" />
+              <circle cx="55" cy="45" r="4" fill="#94A3B8" />
+              <circle cx="185" cy="45" r="4" fill="#94A3B8" />
+              <circle cx="55" cy="125" r="4" fill="#94A3B8" />
+              <circle cx="185" cy="125" r="4" fill="#94A3B8" />
+              <circle cx="85" cy="75" r="10" fill="#E30613" />
+              <text x="105" y="80" fill="#0F172A" fontSize="12" fontFamily="Montserrat" fontWeight="800">
+                SEÑALÉTICA UV
+              </text>
+              <text x="105" y="95" fill="#64748B" fontSize="8" fontFamily="Inter">
+                Acrílico Cristal 6mm
+              </text>
+              <line x1="60" y1="110" x2="180" y2="110" stroke="#E30613" strokeWidth="2" />
+            </svg>
+          </div>
+        )}
+
+        {project.id === "kit-corporativo" && (
+          <div className="w-full h-full relative flex items-center justify-center p-2">
+            <Image
+              src="/products/libreta-ejecutiva.jpg"
+              alt="Kit Corporativo de Agendas y Termos Impresos Americana"
+              width={480}
+              height={320}
+              className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        )}
+
+        {project.id === "litografia-catalogos" && (
+          <div className="w-full h-full relative flex items-center justify-center p-2">
+            <Image
+              src="/products/catalogo-cover.jpg"
+              alt="Catálogo Litográfico Impresos Americana"
+              width={480}
+              height={320}
+              className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        )}
+
+        {project.id === "vallas-gran-formato" && (
+          <div className="w-full h-full relative flex items-center justify-center">
+            <svg viewBox="0 0 360 200" fill="none" className="w-full h-full">
+              <line x1="180" y1="80" x2="180" y2="180" stroke="#94A3B8" strokeWidth="8" />
+              <rect x="60" y="30" width="240" height="90" rx="3" fill="#0F172A" stroke="#CBD5E1" strokeWidth="2" />
+              <rect x="65" y="35" width="230" height="80" fill="#E30613" />
+              <text x="180" y="70" textAnchor="middle" fill="#FFFFFF" fontSize="16" fontFamily="Montserrat" fontWeight="900">
+                GRAN FORMATO UV
+              </text>
+              <text x="180" y="90" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontFamily="Inter" fontWeight="600">
+                ALTA RESOLUCIÓN • 1440 DPI
+              </text>
+            </svg>
+          </div>
+        )}
+
+        {/* Badge top-right */}
+        {project.badge && (
+          <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md border border-zinc-200 px-2.5 py-1 rounded-md text-[10px] font-montserrat font-bold text-zinc-800 uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E30613]" />
+            {project.badge}
+          </div>
+        )}
+      </div>
+
+      {/* Card Content Footer */}
+      <div className="p-6 flex-1 flex flex-col justify-between">
+        <div>
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#E30613] font-bold">
+              {project.categoryLabel}
+            </span>
+            <span className="text-[11px] text-zinc-500 font-mono">
+              {project.clientSector}
+            </span>
+          </div>
+
+          <h3 className="text-lg sm:text-xl font-montserrat font-bold text-zinc-950 group-hover:text-[#E30613] transition-colors mb-3 leading-snug">
+            {project.title}
+          </h3>
+
+          {/* Technical Specs tags */}
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {project.specs.map((spec, i) => (
+              <span
+                key={i}
+                className="text-[11px] px-2.5 py-1 rounded-md bg-zinc-100 text-zinc-600 border border-zinc-200/80 font-mono"
+              >
+                {spec}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom CTA to quote this exact product */}
+        <div className="pt-3 border-t border-zinc-100 flex items-center justify-between">
+          <Link
+            href="/cotizador"
+            className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-700 hover:text-zinc-950 transition-colors"
+          >
+            <span>Cotizar Proyecto Similar</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#E30613] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+          <span className="text-[11px] text-zinc-400 font-mono">
+            Producción Industrial
+          </span>
+        </div>
+      </div>
+    </motion.div>
   );
 }
