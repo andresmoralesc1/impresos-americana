@@ -48,26 +48,26 @@ export function FeaturedProjects() {
   ];
 
   return (
-    <section className="py-20 bg-[#101015] border-t border-white/5 relative">
+    <section className="py-24 bg-zinc-50/70 border-t border-zinc-200/70 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-red-400 font-bold mb-2">
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#E30613] font-bold mb-2">
               <Camera className="w-3.5 h-3.5 text-[#E30613]" />
               <span>PRODUCCIÓN FÍSICA REAL</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-montserrat font-black uppercase text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-montserrat font-black uppercase text-zinc-950 tracking-tight">
               TRABAJOS INSTALADOS EN RETAIL
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-xl">
+            <p className="text-xs sm:text-sm text-zinc-600 mt-1 max-w-xl">
               Fotografías reales de proyectos fabricados en nuestra planta de Cali e instalados en puntos de venta a nivel nacional.
             </p>
           </div>
           <Link
             href="/proyectos"
             onClick={() => triggerHaptic(8)}
-            className="inline-flex items-center justify-center gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-200 hover:text-white transition-colors shrink-0 py-2.5 px-4 rounded-xl bg-white/5 border border-white/10 hover:border-red-500/40 min-h-[44px] w-full sm:w-auto"
+            className="inline-flex items-center justify-center gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-800 hover:text-zinc-950 transition-colors shrink-0 py-2.5 px-4 rounded-xl bg-white border border-zinc-200/90 hover:border-zinc-300 shadow-xs min-h-[44px] w-full sm:w-auto"
           >
             <span>Ver portafolio completo</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#E30613]" />
@@ -79,10 +79,10 @@ export function FeaturedProjects() {
           {featured.map((item) => (
             <div
               key={item.id}
-              className="group rounded-2xl bg-[#16161E] border border-white/10 hover:border-[#E30613]/50 transition-all duration-300 overflow-hidden flex flex-col justify-between"
+              className="group rounded-3xl bg-white border border-zinc-200/90 hover:border-zinc-300 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden flex flex-col justify-between"
             >
               {/* Real Photography Container */}
-              <div className="relative h-56 bg-[#0D0D12] overflow-hidden">
+              <div className="relative h-56 bg-zinc-100 overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -90,32 +90,32 @@ export function FeaturedProjects() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#16161E] via-transparent to-black/30 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent pointer-events-none" />
 
                 {/* Badge top-right */}
-                <div className="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-black/75 backdrop-blur-md border border-white/10 text-[10px] font-mono font-bold text-zinc-200">
+                <div className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-md border border-zinc-200 text-[10px] font-mono font-bold text-zinc-800 shadow-xs">
                   {item.badge}
                 </div>
               </div>
 
               {/* Card Meta Content */}
-              <div className="p-5 flex flex-col justify-between flex-grow">
+              <div className="p-6 flex flex-col justify-between flex-grow">
                 <div>
-                  <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 mb-2">
-                    <span className="text-red-400 font-bold uppercase">{item.category}</span>
-                    <span>{item.clientSector}</span>
+                  <div className="flex items-center justify-between text-[11px] font-mono mb-2">
+                    <span className="text-[#E30613] font-bold uppercase">{item.category}</span>
+                    <span className="text-zinc-500">{item.clientSector}</span>
                   </div>
-                  <h3 className="font-montserrat font-bold text-base text-white group-hover:text-red-400 transition-colors mb-3">
+                  <h3 className="font-montserrat font-bold text-base text-zinc-950 group-hover:text-[#E30613] transition-colors mb-3 leading-snug">
                     {item.title}
                   </h3>
                 </div>
 
                 {/* Specs Pills */}
-                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/5">
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-zinc-100">
                   {item.specs.map((spec, sIdx) => (
                     <span
                       key={sIdx}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-300 border border-white/5"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200/60"
                     >
                       {spec}
                     </span>

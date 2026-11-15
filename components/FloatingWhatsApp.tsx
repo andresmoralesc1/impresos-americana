@@ -34,24 +34,24 @@ export function FloatingWhatsApp() {
     >
       {/* Speech Bubble / Tooltip */}
       {showTooltip && (
-        <div className="pointer-events-auto mb-3 max-w-[calc(100vw-2.5rem)] sm:max-w-xs bg-[#181822]/95 backdrop-blur-md border border-emerald-500/30 text-white p-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative animate-in fade-in slide-in-from-bottom-2 duration-300">
+        <div className="pointer-events-auto mb-3 max-w-[calc(100vw-2.5rem)] sm:max-w-xs bg-white/95 backdrop-blur-md border border-zinc-200 text-zinc-800 p-3.5 rounded-2xl shadow-xl relative animate-in fade-in slide-in-from-bottom-2 duration-300">
           <button
             type="button"
             onClick={handleCloseTooltip}
-            className="absolute top-2 right-2 text-zinc-400 hover:text-white p-1 rounded-full transition-colors"
+            className="absolute top-2 right-2 text-zinc-400 hover:text-zinc-700 p-1 rounded-full transition-colors"
             aria-label="Cerrar notificación"
           >
             <X className="w-3.5 h-3.5" />
           </button>
           <div className="flex items-center gap-2 mb-1">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-700 font-bold">
               Asesoría Comercial en Vivo
             </span>
           </div>
-          <p className="text-xs text-zinc-200 leading-snug font-sans pr-4">
+          <p className="text-xs text-zinc-600 leading-snug font-sans pr-4">
             ¿Tienes dudas con tu archivo o cotización? Escríbenos directamente al{" "}
-            <strong className="text-white">+57 316 320 0181</strong>.
+            <strong className="text-zinc-950 font-bold">+57 316 320 0181</strong>.
           </p>
         </div>
       )}
@@ -62,12 +62,12 @@ export function FloatingWhatsApp() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp a +57 316 320 0181"
-        className="pointer-events-auto relative group flex items-center justify-center p-3.5 sm:p-4 rounded-full bg-gradient-to-tr from-[#20ba59] to-[#25D366] hover:from-[#1eb054] hover:to-[#22c55e] text-white shadow-[0_4px_25px_rgba(37,211,102,0.45)] hover:shadow-[0_8px_35px_rgba(37,211,102,0.75)] transition-all duration-300 transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-500/40"
+        className="pointer-events-auto relative group flex items-center justify-center p-3.5 sm:p-4 rounded-full bg-gradient-to-tr from-[#20ba59] to-[#25D366] hover:from-[#1eb054] hover:to-[#22c55e] text-white shadow-[0_4px_25px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_35px_rgba(37,211,102,0.65)] transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-500/40"
       >
         {/* Pulsing beacon indicator */}
         <span className="absolute -top-1 -right-1 flex h-4 w-4">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-[#121212]" />
+          <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white" />
         </span>
 
         {/* WhatsApp Icon */}

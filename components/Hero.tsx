@@ -50,44 +50,44 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen pt-28 pb-16 lg:pt-36 lg:pb-24 flex items-center justify-center overflow-hidden bg-[#121212]"
+      className="relative min-h-[92vh] pt-28 pb-16 lg:pt-36 lg:pb-24 flex items-center justify-center overflow-hidden bg-white"
     >
-      {/* Faceted Geometric Background with Red Ambience */}
-      <div className="absolute inset-0 bg-faceted-pattern opacity-90 pointer-events-none" />
+      {/* Subtle Dot Grid Background */}
+      <div className="absolute inset-0 bg-faceted-pattern opacity-70 pointer-events-none" />
 
-      {/* Radial Red Glow Gradients */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#E30613]/18 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[420px] h-[420px] bg-[#E30613]/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Soft Ambient Warm Red Glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#E30613]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[420px] h-[420px] bg-red-500/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           {/* Left Column: Value Proposition & High-Converting Typography */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 text-left"
           >
             {/* Top Badge: Industry Leadership */}
-            <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#1E1E26] border border-white/15 text-[11px] sm:text-xs font-mono uppercase tracking-wider text-zinc-200 mb-6 shadow-md max-w-full">
+            <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-red-50/80 border border-red-200/80 text-[11px] sm:text-xs font-mono uppercase tracking-wider text-red-900 mb-6 shadow-xs max-w-full">
               <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#E30613] animate-pulse shrink-0" />
               <span className="font-semibold">Planta Directa • San Nicolás, Cali</span>
-              <span className="text-red-400 font-bold hidden sm:inline">| NIT 900.384.912-4</span>
+              <span className="text-red-700 font-bold hidden sm:inline">| NIT 900.384.912-4</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl xl:text-6xl font-montserrat font-black tracking-tight text-white uppercase leading-[1.08] mb-5 sm:mb-6">
+            <h1 className="text-3xl sm:text-5xl xl:text-6xl font-montserrat font-black tracking-tight text-zinc-950 uppercase leading-[1.08] mb-5 sm:mb-6">
               FABRICACIÓN DE <br />
-              <span className="text-white">MATERIAL POP &</span> <br />
-              <span className="text-[#FF2A36] drop-shadow-[0_0_35px_rgba(227,6,19,0.6)]">
+              <span className="text-zinc-950">MATERIAL POP &</span> <br />
+              <span className="text-[#E30613]">
                 GRAN FORMATO
               </span>
             </h1>
 
             {/* Subheading / Commercial Description */}
-            <p className="text-sm sm:text-base lg:text-lg text-zinc-100 max-w-2xl font-normal leading-relaxed mb-8">
+            <p className="text-sm sm:text-base lg:text-lg text-zinc-600 max-w-2xl font-normal leading-relaxed mb-8">
               Planta de producción gráfica directa en Cali con despachos diarios a todo el país. Desarrollamos{" "}
-              <strong className="text-white font-bold underline decoration-[#E30613] decoration-2 underline-offset-4">
+              <strong className="text-zinc-900 font-bold underline decoration-[#E30613] decoration-2 underline-offset-4">
                 Exhibidores POP de piso y mostrador
               </strong>
               , impresión cama plana UV sobre rígidos, empaques en microcorrugado y litografía comercial de alto tiraje con factura electrónica DIAN.
@@ -98,7 +98,7 @@ export function Hero() {
               <Link
                 href="/cotizador"
                 onClick={() => triggerHaptic(10)}
-                className="group relative inline-flex items-center justify-center gap-2.5 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs sm:text-sm uppercase tracking-wider px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl shadow-[0_0_30px_rgba(227,6,19,0.5)] hover:shadow-[0_0_45px_rgba(227,6,19,0.8)] transition-all duration-300 min-h-[48px]"
+                className="group relative inline-flex items-center justify-center gap-2.5 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs sm:text-sm uppercase tracking-wider px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl shadow-md shadow-red-500/20 hover:shadow-lg hover:shadow-red-500/30 transition-all duration-300 min-h-[48px]"
               >
                 <span>Configurar Cotización Online</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -108,29 +108,29 @@ export function Hero() {
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20solicito%20asesor%C3%ADa%20para%20un%20proyecto%20de%20branding%20y%20material%20POP."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#1E1E24] hover:bg-[#282832] text-white border border-white/15 hover:border-white/30 font-montserrat font-bold text-xs sm:text-sm px-6 py-3.5 sm:py-4 rounded-xl transition-all duration-200 min-h-[48px]"
+                className="inline-flex items-center justify-center gap-2 bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200/90 font-montserrat font-bold text-xs sm:text-sm px-6 py-3.5 sm:py-4 rounded-xl shadow-xs hover:border-zinc-300 transition-all duration-200 min-h-[48px]"
               >
-                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                 <span>Asesor Comercial Inmediato</span>
               </a>
             </div>
 
             {/* Key Trust Checkpoints */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-white/15 text-xs font-semibold text-zinc-100">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-zinc-200 text-xs font-semibold text-zinc-700">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Sin Intermediarios</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Muestra Previa 3D</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Despacho Nacional</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Factura DIAN 19%</span>
               </div>
             </div>
@@ -138,35 +138,35 @@ export function Hero() {
 
           {/* Right Column: Interactive Real Photography Showcase */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.96, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 relative"
           >
             <div className="relative mx-auto max-w-md lg:max-w-none">
               {/* Central Hero Display Stage Card */}
-              <div className="relative rounded-2xl bg-gradient-to-b from-[#1E1E24]/95 to-[#15151A]/95 p-5 border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_35px_rgba(227,6,19,0.15)] backdrop-blur-md">
+              <div className="relative rounded-3xl bg-white p-5 sm:p-6 border border-zinc-200/90 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)]">
                 {/* Header of Preview Box */}
-                <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
+                <div className="flex items-center justify-between border-b border-zinc-100 pb-3 mb-3">
                   <div className="flex items-center gap-2.5">
                     <IALogoMark className="w-7 h-7" showSpeedLines={false} />
                     <div>
-                      <span className="font-montserrat font-bold text-xs uppercase text-white block leading-none">
+                      <span className="font-montserrat font-bold text-xs uppercase text-zinc-950 block leading-none">
                         {currentPhoto.title}
                       </span>
-                      <span className="text-[10px] text-zinc-400 font-mono">
+                      <span className="text-[10px] text-zinc-500 font-mono">
                         {currentPhoto.subtitle}
                       </span>
                     </div>
                   </div>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#E30613] text-white uppercase tracking-wider flex items-center gap-1">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-red-50 text-[#E30613] border border-red-200 uppercase tracking-wider flex items-center gap-1">
                     <Camera className="w-3 h-3" />
                     <span>Foto Real</span>
                   </span>
                 </div>
 
                 {/* Real Photography Stage */}
-                <div className="relative h-64 sm:h-80 w-full rounded-xl bg-[#0F0F13] border border-white/10 overflow-hidden group">
+                <div className="relative h-64 sm:h-80 w-full rounded-2xl bg-zinc-100 border border-zinc-200/80 overflow-hidden group shadow-inner">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentPhoto.id}
@@ -184,14 +184,14 @@ export function Hero() {
                         sizes="(max-width: 1024px) 100vw, 40vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-700"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent pointer-events-none" />
 
                       {/* Floating metadata badges */}
-                      <div className="absolute bottom-3 left-3 bg-black/80 backdrop-blur-sm border border-white/15 px-2.5 py-1 rounded-md text-[10px] font-mono text-zinc-200">
-                        <span className="text-red-400 font-bold">SUSTRATO:</span> {currentPhoto.tag}
+                      <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md border border-zinc-200 px-2.5 py-1 rounded-lg text-[10px] font-mono text-zinc-800 shadow-sm">
+                        <span className="text-[#E30613] font-bold">SUSTRATO:</span> {currentPhoto.tag}
                       </div>
 
-                      <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-sm border border-white/15 px-2 py-0.5 rounded-md text-[9px] font-mono text-emerald-400 font-bold uppercase">
+                      <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md border border-zinc-200 px-2 py-0.5 rounded-lg text-[9px] font-mono text-emerald-700 font-bold uppercase shadow-sm">
                         {currentPhoto.badge}
                       </div>
                     </motion.div>
@@ -199,10 +199,10 @@ export function Hero() {
                 </div>
 
                 {/* Interactive Real Photos Selector Thumbnails */}
-                <div className="mt-3 pt-3 border-t border-white/10">
-                  <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 mb-2">
-                    <span>EXPLORAR TRABAJOS REALES:</span>
-                    <span className="text-red-400 font-bold">{activePhotoIdx + 1} / {realPhotos.length}</span>
+                <div className="mt-3.5 pt-3 border-t border-zinc-100">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 mb-2">
+                    <span className="font-semibold">EXPLORAR TRABAJOS REALES:</span>
+                    <span className="text-[#E30613] font-bold">{activePhotoIdx + 1} / {realPhotos.length}</span>
                   </div>
                   <div className="grid grid-cols-3 gap-2">
                     {realPhotos.map((photo, pIdx) => (
@@ -213,10 +213,10 @@ export function Hero() {
                           setActivePhotoIdx(pIdx);
                           triggerHaptic(8);
                         }}
-                        className={`relative h-14 rounded-lg overflow-hidden border transition-all text-left ${
+                        className={`relative h-14 rounded-xl overflow-hidden border transition-all text-left ${
                           activePhotoIdx === pIdx
-                            ? "border-[#E30613] ring-2 ring-red-500/40 opacity-100"
-                            : "border-white/10 opacity-60 hover:opacity-100"
+                            ? "border-[#E30613] ring-2 ring-red-500/25 opacity-100 shadow-xs"
+                            : "border-zinc-200 opacity-60 hover:opacity-100 hover:border-zinc-300"
                         }`}
                       >
                         <Image
@@ -226,22 +226,21 @@ export function Hero() {
                           sizes="120px"
                           className="object-cover"
                         />
-                        <div className="absolute inset-0 bg-black/30" />
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Bottom Specifications Bar */}
-                <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-xs text-zinc-200">
-                  <span className="flex items-center gap-1.5 text-zinc-100 font-semibold text-xs">
-                    <Boxes className="w-3.5 h-3.5 text-red-400" />
+                <div className="mt-3.5 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs text-zinc-700">
+                  <span className="flex items-center gap-1.5 text-zinc-800 font-semibold text-xs">
+                    <Boxes className="w-3.5 h-3.5 text-[#E30613]" />
                     Fabricación a Medida en Cali
                   </span>
                   <Link
                     href="/cotizador"
                     onClick={() => triggerHaptic(8)}
-                    className="bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-3.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm transition-all"
+                    className="bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-3.5 py-1.5 rounded-lg flex items-center gap-1 shadow-xs transition-all"
                   >
                     <span>Cotizar</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -254,16 +253,16 @@ export function Hero() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="absolute -bottom-6 -left-6 bg-[#18181F]/98 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-2xl flex items-center gap-3 z-20 hidden sm:flex"
+                className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md border border-zinc-200 p-4 rounded-2xl shadow-xl flex items-center gap-3 z-20 hidden sm:flex"
               >
-                <div className="w-10 h-10 rounded-lg bg-[#E30613]/25 border border-[#E30613]/60 flex items-center justify-center text-red-400">
+                <div className="w-10 h-10 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center text-[#E30613]">
                   <Printer className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-sm font-montserrat font-black text-white leading-tight">
+                  <div className="text-sm font-montserrat font-black text-zinc-950 leading-tight">
                     +25.000 m² / mes
                   </div>
-                  <div className="text-xs text-zinc-300 font-mono font-medium">
+                  <div className="text-xs text-zinc-500 font-mono font-medium">
                     Capacidad UV Cama Plana & Offset
                   </div>
                 </div>
@@ -274,10 +273,10 @@ export function Hero() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="absolute -top-5 -right-5 bg-[#18181F]/95 backdrop-blur-md border border-emerald-500/30 p-2.5 rounded-xl shadow-2xl flex items-center gap-2 z-20"
+                className="absolute -top-4 -right-4 bg-white/95 backdrop-blur-md border border-emerald-200 p-2.5 rounded-xl shadow-lg flex items-center gap-2 z-20"
               >
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span className="text-[11px] font-semibold text-white">Garantía Color GMG</span>
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <span className="text-[11px] font-semibold text-zinc-800">Garantía Color GMG</span>
               </motion.div>
             </div>
           </motion.div>

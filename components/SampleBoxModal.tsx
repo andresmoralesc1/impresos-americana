@@ -57,31 +57,31 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-      <div className="bg-[#181820] border border-white/15 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md">
+      <div className="bg-white border border-zinc-200 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-zinc-400 hover:text-white bg-white/5 border border-white/10 transition-colors"
+          className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-zinc-500 hover:text-zinc-900 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 transition-colors"
           aria-label="Cerrar modal"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-[#E30613]/20 border border-[#E30613]/40 flex items-center justify-center text-[#E30613]">
+          <div className="w-10 h-10 rounded-2xl bg-red-50 border border-red-200 flex items-center justify-center text-[#E30613]">
             <Box className="w-5 h-5" />
           </div>
           <div>
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#E30613] font-bold block">
               MUESTRARIO TÉCNICO A DOMICILIO
             </span>
-            <h3 className="font-montserrat font-bold text-lg text-white">
+            <h3 className="font-montserrat font-bold text-lg text-zinc-950">
               Solicitar Sample Box Corporativa
             </h3>
           </div>
         </div>
 
-        <p className="text-xs text-zinc-400 mb-6 leading-relaxed">
+        <p className="text-xs text-zinc-600 mb-6 leading-relaxed">
           Enviamos sin costo a empresas, agencias de publicidad y departamentos de compras
           un kit con muestras físicas reales de sustratos, acabados UV y cartón corrugado.
         </p>
@@ -89,35 +89,35 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
         <form onSubmit={handleSendRequest} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-[11px] font-mono text-zinc-300 block mb-1">
+              <label className="text-[11px] font-mono text-zinc-700 block mb-1 font-semibold">
                 Empresa o Marca:
               </label>
               <div className="relative">
-                <Building className="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Building className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   required
                   placeholder="Ej: Colombina S.A."
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
-                  className="w-full bg-[#121216] border border-white/10 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#E30613]"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-[11px] font-mono text-zinc-300 block mb-1">
+              <label className="text-[11px] font-mono text-zinc-700 block mb-1 font-semibold">
                 Nombre de Contacto / Cargo:
               </label>
               <div className="relative">
-                <User className="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <User className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
                   required
                   placeholder="Ej: Andrea Gómez (Trade Mkt)"
                   value={contactName}
                   onChange={(e) => setContactName(e.target.value)}
-                  className="w-full bg-[#121216] border border-white/10 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#E30613]"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613]"
                 />
               </div>
             </div>
@@ -125,32 +125,32 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-[11px] font-mono text-zinc-300 block mb-1">
+              <label className="text-[11px] font-mono text-zinc-700 block mb-1 font-semibold">
                 Teléfono / WhatsApp:
               </label>
               <div className="relative">
-                <Phone className="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Phone className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="tel"
                   required
                   placeholder="+57 300 123 4567"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-[#121216] border border-white/10 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#E30613]"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-[11px] font-mono text-zinc-300 block mb-1">
+              <label className="text-[11px] font-mono text-zinc-700 block mb-1 font-semibold">
                 Ciudad de Entrega:
               </label>
               <div className="relative">
-                <MapPin className="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <MapPin className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <select
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  className="w-full bg-[#121216] border border-white/10 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#E30613] appearance-none"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613] appearance-none"
                 >
                   <option value="Cali">Cali (Mismo día)</option>
                   <option value="Bogotá D.C.">Bogotá D.C. (24 horas)</option>
@@ -164,7 +164,7 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
 
           {/* Sample Swatches Checkboxes */}
           <div>
-            <label className="text-[11px] font-mono text-zinc-300 block mb-2">
+            <label className="text-[11px] font-mono text-zinc-700 block mb-2 font-semibold">
               Selecciona las muestras físicas que deseas incluir:
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -177,15 +177,15 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
                     onClick={() => toggleSample(sample)}
                     className={`flex items-center gap-2.5 p-2.5 min-h-[44px] rounded-xl border text-left text-xs transition-colors ${
                       isSelected
-                        ? "border-[#E30613] bg-[#E30613]/15 text-white font-medium"
-                        : "border-white/10 bg-[#121216] text-zinc-300 hover:border-white/20"
+                        ? "border-[#E30613] bg-red-50 text-zinc-950 font-medium"
+                        : "border-zinc-200 bg-zinc-50 text-zinc-700 hover:border-zinc-300 hover:bg-zinc-100"
                     }`}
                   >
                     <div
                       className={`w-4 h-4 rounded flex items-center justify-center border text-[10px] shrink-0 ${
                         isSelected
                           ? "bg-[#E30613] border-[#E30613] text-white"
-                          : "border-zinc-600"
+                          : "border-zinc-400 bg-white"
                       }`}
                     >
                       {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
@@ -197,13 +197,13 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
             </div>
           </div>
 
-          <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <span className="text-[11px] text-zinc-400 font-mono">
+          <div className="pt-4 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <span className="text-[11px] text-zinc-500 font-mono">
               Envío coordinado por transportadora sin costo comercial
             </span>
             <button
               type="submit"
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(227,6,19,0.5)]"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm shadow-red-500/20"
             >
               <MessageCircle className="w-4 h-4" />
               <span>Confirmar Envío por WhatsApp</span>

@@ -365,7 +365,7 @@ export function ThreePOPViewer({
   }, [textureTheme, isRotating, hasUVVarnish, brandName, customLogoImg]);
 
   return (
-    <div className="relative w-full h-80 sm:h-96 rounded-xl bg-[#121216] border border-white/5 overflow-hidden flex flex-col justify-between">
+    <div className="relative w-full h-80 sm:h-96 rounded-2xl bg-gradient-to-b from-zinc-50/90 to-zinc-100/70 border border-zinc-200/90 shadow-inner overflow-hidden flex flex-col justify-between">
       {/* 3D Canvas Mount Point */}
       <div
         ref={mountRef}
@@ -375,16 +375,16 @@ export function ThreePOPViewer({
 
       {/* Floating 3D Control Badges */}
       <div className="absolute top-3 left-3 flex items-center gap-2 z-20">
-        <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-[#E30613] text-white uppercase tracking-wider flex items-center gap-1 shadow-md">
+        <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-[#E30613] text-white uppercase tracking-wider flex items-center gap-1 shadow-sm">
           <Sparkles className="w-3 h-3" />
           WebGL 360°
         </span>
         <button
           onClick={() => setIsRotating(!isRotating)}
-          className={`p-1.5 rounded-md text-[10px] font-mono border transition-colors ${
+          className={`p-1.5 rounded-md text-[10px] font-mono border transition-colors shadow-sm ${
             isRotating
-              ? "bg-white/10 text-white border-white/20"
-              : "bg-[#181820] text-zinc-400 border-white/10"
+              ? "bg-white text-zinc-900 border-zinc-300"
+              : "bg-white/80 text-zinc-600 border-zinc-200"
           }`}
           title={isRotating ? "Pausar autorrotación" : "Activar autorrotación"}
         >
@@ -394,7 +394,7 @@ export function ThreePOPViewer({
         {/* Live Logo Customizer Trigger */}
         <button
           onClick={() => setShowLogoInput(!showLogoInput)}
-          className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-[#1C1C26] hover:bg-[#252535] text-zinc-200 border border-white/10 flex items-center gap-1.5 transition-colors"
+          className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-sm flex items-center gap-1.5 transition-colors"
         >
           <Upload className="w-3 h-3 text-[#E30613]" />
           <span>Ver Mi Logo en el 3D</span>
@@ -403,14 +403,14 @@ export function ThreePOPViewer({
 
       {/* Logo Customizer Floating Dropdown */}
       {showLogoInput && (
-        <div className="absolute top-12 left-3 z-30 p-3 rounded-xl bg-[#181822]/95 backdrop-blur-md border border-white/15 shadow-2xl max-w-xs w-full text-xs">
+        <div className="absolute top-12 left-3 z-30 p-3 rounded-xl bg-white/95 backdrop-blur-md border border-zinc-200 shadow-xl max-w-xs w-full text-xs">
           <div className="flex items-center justify-between mb-2">
             <span className="font-mono text-[10px] uppercase text-[#E30613] font-bold">
               Proyectar Marca en el Cabezote 3D
             </span>
             <button
               onClick={() => setShowLogoInput(false)}
-              className="text-zinc-400 hover:text-white text-xs"
+              className="text-zinc-400 hover:text-zinc-700 text-xs"
             >
               ✕
             </button>
@@ -425,10 +425,10 @@ export function ThreePOPViewer({
                 setCustomLogoImg(null);
               }}
               placeholder="Escribe tu marca..."
-              className="w-full bg-[#121217] border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#E30613]"
+              className="w-full bg-zinc-50 border border-zinc-200 rounded-lg px-2.5 py-1.5 text-xs text-zinc-900 focus:outline-none focus:border-[#E30613]"
             />
 
-            <label className="block w-full text-center py-1.5 rounded-lg border border-dashed border-white/20 hover:border-[#E30613] bg-white/5 cursor-pointer text-[10px] font-mono text-zinc-300">
+            <label className="block w-full text-center py-1.5 rounded-lg border border-dashed border-zinc-300 hover:border-[#E30613] bg-zinc-50 hover:bg-zinc-100/60 cursor-pointer text-[10px] font-mono text-zinc-600 transition-colors">
               <span>Subir logo en PNG</span>
               <input
                 type="file"
@@ -448,7 +448,7 @@ export function ThreePOPViewer({
                     setBrandName(b);
                     setCustomLogoImg(null);
                   }}
-                  className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/5 hover:bg-[#E30613] text-zinc-300 hover:text-white"
+                  className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 hover:bg-[#E30613] text-zinc-700 hover:text-white transition-colors"
                 >
                   {b}
                 </button>
@@ -460,8 +460,8 @@ export function ThreePOPViewer({
 
       {/* Material Texture View Switcher */}
       <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-20 pointer-events-auto">
-        <div className="flex items-center gap-1.5 bg-black/80 backdrop-blur-md p-1 rounded-lg border border-white/10">
-          <span className="text-[10px] font-mono text-zinc-400 px-1 hidden sm:inline">
+        <div className="flex items-center gap-1.5 bg-white/90 backdrop-blur-md p-1 rounded-lg border border-zinc-200/80 shadow-sm">
+          <span className="text-[10px] font-mono text-zinc-500 px-1 hidden sm:inline">
             Acabado 3D:
           </span>
           <button
@@ -469,7 +469,7 @@ export function ThreePOPViewer({
             className={`px-2 py-1 rounded text-[10px] font-mono transition-colors ${
               textureTheme === "kraft"
                 ? "bg-[#C29B6C] text-black font-bold"
-                : "text-zinc-300 hover:text-white"
+                : "text-zinc-600 hover:text-zinc-950"
             }`}
           >
             Kraft
@@ -478,8 +478,8 @@ export function ThreePOPViewer({
             onClick={() => setTextureTheme("blanco")}
             className={`px-2 py-1 rounded text-[10px] font-mono transition-colors ${
               textureTheme === "blanco"
-                ? "bg-white text-black font-bold"
-                : "text-zinc-300 hover:text-white"
+                ? "bg-zinc-900 text-white font-bold"
+                : "text-zinc-600 hover:text-zinc-950"
             }`}
           >
             Estucado
@@ -488,8 +488,8 @@ export function ThreePOPViewer({
             onClick={() => setTextureTheme("negro")}
             className={`px-2 py-1 rounded text-[10px] font-mono transition-colors ${
               textureTheme === "negro"
-                ? "bg-[#252530] text-white font-bold border border-white/20"
-                : "text-zinc-300 hover:text-white"
+                ? "bg-zinc-800 text-white font-bold"
+                : "text-zinc-600 hover:text-zinc-950"
             }`}
           >
             Dark POP
@@ -498,15 +498,15 @@ export function ThreePOPViewer({
             onClick={() => setTextureTheme("acrilico")}
             className={`px-2 py-1 rounded text-[10px] font-mono transition-colors ${
               textureTheme === "acrilico"
-                ? "bg-cyan-500/30 text-cyan-200 border border-cyan-400/50 font-bold"
-                : "text-zinc-300 hover:text-white"
+                ? "bg-cyan-100 text-cyan-800 border border-cyan-300 font-bold"
+                : "text-zinc-600 hover:text-zinc-950"
             }`}
           >
             Acrílico
           </button>
         </div>
 
-        <span className="text-[10px] font-mono text-zinc-400 bg-black/80 px-2 py-1 rounded border border-white/10 hidden sm:inline-block">
+        <span className="text-[10px] font-mono text-zinc-500 bg-white/90 px-2 py-1 rounded border border-zinc-200/80 hidden sm:inline-block shadow-sm">
           Arrastra para rotar
         </span>
       </div>

@@ -202,20 +202,20 @@ export default function ProgressPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 pt-28 pb-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         {/* Top Header */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-6 mb-8">
+        <div className="flex items-center justify-between border-b border-zinc-200 pb-6 mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-montserrat font-bold text-zinc-400 hover:text-white uppercase transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-montserrat font-bold text-zinc-500 hover:text-zinc-900 uppercase transition-colors"
           >
             <ArrowLeft className="w-4 h-4 text-[#E30613]" />
             Volver a la Plataforma Principal
           </Link>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-            <span className="text-xs font-mono text-emerald-400 font-bold uppercase">
+            <span className="text-xs font-mono text-emerald-700 font-bold uppercase">
               Auditoría en Vivo • 100% Validado
             </span>
           </div>
@@ -229,34 +229,34 @@ export default function ProgressPage() {
               PANEL DE CONTROL DE CALIDAD Y ARQUITECTURA
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-montserrat font-black uppercase text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-montserrat font-black uppercase text-zinc-950 tracking-tight">
             ESTADO DE CONSTRUCCIÓN & DICTAMEN DEL CRÍTICO
           </h1>
-          <p className="text-zinc-400 text-sm mt-2">
+          <p className="text-zinc-600 text-sm mt-2">
             Verificación técnica, de accesibilidad y correspondencia visual 1:1 contra los lineamientos de marca y mockups de Impresos Americana.
           </p>
         </div>
 
         {/* Overall Status Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
-          <div className="p-4 rounded-xl bg-[#1E1E24] border border-white/10">
-            <span className="text-[10px] font-mono text-zinc-400 uppercase block">Componentes</span>
-            <span className="text-2xl font-montserrat font-black text-white">12 / 12</span>
-            <span className="text-[11px] text-emerald-400 font-semibold block mt-1">100% Completado</span>
+          <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-sm">
+            <span className="text-[10px] font-mono text-zinc-500 uppercase block">Componentes</span>
+            <span className="text-2xl font-montserrat font-black text-zinc-950">12 / 12</span>
+            <span className="text-[11px] text-emerald-600 font-semibold block mt-1">100% Completado</span>
           </div>
-          <div className="p-4 rounded-xl bg-[#1E1E24] border border-white/10">
-            <span className="text-[10px] font-mono text-zinc-400 uppercase block">Next.js 15 Build</span>
-            <span className="text-2xl font-montserrat font-black text-emerald-400">0 Errores</span>
-            <span className="text-[11px] text-zinc-400 font-mono block mt-1">App Router + React 19</span>
+          <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-sm">
+            <span className="text-[10px] font-mono text-zinc-500 uppercase block">Next.js 15 Build</span>
+            <span className="text-2xl font-montserrat font-black text-emerald-600">0 Errores</span>
+            <span className="text-[11px] text-zinc-500 font-mono block mt-1">App Router + React 19</span>
           </div>
-          <div className="p-4 rounded-xl bg-[#1E1E24] border border-white/10">
-            <span className="text-[10px] font-mono text-zinc-400 uppercase block">3D & Cotizador</span>
-            <span className="text-2xl font-montserrat font-black text-white">WebGL + PDF</span>
-            <span className="text-[11px] text-emerald-400 font-semibold block mt-1">Precios en COP</span>
+          <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-sm">
+            <span className="text-[10px] font-mono text-zinc-500 uppercase block">3D & Cotizador</span>
+            <span className="text-2xl font-montserrat font-black text-zinc-950">WebGL + PDF</span>
+            <span className="text-[11px] text-emerald-600 font-semibold block mt-1">Precios en COP</span>
           </div>
-          <div className="p-4 rounded-xl bg-[#1E1E24] border border-white/10">
-            <span className="text-[10px] font-mono text-zinc-400 uppercase block">Normativa Colombia</span>
-            <span className="text-2xl font-montserrat font-black text-white">DIAN + ISO</span>
+          <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-sm">
+            <span className="text-[10px] font-mono text-zinc-500 uppercase block">Normativa Colombia</span>
+            <span className="text-2xl font-montserrat font-black text-zinc-950">DIAN + ISO</span>
             <span className="text-[11px] text-[#E30613] font-mono block mt-1">Cali / Valle del Cauca</span>
           </div>
         </div>
@@ -266,17 +266,17 @@ export default function ProgressPage() {
           {pieces.map((piece) => (
             <div
               key={piece.id}
-              className="p-6 rounded-2xl bg-[#181820] border border-white/10 hover:border-white/20 transition-all shadow-xl"
+              className="p-6 rounded-2xl bg-white border border-zinc-200 hover:border-zinc-300 transition-all shadow-sm"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4 mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-100 pb-4 mb-4">
                 <div>
-                  <h3 className="font-montserrat font-bold text-lg text-white">
+                  <h3 className="font-montserrat font-bold text-lg text-zinc-950">
                     {piece.title}
                   </h3>
-                  <span className="text-xs font-mono text-zinc-400">{piece.file}</span>
+                  <span className="text-xs font-mono text-zinc-500">{piece.file}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
+                  <span className="text-xs font-mono bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full font-bold">
                     {piece.status} • {piece.score}
                   </span>
                 </div>
@@ -288,11 +288,11 @@ export default function ProgressPage() {
               </div>
 
               {/* Harsh Critic Verdict */}
-              <div className="bg-[#121216] border border-white/5 rounded-xl p-4 mb-4">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-bold block mb-1">
+              <div className="bg-zinc-50 border border-zinc-200/80 rounded-xl p-4 mb-4">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 font-bold block mb-1">
                   Dictamen del Crítico de Diseño Industrial & Código:
                 </span>
-                <p className="text-xs text-zinc-300 leading-relaxed font-sans">
+                <p className="text-xs text-zinc-700 leading-relaxed font-sans">
                   {piece.criticVerdict}
                 </p>
               </div>
@@ -300,8 +300,8 @@ export default function ProgressPage() {
               {/* Verification Checklist */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {piece.checks.map((chk, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-zinc-300">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <div key={i} className="flex items-center gap-2 text-xs text-zinc-600">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <span>{chk}</span>
                   </div>
                 ))}
@@ -314,7 +314,7 @@ export default function ProgressPage() {
         <div className="mt-10 text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-[0_0_30px_rgba(227,6,19,0.5)] transition-all"
+            className="inline-flex items-center gap-2 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-[0_4px_16px_rgba(227,6,19,0.3)] transition-all"
           >
             <span>Ver Plataforma en Vivo</span>
             <ExternalLink className="w-4 h-4" />

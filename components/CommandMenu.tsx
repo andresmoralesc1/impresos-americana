@@ -219,25 +219,25 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/85 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/50 backdrop-blur-md">
       <div
-        className="bg-[#181822] border border-white/20 rounded-2xl max-w-2xl w-full shadow-[0_25px_60px_rgba(0,0,0,0.95)] overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        className="bg-white border border-zinc-200 rounded-3xl max-w-2xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-white/10 bg-[#14141B]">
+        <div className="flex items-center gap-3 px-5 py-4 border-b border-zinc-200 bg-zinc-50/70">
           <Search className="w-5 h-5 text-[#E30613]" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar productos, sustratos, troqueles, catálogos PDF o cotizar..."
-            className="w-full bg-transparent border-none text-white placeholder-zinc-500 focus:outline-none text-sm font-sans"
+            className="w-full bg-transparent border-none text-zinc-900 placeholder-zinc-400 focus:outline-none text-sm font-sans"
             autoFocus
           />
           <button
             onClick={onClose}
-            className="text-[11px] font-mono text-zinc-400 hover:text-white px-2 py-1 rounded bg-white/5 border border-white/10"
+            className="text-[11px] font-mono text-zinc-500 hover:text-zinc-900 px-2 py-1 rounded-md bg-white border border-zinc-200 shadow-2xs"
           >
             ESC
           </button>
@@ -246,9 +246,9 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
         {/* Results List */}
         <div className="max-h-96 overflow-y-auto p-3 space-y-1">
           {filteredItems.length === 0 ? (
-            <div className="py-12 text-center text-zinc-400">
-              <Package className="w-8 h-8 mx-auto mb-2 opacity-40 text-zinc-500" />
-              <p className="text-sm font-medium">No encontramos resultados para &quot;{query}&quot;</p>
+            <div className="py-12 text-center text-zinc-500">
+              <Package className="w-8 h-8 mx-auto mb-2 opacity-40 text-zinc-400" />
+              <p className="text-sm font-medium text-zinc-800">No encontramos resultados para &quot;{query}&quot;</p>
               <p className="text-xs text-zinc-500 mt-1 font-mono">
                 Intenta con: termo, libreta, acrílico, troquel, o cotizar
               </p>
@@ -263,16 +263,16 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
                   onMouseEnter={() => setSelectedIndex(index)}
                   className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all ${
                     isSelected
-                      ? "bg-[#E30613]/15 border border-[#E30613]/40 text-white"
-                      : "hover:bg-white/5 border border-transparent text-zinc-300"
+                      ? "bg-red-50/90 border border-red-200 text-zinc-950"
+                      : "hover:bg-zinc-50 border border-transparent text-zinc-700"
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <div
                       className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
                         isSelected
-                          ? "bg-[#E30613] text-white"
-                          : "bg-[#20202A] text-zinc-400"
+                          ? "bg-[#E30613] text-white shadow-xs"
+                          : "bg-zinc-100 text-zinc-600"
                       }`}
                     >
                       {item.category === "Producto" && <Box className="w-4 h-4" />}
@@ -283,14 +283,14 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
 
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-montserrat font-bold text-white">
+                        <span className="text-xs font-montserrat font-bold text-zinc-950">
                           {item.title}
                         </span>
-                        <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400">
+                        <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-600 font-semibold">
                           {item.category}
                         </span>
                       </div>
-                      <p className="text-[11px] text-zinc-400 font-mono mt-0.5">
+                      <p className="text-[11px] text-zinc-500 font-mono mt-0.5">
                         {item.description}
                       </p>
                     </div>
@@ -308,7 +308,7 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
         </div>
 
         {/* Footer shortcuts hint */}
-        <div className="px-5 py-2.5 bg-[#121216] border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+        <div className="px-5 py-2.5 bg-zinc-50 border-t border-zinc-200 flex items-center justify-between text-[11px] font-mono text-zinc-500">
           <div className="flex items-center gap-3">
             <span>↑↓ para navegar</span>
             <span>↵ para seleccionar</span>

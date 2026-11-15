@@ -46,7 +46,7 @@ Acceso al panel administrativo: https://impresosamericana.com/admin`;
   };
 
   return (
-    <div className="min-h-screen bg-[#111116] text-white">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900">
       {/* 1. Header */}
       <PageHeader
         badge="MANUAL OPERATIVO PARA EL CLIENTE"
@@ -60,16 +60,16 @@ Acceso al panel administrativo: https://impresosamericana.com/admin`;
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 space-y-12">
         {/* Action Quickbar (Print, Share, Go to Admin) */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl bg-[#181822] border border-white/10 shadow-xl">
+        <div className="flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl bg-white border border-zinc-200 shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-red-950/60 border border-red-500/30 flex items-center justify-center text-red-400">
+            <div className="w-10 h-10 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center text-[#E30613]">
               <FileCheck className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="font-montserrat font-bold text-sm text-white uppercase tracking-wider">
+              <h2 className="font-montserrat font-bold text-sm text-zinc-950 uppercase tracking-wider">
                 Instructivo Oficial de Administración
               </h2>
-              <p className="text-xs text-zinc-400">
+              <p className="text-xs text-zinc-500">
                 Diseñado para el equipo de ventas, mercadeo y administración de Impresos Americana.
               </p>
             </div>
@@ -78,23 +78,23 @@ Acceso al panel administrativo: https://impresosamericana.com/admin`;
           <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={handlePrint}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-zinc-200 hover:text-white border border-white/10 text-xs font-montserrat font-bold transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200/80 text-zinc-800 border border-zinc-200 text-xs font-montserrat font-bold transition-all shadow-sm"
             >
-              <Printer className="w-4 h-4 text-zinc-400" />
+              <Printer className="w-4 h-4 text-zinc-600" />
               <span>Imprimir / Guardar PDF</span>
             </button>
 
             <button
               onClick={handleShareWhatsApp}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366]/30 text-emerald-300 border border-[#25D366]/40 text-xs font-montserrat font-bold transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-montserrat font-bold transition-all shadow-sm"
             >
-              <Share2 className="w-4 h-4" />
+              <Share2 className="w-4 h-4 text-emerald-600" />
               <span>{shared ? "¡Abierto en WhatsApp!" : "Compartir por WhatsApp"}</span>
             </button>
 
             <Link
               href="/admin"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white text-xs font-montserrat font-black uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(227,6,19,0.4)]"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white text-xs font-montserrat font-black uppercase tracking-wider transition-all shadow-sm"
             >
               <span>Abrir Panel /admin</span>
               <ExternalLink className="w-4 h-4" />

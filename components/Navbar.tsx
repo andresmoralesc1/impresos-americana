@@ -59,8 +59,8 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#121212]/92 backdrop-blur-md border-b border-white/10 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
-            : "bg-transparent py-5"
+            ? "bg-white/95 backdrop-blur-md border-b border-zinc-200/80 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
+            : "bg-white/80 backdrop-blur-sm border-b border-zinc-100 py-4.5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -70,7 +70,7 @@ export function Navbar() {
               href="/"
               className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E30613] rounded-lg p-1"
             >
-              <IALogo size="md" />
+              <IALogo size="md" theme="light" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -85,17 +85,17 @@ export function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
+                    className={`relative px-3.5 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
                       isActive
-                        ? "text-white font-semibold"
-                        : "text-zinc-300 hover:text-white"
+                        ? "text-zinc-950 font-bold"
+                        : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100/60"
                     }`}
                   >
                     {link.name}
                     {isActive && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#E30613] rounded-full shadow-[0_0_8px_#E30613]"
+                        className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#E30613] rounded-full shadow-[0_0_8px_rgba(227,6,19,0.4)]"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -111,11 +111,11 @@ export function Navbar() {
                 type="button"
                 onClick={() => setCommandMenuOpen(true)}
                 aria-label="Buscar producto o sustrato (Cmd+K)"
-                className="p-2 text-zinc-300 hover:text-white hover:bg-white/5 rounded-full transition-colors flex items-center gap-1.5"
+                className="p-2 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 rounded-full transition-colors flex items-center gap-1.5"
                 title="Buscador global Omnibox (Cmd+K)"
               >
-                <Search className="w-5 h-5" />
-                <span className="hidden xl:inline-flex items-center text-[10px] font-mono bg-white/10 text-zinc-300 px-1.5 py-0.5 rounded border border-white/10">
+                <Search className="w-4.5 h-4.5" />
+                <span className="hidden xl:inline-flex items-center text-[10px] font-mono bg-zinc-100 text-zinc-600 px-1.5 py-0.5 rounded border border-zinc-200">
                   ⌘K
                 </span>
               </button>
@@ -125,11 +125,11 @@ export function Navbar() {
                 type="button"
                 onClick={() => setSampleModalOpen(true)}
                 aria-label="Solicitar kit de muestras físicas (Sample Box)"
-                className="relative p-2 text-zinc-300 hover:text-white hover:bg-white/5 rounded-full transition-colors flex items-center gap-1.5"
+                className="relative p-2 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 rounded-full transition-colors flex items-center gap-1.5"
                 title="Pedir Muestrario Físico a Domicilio"
               >
-                <Box className="w-5 h-5 text-[#E30613]" />
-                <span className="hidden xl:inline text-xs font-mono text-zinc-300">Muestras</span>
+                <Box className="w-4.5 h-4.5 text-[#E30613]" />
+                <span className="hidden xl:inline text-xs font-mono text-zinc-700 font-medium">Muestras</span>
                 {cartCount > 0 && (
                   <span className="absolute top-1 right-1 w-4 h-4 bg-[#E30613] text-[10px] font-bold text-white rounded-full flex items-center justify-center">
                     {cartCount}
@@ -140,10 +140,10 @@ export function Navbar() {
               {/* High-impact Americana Red CTA Button */}
               <Link
                 href="/cotizador"
-                className="relative group overflow-hidden bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-lg shadow-[0_0_20px_rgba(227,6,19,0.45)] hover:shadow-[0_0_30px_rgba(227,6,19,0.7)] transition-all duration-300 flex items-center gap-2"
+                className="relative group overflow-hidden bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-lg shadow-sm shadow-red-500/20 hover:shadow-md hover:shadow-red-500/30 transition-all duration-300 flex items-center gap-2"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-white/80 group-hover:rotate-12 transition-transform" />
+                  <Sparkles className="w-3.5 h-3.5 text-white/90 group-hover:rotate-12 transition-transform" />
                   Cotizar Ahora
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
@@ -154,7 +154,7 @@ export function Navbar() {
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20para%20un%20proyecto%20gr%C3%A1fico."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 rounded-lg transition-colors flex items-center justify-center"
+                className="p-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-lg transition-colors flex items-center justify-center shadow-xs"
                 title="Llamar o chatear por WhatsApp (+57 316 320 0181)"
               >
                 <MessageCircle className="w-4 h-4" />
@@ -166,20 +166,21 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setCommandMenuOpen(true)}
-                className="p-2.5 text-zinc-300 hover:text-white rounded-lg focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="p-2 text-zinc-600 hover:text-zinc-950 rounded-lg focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Buscar productos (Cmd+K)"
               >
                 <Search className="w-5 h-5" />
               </button>
               <Link
                 href="/cotizador"
-                className="bg-[#E30613] hover:bg-[#C50510] text-white text-xs font-montserrat font-bold px-3 py-2 rounded-lg min-h-[40px] flex items-center"
+                className="bg-[#E30613] hover:bg-[#C50510] text-white text-xs font-montserrat font-bold px-3 py-2 rounded-lg min-h-[40px] flex items-center shadow-xs"
               >
                 Cotizar
               </Link>
               <button
+                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 text-zinc-300 hover:text-white rounded-lg focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="p-2 text-zinc-700 hover:text-zinc-950 rounded-lg focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Abrir menú de navegación"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -196,11 +197,11 @@ export function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-[#121212]/98 backdrop-blur-2xl pt-24 px-5 sm:px-6 flex flex-col justify-between pb-8 overflow-y-auto lg:hidden"
+            className="fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl pt-24 px-5 sm:px-6 flex flex-col justify-between pb-8 overflow-y-auto lg:hidden shadow-2xl"
           >
             <div className="space-y-4">
-              <div className="border-b border-white/10 pb-4 mb-3">
-                <p className="text-[11px] font-mono uppercase text-zinc-400 tracking-widest mb-2">
+              <div className="border-b border-zinc-200 pb-4 mb-3">
+                <p className="text-[11px] font-mono uppercase text-zinc-400 tracking-widest mb-2 font-semibold">
                   Menú Principal
                 </p>
                 <div className="flex flex-col space-y-1">
@@ -217,8 +218,8 @@ export function Navbar() {
                         onClick={() => setMobileMenuOpen(false)}
                         className={`text-lg sm:text-xl font-montserrat font-bold py-2.5 px-3 rounded-xl transition-colors flex items-center justify-between min-h-[48px] ${
                           isActive
-                            ? "text-[#E30613] bg-red-950/20"
-                            : "text-zinc-200 hover:bg-white/5"
+                            ? "text-[#E30613] bg-red-50"
+                            : "text-zinc-800 hover:bg-zinc-100"
                         }`}
                       >
                         <span>{link.name}</span>
@@ -238,41 +239,41 @@ export function Navbar() {
                   setMobileMenuOpen(false);
                   setSampleModalOpen(true);
                 }}
-                className="w-full p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-left hover:bg-white/10 transition-colors min-h-[48px]"
+                className="w-full p-3 rounded-xl bg-zinc-50 border border-zinc-200 flex items-center justify-between text-left hover:bg-zinc-100 transition-colors min-h-[48px]"
               >
                 <div className="flex items-center gap-2.5">
                   <Box className="w-5 h-5 text-[#E30613]" />
                   <div>
-                    <span className="text-xs font-montserrat font-bold text-white block">
+                    <span className="text-xs font-montserrat font-bold text-zinc-900 block">
                       Pedir Muestrario Físico (Sample Box)
                     </span>
-                    <span className="text-[10px] text-zinc-400 font-mono">
+                    <span className="text-[10px] text-zinc-500 font-mono">
                       Muestras reales a domicilio
                     </span>
                   </div>
                 </div>
-                <span className="text-xs text-red-400 font-bold">Solicitar →</span>
+                <span className="text-xs text-[#E30613] font-bold">Solicitar →</span>
               </button>
 
-              <div className="bg-[#1E1E24] p-4 rounded-xl border border-white/10">
-                <p className="text-[11px] text-zinc-400 mb-1 font-mono uppercase">
+              <div className="bg-zinc-50 p-4 rounded-xl border border-zinc-200">
+                <p className="text-[11px] text-zinc-500 mb-1 font-mono uppercase font-semibold">
                   Atención Directa Cali & Nacional
                 </p>
                 <a
                   href="tel:+576028854000"
-                  className="text-sm font-semibold text-white hover:text-red-400 transition-colors block"
+                  className="text-sm font-semibold text-zinc-900 hover:text-[#E30613] transition-colors block"
                 >
                   PBX Planta: (602) 885-4000
                 </a>
-                <p className="text-xs text-zinc-400 mt-0.5">Lun - Vie: 7:30 AM - 5:30 PM</p>
+                <p className="text-xs text-zinc-500 mt-0.5">Lun - Vie: 7:30 AM - 5:30 PM</p>
               </div>
             </div>
 
-            <div className="space-y-3 pt-6 mt-4 border-t border-white/10">
+            <div className="space-y-3 pt-6 mt-4 border-t border-zinc-200">
               <Link
                 href="/cotizador"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3.5 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-center text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(227,6,19,0.4)] flex items-center justify-center min-h-[48px]"
+                className="w-full py-3.5 bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-center text-xs uppercase tracking-wider rounded-xl shadow-md shadow-red-500/20 flex items-center justify-center min-h-[48px]"
               >
                 Configurar Cotización Online
               </Link>
@@ -280,9 +281,9 @@ export function Navbar() {
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20inmediata."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 bg-[#1E1E24] hover:bg-[#272730] text-emerald-400 border border-emerald-500/30 font-montserrat font-semibold text-center text-xs rounded-xl flex items-center justify-center gap-2 min-h-[48px]"
+                className="w-full py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-montserrat font-semibold text-center text-xs rounded-xl flex items-center justify-center gap-2 min-h-[48px]"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="w-4 h-4 text-emerald-600" />
                 Asesoría WhatsApp Inmediata
               </a>
             </div>

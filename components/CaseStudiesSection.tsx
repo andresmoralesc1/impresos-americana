@@ -38,16 +38,16 @@ export function CaseStudiesSection() {
   ];
 
   return (
-    <section className="py-24 bg-[#0B0B0E] relative overflow-hidden border-t border-white/5">
+    <section className="py-24 bg-white relative overflow-hidden border-t border-zinc-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-red-400 font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
             MÉTRICAS Y RESULTADOS COMPROBADOS
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-zinc-950 tracking-tight leading-none mb-4">
             IMPACTO REAL EN EL PUNTO DE VENTA
           </h2>
-          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-600 text-sm sm:text-base leading-relaxed">
             No solo imprimimos sustratos: diseñamos soluciones de ingeniería gráfica que
             aceleran la decisión de compra del consumidor y resisten la operación física del retail.
           </p>
@@ -58,27 +58,27 @@ export function CaseStudiesSection() {
           {cases.map((cs, idx) => (
             <div
               key={idx}
-              className="p-8 rounded-2xl bg-[#15151D] border border-white/10 hover:border-red-500/50 transition-all flex flex-col justify-between shadow-2xl relative overflow-hidden group corner-slash-red"
+              className="p-8 rounded-3xl bg-zinc-50/70 border border-zinc-200/90 hover:border-zinc-300 hover:bg-white hover:shadow-xl transition-all flex flex-col justify-between shadow-2xs relative overflow-hidden group"
             >
               <div>
-                <span className="text-[10px] font-mono uppercase text-red-400 font-bold tracking-wider block mb-3">
+                <span className="text-[10px] font-mono uppercase text-[#E30613] font-bold tracking-wider block mb-3">
                   {cs.brand}
                 </span>
 
                 <div className="flex items-baseline gap-2 mb-4">
-                  <span className="text-4xl sm:text-5xl font-montserrat font-black text-white group-hover:text-red-400 transition-colors">
+                  <span className="text-4xl sm:text-5xl font-montserrat font-black text-zinc-950 group-hover:text-[#E30613] transition-colors">
                     {cs.metric}
                   </span>
-                  <span className="text-xs font-mono text-zinc-300 font-semibold uppercase">
+                  <span className="text-xs font-mono text-zinc-500 font-semibold uppercase">
                     {cs.metricLabel}
                   </span>
                 </div>
 
-                <h3 className="font-montserrat font-bold text-lg text-white mb-3 leading-snug">
+                <h3 className="font-montserrat font-bold text-lg text-zinc-950 mb-3 leading-snug">
                   {cs.headline}
                 </h3>
 
-                <p className="text-xs text-zinc-200 leading-relaxed mb-6">
+                <p className="text-xs text-zinc-600 leading-relaxed mb-6 font-normal">
                   {cs.description}
                 </p>
 
@@ -86,7 +86,7 @@ export function CaseStudiesSection() {
                   {cs.tags.map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#1C1C26] text-zinc-200 border border-white/10"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200/60"
                     >
                       {tag}
                     </span>
@@ -94,8 +94,8 @@ export function CaseStudiesSection() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-medium text-emerald-400">
-                <CheckCircle className="w-4 h-4 shrink-0" />
+              <div className="pt-4 border-t border-zinc-200/60 flex items-center gap-2 text-xs font-medium text-emerald-700">
+                <CheckCircle className="w-4 h-4 shrink-0 text-emerald-600" />
                 <span>{cs.highlight}</span>
               </div>
             </div>

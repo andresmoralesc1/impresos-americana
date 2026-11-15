@@ -90,11 +90,11 @@ export function PreflightModal({ isOpen, onClose, onFileApproved }: PreflightMod
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-      <div className="bg-[#181822] border border-white/20 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md">
+      <div className="bg-white border border-zinc-200 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-1.5 rounded-lg text-zinc-400 hover:text-white bg-white/5 transition-colors"
+          className="absolute top-5 right-5 p-2 rounded-xl text-zinc-500 hover:text-zinc-900 bg-zinc-100 hover:bg-zinc-200 transition-colors"
           aria-label="Cerrar modal de preprensa"
         >
           <X className="w-5 h-5" />
@@ -102,20 +102,20 @@ export function PreflightModal({ isOpen, onClose, onFileApproved }: PreflightMod
 
         {/* Modal Header */}
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-xl bg-[#E30613]/20 border border-[#E30613]/40 flex items-center justify-center text-[#E30613]">
+          <div className="w-10 h-10 rounded-2xl bg-red-50 border border-red-200 flex items-center justify-center text-[#E30613]">
             <FileCheck2 className="w-5 h-5" />
           </div>
           <div>
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#E30613] font-bold block">
               VALIDADOR INDUSTRIAL DE PREPRENSA
             </span>
-            <h3 className="font-montserrat font-bold text-lg text-white">
+            <h3 className="font-montserrat font-bold text-lg text-zinc-950">
               Inspección de Arte Final Digital
             </h3>
           </div>
         </div>
 
-        <p className="text-xs text-zinc-400 mb-6 leading-relaxed">
+        <p className="text-xs text-zinc-600 mb-6 leading-relaxed">
           Sube tu diseño para analizar resolución (DPI), espacio de color (CMYK) y tolerancias de troquel
           antes de entrar a máquina offset o cama plana UV.
         </p>
@@ -131,8 +131,8 @@ export function PreflightModal({ isOpen, onClose, onFileApproved }: PreflightMod
             onDrop={handleDrop}
             className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all cursor-pointer relative ${
               dragActive
-                ? "border-[#E30613] bg-[#E30613]/10"
-                : "border-white/20 hover:border-[#E30613]/60 bg-[#121217]"
+                ? "border-[#E30613] bg-red-50/30"
+                : "border-zinc-300 hover:border-[#E30613] bg-zinc-50/60"
             }`}
           >
             <input
@@ -149,23 +149,23 @@ export function PreflightModal({ isOpen, onClose, onFileApproved }: PreflightMod
             {analyzing ? (
               <div className="py-6 flex flex-col items-center">
                 <div className="w-10 h-10 rounded-full border-2 border-[#E30613] border-t-transparent animate-spin mb-3" />
-                <p className="text-sm font-montserrat font-bold text-white">
+                <p className="text-sm font-montserrat font-bold text-zinc-950">
                   Analizando perfiles cromáticos y resolución...
                 </p>
-                <p className="text-[11px] text-zinc-400 font-mono mt-1">
+                <p className="text-[11px] text-zinc-500 font-mono mt-1">
                   Verificando sangrados de troquel y curvas vectoriales
                 </p>
               </div>
             ) : (
               <div>
                 <UploadCloud className="w-12 h-12 text-[#E30613] mx-auto mb-3" />
-                <p className="text-sm font-semibold text-white">
+                <p className="text-sm font-semibold text-zinc-950">
                   Arrastra tu archivo aquí o haz clic para examinar
                 </p>
-                <p className="text-xs text-zinc-400 mt-1 font-mono">
+                <p className="text-xs text-zinc-500 mt-1 font-mono">
                   Soportado: PDF/X-1a, Adobe Illustrator (.AI), CorelDraw (.CDR), PNG o JPG
                 </p>
-                <span className="inline-block mt-3 px-3 py-1 rounded-full text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30">
+                <span className="inline-block mt-3 px-3 py-1 rounded-full text-[10px] font-mono text-emerald-800 bg-emerald-50 border border-emerald-200 font-semibold">
                   Preflight instantáneo en el navegador
                 </span>
               </div>
@@ -176,24 +176,24 @@ export function PreflightModal({ isOpen, onClose, onFileApproved }: PreflightMod
         {/* Report Output Card */}
         {report && (
           <div className="space-y-4">
-            <div className="p-4 rounded-xl bg-[#121218] border border-white/10 flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-mono text-zinc-500 uppercase block">
+                <span className="text-[10px] font-mono text-zinc-500 uppercase block font-semibold">
                   Archivo Inspeccionado
                 </span>
-                <span className="text-sm font-montserrat font-bold text-white">
+                <span className="text-sm font-montserrat font-bold text-zinc-950">
                   {report.fileName}
                 </span>
-                <span className="text-xs text-zinc-400 font-mono ml-2">
+                <span className="text-xs text-zinc-500 font-mono ml-2">
                   ({report.fileSizeMB})
                 </span>
               </div>
 
               <div className="text-right">
-                <span className="text-xl font-montserrat font-black text-emerald-400">
+                <span className="text-xl font-montserrat font-black text-emerald-600">
                   {report.overallScore}/100
                 </span>
-                <span className="text-[10px] text-emerald-400 font-mono block">
+                <span className="text-[10px] text-emerald-700 font-mono block font-semibold">
                   Apto para Producción
                 </span>
               </div>
@@ -202,39 +202,39 @@ export function PreflightModal({ isOpen, onClose, onFileApproved }: PreflightMod
             {/* Checklist */}
             <div className="space-y-2.5">
               {/* Check 1: Resolution */}
-              <div className="p-3 rounded-xl bg-[#15151D] border border-white/5 flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-2xs flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-xs font-montserrat font-bold text-white">
+                  <h4 className="text-xs font-montserrat font-bold text-zinc-950">
                     Resolución de Impresión: 300 DPI
                   </h4>
-                  <p className="text-[11px] text-zinc-400 mt-0.5">
+                  <p className="text-[11px] text-zinc-600 mt-0.5">
                     {report.resolutionText}
                   </p>
                 </div>
               </div>
 
               {/* Check 2: Color Mode */}
-              <div className="p-3 rounded-xl bg-[#15151D] border border-white/5 flex items-start gap-3">
+              <div className="p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-2xs flex items-start gap-3">
                 <Sparkles className="w-5 h-5 text-[#E30613] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-xs font-montserrat font-bold text-white flex items-center gap-2">
+                  <h4 className="text-xs font-montserrat font-bold text-zinc-950 flex items-center gap-2">
                     <span>Espacio de Color: {report.colorSpace}</span>
                   </h4>
-                  <p className="text-[11px] text-zinc-400 mt-0.5">
+                  <p className="text-[11px] text-zinc-600 mt-0.5">
                     {report.colorAdvice}
                   </p>
                 </div>
               </div>
 
               {/* Check 3: Bleed & Safety */}
-              <div className="p-3 rounded-xl bg-[#15151D] border border-white/5 flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-2xs flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-xs font-montserrat font-bold text-white">
+                  <h4 className="text-xs font-montserrat font-bold text-zinc-950">
                     Tolerancias de Troquel y Sangrado
                   </h4>
-                  <p className="text-[11px] text-zinc-400 mt-0.5">
+                  <p className="text-[11px] text-zinc-600 mt-0.5">
                     {report.bleedText}
                   </p>
                 </div>
@@ -242,11 +242,11 @@ export function PreflightModal({ isOpen, onClose, onFileApproved }: PreflightMod
             </div>
 
             {/* Actions */}
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+            <div className="pt-4 border-t border-zinc-200 flex items-center justify-between gap-3">
               <button
                 type="button"
                 onClick={() => setReport(null)}
-                className="text-xs text-zinc-400 hover:text-white px-3 py-2 rounded-lg bg-white/5"
+                className="text-xs text-zinc-700 hover:text-zinc-950 px-3.5 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 transition-colors font-medium"
               >
                 Cambiar Archivo
               </button>
@@ -254,7 +254,7 @@ export function PreflightModal({ isOpen, onClose, onFileApproved }: PreflightMod
               <button
                 type="button"
                 onClick={handleConfirm}
-                className="px-6 py-2.5 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(227,6,19,0.5)]"
+                className="px-6 py-2.5 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all shadow-xs"
               >
                 Aprobar Arte y Adjuntar
               </button>

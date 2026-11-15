@@ -75,16 +75,16 @@ export function CapabilitiesSection() {
   ];
 
   return (
-    <section id="servicios" className="py-24 bg-[#0F0F14] relative overflow-hidden border-t border-b border-white/5">
+    <section id="servicios" className="py-24 bg-white relative overflow-hidden border-t border-b border-zinc-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-red-400 font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
             INFRAESTRUCTURA Y PARQUE DE MAQUINARIA
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-zinc-950 tracking-tight leading-none mb-4">
             POTENCIA INDUSTRIAL DE IMPRESIÓN
           </h2>
-          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-600 text-sm sm:text-base leading-relaxed">
             Nuestra planta en Cali cuenta con tecnología alemana, suiza y japonesa de última
             generación para garantizar tiempos de respuesta inalcanzables para talleres convencionales.
           </p>
@@ -95,24 +95,24 @@ export function CapabilitiesSection() {
           {machinery.map((item, index) => (
             <div
               key={index}
-              className="p-6 rounded-2xl bg-[#16161D] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between"
+              className="p-6 sm:p-7 rounded-3xl bg-zinc-50/70 border border-zinc-200 hover:border-zinc-300 hover:bg-white hover:shadow-lg transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-mono text-red-400 font-bold uppercase tracking-wider">
+                  <span className="text-xs font-mono text-[#E30613] font-bold uppercase tracking-wider">
                     {item.brand}
                   </span>
                   <Factory className="w-4 h-4 text-zinc-400" />
                 </div>
-                <h3 className="font-montserrat font-bold text-lg text-white mb-2">
+                <h3 className="font-montserrat font-bold text-lg text-zinc-950 mb-2">
                   {item.name}
                 </h3>
-                <p className="text-xs text-zinc-200 leading-relaxed mb-4">
+                <p className="text-xs text-zinc-600 leading-relaxed mb-4 font-normal">
                   {item.specs}
                 </p>
               </div>
-              <div className="pt-3 border-t border-white/5 flex items-center gap-2 text-xs font-medium text-emerald-400">
-                <CheckCircle className="w-3.5 h-3.5" />
+              <div className="pt-3.5 border-t border-zinc-200/60 flex items-center gap-2 text-xs font-medium text-emerald-700">
+                <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
                 <span>{item.feature}</span>
               </div>
             </div>
@@ -120,17 +120,17 @@ export function CapabilitiesSection() {
         </div>
 
         {/* Technical Substrates Matrix */}
-        <div className="rounded-2xl bg-[#181820] border border-white/10 p-6 sm:p-8">
-          <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
+        <div className="rounded-3xl bg-white border border-zinc-200/90 p-6 sm:p-8 shadow-sm">
+          <div className="flex items-center justify-between mb-6 border-b border-zinc-200 pb-4">
             <div>
-              <h3 className="font-montserrat font-black text-xl text-white uppercase">
+              <h3 className="font-montserrat font-black text-xl text-zinc-950 uppercase">
                 Matriz de Sustratos & Acabados Industriales
               </h3>
-              <p className="text-xs text-zinc-300 font-mono mt-0.5">
+              <p className="text-xs text-zinc-500 font-mono mt-0.5">
                 Especificaciones de stock permanente en almacén central
               </p>
             </div>
-            <span className="hidden sm:inline-block text-xs font-mono bg-white/5 text-zinc-200 px-3 py-1 rounded-full border border-white/10 font-medium">
+            <span className="hidden sm:inline-block text-xs font-mono bg-zinc-100 text-zinc-700 px-3 py-1 rounded-full border border-zinc-200 font-semibold">
               Certificaciones FSC & ISO 14001
             </span>
           </div>
@@ -138,16 +138,16 @@ export function CapabilitiesSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {substrates.map((sub, idx) => (
               <div key={idx} className="space-y-3">
-                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-red-400 border-b border-white/10 pb-2">
+                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#E30613] border-b border-zinc-200 pb-2">
                   {sub.category}
                 </h4>
                 <ul className="space-y-2">
                   {sub.items.map((item, itemIdx) => (
                     <li
                       key={itemIdx}
-                      className="text-xs text-zinc-200 flex items-start gap-2 leading-tight"
+                      className="text-xs text-zinc-700 flex items-start gap-2 leading-tight"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#E30613] mt-1 shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}

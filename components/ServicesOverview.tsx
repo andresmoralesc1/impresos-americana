@@ -82,32 +82,32 @@ export function ServicesOverview() {
   ];
 
   return (
-    <section id="servicios-principales" className="py-20 bg-[#0E0E12] relative">
+    <section id="servicios-principales" className="py-24 bg-zinc-50/70 border-b border-zinc-200/70 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/40 border border-red-500/30 text-xs font-mono font-bold text-red-300 mb-3">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-200 text-xs font-mono font-bold text-red-800 mb-3 shadow-xs">
             <Cpu className="w-3.5 h-3.5 text-[#E30613]" />
             PLANTA INDUSTRIAL DIRECTA • SAN NICOLÁS, CALI
           </div>
-          <h2 className="text-3xl sm:text-4xl font-montserrat font-black uppercase text-white tracking-tight leading-tight mb-3">
+          <h2 className="text-3xl sm:text-4xl font-montserrat font-black uppercase text-zinc-950 tracking-tight leading-tight mb-3">
             SERVICIOS DE MANUFACTURA GRÁFICA
           </h2>
-          <p className="text-zinc-400 text-sm leading-relaxed">
+          <p className="text-zinc-600 text-sm leading-relaxed">
             Capacidad instalada para atender proyectos de retail, gran formato y tirajes masivos sin intermediarios comerciales.
           </p>
         </div>
 
         {/* 4 Core Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {services.map((service) => (
             <div
               key={service.id}
-              className="rounded-2xl p-5 bg-[#14141B] border border-white/5 hover:border-white/20 transition-all duration-300 flex flex-col justify-between group hover:bg-[#181822] overflow-hidden"
+              className="rounded-3xl p-5 bg-white border border-zinc-200/90 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.08)] hover:border-zinc-300 transition-all duration-300 flex flex-col justify-between group overflow-hidden"
             >
               <div>
                 {/* Real Photo Thumbnail */}
-                <div className="relative h-36 w-full rounded-xl overflow-hidden mb-4 bg-[#0A0A0E] border border-white/5">
+                <div className="relative h-36 w-full rounded-2xl overflow-hidden mb-4 bg-zinc-100 border border-zinc-200/80 shadow-inner">
                   <Image
                     src={service.image}
                     alt={service.title}
@@ -115,36 +115,36 @@ export function ServicesOverview() {
                     sizes="(max-width: 768px) 100vw, 25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#14141B] via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent pointer-events-none" />
 
                   {/* Step & Badge inside image */}
-                  <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm border border-white/10 text-white font-montserrat font-black text-xs">
+                  <div className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-lg bg-white/95 backdrop-blur-sm border border-zinc-200 text-zinc-950 font-montserrat font-black text-xs shadow-xs">
                     {service.step}
                   </div>
-                  <div className="absolute top-2.5 right-2.5 text-[9px] font-mono uppercase px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm text-zinc-300 border border-white/10 font-bold">
+                  <div className="absolute top-2.5 right-2.5 text-[9px] font-mono uppercase px-2 py-0.5 rounded-lg bg-white/95 backdrop-blur-sm text-zinc-700 border border-zinc-200 font-bold shadow-xs">
                     {service.badge}
                   </div>
                 </div>
 
-                <h3 className="text-base font-montserrat font-bold text-white group-hover:text-red-400 transition-colors leading-snug mb-1">
+                <h3 className="text-base font-montserrat font-bold text-zinc-950 group-hover:text-[#E30613] transition-colors leading-snug mb-1">
                   {service.title}
                 </h3>
-                <p className="text-[11px] text-zinc-400 font-mono mb-2.5">
+                <p className="text-[11px] text-zinc-500 font-mono mb-2.5">
                   {service.tagline}
                 </p>
 
-                <p className="text-xs text-zinc-400 leading-relaxed mb-4">
+                <p className="text-xs text-zinc-600 leading-relaxed mb-4">
                   {service.description}
                 </p>
               </div>
 
               <div>
                 {/* Highlights */}
-                <div className="flex flex-wrap gap-1.5 mb-4 pt-3 border-t border-white/5">
+                <div className="flex flex-wrap gap-1.5 mb-4 pt-3 border-t border-zinc-100">
                   {service.highlights.map((h, i) => (
                     <span
                       key={i}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-300"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-100 text-zinc-700 font-medium"
                     >
                       {h}
                     </span>
@@ -155,7 +155,7 @@ export function ServicesOverview() {
                 <Link
                   href={service.ctaLink}
                   onClick={() => triggerHaptic(8)}
-                  className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-red-400 hover:text-white transition-colors py-2.5 px-3.5 sm:p-0 rounded-xl bg-red-950/40 sm:bg-transparent border border-red-500/30 sm:border-0 min-h-[42px] sm:min-h-0"
+                  className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-[#E30613] hover:text-[#C50510] transition-colors py-2.5 px-3.5 sm:p-0 rounded-xl bg-red-50 sm:bg-transparent border border-red-200 sm:border-0 min-h-[42px] sm:min-h-0"
                 >
                   <span>{service.ctaText}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -166,14 +166,14 @@ export function ServicesOverview() {
         </div>
 
         {/* Minimalist Subpage Hub Bar */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-[#14141B] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3 text-center sm:text-left">
-            <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 hidden sm:block" />
+        <div className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-[0_8px_30px_-6px_rgba(0,0,0,0.05)] flex flex-col sm:flex-row items-center justify-between gap-5">
+          <div className="flex items-center gap-3.5 text-center sm:text-left">
+            <ShieldCheck className="w-6 h-6 text-emerald-600 shrink-0 hidden sm:block" />
             <div>
-              <p className="text-sm font-montserrat font-bold text-white">
+              <p className="text-sm font-montserrat font-bold text-zinc-950">
                 ¿Buscas artículos promocionales o calcular un empaque en 3D?
               </p>
-              <p className="text-xs text-zinc-400 mt-0.5">
+              <p className="text-xs text-zinc-500 mt-0.5">
                 Consulta el catálogo de referencias con fotos y precios o ingresa al cotizador interactivo.
               </p>
             </div>
@@ -183,17 +183,17 @@ export function ServicesOverview() {
             <Link
               href="/catalogo"
               onClick={() => triggerHaptic(8)}
-              className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 border border-white/10 min-h-[44px]"
+              className="px-4.5 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-montserrat font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 border border-zinc-200 min-h-[44px]"
             >
-              <Boxes className="w-3.5 h-3.5 text-zinc-400" />
+              <Boxes className="w-3.5 h-3.5 text-zinc-600" />
               <span>Ver Catálogo</span>
             </Link>
             <Link
               href="/cotizador"
               onClick={() => triggerHaptic(8)}
-              className="px-4 py-2.5 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-1.5 min-h-[44px]"
+              className="px-5 py-2.5 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all shadow-sm shadow-red-500/20 hover:shadow-md flex items-center justify-center gap-1.5 min-h-[44px]"
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="w-3.5 h-3.5 text-white/90" />
               <span>Cotizador 3D</span>
             </Link>
           </div>

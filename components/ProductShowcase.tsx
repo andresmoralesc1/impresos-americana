@@ -47,19 +47,19 @@ export function ProductShowcase() {
   ];
 
   return (
-    <section className="py-20 bg-[#0E0E14] border-t border-white/5 relative">
+    <section className="py-24 bg-white border-t border-zinc-200/70 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-red-400 font-bold mb-2">
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#E30613] font-bold mb-2">
               <Boxes className="w-3.5 h-3.5" />
               <span>CATÁLOGO DE PRODUCTOS & MERCHANDISING</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-montserrat font-black uppercase text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-montserrat font-black uppercase text-zinc-950 tracking-tight">
               ARTÍCULOS CON MARCA CORPORATIVA
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-xl">
+            <p className="text-xs sm:text-sm text-zinc-600 mt-1 max-w-xl">
               Referencias en inventario listas para marcar con serigrafía, tampografía, sublimación o grabado láser directo.
             </p>
           </div>
@@ -67,7 +67,7 @@ export function ProductShowcase() {
           <Link
             href="/catalogo"
             onClick={() => triggerHaptic(8)}
-            className="inline-flex items-center justify-center gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-red-400 hover:text-white transition-colors shrink-0 py-2.5 px-4 rounded-xl bg-white/5 border border-white/10 hover:border-red-500/40 min-h-[44px] w-full sm:w-auto"
+            className="inline-flex items-center justify-center gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-[#E30613] hover:text-[#C50510] transition-colors shrink-0 py-2.5 px-4.5 rounded-xl bg-red-50 hover:bg-red-100/70 border border-red-200 min-h-[44px] w-full sm:w-auto shadow-xs"
           >
             <span>Explorar catálogo completo (+50 referencias)</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -75,17 +75,17 @@ export function ProductShowcase() {
         </div>
 
         {/* 4 Real Product Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((item, idx) => (
             <Link
               key={idx}
               href="/catalogo"
               onClick={() => triggerHaptic(6)}
-              className="group rounded-2xl bg-[#15151D] border border-white/5 hover:border-red-500/40 transition-all duration-300 p-4 flex flex-col justify-between hover:bg-[#1A1A24]"
+              className="group rounded-3xl bg-zinc-50/60 border border-zinc-200/80 hover:border-zinc-300 transition-all duration-300 p-5 flex flex-col justify-between hover:bg-white hover:shadow-lg"
             >
               <div>
                 {/* Real Product Image Stage */}
-                <div className="relative h-48 w-full rounded-xl bg-white/5 border border-white/5 overflow-hidden mb-4 flex items-center justify-center p-3">
+                <div className="relative h-48 w-full rounded-2xl bg-white border border-zinc-200/70 overflow-hidden mb-4 flex items-center justify-center p-3 shadow-inner">
                   <Image
                     src={item.image}
                     alt={item.name}
@@ -93,25 +93,25 @@ export function ProductShowcase() {
                     sizes="(max-width: 768px) 100vw, 25vw"
                     className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-black/80 backdrop-blur-sm text-[10px] font-mono text-emerald-400 font-bold">
+                  <div className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-lg bg-emerald-50 border border-emerald-200 text-[10px] font-mono text-emerald-800 font-bold shadow-xs">
                     {item.minQty}
                   </div>
                 </div>
 
-                <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 block mb-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 block mb-1 font-semibold">
                   {item.category}
                 </span>
 
-                <h3 className="font-montserrat font-bold text-sm text-white group-hover:text-red-400 transition-colors mb-2 leading-snug">
+                <h3 className="font-montserrat font-bold text-sm text-zinc-950 group-hover:text-[#E30613] transition-colors mb-2 leading-snug">
                   {item.name}
                 </h3>
 
-                <p className="text-[11px] text-zinc-400 leading-relaxed font-sans mb-4">
+                <p className="text-[11px] text-zinc-600 leading-relaxed font-sans mb-4">
                   {item.spec}
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-red-400 group-hover:text-white transition-colors font-bold uppercase">
+              <div className="pt-3 border-t border-zinc-200/60 flex items-center justify-between text-[11px] font-mono text-[#E30613] group-hover:text-[#C50510] transition-colors font-bold uppercase">
                 <span>Ver detalles</span>
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </div>

@@ -256,32 +256,32 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
   };
 
   return (
-    <section id="catalogo" className="py-24 bg-[#111116] relative overflow-hidden border-t border-white/5">
+    <section id="catalogo" className="py-24 bg-white relative overflow-hidden border-t border-zinc-200">
       {/* Background glow */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#E30613]/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#E30613]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-red-400 font-bold block mb-2">
+          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
             CATÁLOGO OFICIAL DE ARTÍCULOS PUBLICITARIOS
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-white tracking-tight leading-none mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-zinc-950 tracking-tight leading-none mb-4">
             PRODUCTOS CORPORATIVOS & MERCHANDISING
           </h2>
-          <p className="text-zinc-200 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-600 text-sm sm:text-base leading-relaxed">
             Referencias reales extraídas de nuestros catálogos impresos oficiales de producción 2024.
             Marcación con tampografía, grabado láser, sublimación o impresión UV directa.
           </p>
 
           {isFromSanity && (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-mono mt-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-mono mt-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Sincronizado en vivo con Panel CMS
             </div>
           )}
 
-          {/* Category Filter Pills (Mobile swipeable + 44px touch targets) */}
+          {/* Category Filter Pills */}
           <div className="flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 mt-8 overflow-x-auto pb-2 sm:pb-0 px-1 -mx-4 sm:mx-0 px-4 scrollbar-none">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat.id;
@@ -294,8 +294,8 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                   }}
                   className={`px-5 py-2.5 min-h-[44px] shrink-0 rounded-full text-xs font-montserrat font-semibold transition-all duration-300 ${
                     isActive
-                      ? "bg-[#E30613] text-white shadow-[0_0_15px_rgba(227,6,19,0.5)] scale-105"
-                      : "bg-[#1A1A22] text-zinc-200 hover:text-white hover:bg-[#252530] border border-white/10"
+                      ? "bg-[#E30613] text-white shadow-[0_4px_16px_rgba(227,6,19,0.3)] scale-105"
+                      : "bg-zinc-100/80 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-200/80 border border-zinc-200"
                   }`}
                 >
                   {cat.label}
@@ -316,10 +316,10 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                className="group rounded-2xl bg-[#181820] border border-white/10 hover:border-[#E30613]/50 transition-all duration-300 overflow-hidden shadow-xl flex flex-col justify-between corner-slash-red"
+                className="group rounded-2xl bg-white border border-zinc-200 hover:border-[#E30613]/40 transition-all duration-300 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl flex flex-col justify-between corner-slash-red"
               >
                 {/* Product Image Stage */}
-                <div className="relative h-60 w-full bg-[#121217] overflow-hidden border-b border-white/5 flex items-center justify-center p-3">
+                <div className="relative h-60 w-full bg-zinc-50 overflow-hidden border-b border-zinc-100 flex items-center justify-center p-3">
                   <div className="relative w-full h-full overflow-hidden rounded-xl">
                     <Image
                       src={prod.imageSrc}
@@ -331,13 +331,13 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                   </div>
 
                   {/* Top Badges */}
-                  <div className="absolute top-3 left-3 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-red-400 font-bold border border-white/10">
+                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-[#E30613] font-bold border border-zinc-200 shadow-sm">
                     {prod.reference}
                   </div>
 
                   <button
                     onClick={() => setPreviewImage(prod.imageSrc)}
-                    className="absolute bottom-3 right-3 p-2 rounded-lg bg-black/75 hover:bg-[#E30613] text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute bottom-3 right-3 p-2 rounded-lg bg-zinc-900/80 hover:bg-[#E30613] text-white opacity-0 group-hover:opacity-100 transition-opacity shadow-sm"
                     title="Ampliar vista del catálogo"
                   >
                     <Eye className="w-4 h-4" />
@@ -348,15 +348,15 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-red-400 font-bold">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#E30613] font-bold">
                         {prod.categoryLabel}
                       </span>
-                      <span className="text-[11px] text-zinc-300 font-mono">
+                      <span className="text-[11px] text-zinc-500 font-mono">
                         {prod.minOrder}
                       </span>
                     </div>
 
-                    <h3 className="font-montserrat font-bold text-base text-white group-hover:text-red-400 transition-colors mb-2 leading-snug">
+                    <h3 className="font-montserrat font-bold text-base text-zinc-900 group-hover:text-[#E30613] transition-colors mb-2 leading-snug">
                       {prod.name}
                     </h3>
 
@@ -365,7 +365,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                       {prod.specs.map((sp, i) => (
                         <span
                           key={i}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#131318] text-zinc-200 border border-white/10"
+                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 text-zinc-600 border border-zinc-200"
                         >
                           {sp}
                         </span>
@@ -374,12 +374,12 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                   </div>
 
                   {/* Pricing and Action */}
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                  <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
                     <div>
-                      <span className="text-[10px] font-mono text-zinc-300 block">
+                      <span className="text-[10px] font-mono text-zinc-500 block">
                         Desde:
                       </span>
-                      <span className="font-montserrat font-black text-lg text-white">
+                      <span className="font-montserrat font-black text-lg text-zinc-950">
                         {prod.priceCOP}
                       </span>
                     </div>
@@ -388,7 +388,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                       href={generateWhatsAppInquiry(prod)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3.5 py-2 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-[0_0_15px_rgba(227,6,19,0.4)]"
+                      className="px-3.5 py-2 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-[0_4px_14px_rgba(227,6,19,0.3)]"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />
                       <span>Cotizar</span>
@@ -401,42 +401,42 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
         </div>
 
         {/* Official PDF Catalogs Download Center */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#1E1E26] via-[#1A1A22] to-[#16161D] border border-white/15 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+        <div className="rounded-2xl bg-zinc-50/80 border border-zinc-200 p-6 sm:p-8 shadow-md relative overflow-hidden">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-[#E30613] text-white flex items-center justify-center font-montserrat font-black shadow-[0_0_20px_#E30613]">
+            <div className="w-10 h-10 rounded-xl bg-[#E30613] text-white flex items-center justify-center font-montserrat font-black shadow-[0_4px_14px_rgba(227,6,19,0.3)]">
               PDF
             </div>
             <div>
-              <span className="text-[10px] font-mono text-red-400 font-bold uppercase tracking-widest block">
+              <span className="text-[10px] font-mono text-[#E30613] font-bold uppercase tracking-widest block">
                 DOCUMENTACIÓN Y TARIFARIOS OFICIALES
               </span>
-              <h3 className="font-montserrat font-bold text-xl text-white">
+              <h3 className="font-montserrat font-bold text-xl text-zinc-950">
                 Descarga Nuestros Catálogos Completos de Producción
               </h3>
             </div>
           </div>
 
-          <p className="text-xs text-zinc-200 max-w-3xl mb-6 leading-relaxed">
+          <p className="text-xs text-zinc-600 max-w-3xl mb-6 leading-relaxed">
             Si eres director de mercadeo, agencia o compras institucionales, descarga los
             documentos oficiales con todas las referencias, medidas técnicas y escalas de precios al por mayor.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Catalog 1 */}
-            <div className="p-4 rounded-xl bg-[#121217] border border-white/10 flex flex-col justify-between">
+            <div className="p-5 rounded-xl bg-white border border-zinc-200/90 shadow-sm flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono text-emerald-400 uppercase font-bold">116 Páginas • 6.6 MB (Optimizado)</span>
-                <h4 className="font-montserrat font-bold text-sm text-white mt-1 mb-2">
+                <span className="text-[10px] font-mono text-emerald-600 uppercase font-bold">116 Páginas • 6.6 MB (Optimizado)</span>
+                <h4 className="font-montserrat font-bold text-sm text-zinc-900 mt-1 mb-2">
                   Catálogo Maestro Impresos Americana
                 </h4>
-                <p className="text-[11px] text-zinc-300">
+                <p className="text-[11px] text-zinc-500">
                   Material POP, oficina, termos de temperatura, agendas y tecnología.
                 </p>
               </div>
               <a
                 href="/catalogos/catalogo-impresos-americana.pdf"
                 download="Catalogo_Impresos_Americana.pdf"
-                className="mt-4 w-full py-2 px-3 rounded-lg bg-[#22222D] hover:bg-[#E30613] text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
+                className="mt-4 w-full py-2.5 px-3 rounded-lg bg-zinc-100 hover:bg-[#E30613] text-zinc-800 hover:text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 border border-zinc-200 transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Descargar PDF (6.6 MB)</span>
@@ -444,20 +444,20 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
             </div>
 
             {/* Catalog 2 */}
-            <div className="p-4 rounded-xl bg-[#121217] border border-white/10 flex flex-col justify-between">
+            <div className="p-5 rounded-xl bg-white border border-zinc-200/90 shadow-sm flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono text-emerald-400 uppercase font-bold">Edición 2024 • 24 MB (Optimizado)</span>
-                <h4 className="font-montserrat font-bold text-sm text-white mt-1 mb-2">
+                <span className="text-[10px] font-mono text-emerald-600 uppercase font-bold">Edición 2024 • 24 MB (Optimizado)</span>
+                <h4 className="font-montserrat font-bold text-sm text-zinc-900 mt-1 mb-2">
                   Esferos y Llaveros Publicitarios
                 </h4>
-                <p className="text-[11px] text-zinc-300">
+                <p className="text-[11px] text-zinc-500">
                   Línea completa de lapiceros plásticos, metálicos, ecológicos y llaveros en aluminio.
                 </p>
               </div>
               <a
                 href="/catalogos/esferos-y-llaveros-2024.pdf"
                 download="Catalogo_Esferos_Llaveros_2024.pdf"
-                className="mt-4 w-full py-2 px-3 rounded-lg bg-[#22222D] hover:bg-[#E30613] text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
+                className="mt-4 w-full py-2.5 px-3 rounded-lg bg-zinc-100 hover:bg-[#E30613] text-zinc-800 hover:text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 border border-zinc-200 transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Descargar PDF (24 MB)</span>
@@ -465,20 +465,20 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
             </div>
 
             {/* Catalog 3 */}
-            <div className="p-4 rounded-xl bg-[#121217] border border-white/10 flex flex-col justify-between">
+            <div className="p-5 rounded-xl bg-white border border-zinc-200/90 shadow-sm flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-mono text-emerald-400 uppercase font-bold">Regalos & POP • 31 MB (Optimizado)</span>
-                <h4 className="font-montserrat font-bold text-sm text-white mt-1 mb-2">
+                <span className="text-[10px] font-mono text-emerald-600 uppercase font-bold">Regalos & POP • 31 MB (Optimizado)</span>
+                <h4 className="font-montserrat font-bold text-sm text-zinc-900 mt-1 mb-2">
                   Productos Publicitarios Especiales
                 </h4>
-                <p className="text-[11px] text-zinc-300">
+                <p className="text-[11px] text-zinc-500">
                   Bolsas ecológicas, paraguas, artículos de viaje y kits corporativos para eventos.
                 </p>
               </div>
               <a
                 href="/catalogos/productos-publicitarios.pdf"
                 download="Catalogo_Productos_Publicitarios.pdf"
-                className="mt-4 w-full py-2 px-3 rounded-lg bg-[#22222D] hover:bg-[#E30613] text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
+                className="mt-4 w-full py-2.5 px-3 rounded-lg bg-zinc-100 hover:bg-[#E30613] text-zinc-800 hover:text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 border border-zinc-200 transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Descargar PDF (31 MB)</span>
@@ -491,20 +491,20 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
       {/* Image Preview Lightbox Modal */}
       {previewImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md cursor-pointer"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/70 backdrop-blur-md cursor-pointer"
           onClick={() => setPreviewImage(null)}
         >
-          <div className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl border border-white/20">
+          <div className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl bg-white border border-zinc-200 shadow-2xl p-2">
             <Image
               src={previewImage}
               alt="Vista detallada del catálogo"
               width={1200}
               height={800}
-              className="w-full h-full object-contain max-h-[85vh]"
+              className="w-full h-full object-contain max-h-[85vh] rounded-xl"
             />
             <button
               onClick={() => setPreviewImage(null)}
-              className="absolute top-4 right-4 bg-black/80 text-white p-2 rounded-full font-mono text-xs hover:bg-[#E30613]"
+              className="absolute top-4 right-4 bg-zinc-900/80 text-white px-3 py-1.5 rounded-full font-mono text-xs hover:bg-[#E30613] shadow-md"
             >
               Cerrar (ESC)
             </button>

@@ -22,7 +22,7 @@ export function IALogoMark({
         width={96}
         height={64}
         priority
-        className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(227,6,19,0.3)] transition-transform duration-200 group-hover:scale-105"
+        className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(227,6,19,0.2)] transition-transform duration-200 group-hover:scale-105"
       />
     </div>
   );
@@ -31,6 +31,7 @@ export function IALogoMark({
 export function IALogo({
   className = "",
   variant = "horizontal",
+  theme = "light",
   size = "md",
 }: LogoProps) {
   const sizeMap = {
@@ -42,18 +43,24 @@ export function IALogo({
 
   const { mark, textPrimary, textSub } = sizeMap[size];
 
+  const isWhite = theme === "white" || theme === "dark";
+
   return (
     <div className={`inline-flex items-center gap-3 select-none ${className}`}>
       <IALogoMark className={mark} />
       {variant !== "mark-only" && (
         <div className="flex flex-col leading-none">
           <span
-            className={`font-montserrat font-black tracking-wider uppercase text-white ${textPrimary}`}
+            className={`font-montserrat font-black tracking-wider uppercase ${
+              isWhite ? "text-white" : "text-zinc-950"
+            } ${textPrimary}`}
           >
             IMPRESOS
           </span>
           <span
-            className={`font-montserrat font-bold tracking-[0.22em] uppercase text-white/90 mt-0.5 ${textSub}`}
+            className={`font-montserrat font-bold tracking-[0.22em] uppercase mt-0.5 ${
+              isWhite ? "text-white/90" : "text-[#E30613]"
+            } ${textSub}`}
           >
             AMERICANA
           </span>

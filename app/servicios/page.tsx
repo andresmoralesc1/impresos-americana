@@ -33,7 +33,7 @@ export default function ServiciosPage() {
       <CaseStudiesSection />
 
       {/* Bottom Conversion Callout */}
-      <section className="py-16 bg-[#0E0E12] border-t border-white/10">
+      <section className="py-16 bg-white border-t border-zinc-200">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="p-8 sm:p-10 rounded-2xl bg-gradient-to-r from-[#8F0008] via-[#E30613] to-[#B3000B] text-white shadow-2xl relative overflow-hidden">
             <h2 className="text-2xl sm:text-3xl font-montserrat font-black uppercase tracking-tight mb-2">
