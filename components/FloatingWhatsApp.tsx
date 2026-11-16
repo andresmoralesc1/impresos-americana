@@ -30,7 +30,7 @@ export function FloatingWhatsApp() {
   return (
     <aside
       aria-label="Atención al cliente por WhatsApp"
-      className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end pointer-events-none select-none pb-[env(safe-area-inset-bottom)]"
+      className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 hidden lg:flex flex-col items-end pointer-events-none select-none pb-[env(safe-area-inset-bottom)]"
     >
       {/* Speech Bubble / Tooltip */}
       {showTooltip && (

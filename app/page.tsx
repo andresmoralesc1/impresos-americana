@@ -23,7 +23,7 @@ export default function Home() {
       <Hero />
 
       {/* 2. Franja de Confianza / Sectores Atendidos (Minimalist Trust Strip) */}
-      <div className="border-t border-b border-zinc-200/80 bg-zinc-50/80 py-4.5 overflow-hidden">
+      <div className="border-t border-b border-zinc-200/80 bg-zinc-50/80 py-4 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-500 font-bold shrink-0">
@@ -77,9 +77,9 @@ export default function Home() {
               href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20tengo%20un%20proyecto%20para%20cotizar%20directamente%20con%20planta."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20BD5A] text-slate-950 font-montserrat font-black text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-md shadow-emerald-500/20 hover:shadow-lg transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20BD5A] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-md shadow-emerald-500/20 hover:shadow-lg transition-all"
             >
-              <MessageCircle className="w-4 h-4 fill-slate-950" />
+              <MessageCircle className="w-4 h-4 fill-white" />
               <span>Chatear por WhatsApp (+57 316 320 0181)</span>
             </a>
 

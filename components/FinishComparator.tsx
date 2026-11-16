@@ -40,6 +40,26 @@ export function FinishComparator() {
     isDragging.current = false;
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      setSliderPos((prev) => Math.max(0, prev - 5));
+      triggerHaptic(5);
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      setSliderPos((prev) => Math.min(100, prev + 5));
+      triggerHaptic(5);
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      setSliderPos(0);
+      triggerHaptic(10);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      setSliderPos(100);
+      triggerHaptic(10);
+    }
+  };
+
   const selectTab = (item: "pop" | "catalogo" | "empaque") => {
     setActiveItem(item);
     triggerHaptic(12);
@@ -99,10 +119,17 @@ export function FinishComparator() {
         <div className="max-w-4xl mx-auto">
           <div
             ref={containerRef}
+            tabIndex={0}
+            role="slider"
+            aria-label="Comparador interactivo de acabados: Laminado Mate vs Barniz UV Sectorizado"
+            aria-valuenow={sliderPos}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            onKeyDown={handleKeyDown}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
-            className="relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden border border-zinc-200 shadow-xl select-none cursor-ew-resize touch-none bg-white"
+            className="relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden border border-zinc-200 shadow-xl select-none cursor-ew-resize touch-none bg-white focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2"
           >
             {/* Background Layer: Right Side - Barniz UV Sectorizado (High Gloss & Reflective Shine) */}
             <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-zinc-50 to-white flex items-center justify-center p-8">
