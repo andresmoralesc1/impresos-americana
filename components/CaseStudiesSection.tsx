@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, ArrowRight, TrendingUp } from "lucide-react";
+import { triggerHaptic } from "@/lib/haptics";
 
 export function CaseStudiesSection() {
   const cases = [
@@ -58,15 +59,18 @@ export function CaseStudiesSection() {
           {cases.map((cs, idx) => (
             <div
               key={idx}
-              className="p-8 rounded-3xl bg-zinc-50/70 border border-zinc-200/90 hover:border-zinc-300 hover:bg-white hover:shadow-xl transition-all flex flex-col justify-between shadow-2xs relative overflow-hidden group"
+              className="p-8 rounded-3xl bg-zinc-50/70 border border-zinc-200/90 hover:border-[#E30613]/50 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between shadow-2xs relative overflow-hidden group corner-slash-red"
             >
               <div>
-                <span className="text-[10px] font-mono uppercase text-[#E30613] font-bold tracking-wider block mb-3">
-                  {cs.brand}
-                </span>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] font-mono uppercase text-[#E30613] font-bold tracking-wider block">
+                    {cs.brand}
+                  </span>
+                  <TrendingUp className="w-4 h-4 text-zinc-400 group-hover:text-[#E30613] transition-colors" />
+                </div>
 
                 <div className="flex items-baseline gap-2 mb-4">
-                  <span className="text-4xl sm:text-5xl font-montserrat font-black text-zinc-950 group-hover:text-[#E30613] transition-colors">
+                  <span className="text-4xl sm:text-5xl font-montserrat font-black text-zinc-950 group-hover:text-[#E30613] transition-colors tracking-tight">
                     {cs.metric}
                   </span>
                   <span className="text-xs font-mono text-zinc-500 font-semibold uppercase">
@@ -94,9 +98,22 @@ export function CaseStudiesSection() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-zinc-200/60 flex items-center gap-2 text-xs font-medium text-emerald-700">
-                <CheckCircle className="w-4 h-4 shrink-0 text-emerald-600" />
-                <span>{cs.highlight}</span>
+              <div className="pt-4 border-t border-zinc-200/60 flex flex-col gap-3">
+                <div className="flex items-center gap-2 text-xs font-medium text-emerald-700">
+                  <CheckCircle className="w-4 h-4 shrink-0 text-emerald-600" />
+                  <span>{cs.highlight}</span>
+                </div>
+
+                <a
+                  href={`https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20quisiera%20soluciones%20similares%20al%20caso%20de%20%22${encodeURIComponent(cs.headline)}%22.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => triggerHaptic(8)}
+                  className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold text-zinc-600 hover:text-[#E30613] transition-colors pt-1"
+                >
+                  <span>Consultar caso similar</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
               </div>
             </div>
           ))}

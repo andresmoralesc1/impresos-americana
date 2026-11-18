@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, MessageCircle, Eye, Search, X } from "lucide-react";
+import { Download, MessageCircle, Eye, Search, X, Copy, Check } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
 import { client, isSanityConfigured } from "@/sanity/lib/client";
 import { PRODUCTS_QUERY, CATEGORIES_QUERY } from "@/sanity/lib/queries";
@@ -158,15 +158,31 @@ const defaultProducts: ProductCatalogItem[] = [
 export function RealProductsCatalog() {
   const [selectedCategory, setSelectedCategory] = useState<CatalogCategory>("todos");
   const [searchQuery, setSearchQuery] = useState("");
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [previewProduct, setPreviewProduct] = useState<ProductCatalogItem | null>(null);
+  const [copiedRefId, setCopiedRefId] = useState<string | null>(null);
+  const [downloadingPdf, setDownloadingPdf] = useState<string | null>(null);
   const [categories, setCategories] = useState(defaultCategories);
   const [productsList, setProductsList] = useState<ProductCatalogItem[]>(defaultProducts);
   const [isFromSanity, setIsFromSanity] = useState(false);
 
+  const handleCopyReference = (refText: string, id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    triggerHaptic(10);
+    navigator.clipboard.writeText(refText);
+    setCopiedRefId(id);
+    setTimeout(() => setCopiedRefId(null), 2000);
+  };
+
+  const handlePdfDownloadClick = (pdfName: string) => {
+    triggerHaptic(12);
+    setDownloadingPdf(pdfName);
+    setTimeout(() => setDownloadingPdf(null), 2500);
+  };
+
   useEffect(() => {
-    if (!previewImage) return;
+    if (!previewProduct) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setPreviewImage(null);
+      if (e.key === "Escape") setPreviewProduct(null);
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
@@ -174,7 +190,7 @@ export function RealProductsCatalog() {
       document.body.style.overflow = "unset";
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [previewImage]);
+  }, [previewProduct]);
 
   useEffect(() => {
     if (!isSanityConfigured || !client) return;
@@ -325,10 +341,14 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
             </div>
           </div>
 
-          {/* Category Filter Pills */}
+          {/* Category Filter Pills with Item Count Badges */}
           <div className="flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 mt-8 overflow-x-auto pb-2 sm:pb-0 px-1 -mx-4 sm:mx-0 px-4 scrollbar-none">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat.id;
+              const count = cat.id === "todos"
+                ? productsList.length
+                : productsList.filter((p) => p.category === cat.id).length;
+
               return (
                 <button
                   key={cat.id}
@@ -336,16 +356,28 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                     triggerHaptic(10);
                     setSelectedCategory(cat.id as CatalogCategory);
                   }}
-                  className={`px-5 py-2.5 min-h-[44px] shrink-0 rounded-full text-xs font-montserrat font-semibold transition-all duration-300 ${
+                  className={`relative px-4 sm:px-5 py-2.5 min-h-[44px] shrink-0 rounded-full text-xs font-montserrat font-semibold transition-all duration-200 flex items-center gap-2 ${
                     isActive
-                      ? "bg-[#E30613] text-white shadow-[0_4px_16px_rgba(227,6,19,0.3)] scale-105"
-                      : "bg-zinc-100/80 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-200/80 border border-zinc-200"
+                      ? "bg-[#E30613] text-white shadow-[0_4px_16px_rgba(227,6,19,0.3)] scale-[1.02]"
+                      : "bg-zinc-100/90 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-200/80 border border-zinc-200"
                   }`}
                 >
-                  {cat.label}
+                  <span>{cat.label}</span>
+                  <span
+                    className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${
+                      isActive ? "bg-white/20 text-white" : "bg-zinc-200 text-zinc-600"
+                    }`}
+                  >
+                    {count}
+                  </span>
                 </button>
               );
             })}
+          </div>
+
+          {/* Results Counter info */}
+          <div className="mt-4 text-xs font-mono text-zinc-500">
+            Mostrando <span className="font-bold text-zinc-900">{filteredProducts.length}</span> referencias industriales
           </div>
         </div>
 
@@ -376,10 +408,16 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
-                  className="group rounded-2xl bg-white border border-zinc-200 hover:border-[#E30613]/40 transition-all duration-300 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl flex flex-col justify-between corner-slash-red"
+                  className="group rounded-2xl bg-white border border-zinc-200 hover:border-[#E30613]/50 transition-all duration-300 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between corner-slash-red"
                 >
                 {/* Product Image Stage */}
-                <div className="relative h-60 w-full bg-zinc-50 overflow-hidden border-b border-zinc-100 flex items-center justify-center p-3">
+                <div
+                  className="relative h-60 w-full bg-zinc-50 overflow-hidden border-b border-zinc-100 flex items-center justify-center p-3 cursor-pointer"
+                  onClick={() => {
+                    triggerHaptic(10);
+                    setPreviewProduct(prod);
+                  }}
+                >
                   <div className="relative w-full h-full overflow-hidden rounded-xl">
                     <Image
                       src={prod.imageSrc}
@@ -390,15 +428,36 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                     />
                   </div>
 
-                  {/* Top Badges */}
-                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-[#E30613] font-bold border border-zinc-200 shadow-sm">
-                    {prod.reference}
+                  {/* Top Reference Badge with 1-click Copy */}
+                  <div className="absolute top-3 left-3 flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={(e) => handleCopyReference(prod.reference, prod.id, e)}
+                      title="Copiar referencia al portapapeles"
+                      className="bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-[#E30613] hover:text-white hover:bg-[#E30613] font-bold border border-zinc-200 shadow-sm flex items-center gap-1.5 transition-colors"
+                    >
+                      {copiedRefId === prod.id ? (
+                        <>
+                          <Check className="w-3 h-3 text-emerald-600" />
+                          <span className="text-emerald-700">Copiada</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>{prod.reference}</span>
+                          <Copy className="w-2.5 h-2.5 opacity-60" />
+                        </>
+                      )}
+                    </button>
                   </div>
 
                   <button
-                    onClick={() => setPreviewImage(prod.imageSrc)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      triggerHaptic(10);
+                      setPreviewProduct(prod);
+                    }}
                     className="absolute bottom-3 right-3 p-2 rounded-lg bg-zinc-900/80 hover:bg-[#E30613] text-white opacity-0 group-hover:opacity-100 transition-opacity shadow-sm"
-                    title="Ampliar vista del catálogo"
+                    title="Ampliar vista del producto"
                   >
                     <Eye className="w-4 h-4" />
                   </button>
@@ -416,7 +475,10 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                       </span>
                     </div>
 
-                    <h3 className="font-montserrat font-bold text-base text-zinc-900 group-hover:text-[#E30613] transition-colors mb-2 leading-snug">
+                    <h3
+                      onClick={() => setPreviewProduct(prod)}
+                      className="font-montserrat font-bold text-base text-zinc-900 group-hover:text-[#E30613] transition-colors mb-2 leading-snug cursor-pointer"
+                    >
                       {prod.name}
                     </h3>
 
@@ -448,7 +510,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                       href={generateWhatsAppInquiry(prod)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3.5 py-2 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-[0_4px_14px_rgba(227,6,19,0.3)]"
+                      className="px-3.5 py-2 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-[0_4px_14px_rgba(227,6,19,0.25)] hover:shadow-[0_6px_20px_rgba(227,6,19,0.35)] active:scale-95"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />
                       <span>Cotizar</span>
@@ -497,10 +559,20 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
               <a
                 href="/catalogos/catalogo-impresos-americana.pdf"
                 download="Catalogo_Impresos_Americana.pdf"
+                onClick={() => handlePdfDownloadClick("maestro")}
                 className="mt-4 w-full py-2.5 px-3 rounded-lg bg-zinc-100 hover:bg-[#E30613] text-zinc-800 hover:text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 border border-zinc-200 transition-colors"
               >
-                <Download className="w-3.5 h-3.5" />
-                <span>Descargar PDF (6.6 MB)</span>
+                {downloadingPdf === "maestro" ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>¡Descargando Catálogo!</span>
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Descargar PDF (6.6 MB)</span>
+                  </>
+                )}
               </a>
             </div>
 
@@ -518,10 +590,20 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
               <a
                 href="/catalogos/esferos-y-llaveros-2024.pdf"
                 download="Catalogo_Esferos_Llaveros_2024.pdf"
+                onClick={() => handlePdfDownloadClick("esferos")}
                 className="mt-4 w-full py-2.5 px-3 rounded-lg bg-zinc-100 hover:bg-[#E30613] text-zinc-800 hover:text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 border border-zinc-200 transition-colors"
               >
-                <Download className="w-3.5 h-3.5" />
-                <span>Descargar PDF (24 MB)</span>
+                {downloadingPdf === "esferos" ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>¡Descargando Catálogo!</span>
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Descargar PDF (24 MB)</span>
+                  </>
+                )}
               </a>
             </div>
 
@@ -539,36 +621,113 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
               <a
                 href="/catalogos/productos-publicitarios.pdf"
                 download="Catalogo_Productos_Publicitarios.pdf"
+                onClick={() => handlePdfDownloadClick("especiales")}
                 className="mt-4 w-full py-2.5 px-3 rounded-lg bg-zinc-100 hover:bg-[#E30613] text-zinc-800 hover:text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 border border-zinc-200 transition-colors"
               >
-                <Download className="w-3.5 h-3.5" />
-                <span>Descargar PDF (31 MB)</span>
+                {downloadingPdf === "especiales" ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>¡Descargando Catálogo!</span>
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Descargar PDF (31 MB)</span>
+                  </>
+                )}
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Image Preview Lightbox Modal */}
-      {previewImage && (
+      {/* Rich Product Details & Lightbox Modal */}
+      {previewProduct && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/70 backdrop-blur-md cursor-pointer"
-          onClick={() => setPreviewImage(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/75 backdrop-blur-md"
+          onClick={() => setPreviewProduct(null)}
         >
-          <div className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl bg-white border border-zinc-200 shadow-2xl p-2">
-            <Image
-              src={previewImage}
-              alt="Vista detallada del catálogo"
-              width={1200}
-              height={800}
-              className="w-full h-full object-contain max-h-[85vh] rounded-xl"
-            />
-            <button
-              onClick={() => setPreviewImage(null)}
-              className="absolute top-4 right-4 bg-zinc-900/80 text-white px-3 py-1.5 rounded-full font-mono text-xs hover:bg-[#E30613] shadow-md"
-            >
-              Cerrar (ESC)
-            </button>
+          <div
+            className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white border border-zinc-200 shadow-2xl p-6 sm:p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between pb-4 border-b border-zinc-200 mb-6">
+              <div>
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#E30613] font-bold block">
+                  {previewProduct.categoryLabel} • {previewProduct.reference}
+                </span>
+                <h3 className="font-montserrat font-bold text-xl sm:text-2xl text-zinc-950">
+                  {previewProduct.name}
+                </h3>
+              </div>
+              <button
+                onClick={() => setPreviewProduct(null)}
+                className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors"
+                aria-label="Cerrar modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+              <div className="relative h-64 bg-zinc-50 rounded-2xl border border-zinc-100 overflow-hidden flex items-center justify-center p-4">
+                <Image
+                  src={previewProduct.imageSrc}
+                  alt={previewProduct.name}
+                  width={600}
+                  height={400}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <span className="text-xs font-mono text-zinc-500 uppercase block">Precio Referencial</span>
+                  <span className="font-montserrat font-black text-2xl text-zinc-950">{previewProduct.priceCOP}</span>
+                  <span className="text-xs font-mono text-zinc-500 block mt-0.5">({previewProduct.minOrder})</span>
+                </div>
+
+                <div>
+                  <span className="text-xs font-mono font-bold uppercase text-zinc-700 block mb-2">Especificaciones de Fabricación</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {previewProduct.specs.map((sp, idx) => (
+                      <span key={idx} className="text-xs font-mono px-2.5 py-1 rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200">
+                        {sp}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-zinc-100 flex flex-col gap-2">
+                  <a
+                    href={generateWhatsAppInquiry(previewProduct)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-montserrat font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all"
+                  >
+                    <MessageCircle className="w-4 h-4 fill-white" />
+                    <span>Cotizar este producto por WhatsApp</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={(e) => handleCopyReference(previewProduct.reference, previewProduct.id, e)}
+                    className="w-full py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-montserrat font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors border border-zinc-200"
+                  >
+                    {copiedRefId === previewProduct.id ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-600" />
+                        <span className="text-emerald-700">Referencia Copiada</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5 text-zinc-500" />
+                        <span>Copiar Referencia ({previewProduct.reference})</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

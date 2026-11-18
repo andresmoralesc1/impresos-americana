@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Copy, Check, X, MessageCircle, Sparkles } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
 
 type ProjectCategory = "Todos" | "Material POP" | "Gran Formato" | "Litografía" | "Merchandising";
@@ -24,6 +24,8 @@ interface ProjectItem {
 
 export function BentoGrid() {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("Todos");
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [copiedProjectId, setCopiedProjectId] = useState<string | null>(null);
 
   const categories: ProjectCategory[] = [
     "Todos",
@@ -32,6 +34,15 @@ export function BentoGrid() {
     "Litografía",
     "Merchandising",
   ];
+
+  const handleCopySpecs = (project: ProjectItem, e: React.MouseEvent) => {
+    e.stopPropagation();
+    triggerHaptic(10);
+    const text = `${project.title} (${project.categoryLabel}) - Sector: ${project.clientSector} - Materiales: ${project.specs.join(", ")}`;
+    navigator.clipboard.writeText(text);
+    setCopiedProjectId(project.id);
+    setTimeout(() => setCopiedProjectId(null), 2000);
+  };
 
   const projects: ProjectItem[] = [
     {
@@ -132,10 +143,14 @@ export function BentoGrid() {
             Fabricaciones e instalaciones reales en cadenas de supermercados, retail farmacéutico, eventos feriales y sedes corporativas en toda Colombia.
           </p>
 
-          {/* Category Filter Pills */}
+          {/* Category Filter Pills with Item Counts */}
           <div className="flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 mt-8 overflow-x-auto pb-2 sm:pb-0 px-1 -mx-4 sm:mx-0 px-4 scrollbar-none">
             {categories.map((cat) => {
               const isActive = activeCategory === cat;
+              const count = cat === "Todos"
+                ? projects.length
+                : projects.filter((p) => p.category === cat).length;
+
               return (
                 <button
                   key={cat}
@@ -143,13 +158,20 @@ export function BentoGrid() {
                     triggerHaptic(10);
                     setActiveCategory(cat);
                   }}
-                  className={`px-5 py-2.5 min-h-[44px] shrink-0 rounded-full text-xs font-montserrat font-semibold transition-all duration-300 ${
+                  className={`px-4 sm:px-5 py-2.5 min-h-[44px] shrink-0 rounded-full text-xs font-montserrat font-semibold transition-all duration-200 flex items-center gap-2 ${
                     isActive
-                      ? "bg-[#E30613] text-white shadow-[0_4px_16px_rgba(227,6,19,0.3)] scale-105"
-                      : "bg-zinc-100/80 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-200/80 border border-zinc-200"
+                      ? "bg-[#E30613] text-white shadow-[0_4px_16px_rgba(227,6,19,0.3)] scale-[1.02]"
+                      : "bg-zinc-100/90 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-200/80 border border-zinc-200"
                   }`}
                 >
-                  {cat}
+                  <span>{cat}</span>
+                  <span
+                    className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${
+                      isActive ? "bg-white/20 text-white" : "bg-zinc-200 text-zinc-600"
+                    }`}
+                  >
+                    {count}
+                  </span>
                 </button>
               );
             })}
@@ -166,6 +188,12 @@ export function BentoGrid() {
                   key={project.id}
                   project={project}
                   isLarge={isLarge}
+                  onSelect={() => {
+                    triggerHaptic(10);
+                    setSelectedProject(project);
+                  }}
+                  onCopySpecs={(e) => handleCopySpecs(project, e)}
+                  isCopied={copiedProjectId === project.id}
                 />
               );
             })}
@@ -193,6 +221,83 @@ export function BentoGrid() {
           </Link>
         </div>
       </div>
+
+      {/* Rich Project Details Modal */}
+      {selectedProject && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/75 backdrop-blur-md"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div
+            className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white border border-zinc-200 shadow-2xl p-6 sm:p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between pb-4 border-b border-zinc-200 mb-6">
+              <div>
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#E30613] font-bold block">
+                  {selectedProject.categoryLabel} • {selectedProject.clientSector}
+                </span>
+                <h3 className="font-montserrat font-bold text-xl sm:text-2xl text-zinc-950 mt-0.5">
+                  {selectedProject.title}
+                </h3>
+              </div>
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors"
+                aria-label="Cerrar modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-zinc-50 rounded-2xl p-4 border border-zinc-100">
+                <span className="text-xs font-mono font-bold uppercase text-zinc-500 block mb-2">
+                  Especificaciones Técnicas & Materiales
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.specs.map((sp, idx) => (
+                    <span key={idx} className="text-xs font-mono px-3 py-1.5 rounded-lg bg-white border border-zinc-200 text-zinc-800 font-semibold shadow-2xs">
+                      {sp}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 text-xs font-mono">
+                <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200">
+                  <span className="text-zinc-500 block mb-0.5">Sector Cliente:</span>
+                  <span className="font-bold text-zinc-900">{selectedProject.clientSector}</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200">
+                  <span className="text-zinc-500 block mb-0.5">Planta Fabricación:</span>
+                  <span className="font-bold text-zinc-900">Cali (San Nicolás)</span>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-zinc-200 flex flex-col sm:flex-row gap-3">
+                <a
+                  href={`https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20estoy%20interesado%20en%20un%20proyecto%20similar%20a%20${encodeURIComponent(selectedProject.title)}%20(${encodeURIComponent(selectedProject.categoryLabel)}).`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-montserrat font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all"
+                >
+                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <span>Cotizar por WhatsApp</span>
+                </a>
+
+                <Link
+                  href="/cotizador"
+                  className="py-3.5 px-6 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all text-center"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>Ir al Cotizador 3D</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -200,9 +305,15 @@ export function BentoGrid() {
 function BentoCard({
   project,
   isLarge,
+  onSelect,
+  onCopySpecs,
+  isCopied,
 }: {
   project: ProjectItem;
   isLarge: boolean;
+  onSelect: () => void;
+  onCopySpecs: (e: React.MouseEvent) => void;
+  isCopied: boolean;
 }) {
   const cardRef = React.useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
@@ -365,6 +476,26 @@ function BentoCard({
             {project.badge}
           </div>
         )}
+
+        {/* Copy Specs Button top-left */}
+        <button
+          type="button"
+          onClick={onCopySpecs}
+          title="Copiar ficha técnica al portapapeles"
+          className="absolute top-3 left-3 bg-white/95 backdrop-blur-md border border-zinc-200 px-2.5 py-1 rounded-md text-[10px] font-mono text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 flex items-center gap-1.5 shadow-sm transition-colors"
+        >
+          {isCopied ? (
+            <>
+              <Check className="w-3 h-3 text-emerald-600" />
+              <span className="text-emerald-700 font-bold">Copiado</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3 h-3 text-zinc-500" />
+              <span>Copiar Ficha</span>
+            </>
+          )}
+        </button>
       </div>
 
       {/* Card Content Footer */}
@@ -379,7 +510,10 @@ function BentoCard({
             </span>
           </div>
 
-          <h3 className="text-lg sm:text-xl font-montserrat font-bold text-zinc-950 group-hover:text-[#E30613] transition-colors mb-3 leading-snug">
+          <h3
+            onClick={onSelect}
+            className="text-lg sm:text-xl font-montserrat font-bold text-zinc-950 group-hover:text-[#E30613] transition-colors mb-3 leading-snug cursor-pointer"
+          >
             {project.title}
           </h3>
 
@@ -398,13 +532,14 @@ function BentoCard({
 
         {/* Bottom CTA to quote this exact product */}
         <div className="pt-3 border-t border-zinc-100 flex items-center justify-between">
-          <Link
-            href="/cotizador"
-            className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-700 hover:text-zinc-950 transition-colors"
+          <button
+            type="button"
+            onClick={onSelect}
+            className="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold uppercase tracking-wider text-zinc-700 hover:text-[#E30613] transition-colors"
           >
-            <span>Cotizar Proyecto Similar</span>
+            <span>Ver Ficha Técnica</span>
             <ArrowUpRight className="w-3.5 h-3.5 text-[#E30613] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
+          </button>
           <span className="text-[11px] text-zinc-400 font-mono">
             Producción Industrial
           </span>
