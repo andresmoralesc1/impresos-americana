@@ -524,14 +524,14 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
                 UBICACIÓN EN GOOGLE MAPS — BARRIO SAN NICOLÁS
               </h3>
               <p className="text-xs text-zinc-500 mt-0.5">
-                Calle 16 # 4-37, Cali, Valle del Cauca • Coordenadas GPS: 3.4475° N, 76.5284° W
+                Calle 16 # 4-37, Cali, Valle del Cauca • Coordenadas GPS: 3.4538° N, 76.5287° W
               </p>
             </div>
 
             {/* GPS Navigation Links (Google Maps & Waze apps) */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto">
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Calle+16+%23+4-37+San+Nicolas+Cali+Colombia"
+                href="https://www.google.com/maps/dir//impresos+americana,+Cl.+16+%234-37,+COMUNA+3,+Cali,+Valle+del+Cauca/@3.453753,-76.5287226,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8e30a66886c9fa57:0x1347601b1a7c1925!2m2!1d-76.5287226!2d3.453753"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 text-xs font-montserrat font-bold uppercase transition-all shadow-xs min-h-[44px]"
@@ -542,7 +542,7 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
               </a>
 
               <a
-                href="https://waze.com/ul?q=Calle%2016%204-37%20San%20Nicolas%20Cali"
+                href="https://waze.com/ul?ll=3.453753,-76.5287226&navigate=yes"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-montserrat font-bold uppercase transition-all shadow-2xs min-h-[44px]"
@@ -557,8 +557,8 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
           {/* Embedded Google Maps Container */}
           <div className="relative w-full h-[380px] sm:h-[460px] bg-zinc-100">
             <iframe
-              title="Ubicación de Planta Impresos Americana - Calle 16 # 4-37, San Nicolás, Cali"
-              src="https://maps.google.com/maps?q=Calle+16+%23+4-37,+San+Nicol%C3%A1s,+Cali,+Valle+del+Cauca,+Colombia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              title="Ubicación oficial de Impresos Americana en Google Maps - Calle 16 # 4-37, Cali"
+              src="https://maps.google.com/maps?q=impresos+americana,+Cl.+16+%234-37,+COMUNA+3,+Cali,+Valle+del+Cauca&t=&z=16&ie=UTF8&iwloc=B&output=embed"
               className="w-full h-full border-0 filter contrast-105"
               loading="lazy"
               allowFullScreen
