@@ -46,6 +46,33 @@ body {
   color: #FFFFFF;
 }
 
+/* Tactile Micro-Interactions & Mechanical Feedback */
+button,
+[role="button"],
+a.btn {
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+button:active:not(:disabled),
+[role="button"]:active:not([aria-disabled="true"]) {
+  transform: scale(0.975);
+}
+
+/* Smooth Accessible Focus Ring Transitions */
+:focus-visible {
+  transition: outline-offset 0.1s ease, box-shadow 0.12s ease;
+}
+
+/* Reduced motion preference respect */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Crisp architectural dot / grid background for light theme */
 .bg-faceted-pattern {
   background-color: #FFFFFF;

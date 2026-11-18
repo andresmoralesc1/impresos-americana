@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { RotateCw, Sparkles, Upload } from "lucide-react";
+import { triggerHaptic } from "@/lib/haptics";
 
 interface ThreePOPViewerProps {
   materialType?: string;
@@ -399,7 +400,10 @@ export function ThreePOPViewer({
             WebGL 360°
           </span>
           <button
-            onClick={() => setIsRotating(!isRotating)}
+            onClick={() => {
+              setIsRotating(!isRotating);
+              triggerHaptic(10);
+            }}
             className={`p-1.5 rounded-md text-[10px] font-mono border transition-colors shadow-sm ${
               isRotating
                 ? "bg-white text-zinc-900 border-zinc-300"
@@ -412,7 +416,10 @@ export function ThreePOPViewer({
 
           {/* Live Logo Customizer Trigger */}
           <button
-            onClick={() => setShowLogoInput(!showLogoInput)}
+            onClick={() => {
+              setShowLogoInput(!showLogoInput);
+              triggerHaptic(8);
+            }}
             className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-sm flex items-center gap-1.5 transition-colors"
           >
             <Upload className="w-3 h-3 text-[#E30613]" />
@@ -428,7 +435,10 @@ export function ThreePOPViewer({
           </span>
           <button
             type="button"
-            onClick={() => setLightingPreset("estudio")}
+            onClick={() => {
+              setLightingPreset("estudio");
+              triggerHaptic(8);
+            }}
             className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold transition-colors ${
               lightingPreset === "estudio"
                 ? "bg-zinc-900 text-white shadow-2xs"
@@ -440,7 +450,10 @@ export function ThreePOPViewer({
           </button>
           <button
             type="button"
-            onClick={() => setLightingPreset("retail")}
+            onClick={() => {
+              setLightingPreset("retail");
+              triggerHaptic(8);
+            }}
             className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold transition-colors ${
               lightingPreset === "retail"
                 ? "bg-[#E30613] text-white shadow-2xs"
@@ -452,7 +465,10 @@ export function ThreePOPViewer({
           </button>
           <button
             type="button"
-            onClick={() => setLightingPreset("contraste")}
+            onClick={() => {
+              setLightingPreset("contraste");
+              triggerHaptic(8);
+            }}
             className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-bold transition-colors ${
               lightingPreset === "contraste"
                 ? "bg-blue-600 text-white shadow-2xs"
@@ -529,7 +545,10 @@ export function ThreePOPViewer({
             Acabado 3D:
           </span>
           <button
-            onClick={() => setTextureTheme("kraft")}
+            onClick={() => {
+              setTextureTheme("kraft");
+              triggerHaptic(8);
+            }}
             className={`px-2 py-1 rounded text-[10px] font-mono transition-colors ${
               textureTheme === "kraft"
                 ? "bg-[#C29B6C] text-black font-bold"
@@ -539,7 +558,10 @@ export function ThreePOPViewer({
             Kraft
           </button>
           <button
-            onClick={() => setTextureTheme("blanco")}
+            onClick={() => {
+              setTextureTheme("blanco");
+              triggerHaptic(8);
+            }}
             className={`px-2 py-1 rounded text-[10px] font-mono transition-colors ${
               textureTheme === "blanco"
                 ? "bg-zinc-900 text-white font-bold"
@@ -549,7 +571,10 @@ export function ThreePOPViewer({
             Estucado
           </button>
           <button
-            onClick={() => setTextureTheme("negro")}
+            onClick={() => {
+              setTextureTheme("negro");
+              triggerHaptic(8);
+            }}
             className={`px-2 py-1 rounded text-[10px] font-mono transition-colors ${
               textureTheme === "negro"
                 ? "bg-zinc-800 text-white font-bold"
@@ -559,7 +584,10 @@ export function ThreePOPViewer({
             Dark POP
           </button>
           <button
-            onClick={() => setTextureTheme("acrilico")}
+            onClick={() => {
+              setTextureTheme("acrilico");
+              triggerHaptic(8);
+            }}
             className={`px-2 py-1 rounded text-[10px] font-mono transition-colors ${
               textureTheme === "acrilico"
                 ? "bg-cyan-100 text-cyan-800 border border-cyan-300 font-bold"

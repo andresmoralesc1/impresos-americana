@@ -12,6 +12,7 @@ import { CommandMenu } from "./CommandMenu";
 export function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [commandMenuOpen, setCommandMenuOpen] = useState(false);
   const [sampleModalOpen, setSampleModalOpen] = useState(false);
@@ -19,6 +20,10 @@ export function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      if (total > 0) {
+        setScrollProgress(Math.min(100, Math.max(0, (window.scrollY / total) * 100)));
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -157,6 +162,13 @@ export function Navbar() {
             </button>
           </div>
         </div>
+
+        {/* Minimalist Scroll Progress Hairline */}
+        <div
+          className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#E30613] via-red-500 to-[#E30613] pointer-events-none transition-[width] duration-75 ease-out opacity-90"
+          style={{ width: `${scrollProgress}%` }}
+          aria-hidden="true"
+        />
       </header>
 
       {/* Mobile Menu Overlay */}

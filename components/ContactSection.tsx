@@ -31,6 +31,8 @@ export function ContactSection() {
 
   const [submitted, setSubmitted] = useState(false);
   const [copiedAddress, setCopiedAddress] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const [isOpenNow, setIsOpenNow] = useState(true);
 
   // Real-time plant operation check (Mon-Fri 7:30 AM - 5:30 PM Colombian Time UTC-5)
@@ -61,6 +63,20 @@ export function ContactSection() {
     navigator.clipboard.writeText("Calle 16 # 4-37, Barrio San Nicolás, Cali, Valle del Cauca, Colombia");
     setCopiedAddress(true);
     setTimeout(() => setCopiedAddress(false), 2500);
+  };
+
+  const handleCopyPhone = () => {
+    triggerHaptic(10);
+    navigator.clipboard.writeText("+57 602 885 4000");
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2500);
+  };
+
+  const handleCopyEmail = () => {
+    triggerHaptic(10);
+    navigator.clipboard.writeText("cotizaciones@impresosamericana.com");
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -219,14 +235,14 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
               </div>
 
               {/* PBX and WhatsApp Card */}
-              <div className="p-5 rounded-2xl bg-white border border-zinc-200 shadow-2xs flex items-start gap-3">
-                <Phone className="w-5 h-5 text-[#E30613] shrink-0 mt-0.5" />
-                <div className="w-full">
-                  <h3 className="font-montserrat font-bold text-xs uppercase tracking-wider text-zinc-950">
-                    Central Telefónica & WhatsApp
-                  </h3>
-                  <div className="mt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div className="space-y-1">
+              <div className="p-5 rounded-2xl bg-white border border-zinc-200 shadow-2xs flex items-start justify-between gap-3 group hover:border-zinc-300 transition-colors">
+                <div className="flex items-start gap-3">
+                  <Phone className="w-5 h-5 text-[#E30613] shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="font-montserrat font-bold text-xs uppercase tracking-wider text-zinc-950">
+                      Central Telefónica & WhatsApp
+                    </h3>
+                    <div className="mt-1 space-y-1">
                       <p className="text-xs text-zinc-600">
                         PBX:{" "}
                         <a
@@ -248,33 +264,70 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
                         </a>
                       </p>
                     </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 w-fit font-semibold">
-                      Atención Rápida
-                    </span>
                   </div>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={handleCopyPhone}
+                  title="Copiar teléfono al portapapeles"
+                  className="shrink-0 p-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border border-zinc-200 transition-all flex items-center gap-1.5 text-xs font-mono"
+                >
+                  {copiedPhone ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span className="text-[10px] text-emerald-700 font-bold hidden sm:inline">Copiado</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5 text-zinc-500" />
+                      <span className="text-[10px] text-zinc-600 hidden sm:inline font-medium">Copiar</span>
+                    </>
+                  )}
+                </button>
               </div>
 
               {/* Email Card */}
-              <div className="p-5 rounded-2xl bg-white border border-zinc-200 shadow-2xs flex items-start gap-3">
-                <Mail className="w-5 h-5 text-[#E30613] shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="font-montserrat font-bold text-xs uppercase tracking-wider text-zinc-950">
-                    Correos de Departamento
-                  </h3>
-                  <p className="text-xs text-zinc-700 mt-1 font-mono">
-                    <a href="mailto:cotizaciones@impresosamericana.com" className="hover:text-[#E30613] transition-colors font-semibold">
-                      cotizaciones@impresosamericana.com
-                    </a>{" "}
-                    <span className="text-zinc-400">•</span>{" "}
-                    <a href="mailto:ventas@impresosamericana.com" className="hover:text-[#E30613] transition-colors font-semibold">
-                      ventas@impresosamericana.com
-                    </a>
-                  </p>
-                  <p className="text-[11px] text-zinc-500 mt-0.5">
-                    Recepción de órdenes de compra, artes en alta resolución y licitaciones.
-                  </p>
+              <div className="p-5 rounded-2xl bg-white border border-zinc-200 shadow-2xs flex items-start justify-between gap-3 group hover:border-zinc-300 transition-colors">
+                <div className="flex items-start gap-3">
+                  <Mail className="w-5 h-5 text-[#E30613] shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="font-montserrat font-bold text-xs uppercase tracking-wider text-zinc-950">
+                      Correos de Departamento
+                    </h3>
+                    <p className="text-xs text-zinc-700 mt-1 font-mono">
+                      <a href="mailto:cotizaciones@impresosamericana.com" className="hover:text-[#E30613] transition-colors font-semibold">
+                        cotizaciones@impresosamericana.com
+                      </a>{" "}
+                      <span className="text-zinc-400">•</span>{" "}
+                      <a href="mailto:ventas@impresosamericana.com" className="hover:text-[#E30613] transition-colors font-semibold">
+                        ventas@impresosamericana.com
+                      </a>
+                    </p>
+                    <p className="text-[11px] text-zinc-500 mt-0.5">
+                      Recepción de órdenes de compra, artes en alta resolución y licitaciones.
+                    </p>
+                  </div>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  title="Copiar correo al portapapeles"
+                  className="shrink-0 p-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border border-zinc-200 transition-all flex items-center gap-1.5 text-xs font-mono"
+                >
+                  {copiedEmail ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span className="text-[10px] text-emerald-700 font-bold hidden sm:inline">Copiado</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5 text-zinc-500" />
+                      <span className="text-[10px] text-zinc-600 hidden sm:inline font-medium">Copiar</span>
+                    </>
+                  )}
+                </button>
               </div>
 
               {/* Facilities specs */}

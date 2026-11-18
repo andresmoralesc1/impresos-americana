@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   MessageCircle,
   UploadCloud,
@@ -470,8 +471,15 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                     >
                       <Minus className="w-4 h-4" />
                     </button>
-                    <span className="w-16 text-center font-montserrat font-black text-xl text-zinc-950">
-                      {quantity}
+                    <span className="w-16 text-center font-montserrat font-black text-xl text-zinc-950 overflow-hidden inline-flex items-center justify-center">
+                      <motion.span
+                        key={quantity}
+                        initial={{ y: -6, opacity: 0.6, scale: 0.95 }}
+                        animate={{ y: 0, opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                      >
+                        {quantity}
+                      </motion.span>
                     </span>
                     <button
                       type="button"
@@ -601,9 +609,15 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                 • <strong className="text-zinc-900">Acabados:</strong> {selectedFinishNames || "Estándar"} <br />
                 • <strong className="text-zinc-900">Subtotal:</strong> ${totalSubtotalCOP.toLocaleString("es-CO")} COP <br />
                 • <strong className="text-zinc-900">Total con IVA (19% DIAN):</strong>{" "}
-                <span className="text-zinc-950 font-bold text-sm bg-zinc-100 px-2 py-0.5 rounded-md border border-zinc-200">
+                <motion.span
+                  key={totalConIVACOP}
+                  initial={{ scale: 1.08 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="inline-block text-zinc-950 font-bold text-sm bg-zinc-100 px-2 py-0.5 rounded-md border border-zinc-200"
+                >
                   ${totalConIVACOP.toLocaleString("es-CO")} COP
-                </span>
+                </motion.span>
               </p>
               <div className="mt-3 flex items-center gap-3 text-xs text-zinc-500 font-medium">
                 <span className="flex items-center gap-1 text-emerald-700 font-semibold">

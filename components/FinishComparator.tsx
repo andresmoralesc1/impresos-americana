@@ -9,10 +9,12 @@ export function FinishComparator() {
   const [activeItem, setActiveItem] = useState<"pop" | "catalogo" | "empaque">("pop");
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef<boolean>(false);
+  const [isDraggingActive, setIsDraggingActive] = useState<boolean>(false);
   const lastDetentCrossed = useRef<number>(50);
 
   const handlePointerDown = () => {
     isDragging.current = true;
+    setIsDraggingActive(true);
     triggerHaptic(10);
   };
 
@@ -38,6 +40,7 @@ export function FinishComparator() {
 
   const handlePointerUp = () => {
     isDragging.current = false;
+    setIsDraggingActive(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -205,12 +208,25 @@ export function FinishComparator() {
               </div>
             </div>
 
-            {/* Draggable Divider Line & Knob */}
+            {/* Draggable Divider Line & Knob with Micro-Interaction Tooltip */}
             <div
-              className="absolute top-0 bottom-0 w-0.5 bg-[#E30613] z-30 shadow-md"
+              className="absolute top-0 bottom-0 w-0.5 bg-[#E30613] z-30 shadow-md transition-all pointer-events-none"
               style={{ left: `${sliderPos}%` }}
             >
-              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-[#E30613] text-white border-2 border-white shadow-lg flex items-center justify-center">
+              {/* Floating Percentage Indicator while dragging or hovering */}
+              <div
+                className={`absolute top-4 -translate-x-1/2 px-2.5 py-1 rounded-full bg-zinc-950/90 text-white font-mono text-[10px] font-bold shadow-lg transition-opacity duration-200 whitespace-nowrap backdrop-blur-sm border border-white/20 ${
+                  isDraggingActive ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                }`}
+              >
+                {sliderPos}% Mate • {100 - sliderPos}% UV
+              </div>
+
+              <div
+                className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-[#E30613] text-white border-2 border-white shadow-lg flex items-center justify-center transition-transform duration-150 ${
+                  isDraggingActive ? "scale-115 shadow-red-500/40 shadow-xl" : "hover:scale-110 shadow-md"
+                }`}
+              >
                 <SlidersHorizontal className="w-4 h-4" />
               </div>
             </div>

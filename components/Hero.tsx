@@ -256,28 +256,38 @@ export function Hero() {
                     <span className="text-[#E30613] font-bold">{activeSubstrateIdx + 1} / {substrates.length}</span>
                   </div>
                   <div className="grid grid-cols-3 gap-2">
-                    {substrates.map((sub, sIdx) => (
-                      <button
-                        key={sub.id}
-                        type="button"
-                        onClick={() => {
-                          setActiveSubstrateIdx(sIdx);
-                          triggerHaptic(8);
-                        }}
-                        className={`relative p-2 rounded-xl border text-left transition-all ${
-                          activeSubstrateIdx === sIdx
-                            ? "border-[#E30613] bg-red-50/60 ring-2 ring-red-500/25 shadow-xs"
-                            : "border-zinc-200 bg-zinc-50 hover:bg-zinc-100 hover:border-zinc-300"
-                        }`}
-                      >
-                        <span className="block text-[11px] font-montserrat font-bold text-zinc-950 truncate">
-                          {sub.name}
-                        </span>
-                        <span className="block text-[9px] font-mono text-zinc-500 truncate mt-0.5">
-                          {sub.badge}
-                        </span>
-                      </button>
-                    ))}
+                    {substrates.map((sub, sIdx) => {
+                      const isActive = activeSubstrateIdx === sIdx;
+                      return (
+                        <button
+                          key={sub.id}
+                          type="button"
+                          onClick={() => {
+                            setActiveSubstrateIdx(sIdx);
+                            triggerHaptic(8);
+                          }}
+                          className={`relative p-2 rounded-xl border text-left transition-all ${
+                            isActive
+                              ? "border-[#E30613] bg-red-50/70 shadow-xs"
+                              : "border-zinc-200 bg-zinc-50 hover:bg-zinc-100 hover:border-zinc-300"
+                          }`}
+                        >
+                          {isActive && (
+                            <motion.div
+                              layoutId="activeSubstrateRing"
+                              className="absolute inset-0 rounded-xl ring-2 ring-[#E30613]/30 pointer-events-none"
+                              transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                            />
+                          )}
+                          <span className="block text-[11px] font-montserrat font-bold text-zinc-950 truncate">
+                            {sub.name}
+                          </span>
+                          <span className="block text-[9px] font-mono text-zinc-500 truncate mt-0.5">
+                            {sub.badge}
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
