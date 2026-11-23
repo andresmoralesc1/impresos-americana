@@ -22,17 +22,22 @@ export default function Home() {
       {/* 1. Hero Principal con Showcase de Fotos Reales */}
       <Hero />
 
-      {/* 2. Franja de Confianza / Sectores Atendidos (Minimalist Trust Strip) */}
-      <div className="border-t border-b border-zinc-200/80 bg-zinc-50/80 py-4 overflow-hidden">
+      {/* 2. Franja de Confianza / Sectores Atendidos (Modern Trust Strip) */}
+      <div className="border-t border-b border-zinc-200/80 bg-zinc-50/70 py-4 sm:py-5 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-500 font-bold shrink-0">
-              PRODUCCIÓN DIRECTA PARA
-            </span>
-            <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-6 gap-y-2 text-xs font-mono text-zinc-700 font-medium">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-4 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200/80 text-[10px] font-mono font-bold text-red-800 shrink-0 shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E30613] animate-pulse" />
+              <span>PRODUCCIÓN DIRECTA PARA</span>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center lg:justify-end gap-2 sm:gap-2.5">
               {sectors.map((sector, idx) => (
-                <span key={idx} className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E30613]" />
+                <span
+                  key={idx}
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white border border-zinc-200/90 text-xs font-montserrat font-semibold text-zinc-800 shadow-2xs hover:border-[#E30613]/50 hover:text-zinc-950 transition-all duration-200 whitespace-nowrap"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E30613] shrink-0" />
                   <span>{sector}</span>
                 </span>
               ))}
