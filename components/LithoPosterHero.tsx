@@ -265,81 +265,85 @@ export function LithoPosterHero() {
       {/* ============================================================== */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center">
         
-        {/* Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-xl border border-zinc-200/90 shadow-xs mb-6 sm:mb-8 ring-1 ring-zinc-950/5">
-          <span className="w-2 h-2 rounded-full bg-[#E30613] animate-pulse" />
-          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-800">
-            Planta de Litografía &amp; Material POP • San Nicolás, Cali
-          </span>
-        </div>
-
-        {/* Main Headline */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-montserrat font-black uppercase tracking-tight text-zinc-950 leading-[1.06] mb-6">
-          Ingeniería en <span className="text-[#E30613]">Material POP</span>, Empaques &amp; Litografía
-        </h1>
-
-        {/* Value Proposition Description */}
-        <p className="text-sm sm:text-lg lg:text-xl text-zinc-700 max-w-3xl mx-auto leading-relaxed font-normal mb-8 sm:mb-10">
-          Fabricación industrial de exhibidores de piso reforzados, cajas rígidas, catálogos en offset y gran formato UV en Cali con despacho coordinado a toda Colombia.
-        </p>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto mb-10 sm:mb-12">
-          <Link
-            href="/cotizador"
-            onClick={() => triggerHaptic(10)}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-[#E30613] hover:bg-[#c50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-lg shadow-red-500/25 transition-all transform hover:scale-[1.02] active:scale-95"
-          >
-            <Sparkles className="w-4 h-4" />
-            <span>Cotizar Proyecto en 3D</span>
-          </Link>
-
-          <a
-            href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20y%20cotizaci%C3%B3n%20para%20un%20proyecto."
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => triggerHaptic(8)}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-zinc-950 hover:bg-zinc-800 text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-md transition-all active:scale-95"
-          >
-            <MessageCircle className="w-4 h-4 text-[#25D366]" />
-            <span>Hablar por WhatsApp</span>
-          </a>
-
-          <Link
-            href="/proyectos"
-            onClick={() => triggerHaptic(8)}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white/90 hover:bg-white text-zinc-800 border border-zinc-200 font-montserrat font-semibold text-xs uppercase tracking-wider shadow-xs transition-all"
-          >
-            <span>Ver Proyectos</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#E30613]" />
-          </Link>
-        </div>
-
-        {/* Capabilities Trust Bar */}
-        <div className="p-3 sm:p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-zinc-200/80 shadow-2xs flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-zinc-700">
-          <div className="flex items-center gap-2 font-mono text-[11px] font-semibold">
-            <Cpu className="w-3.5 h-3.5 text-[#E30613]" />
-            <span>Offset Heidelberg Speedmaster</span>
+        {/* Main Central Presentation Card with Frosted Backdrop for Maximum Legibility */}
+        <div className="w-full bg-white/75 backdrop-blur-xl rounded-3xl border border-white/80 p-6 sm:p-10 md:p-12 shadow-xl shadow-zinc-950/5 ring-1 ring-zinc-900/5 flex flex-col items-center">
+          
+          {/* Eyebrow Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 text-white shadow-xs mb-5 sm:mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#E30613] animate-pulse" />
+            <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider">
+              Planta Litográfica &amp; Material POP • San Nicolás, Cali
+            </span>
           </div>
-          <span className="text-zinc-300 hidden sm:inline">•</span>
-          <div className="flex items-center gap-2 font-mono text-[11px] font-semibold">
-            <Layers className="w-3.5 h-3.5 text-[#E30613]" />
-            <span>Corte Digital Zünd &amp; Láser CNC</span>
+
+          {/* Main Headline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-montserrat font-black uppercase tracking-tight text-zinc-950 leading-[1.08] mb-5">
+            Ingeniería en <span className="text-[#E30613]">Material POP</span>, Empaques &amp; Litografía
+          </h1>
+
+          {/* Value Proposition Description */}
+          <p className="text-sm sm:text-base lg:text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed font-normal mb-8">
+            Diseño estructural y fabricación industrial de exhibidores de piso reforzados, cajas rígidas, catálogos offset de alta gama y gran formato UV en Cali, con despacho coordinado a toda Colombia.
+          </p>
+
+          {/* Action Buttons (CTAs) */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto mb-8">
+            <Link
+              href="/cotizador"
+              onClick={() => triggerHaptic(10)}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#E30613] hover:bg-[#c50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-lg shadow-red-500/25 transition-all transform hover:scale-[1.02] active:scale-95"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>Cotizar Proyecto en 3D</span>
+            </Link>
+
+            <a
+              href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20y%20cotizaci%C3%B3n%20para%20un%20proyecto."
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => triggerHaptic(8)}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-md transition-all active:scale-95"
+            >
+              <MessageCircle className="w-4 h-4 text-[#25D366]" />
+              <span>Hablar por WhatsApp</span>
+            </a>
+
+            <Link
+              href="/proyectos"
+              onClick={() => triggerHaptic(8)}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200/90 font-montserrat font-semibold text-xs uppercase tracking-wider shadow-2xs transition-all"
+            >
+              <span>Ver Proyectos</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#E30613]" />
+            </Link>
           </div>
-          <span className="text-zinc-300 hidden sm:inline">•</span>
-          <div className="flex items-center gap-2 font-mono text-[11px] font-semibold">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#E30613]" />
-            <span>Carga 45 kg por Bandeja</span>
-          </div>
-          <span className="text-zinc-300 hidden sm:inline">•</span>
-          <div className="flex items-center gap-2 font-mono text-[11px] font-semibold">
-            <Truck className="w-3.5 h-3.5 text-[#E30613]" />
-            <span>Despacho a Toda Colombia</span>
+
+          {/* Capabilities Trust Bar */}
+          <div className="w-full pt-6 border-t border-zinc-200/60 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-zinc-600">
+            <div className="flex items-center gap-2 font-mono text-[11px] font-medium">
+              <Cpu className="w-3.5 h-3.5 text-[#E30613]" />
+              <span>Heidelberg Speedmaster</span>
+            </div>
+            <span className="text-zinc-300 hidden sm:inline">•</span>
+            <div className="flex items-center gap-2 font-mono text-[11px] font-medium">
+              <Layers className="w-3.5 h-3.5 text-[#E30613]" />
+              <span>Corte Digital Zünd &amp; Láser CNC</span>
+            </div>
+            <span className="text-zinc-300 hidden sm:inline">•</span>
+            <div className="flex items-center gap-2 font-mono text-[11px] font-medium">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#E30613]" />
+              <span>Carga 45 kg por Bandeja</span>
+            </div>
+            <span className="text-zinc-300 hidden sm:inline">•</span>
+            <div className="flex items-center gap-2 font-mono text-[11px] font-medium">
+              <Truck className="w-3.5 h-3.5 text-[#E30613]" />
+              <span>Despacho a Toda Colombia</span>
+            </div>
           </div>
         </div>
 
         {/* Interactive hint */}
-        <p className="text-[11px] text-zinc-500 font-mono mt-4">
+        <p className="text-[11px] text-zinc-400 font-mono mt-4">
           Toca o haz clic sobre el fondo para lanzar tipos móviles de imprenta
         </p>
       </div>
