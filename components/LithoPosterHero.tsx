@@ -212,7 +212,7 @@ export function LithoPosterHero() {
       className="relative w-full overflow-hidden bg-gradient-to-b from-slate-50 via-white to-zinc-50 border-b border-zinc-200/80 min-h-[640px] lg:min-h-[720px] flex items-center justify-center py-16 sm:py-20 select-none"
     >
       {/* ============================================================== */}
-      {/* 1. CONTINUOUS STREAMING TYPOGRAPHY BACKGROUND (NO HUMAN)      */}
+      {/* 1. CONTINUOUS STREAMING TYPOGRAPHY BACKGROUND (LIGHT PAPER)   */}
       {/* ============================================================== */}
       <div
         className="absolute inset-[-20%] pointer-events-none flex flex-col justify-center gap-4 sm:gap-6 opacity-[0.14] rotate-[-5deg] overflow-hidden z-0"
@@ -253,37 +253,41 @@ export function LithoPosterHero() {
         ))}
       </div>
 
-      {/* Subtle Specular Ambient Highlights */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-64 bg-red-500/5 rounded-full blur-[140px] pointer-events-none z-1" />
+      {/* Subtle Specular Ambient Highlights for Depth */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-64 bg-red-500/5 rounded-full blur-[140px] pointer-events-none z-1" />
       <div className="absolute bottom-0 right-10 w-96 h-96 bg-slate-300/20 rounded-full blur-[140px] pointer-events-none z-1" />
 
-      {/* Subtle Grid dots overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:32px_32px] opacity-20 pointer-events-none z-1" />
+      {/* Subtle Technical Grid Dots overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:32px_32px] opacity-25 pointer-events-none z-1" />
 
       {/* ============================================================== */}
-      {/* 2. FOREGROUND CONTENT WRITTEN DIRECTLY OVER THE STREAM         */}
+      {/* 2. FOREGROUND CONTENT (LOCALIZED & HIGH-CONTRAST LIGHT)        */}
       {/* ============================================================== */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center">
         
-        {/* Main Central Presentation Card with Frosted Backdrop for Maximum Legibility */}
-        <div className="w-full bg-white/75 backdrop-blur-xl rounded-3xl border border-white/80 p-6 sm:p-10 md:p-12 shadow-xl shadow-zinc-950/5 ring-1 ring-zinc-900/5 flex flex-col items-center">
+        {/* Main Central Presentation Card with Frosted Backdrop */}
+        <div className="w-full bg-white/80 backdrop-blur-xl rounded-3xl border border-zinc-200/90 p-6 sm:p-10 md:p-12 shadow-xl shadow-zinc-950/5 ring-1 ring-zinc-950/5 flex flex-col items-center">
           
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 text-white shadow-xs mb-5 sm:mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#E30613] animate-pulse" />
-            <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider">
-              Planta Litográfica &amp; Material POP • San Nicolás, Cali
+          {/* Eyebrow Badge: 100% Localized (Zero 'planta litografica', Zero 'material pop') */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-zinc-900 text-white shadow-xs mb-5 sm:mb-6 border border-zinc-800">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[10px] sm:text-[11px] font-mono font-medium text-zinc-300">
+              PLANTA DIRECTA EN CALI
+            </span>
+            <span className="text-zinc-600">•</span>
+            <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-red-400">
+              SAN NICOLÁS
             </span>
           </div>
 
-          {/* Main Headline */}
+          {/* Main Headline: Clean, Punchy & High Contrast */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-montserrat font-black uppercase tracking-tight text-zinc-950 leading-[1.08] mb-5">
-            Ingeniería en <span className="text-[#E30613]">Material POP</span>, Empaques &amp; Litografía
+            Ingeniería Gráfica &amp; <span className="text-[#E30613]">Producción Industrial</span>
           </h1>
 
           {/* Value Proposition Description */}
-          <p className="text-sm sm:text-base lg:text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed font-normal mb-8">
-            Diseño estructural y fabricación industrial de exhibidores de piso reforzados, cajas rígidas, catálogos offset de alta gama y gran formato UV en Cali, con despacho coordinado a toda Colombia.
+          <p className="text-sm sm:text-base lg:text-lg text-zinc-700 max-w-2xl mx-auto leading-relaxed font-normal mb-8">
+            Fabricación directa en San Nicolás, Cali: exhibidores de piso reforzados, cajas rígidas, catálogos en offset y gran formato UV con despacho coordinado a toda Colombia sin intermediarios.
           </p>
 
           {/* Action Buttons (CTAs) */}
@@ -298,7 +302,7 @@ export function LithoPosterHero() {
             </Link>
 
             <a
-              href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20y%20cotizaci%C3%B3n%20para%20un%20proyecto."
+              href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20directa%20en%20planta%20para%20un%20proyecto."
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => triggerHaptic(8)}
@@ -311,7 +315,7 @@ export function LithoPosterHero() {
             <Link
               href="/proyectos"
               onClick={() => triggerHaptic(8)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200/90 font-montserrat font-semibold text-xs uppercase tracking-wider shadow-2xs transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200/90 font-montserrat font-semibold text-xs uppercase tracking-wider shadow-2xs transition-all"
             >
               <span>Ver Proyectos</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#E30613]" />
@@ -319,7 +323,7 @@ export function LithoPosterHero() {
           </div>
 
           {/* Capabilities Trust Bar */}
-          <div className="w-full pt-6 border-t border-zinc-200/60 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-zinc-600">
+          <div className="w-full pt-6 border-t border-zinc-200/80 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-zinc-700">
             <div className="flex items-center gap-2 font-mono text-[11px] font-medium">
               <Cpu className="w-3.5 h-3.5 text-[#E30613]" />
               <span>Heidelberg Speedmaster</span>
