@@ -134,10 +134,17 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
       actionUrl: "/contacto",
     },
     {
-      id: "accion-guia-admin",
-      title: "Manual del Cliente: Guía del Editor de Productos CMS",
+      id: "accion-admin",
+      title: "Panel Administrativo Sanity Studio (/admin)",
       category: "Acción",
-      description: "Instructivo paso a paso con capturas para subir, editar y eliminar productos",
+      description: "Acceso al panel CMS para gestionar productos, tarifas y PDFs",
+      actionUrl: "/admin",
+    },
+    {
+      id: "accion-guia-admin",
+      title: "Manual de Administración del Catálogo",
+      category: "Acción",
+      description: "Guía paso a paso para subir productos, modificar precios y fotos",
       actionUrl: "/guia-admin",
     },
     {

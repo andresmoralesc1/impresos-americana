@@ -21,7 +21,7 @@ export function MobileStickyBar() {
   return (
     <aside
       aria-label="Acciones rápidas de cotización móvil"
-      className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white/95 backdrop-blur-lg border-t border-zinc-200 px-4 py-3 shadow-[0_-4px_25px_rgba(0,0,0,0.06)] transition-all duration-300 pb-[max(12px,env(safe-area-inset-bottom))]"
+      className="fixed bottom-0 left-0 right-0 z-30 lg:hidden bg-white/95 backdrop-blur-lg border-t border-zinc-200 px-4 py-3 shadow-[0_-4px_25px_rgba(0,0,0,0.06)] transition-all duration-300 pb-[max(12px,env(safe-area-inset-bottom))]"
     >
       <div className="flex items-center gap-3 max-w-md mx-auto">
         {/* Direct WhatsApp Callout */}

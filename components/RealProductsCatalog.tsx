@@ -6,10 +6,24 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Download, MessageCircle, Eye, Search, X, Copy, Check } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
 import { client, isSanityConfigured } from "@/sanity/lib/client";
-import { PRODUCTS_QUERY, CATEGORIES_QUERY } from "@/sanity/lib/queries";
+import { PRODUCTS_QUERY, CATEGORIES_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
 
 type CatalogCategory = string;
+
+interface SiteSettingsData {
+  whatsappNumber?: string;
+  contactEmail?: string;
+  address?: string;
+  businessHours?: string;
+  announcementActive?: boolean;
+  announcementBadge?: string;
+  announcementText?: string;
+  announcementLink?: string;
+  catalogPdfMaestroUrl?: string;
+  catalogPdfEsferosUrl?: string;
+  catalogPdfEspecialesUrl?: string;
+}
 
 interface ProductCatalogItem {
   id: string;
@@ -19,9 +33,21 @@ interface ProductCatalogItem {
   categoryLabel: string;
   priceCOP: string;
   imageSrc: string;
+  gallery?: string[];
   specs: string[];
   minOrder: string;
 }
+
+const formatPriceCOP = (price?: string) => {
+  if (!price) return "$0 COP";
+  const trimmed = price.trim();
+  if (trimmed.includes("$") || trimmed.toUpperCase().includes("COP")) return trimmed;
+  const num = Number(trimmed.replace(/[^0-9]/g, ""));
+  if (!isNaN(num) && num > 0) {
+    return `$${new Intl.NumberFormat("es-CO").format(num)} COP`;
+  }
+  return trimmed;
+};
 
 const defaultCategories = [
   { id: "todos", label: "Todos los Productos" },
@@ -159,11 +185,13 @@ export function RealProductsCatalog() {
   const [selectedCategory, setSelectedCategory] = useState<CatalogCategory>("todos");
   const [searchQuery, setSearchQuery] = useState("");
   const [previewProduct, setPreviewProduct] = useState<ProductCatalogItem | null>(null);
+  const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
   const [copiedRefId, setCopiedRefId] = useState<string | null>(null);
   const [downloadingPdf, setDownloadingPdf] = useState<string | null>(null);
   const [categories, setCategories] = useState(defaultCategories);
   const [productsList, setProductsList] = useState<ProductCatalogItem[]>(defaultProducts);
   const [isFromSanity, setIsFromSanity] = useState(false);
+  const [siteSettings, setSiteSettings] = useState<SiteSettingsData | null>(null);
 
   const handleCopyReference = (refText: string, id: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -181,6 +209,7 @@ export function RealProductsCatalog() {
 
   useEffect(() => {
     if (!previewProduct) return;
+    setActiveModalImage(previewProduct.imageSrc);
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setPreviewProduct(null);
     };
@@ -209,13 +238,19 @@ export function RealProductsCatalog() {
           categoryLabel?: string;
           priceCOP?: string;
           image?: Parameters<typeof urlForImage>[0];
+          gallery?: Array<Parameters<typeof urlForImage>[0]>;
           specs?: string[];
           minOrder?: string;
         }>
       >(PRODUCTS_QUERY),
+      client.fetch<SiteSettingsData>(SITE_SETTINGS_QUERY),
     ])
-      .then(([sanityCategories, sanityProducts]) => {
+      .then(([sanityCategories, sanityProducts, sanitySettings]) => {
         if (!isMounted) return;
+
+        if (sanitySettings) {
+          setSiteSettings(sanitySettings);
+        }
 
         if (sanityProducts && sanityProducts.length > 0) {
           // Dynamic category detection
@@ -242,14 +277,21 @@ export function RealProductsCatalog() {
 
           const mapped: ProductCatalogItem[] = sanityProducts.map((p) => {
             const imgUrl = p.image ? urlForImage(p.image)?.width(800).url() : null;
+            const galleryUrls = Array.isArray(p.gallery)
+              ? p.gallery
+                  .map((g) => (g ? urlForImage(g)?.width(800).url() : null))
+                  .filter((url): url is string => Boolean(url))
+              : [];
+
             return {
               id: p.id || p.slug || Math.random().toString(),
               name: p.name,
               reference: p.reference || "Ref. Oficial",
               category: p.category || "termos",
               categoryLabel: p.categoryLabel || "General",
-              priceCOP: p.priceCOP || "$0 COP",
+              priceCOP: formatPriceCOP(p.priceCOP),
               imageSrc: imgUrl || "/products/termo-temperatura.jpg",
+              gallery: galleryUrls.length > 0 ? galleryUrls : undefined,
               specs: Array.isArray(p.specs) ? p.specs : [],
               minOrder: p.minOrder || "Mínimo 25 uds",
             };
@@ -280,6 +322,7 @@ export function RealProductsCatalog() {
   });
 
   const generateWhatsAppInquiry = (prod: ProductCatalogItem) => {
+    const rawNumber = siteSettings?.whatsappNumber?.replace(/[^0-9]/g, "") || "573163200181";
     const text = `*CONSULTA DE PRODUCTO - IMPRESOS AMERICANA*
 ---------------------------------------
 • *Artículo:* ${prod.name}
@@ -288,7 +331,7 @@ export function RealProductsCatalog() {
 • *Tiraje Mínimo:* ${prod.minOrder}
 ---------------------------------------
 _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar disponibilidad de colores y tiempos de despacho con mi logo impreso.`;
-    return `https://wa.me/573163200181?text=${encodeURIComponent(text)}`;
+    return `https://wa.me/${rawNumber}?text=${encodeURIComponent(text)}`;
   };
 
   return (
@@ -298,6 +341,29 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
+        {siteSettings?.announcementActive && siteSettings?.announcementText && (
+          <div className="mb-10 p-4 sm:p-5 rounded-2xl bg-zinc-950 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl border border-red-500/30">
+            <div className="flex items-center gap-3">
+              <span className="px-2.5 py-1 rounded-md bg-[#E30613] text-white font-mono font-bold text-[10px] tracking-wider uppercase shrink-0">
+                {siteSettings.announcementBadge || "AVISO"}
+              </span>
+              <p className="text-xs sm:text-sm font-medium text-zinc-200">
+                {siteSettings.announcementText}
+              </p>
+            </div>
+            {siteSettings.announcementLink && (
+              <a
+                href={siteSettings.announcementLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-montserrat font-bold whitespace-nowrap transition-colors"
+              >
+                Ver más →
+              </a>
+            )}
+          </div>
+        )}
+
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E30613] font-bold block mb-2">
             CATÁLOGO OFICIAL DE ARTÍCULOS PUBLICITARIOS
@@ -326,7 +392,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Buscar por nombre, referencia (ej. termo, libreta)..."
-                className="w-full pl-11 pr-10 py-2.5 text-xs sm:text-sm bg-zinc-50 border border-zinc-200 rounded-full text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-[#E30613] focus:ring-1 focus:ring-[#E30613] transition-all font-montserrat shadow-sm"
+                className="w-full pl-11 pr-10 py-2.5 text-base sm:text-sm bg-zinc-50 border border-zinc-200 rounded-full text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-[#E30613] focus:ring-1 focus:ring-[#E30613] transition-all font-montserrat shadow-sm"
               />
               {searchQuery && (
                 <button
@@ -557,7 +623,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                 </p>
               </div>
               <a
-                href="/catalogos/catalogo-impresos-americana.pdf"
+                href={siteSettings?.catalogPdfMaestroUrl || "/catalogos/catalogo-impresos-americana.pdf"}
                 download="Catalogo_Impresos_Americana.pdf"
                 onClick={() => handlePdfDownloadClick("maestro")}
                 className="mt-4 w-full py-2.5 px-3 rounded-lg bg-zinc-100 hover:bg-[#E30613] text-zinc-800 hover:text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 border border-zinc-200 transition-colors"
@@ -588,7 +654,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                 </p>
               </div>
               <a
-                href="/catalogos/esferos-y-llaveros-2024.pdf"
+                href={siteSettings?.catalogPdfEsferosUrl || "/catalogos/esferos-y-llaveros-2024.pdf"}
                 download="Catalogo_Esferos_Llaveros_2024.pdf"
                 onClick={() => handlePdfDownloadClick("esferos")}
                 className="mt-4 w-full py-2.5 px-3 rounded-lg bg-zinc-100 hover:bg-[#E30613] text-zinc-800 hover:text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 border border-zinc-200 transition-colors"
@@ -619,7 +685,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
                 </p>
               </div>
               <a
-                href="/catalogos/productos-publicitarios.pdf"
+                href={siteSettings?.catalogPdfEspecialesUrl || "/catalogos/productos-publicitarios.pdf"}
                 download="Catalogo_Productos_Publicitarios.pdf"
                 onClick={() => handlePdfDownloadClick("especiales")}
                 className="mt-4 w-full py-2.5 px-3 rounded-lg bg-zinc-100 hover:bg-[#E30613] text-zinc-800 hover:text-white font-montserrat font-semibold text-xs flex items-center justify-center gap-2 border border-zinc-200 transition-colors"
@@ -644,11 +710,11 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
       {/* Rich Product Details & Lightbox Modal */}
       {previewProduct && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/75 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-zinc-950/75 backdrop-blur-md"
           onClick={() => setPreviewProduct(null)}
         >
           <div
-            className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white border border-zinc-200 shadow-2xl p-6 sm:p-8"
+            className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white border border-zinc-200 shadow-2xl p-5 sm:p-8"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between pb-4 border-b border-zinc-200 mb-6">
@@ -662,7 +728,7 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
               </div>
               <button
                 onClick={() => setPreviewProduct(null)}
-                className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors"
+                className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors"
                 aria-label="Cerrar modal"
               >
                 <X className="w-5 h-5" />
@@ -670,14 +736,55 @@ _Visto en el catálogo web oficial de Impresos Americana._ Deseo consultar dispo
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-              <div className="relative h-64 bg-zinc-50 rounded-2xl border border-zinc-100 overflow-hidden flex items-center justify-center p-4">
-                <Image
-                  src={previewProduct.imageSrc}
-                  alt={previewProduct.name}
-                  width={600}
-                  height={400}
-                  className="w-full h-full object-contain"
-                />
+              <div className="space-y-3">
+                <div className="relative h-64 bg-zinc-50 rounded-2xl border border-zinc-100 overflow-hidden flex items-center justify-center p-4">
+                  <Image
+                    src={activeModalImage || previewProduct.imageSrc}
+                    alt={previewProduct.name}
+                    width={600}
+                    height={400}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                {previewProduct.gallery && previewProduct.gallery.length > 0 && (
+                  <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                    <button
+                      type="button"
+                      onClick={() => setActiveModalImage(previewProduct.imageSrc)}
+                      className={`relative w-12 h-12 rounded-lg border overflow-hidden shrink-0 transition-all ${
+                        (activeModalImage || previewProduct.imageSrc) === previewProduct.imageSrc
+                          ? "border-[#E30613] ring-2 ring-[#E30613]/20"
+                          : "border-zinc-200 opacity-60 hover:opacity-100"
+                      }`}
+                    >
+                      <Image
+                        src={previewProduct.imageSrc}
+                        alt="Foto principal"
+                        fill
+                        className="object-cover"
+                      />
+                    </button>
+                    {previewProduct.gallery.map((imgUrl, gIdx) => (
+                      <button
+                        key={gIdx}
+                        type="button"
+                        onClick={() => setActiveModalImage(imgUrl)}
+                        className={`relative w-12 h-12 rounded-lg border overflow-hidden shrink-0 transition-all ${
+                          activeModalImage === imgUrl
+                            ? "border-[#E30613] ring-2 ring-[#E30613]/20"
+                            : "border-zinc-200 opacity-60 hover:opacity-100"
+                        }`}
+                      >
+                        <Image
+                          src={imgUrl}
+                          alt={`Foto galería ${gIdx + 1}`}
+                          fill
+                          className="object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="space-y-4">

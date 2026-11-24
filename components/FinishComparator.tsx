@@ -135,8 +135,8 @@ export function FinishComparator() {
             className="relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden border border-zinc-200 shadow-xl select-none cursor-ew-resize touch-none bg-white focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2"
           >
             {/* Background Layer: Right Side - Barniz UV Sectorizado (High Gloss & Reflective Shine) */}
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-zinc-50 to-white flex items-center justify-center p-8">
-              <div className="relative w-full max-w-md h-52 sm:h-64 rounded-2xl bg-white border border-zinc-200 p-6 flex flex-col justify-between shadow-xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-zinc-50 to-white flex items-center justify-center p-4 sm:p-8">
+              <div className="relative w-full max-w-md h-52 sm:h-64 rounded-2xl bg-white border border-zinc-200 p-4 sm:p-6 flex flex-col justify-between shadow-xl">
                 {/* Shiny UV Gloss Simulation Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/80 to-transparent rounded-2xl pointer-events-none" />
 
@@ -173,10 +173,10 @@ export function FinishComparator() {
 
             {/* Foreground Layer (Clipped): Left Side - Laminado Mate Suave */}
             <div
-              className="absolute inset-0 bg-gradient-to-br from-zinc-200/70 via-zinc-100 to-zinc-50 flex items-center justify-center p-8 overflow-hidden pointer-events-none"
+              className="absolute inset-0 bg-gradient-to-br from-zinc-200/70 via-zinc-100 to-zinc-50 flex items-center justify-center p-4 sm:p-8 overflow-hidden pointer-events-none"
               style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
             >
-              <div className="relative w-full max-w-md h-52 sm:h-64 rounded-2xl bg-zinc-50 border border-zinc-200 p-6 flex flex-col justify-between shadow-sm">
+              <div className="relative w-full max-w-md h-52 sm:h-64 rounded-2xl bg-zinc-50 border border-zinc-200 p-4 sm:p-6 flex flex-col justify-between shadow-sm">
                 <div className="flex items-center justify-between">
                   <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center text-white font-montserrat font-black">
                     iA

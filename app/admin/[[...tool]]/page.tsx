@@ -42,89 +42,105 @@ export default function AdminPage() {
       <div className="max-w-4xl w-full space-y-8">
         {/* Brand Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-xs font-mono font-bold text-[#E30613]">
-            <span className="w-2 h-2 rounded-full bg-[#E30613] animate-pulse" />
-            PANEL DE ADMINISTRACIÓN DE CATÁLOGO
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-xs font-mono font-bold text-[#E30613]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E30613]" />
+            PANEL DE CATÁLOGO
           </div>
           <h1 className="text-3xl sm:text-4xl font-montserrat font-black uppercase tracking-tight text-zinc-950">
-            EDITOR DE PRODUCTOS & CMS
+            Administración del Catálogo
           </h1>
           <p className="text-zinc-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Desde este panel administrativo tú o tu cliente podrán <strong>subir nuevos productos</strong>, <strong>editar precios y fotos</strong>, o <strong>eliminar artículos</strong> del catálogo público sin tocar código.
+            Gestor de contenido para actualizar productos, tarifas en Pesos Colombianos, fotografías reales y catálogos en PDF.
           </p>
 
           <div className="pt-2">
             <Link
               href="/guia-admin"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 text-xs font-montserrat font-bold transition-all shadow-sm group"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 text-xs font-montserrat font-semibold transition-all shadow-xs"
             >
-              <span>Ver Guía Visual Paso a Paso con Capturas para el Cliente</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 text-[#E30613] transition-transform" />
+              <span>Ver manual de uso paso a paso</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#E30613]" />
             </Link>
           </div>
         </div>
 
-        {/* 3 Core Capabilities Overview Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {/* 4 Core Capabilities Overview Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* 1. Subir */}
-          <div className="p-6 rounded-2xl bg-white border border-zinc-200 hover:border-emerald-500/50 transition-all space-y-3 shadow-sm group">
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <UploadCloud className="w-6 h-6" />
+          <div className="p-5 rounded-2xl bg-white border border-zinc-200 hover:border-emerald-500/50 transition-all space-y-3 shadow-sm group">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <UploadCloud className="w-5 h-5" />
             </div>
-            <h3 className="font-montserrat font-bold text-base text-zinc-950 uppercase tracking-wider">
+            <h3 className="font-montserrat font-bold text-sm text-zinc-950 uppercase tracking-wider">
               1. Subir Productos
             </h3>
             <p className="text-xs text-zinc-600 leading-relaxed">
-              Crea artículos en segundos: añade el nombre, referencia, precio en Pesos Colombianos, cantidad mínima y sube la foto directamente desde el celular o computador.
+              Crea artículos en segundos con nombre, referencia, precio en COP, pedido mínimo y fotos con compresión automática CDN.
             </p>
             <div className="pt-1 text-[11px] font-mono text-emerald-600">
-              ✓ Subida y compresión CDN automática
+              ✓ Galería de fotos múltiples
             </div>
           </div>
 
           {/* 2. Editar */}
-          <div className="p-6 rounded-2xl bg-white border border-zinc-200 hover:border-blue-500/50 transition-all space-y-3 shadow-sm group">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Edit3 className="w-6 h-6" />
+          <div className="p-5 rounded-2xl bg-white border border-zinc-200 hover:border-blue-500/50 transition-all space-y-3 shadow-sm group">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Edit3 className="w-5 h-5" />
             </div>
-            <h3 className="font-montserrat font-bold text-base text-zinc-950 uppercase tracking-wider">
+            <h3 className="font-montserrat font-bold text-sm text-zinc-950 uppercase tracking-wider">
               2. Editar en Vivo
             </h3>
             <p className="text-xs text-zinc-600 leading-relaxed">
-              Modifica cualquier dato en cualquier momento: cambia precios en COP, renueva fotos, actualiza características o reordena la posición en el catálogo.
+              Modifica precios en COP, fotos, descripciones o crea categorías nuevas que se reflejan de inmediato en la web.
             </p>
             <div className="pt-1 text-[11px] font-mono text-blue-600">
-              ✓ Reflejado inmediato en la web
+              ✓ Categorías dinámicas
             </div>
           </div>
 
           {/* 3. Eliminar / Ocultar */}
-          <div className="p-6 rounded-2xl bg-white border border-zinc-200 hover:border-red-500/50 transition-all space-y-3 shadow-sm group">
-            <div className="w-12 h-12 rounded-xl bg-red-50 text-[#E30613] border border-red-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Trash2 className="w-6 h-6" />
+          <div className="p-5 rounded-2xl bg-white border border-zinc-200 hover:border-red-500/50 transition-all space-y-3 shadow-sm group">
+            <div className="w-10 h-10 rounded-xl bg-red-50 text-[#E30613] border border-red-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Trash2 className="w-5 h-5" />
             </div>
-            <h3 className="font-montserrat font-bold text-base text-zinc-950 uppercase tracking-wider">
-              3. Eliminar u Ocultar
+            <h3 className="font-montserrat font-bold text-sm text-zinc-950 uppercase tracking-wider">
+              3. Ocultar o Borrar
             </h3>
             <p className="text-xs text-zinc-600 leading-relaxed">
-              <strong>Ocultar sin borrar:</strong> Desmarca la casilla &ldquo;¿Visible?&rdquo; para pausar un producto agotado. O haz clic en <em>Delete</em> para borrarlo definitivamente.
+              Desmarca &ldquo;¿Visible?&rdquo; para pausar artículos agotados sin perder el historial, o bórralos permanentemente en un clic.
             </p>
             <div className="pt-1 text-[11px] font-mono text-[#E30613]">
-              ✓ Control total de disponibilidad
+              ✓ Control de disponibilidad
+            </div>
+          </div>
+
+          {/* 4. WhatsApp y PDFs */}
+          <div className="p-5 rounded-2xl bg-white border border-zinc-200 hover:border-purple-500/50 transition-all space-y-3 shadow-sm group">
+            <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 border border-purple-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <ExternalLink className="w-5 h-5" />
+            </div>
+            <h3 className="font-montserrat font-bold text-sm text-zinc-950 uppercase tracking-wider">
+              4. WhatsApp &amp; PDFs
+            </h3>
+            <p className="text-xs text-zinc-600 leading-relaxed">
+              Actualiza la línea de WhatsApp corporativa, sube nuevos PDFs del catálogo y publica anuncios de temporada sin tocar código.
+            </p>
+            <div className="pt-1 text-[11px] font-mono text-purple-600">
+              ✓ Configuración global
             </div>
           </div>
         </div>
 
         {/* Step-by-Step Activation / Setup Card */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200 shadow-md space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200 pb-4">
+        <div className="p-6 sm:p-8 rounded-2xl bg-white border border-zinc-200/90 shadow-xs space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200/80 pb-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-amber-600 text-xs font-mono font-bold uppercase mb-1">
-                <ShieldAlert className="w-4 h-4" />
-                PASO FINAL: VINCULACIÓN DE CUENTA GRATUITA (1 MINUTO)
+              <div className="inline-flex items-center gap-1.5 text-zinc-600 text-xs font-mono font-semibold uppercase mb-1">
+                <ShieldAlert className="w-4 h-4 text-amber-600" />
+                VINCULACIÓN INICIAL DE SANITY
               </div>
               <h2 className="text-xl font-montserrat font-black text-zinc-950 uppercase tracking-tight">
-                ¿Cómo activar el panel en tu proyecto?
+                Conectar con tu cuenta de Sanity
               </h2>
             </div>
 
@@ -132,9 +148,9 @@ export default function AdminPage() {
               href="https://www.sanity.io/manage"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white text-xs font-montserrat font-black uppercase tracking-wider transition-all shadow-md shrink-0"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-montserrat font-bold uppercase tracking-wider transition-colors shadow-xs shrink-0"
             >
-              <span>Abrir Sanity.io Gratis</span>
+              <span>Abrir Sanity.io</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>

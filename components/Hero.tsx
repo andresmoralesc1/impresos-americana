@@ -243,16 +243,16 @@ export function Hero() {
             </div>
 
             {/* High-Value B2B Lead Magnet Tools Bar */}
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
+            <div className="mt-4 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2.5">
               <button
                 type="button"
                 onClick={() => {
                   triggerHaptic(8);
                   setIsSampleBoxOpen(true);
                 }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-300/80 text-[11px] font-mono font-medium shadow-2xs hover:border-[#E30613] hover:text-[#E30613] transition-all cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[42px] rounded-full bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-300/80 text-xs font-mono font-medium shadow-2xs hover:border-[#E30613] hover:text-[#E30613] transition-all cursor-pointer"
               >
-                <Box className="w-3.5 h-3.5 text-[#E30613]" />
+                <Box className="w-4 h-4 text-[#E30613] shrink-0" />
                 <span>Solicitar Muestrario Físico a tu Empresa</span>
               </button>
 
@@ -262,9 +262,9 @@ export function Hero() {
                   triggerHaptic(8);
                   setIsPreflightOpen(true);
                 }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-300/80 text-[11px] font-mono font-medium shadow-2xs hover:border-emerald-600 hover:text-emerald-700 transition-all cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[42px] rounded-full bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-300/80 text-xs font-mono font-medium shadow-2xs hover:border-emerald-600 hover:text-emerald-700 transition-all cursor-pointer"
               >
-                <FileCheck2 className="w-3.5 h-3.5 text-emerald-600" />
+                <FileCheck2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Pre-chequeo Técnico de Archivo / PDF</span>
               </button>
             </div>

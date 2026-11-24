@@ -423,7 +423,7 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
                       value={formData.nombre}
                       onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
                       placeholder="Ej. Carlos Martínez"
-                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 text-xs font-sans focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors"
+                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 text-base sm:text-xs font-sans focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors"
                     />
                   </div>
 
@@ -436,7 +436,7 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
                       value={formData.empresa}
                       onChange={(e) => setFormData({ ...formData, empresa: e.target.value })}
                       placeholder="Ej. Distribuidora Andina S.A.S."
-                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 text-xs font-sans focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors"
+                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 text-base sm:text-xs font-sans focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors"
                     />
                   </div>
                 </div>
@@ -452,7 +452,7 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
                       value={formData.telefono}
                       onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
                       placeholder="Ej. 316 320 0181"
-                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 text-xs font-sans focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors"
+                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 text-base sm:text-xs font-sans focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors"
                     />
                   </div>
 
@@ -463,7 +463,7 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
                     <select
                       value={formData.ciudad}
                       onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
-                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 text-xs font-sans focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors cursor-pointer"
+                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 text-base sm:text-xs font-sans focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors cursor-pointer"
                     >
                       <option value="Cali">Cali (Sede Principal / Retiro en Planta)</option>
                       <option value="Bogotá D.C.">Bogotá D.C.</option>
@@ -489,7 +489,7 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
                     value={formData.mensaje}
                     onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
                     placeholder="Descríbenos tu proyecto: cantidad de unidades requeridas, tipo de sustrato (cartón corrugado, MDF, acrílico, plegadiza), medidas aproximadas, si cuentas con arte listo en PDF/AI..."
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl p-4 text-zinc-900 text-xs font-sans focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors resize-none leading-relaxed"
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl p-4 text-zinc-900 text-base sm:text-xs font-sans focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors resize-none leading-relaxed"
                   />
                 </div>
 

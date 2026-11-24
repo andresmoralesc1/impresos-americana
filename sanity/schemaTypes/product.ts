@@ -21,28 +21,17 @@ export const productType = defineType({
     }),
     defineField({
       name: "category",
-      title: "Categoría",
-      type: "string",
-      description: "Selecciona a qué sección pertenece este producto",
-      options: {
-        list: [
-          { title: "Termos & Botellas", value: "termos" },
-          { title: "Agendas & Libretas", value: "agendas" },
-          { title: "Esferos & Bolígrafos", value: "esferos" },
-          { title: "Llaveros & USBs", value: "llaveros-usb" },
-          { title: "Bolsas & Empaques", value: "bolsas" },
-          { title: "Tecnología & Accesorios", value: "tecnologia" },
-          { title: "Otros Artículos", value: "otros" },
-        ],
-      },
-      initialValue: "termos",
-      validation: (rule) => rule.required(),
+      title: "Categoría del Catálogo",
+      type: "reference",
+      to: [{ type: "category" }],
+      description: "Selecciona a qué sección pertenece este producto. Puedes elegir una existente o crear una nueva con el botón '+' directamente.",
+      validation: (rule) => rule.required().error("Debes seleccionar una categoría"),
     }),
     defineField({
       name: "priceCOP",
       title: "Precio Unitario en COP",
       type: "string",
-      description: "Precio visible para los clientes (ej: $25.635 COP)",
+      description: "Precio visible para los clientes (ej: $25.635 COP). Si escribes un número plano (ej: 25000), el catálogo lo formateará automáticamente con moneda.",
       validation: (rule) => rule.required().error("Debes indicar un precio de referencia"),
     }),
     defineField({
@@ -61,6 +50,18 @@ export const productType = defineType({
         hotspot: true,
       },
       validation: (rule) => rule.required().error("Debes subir una fotografía del producto"),
+    }),
+    defineField({
+      name: "gallery",
+      title: "Galería de Fotos Adicionales (Opcional)",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "image",
+          options: { hotspot: true },
+        }),
+      ],
+      description: "Sube fotos complementarias: detalles de acabados, variantes de color, empaque o producto en uso.",
     }),
     defineField({
       name: "specs",

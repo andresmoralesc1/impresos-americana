@@ -344,7 +344,7 @@ export function DielineTemplates() {
           onClick={() => setPreviewTemplate(null)}
         >
           <div
-            className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-zinc-900 border border-zinc-800 shadow-2xl p-6"
+            className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-3xl bg-zinc-900 border border-zinc-800 shadow-2xl p-5 sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between pb-4 border-b border-zinc-800 mb-4 text-white">
@@ -358,7 +358,8 @@ export function DielineTemplates() {
               </div>
               <button
                 onClick={() => setPreviewTemplate(null)}
-                className="p-1.5 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300"
+                className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors"
+                aria-label="Cerrar modal de troquel"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -370,7 +371,7 @@ export function DielineTemplates() {
               dangerouslySetInnerHTML={{ __html: previewTemplate.svgContent }}
             />
 
-            <div className="mt-4 pt-4 border-t border-zinc-800 flex items-center justify-between">
+            <div className="mt-4 pt-4 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3">
               <span className="text-xs font-mono text-zinc-400">
                 {previewTemplate.dimensions} • {previewTemplate.format}
               </span>

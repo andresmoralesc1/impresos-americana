@@ -100,7 +100,7 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
                   placeholder="Ej: Colombina S.A."
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613]"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-base sm:text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613]"
                 />
               </div>
             </div>
@@ -117,7 +117,7 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
                   placeholder="Ej: Andrea Gómez (Trade Mkt)"
                   value={contactName}
                   onChange={(e) => setContactName(e.target.value)}
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613]"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-base sm:text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613]"
                 />
               </div>
             </div>
@@ -136,7 +136,7 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
                   placeholder="+57 300 123 4567"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613]"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-base sm:text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613]"
                 />
               </div>
             </div>
@@ -150,7 +150,7 @@ _Solicitado desde impresosamericana.com para evaluación de calidades técnicas.
                 <select
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613] appearance-none"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl pl-9 pr-3 py-2.5 text-base sm:text-xs text-zinc-900 focus:bg-white focus:outline-none focus:border-[#E30613] appearance-none"
                 >
                   <option value="Cali">Cali (Mismo día)</option>
                   <option value="Bogotá D.C.">Bogotá D.C. (24 horas)</option>

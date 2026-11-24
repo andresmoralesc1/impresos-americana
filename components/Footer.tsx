@@ -184,6 +184,14 @@ export function Footer() {
                     Casos de Éxito en Retail
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/guia-admin"
+                    className="inline-block py-0.5 hover:text-[#E30613] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#E30613] rounded"
+                  >
+                    Manual de Administración CMS
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>

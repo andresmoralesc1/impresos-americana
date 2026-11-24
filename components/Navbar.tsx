@@ -198,7 +198,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl pt-20 px-6 flex flex-col justify-between pb-8 overflow-y-auto lg:hidden shadow-2xl"
+            className="fixed inset-0 z-45 bg-white/98 backdrop-blur-2xl pt-20 px-6 flex flex-col justify-between pb-[max(2rem,env(safe-area-inset-bottom))] overflow-y-auto lg:hidden shadow-2xl"
           >
             <div className="space-y-4">
               <div className="border-b border-zinc-100 pb-4 mb-2">

@@ -8,115 +8,149 @@ import {
   UploadCloud,
   Edit3,
   Trash2,
-  CheckCircle2,
   Printer,
   Share2,
   ExternalLink,
   Camera,
-  EyeOff,
-  HelpCircle,
-  FileCheck,
-  ChevronRight,
   Layers,
+  HelpCircle,
   Check,
-  AlertTriangle,
+  ArrowRight,
+  EyeOff,
+  Phone,
+  FileDown,
+  Megaphone,
+  Smartphone,
+  Copy,
 } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
 
 export default function GuiaAdminPage() {
-  const [activeTab, setActiveTab] = useState<"crear" | "editar" | "eliminar" | "fotos" | "faq">("crear");
+  const [activeTab, setActiveTab] = useState<
+    "crear" | "editar" | "fotos" | "eliminar" | "faq"
+  >("crear");
   const [shared, setShared] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
 
   const handlePrint = () => {
     triggerHaptic(10);
     window.print();
   };
 
+  const handleCopyLink = () => {
+    triggerHaptic(10);
+    const url =
+      typeof window !== "undefined"
+        ? window.location.href
+        : "https://impresosamericana.com/guia-admin";
+    navigator.clipboard.writeText(url);
+    setCopiedLink(true);
+    setTimeout(() => setCopiedLink(false), 2000);
+  };
+
   const handleShareWhatsApp = () => {
     triggerHaptic(10);
-    const message = `*MANUAL DEL CLIENTE - EDITOR DE CATÁLOGO IMPRESOS AMERICANA*
----------------------------------------
-Aquí tienes la guía visual paso a paso con capturas para subir, editar y eliminar productos de tu catálogo web:
-${typeof window !== "undefined" ? window.location.href : "https://impresosamericana.com/guia-admin"}
----------------------------------------
-Acceso al panel administrativo: https://impresosamericana.com/admin`;
+    const message = `*Manual de Administración — Impresos Americana*\nGuía paso a paso para subir productos, modificar precios y gestionar catálogos en la web:\n${
+      typeof window !== "undefined"
+        ? window.location.href
+        : "https://impresosamericana.com/guia-admin"
+    }\n\nPanel administrativo: https://impresosamericana.com/admin`;
     window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
     setShared(true);
     setTimeout(() => setShared(false), 3000);
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden relative bg-gradient-to-br from-slate-100 via-zinc-50 to-stone-100 text-zinc-900 selection:bg-[#E30613] selection:text-white">
+      {/* Specular Ambient Glow & Ultra-Glossy Glass Lighting (No Green) */}
+      <div className="absolute inset-0 bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:28px_28px] opacity-25 pointer-events-none" />
+      <div className="absolute -top-32 left-1/3 w-[650px] h-[550px] bg-red-500/7 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 -right-20 w-[550px] h-[550px] bg-slate-300/30 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-[550px] h-[550px] bg-red-600/4 rounded-full blur-[180px] pointer-events-none" />
+
       {/* 1. Header */}
       <PageHeader
-        badge="MANUAL OPERATIVO PARA EL CLIENTE"
-        title="GUÍA VISUAL DEL EDITOR DE PRODUCTOS & CMS"
-        description="Instructivo paso a paso con capturas simuladas del panel para subir artículos nuevos, actualizar precios en Pesos Colombianos, subir fotografías reales y gestionar la disponibilidad en la web sin tocar código."
+        badge="ADMINISTRACIÓN & CONTENIDOS"
+        title="Manual del Panel de Catálogo"
+        description="Procedimientos claros para subir artículos, actualizar precios en Pesos Colombianos, renovar fotografías y gestionar catálogos PDF en la web de Impresos Americana."
         breadcrumbs={[
           { label: "Catálogo", href: "/catalogo" },
-          { label: "Guía Administrativa" },
+          { label: "Manual de Administración" },
         ]}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 space-y-12">
-        {/* Action Quickbar (Print, Share, Go to Admin) */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl bg-white border border-zinc-200 shadow-sm">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center text-[#E30613]">
-              <FileCheck className="w-5 h-5" />
+      <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10 space-y-6 sm:space-y-8 min-w-0">
+        {/* Glassmorphism Quick Actions Top Bar */}
+        <div className="w-full p-4 sm:p-5 rounded-3xl bg-white/75 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 min-w-0">
+          <div className="space-y-1 min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#E30613] animate-pulse shrink-0" />
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-700">
+                Panel Sanity Studio v4
+              </span>
             </div>
-            <div>
-              <h2 className="font-montserrat font-bold text-sm text-zinc-950 uppercase tracking-wider">
-                Instructivo Oficial de Administración
-              </h2>
-              <p className="text-xs text-zinc-500">
-                Diseñado para el equipo de ventas, mercadeo y administración de Impresos Americana.
-              </p>
-            </div>
+            <p className="text-xs text-zinc-600 truncate">
+              Ruta directa de acceso:{" "}
+              <code className="px-2 py-0.5 rounded-md bg-white/90 border border-zinc-200 font-mono text-zinc-950 font-bold text-[11px] shadow-2xs">
+                /admin
+              </code>
+            </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto shrink-0">
+            <button
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/90 hover:bg-white text-zinc-800 border border-white/90 text-xs font-semibold transition-all shadow-2xs hover:shadow-xs"
+            >
+              {copiedLink ? (
+                <Check className="w-3.5 h-3.5 text-[#E30613]" />
+              ) : (
+                <Copy className="w-3.5 h-3.5 text-zinc-500" />
+              )}
+              <span>{copiedLink ? "Copiado" : "Copiar enlace"}</span>
+            </button>
+
             <button
               onClick={handlePrint}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200/80 text-zinc-800 border border-zinc-200 text-xs font-montserrat font-bold transition-all shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/90 hover:bg-white text-zinc-800 border border-white/90 text-xs font-semibold transition-all shadow-2xs hover:shadow-xs"
             >
-              <Printer className="w-4 h-4 text-zinc-600" />
-              <span>Imprimir / Guardar PDF</span>
+              <Printer className="w-3.5 h-3.5 text-zinc-500" />
+              <span>Imprimir / PDF</span>
             </button>
 
             <button
               onClick={handleShareWhatsApp}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-montserrat font-bold transition-all shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold transition-all shadow-2xs"
             >
-              <Share2 className="w-4 h-4 text-emerald-600" />
-              <span>{shared ? "¡Abierto en WhatsApp!" : "Compartir por WhatsApp"}</span>
+              <Share2 className="w-3.5 h-3.5 text-zinc-300" />
+              <span>{shared ? "Abierto" : "WhatsApp"}</span>
             </button>
 
             <Link
               href="/admin"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white text-xs font-montserrat font-black uppercase tracking-wider transition-all shadow-sm"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-red-500/20 ml-auto md:ml-0"
             >
-              <span>Abrir Panel /admin</span>
-              <ExternalLink className="w-4 h-4" />
+              <span>Entrar a /admin</span>
+              <ExternalLink className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
 
-        {/* Tab Selectors (Sticky Navigation) */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-white/10">
+        {/* Tab Navigation (Exact 5 Tabs in Glossy Grid, 100% visible on all viewports without truncation) */}
+        <div className="w-full p-1.5 sm:p-2 rounded-3xl bg-white/75 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-1.5 sm:gap-2">
           <button
             onClick={() => {
               triggerHaptic(10);
               setActiveTab("crear");
             }}
-            className={`px-5 py-3 rounded-t-xl text-xs sm:text-sm font-montserrat font-bold flex items-center gap-2 transition-all whitespace-nowrap border-b-2 ${
+            className={`w-full px-3 py-3 rounded-2xl flex flex-col sm:flex-row items-center justify-center gap-2 text-xs font-montserrat transition-all duration-200 text-center ${
               activeTab === "crear"
-                ? "bg-[#1C1C26] text-white border-[#E30613]"
-                : "text-zinc-400 hover:text-zinc-200 border-transparent hover:bg-white/5"
+                ? "bg-zinc-950 text-white shadow-md font-bold scale-[1.01]"
+                : "bg-white/60 hover:bg-white text-zinc-700 hover:text-zinc-950 border border-white/80 font-semibold shadow-2xs"
             }`}
           >
-            <UploadCloud className="w-4 h-4 text-emerald-400" />
-            <span>1. Cómo Subir un Producto</span>
+            <UploadCloud className="w-4 h-4 text-[#E30613] shrink-0" />
+            <span className="truncate">1. Subir Producto</span>
           </button>
 
           <button
@@ -124,29 +158,14 @@ Acceso al panel administrativo: https://impresosamericana.com/admin`;
               triggerHaptic(10);
               setActiveTab("editar");
             }}
-            className={`px-5 py-3 rounded-t-xl text-xs sm:text-sm font-montserrat font-bold flex items-center gap-2 transition-all whitespace-nowrap border-b-2 ${
+            className={`w-full px-3 py-3 rounded-2xl flex flex-col sm:flex-row items-center justify-center gap-2 text-xs font-montserrat transition-all duration-200 text-center ${
               activeTab === "editar"
-                ? "bg-[#1C1C26] text-white border-[#E30613]"
-                : "text-zinc-400 hover:text-zinc-200 border-transparent hover:bg-white/5"
+                ? "bg-zinc-950 text-white shadow-md font-bold scale-[1.01]"
+                : "bg-white/60 hover:bg-white text-zinc-700 hover:text-zinc-950 border border-white/80 font-semibold shadow-2xs"
             }`}
           >
-            <Edit3 className="w-4 h-4 text-blue-400" />
-            <span>2. Cómo Editar Precios y Textos</span>
-          </button>
-
-          <button
-            onClick={() => {
-              triggerHaptic(10);
-              setActiveTab("eliminar");
-            }}
-            className={`px-5 py-3 rounded-t-xl text-xs sm:text-sm font-montserrat font-bold flex items-center gap-2 transition-all whitespace-nowrap border-b-2 ${
-              activeTab === "eliminar"
-                ? "bg-[#1C1C26] text-white border-[#E30613]"
-                : "text-zinc-400 hover:text-zinc-200 border-transparent hover:bg-white/5"
-            }`}
-          >
-            <Trash2 className="w-4 h-4 text-red-400" />
-            <span>3. Ocultar (Agotado) o Eliminar</span>
+            <Edit3 className="w-4 h-4 text-blue-500 shrink-0" />
+            <span className="truncate">2. Precios &amp; Textos</span>
           </button>
 
           <button
@@ -154,14 +173,29 @@ Acceso al panel administrativo: https://impresosamericana.com/admin`;
               triggerHaptic(10);
               setActiveTab("fotos");
             }}
-            className={`px-5 py-3 rounded-t-xl text-xs sm:text-sm font-montserrat font-bold flex items-center gap-2 transition-all whitespace-nowrap border-b-2 ${
+            className={`w-full px-3 py-3 rounded-2xl flex flex-col sm:flex-row items-center justify-center gap-2 text-xs font-montserrat transition-all duration-200 text-center ${
               activeTab === "fotos"
-                ? "bg-[#1C1C26] text-white border-[#E30613]"
-                : "text-zinc-400 hover:text-zinc-200 border-transparent hover:bg-white/5"
+                ? "bg-zinc-950 text-white shadow-md font-bold scale-[1.01]"
+                : "bg-white/60 hover:bg-white text-zinc-700 hover:text-zinc-950 border border-white/80 font-semibold shadow-2xs"
             }`}
           >
-            <Camera className="w-4 h-4 text-amber-400" />
-            <span>4. Fotos & Buenas Prácticas</span>
+            <Camera className="w-4 h-4 text-amber-500 shrink-0" />
+            <span className="truncate">3. Fotos &amp; Galería</span>
+          </button>
+
+          <button
+            onClick={() => {
+              triggerHaptic(10);
+              setActiveTab("eliminar");
+            }}
+            className={`w-full px-3 py-3 rounded-2xl flex flex-col sm:flex-row items-center justify-center gap-2 text-xs font-montserrat transition-all duration-200 text-center ${
+              activeTab === "eliminar"
+                ? "bg-zinc-950 text-white shadow-md font-bold scale-[1.01]"
+                : "bg-white/60 hover:bg-white text-zinc-700 hover:text-zinc-950 border border-white/80 font-semibold shadow-2xs"
+            }`}
+          >
+            <Trash2 className="w-4 h-4 text-red-500 shrink-0" />
+            <span className="truncate">4. Pausar / Eliminar</span>
           </button>
 
           <button
@@ -169,586 +203,617 @@ Acceso al panel administrativo: https://impresosamericana.com/admin`;
               triggerHaptic(10);
               setActiveTab("faq");
             }}
-            className={`px-5 py-3 rounded-t-xl text-xs sm:text-sm font-montserrat font-bold flex items-center gap-2 transition-all whitespace-nowrap border-b-2 ${
+            className={`w-full sm:col-span-2 lg:col-span-1 px-3 py-3 rounded-2xl flex flex-col sm:flex-row items-center justify-center gap-2 text-xs font-montserrat transition-all duration-200 text-center ${
               activeTab === "faq"
-                ? "bg-[#1C1C26] text-white border-[#E30613]"
-                : "text-zinc-400 hover:text-zinc-200 border-transparent hover:bg-white/5"
+                ? "bg-zinc-950 text-white shadow-md font-bold scale-[1.01]"
+                : "bg-white/60 hover:bg-white text-zinc-700 hover:text-zinc-950 border border-white/80 font-semibold shadow-2xs"
             }`}
           >
-            <HelpCircle className="w-4 h-4 text-purple-400" />
-            <span>5. Preguntas Frecuentes</span>
+            <HelpCircle className="w-4 h-4 text-[#E30613] shrink-0" />
+            <span className="truncate">5. Preguntas &amp; Ajustes</span>
           </button>
         </div>
 
         {/* ============================================================== */}
-        {/* TAB 1: SUBIR UN PRODUCTO NUEVO                                */}
+        {/* TAB 1: SUBIR UN PRODUCTO                                       */}
         {/* ============================================================== */}
         {activeTab === "crear" && (
-          <div className="space-y-8 animate-fadeIn">
-            {/* Steps overview */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="p-4 rounded-xl bg-[#181822] border border-white/10 space-y-1">
-                <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-mono font-bold text-xs flex items-center justify-center mb-2">
-                  1
+          <div className="space-y-6 w-full min-w-0">
+            {/* 3 Step Cards in Frosted Glass */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 min-w-0">
+              <div className="p-5 sm:p-6 rounded-3xl bg-white/75 backdrop-blur-2xl border border-white/90 shadow-[0_8px_30px_rgb(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] ring-1 ring-zinc-950/5 space-y-2 hover:bg-white/90 transition-all min-w-0">
+                <span className="font-mono text-xs font-bold text-[#E30613] block">
+                  PASO 1
                 </span>
-                <strong className="text-white text-xs sm:text-sm block">Ingresa a /admin</strong>
-                <p className="text-[11px] text-zinc-400">
-                  Abre tu navegador y entra con tu cuenta de Google o correo autorizado.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#181822] border border-white/10 space-y-1">
-                <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-mono font-bold text-xs flex items-center justify-center mb-2">
-                  2
-                </span>
-                <strong className="text-white text-xs sm:text-sm block">Clic en Nuevo (+)</strong>
-                <p className="text-[11px] text-zinc-400">
-                  Selecciona &ldquo;Producto del Catálogo&rdquo; y presiona el botón &ldquo;+&rdquo; o &ldquo;Crear&rdquo;.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#181822] border border-white/10 space-y-1">
-                <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-mono font-bold text-xs flex items-center justify-center mb-2">
-                  3
-                </span>
-                <strong className="text-white text-xs sm:text-sm block">Llena los Datos</strong>
-                <p className="text-[11px] text-zinc-400">
-                  Escribe nombre, referencia, precio en COP, sube la foto y selecciona categoría.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#181822] border border-white/10 space-y-1">
-                <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-mono font-bold text-xs flex items-center justify-center mb-2">
-                  4
-                </span>
-                <strong className="text-white text-xs sm:text-sm block">Clic en &ldquo;Publish&rdquo;</strong>
-                <p className="text-[11px] text-zinc-400">
-                  Presiona el botón verde inferior. El producto aparece al instante en la web.
-                </p>
-              </div>
-            </div>
-
-            {/* High-Fidelity Studio UI Visual Mockup */}
-            <div className="rounded-2xl bg-[#0D0D12] border border-white/15 overflow-hidden shadow-2xl">
-              {/* Browser bar */}
-              <div className="px-4 py-3 bg-[#171720] border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-                  <span className="ml-3 text-[11px] font-mono text-zinc-400 bg-[#0E0E14] px-3 py-1 rounded-md border border-white/5">
-                    https://impresosamericana.com/admin/structure/product;create
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono text-emerald-400 font-bold hidden sm:inline">
-                  ● EN VIVO (SANITY STUDIO)
-                </span>
-              </div>
-
-              {/* Studio Workspace Simulation */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
-                {/* Left Panel Sidebar */}
-                <div className="lg:col-span-3 bg-[#13131A] border-r border-white/10 p-4 space-y-4">
-                  <div className="text-[11px] font-mono text-zinc-400 uppercase tracking-widest font-bold">
-                    CONTENIDO DEL CMS
-                  </div>
-                  <div className="space-y-1 text-xs font-montserrat">
-                    <div className="p-2.5 rounded-lg bg-[#E30613] text-white font-bold flex items-center justify-between shadow-md">
-                      <span className="flex items-center gap-2">
-                        <Layers className="w-4 h-4" />
-                        Producto del Catálogo
-                      </span>
-                      <span className="text-[10px] bg-black/40 px-1.5 py-0.5 rounded font-mono">14</span>
-                    </div>
-                    <div className="p-2.5 rounded-lg text-zinc-400 hover:text-white flex items-center gap-2 transition-colors">
-                      <Layers className="w-4 h-4" />
-                      Categorías de Producto
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-white/10">
-                    <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-[11px] space-y-1">
-                      <strong className="block text-emerald-400 font-bold">Paso 1:</strong>
-                      Haz clic en el botón <strong className="text-white">+ Crear</strong> en la barra superior del panel.
-                    </div>
-                  </div>
-                </div>
-
-                {/* Center / Right: Interactive Document Form Mockup */}
-                <div className="lg:col-span-9 p-6 bg-[#181824] space-y-6">
-                  {/* Form Header */}
-                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                    <div>
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold block">
-                        NUEVO DOCUMENTO
-                      </span>
-                      <h3 className="text-lg font-montserrat font-black text-white">
-                        Creando: Producto del Catálogo
-                      </h3>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-mono px-2 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                        Borrador (No publicado)
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Form Fields Simulation */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                    {/* Left form column */}
-                    <div className="space-y-4">
-                      {/* Field 1: Name */}
-                      <div className="p-3 rounded-xl bg-[#111116] border border-white/10 space-y-1 relative">
-                        <div className="flex items-center justify-between">
-                          <label className="font-mono font-bold text-zinc-300 uppercase">
-                            Nombre del Producto *
-                          </label>
-                          <span className="text-[10px] text-red-400 font-bold">Obligatorio</span>
-                        </div>
-                        <input
-                          type="text"
-                          readOnly
-                          value="Termo Inteligente con Pantalla LED 500ml"
-                          className="w-full bg-[#1A1A22] border border-white/10 rounded-lg px-3 py-2 text-white font-sans text-xs"
-                        />
-                        <p className="text-[10px] text-zinc-400">
-                          Nombre comercial claro que leerá el cliente final.
-                        </p>
-                      </div>
-
-                      {/* Field 2: Reference */}
-                      <div className="p-3 rounded-xl bg-[#111116] border border-white/10 space-y-1">
-                        <label className="font-mono font-bold text-zinc-300 uppercase">
-                          Referencia de Producción / Código *
-                        </label>
-                        <input
-                          type="text"
-                          readOnly
-                          value="Ref. Termo Temperatura 500 ml"
-                          className="w-full bg-[#1A1A22] border border-white/10 rounded-lg px-3 py-2 text-white font-sans text-xs"
-                        />
-                      </div>
-
-                      {/* Field 3: Category Dropdown */}
-                      <div className="p-3 rounded-xl bg-[#111116] border border-white/10 space-y-1">
-                        <label className="font-mono font-bold text-zinc-300 uppercase">
-                          Categoría (Menú Directo) *
-                        </label>
-                        <select
-                          disabled
-                          className="w-full bg-[#1A1A22] border border-white/10 rounded-lg px-3 py-2 text-white font-sans text-xs"
-                        >
-                          <option>Termos &amp; Botellas</option>
-                        </select>
-                        <p className="text-[10px] text-zinc-400">
-                          Selecciona la sección donde se agrupará en el catálogo.
-                        </p>
-                      </div>
-
-                      {/* Field 4: Price COP */}
-                      <div className="p-3 rounded-xl bg-[#111116] border border-white/10 space-y-1">
-                        <label className="font-mono font-bold text-zinc-300 uppercase">
-                          Precio Unitario en COP *
-                        </label>
-                        <input
-                          type="text"
-                          readOnly
-                          value="$25.635 COP"
-                          className="w-full bg-[#1A1A22] border border-white/10 rounded-lg px-3 py-2 text-emerald-400 font-mono font-bold text-xs"
-                        />
-                        <p className="text-[10px] text-zinc-400">
-                          Escribe el valor formateado (ej: $25.635 COP).
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Right form column */}
-                    <div className="space-y-4">
-                      {/* Field 5: Image Upload */}
-                      <div className="p-3 rounded-xl bg-[#111116] border border-white/10 space-y-2">
-                        <div className="flex items-center justify-between">
-                          <label className="font-mono font-bold text-zinc-300 uppercase">
-                            Fotografía Real del Producto *
-                          </label>
-                          <span className="text-[10px] text-emerald-400 font-mono font-bold">
-                            JPG / PNG / WebP
-                          </span>
-                        </div>
-
-                        <div className="border-2 border-dashed border-white/20 rounded-xl p-4 text-center space-y-2 bg-[#171720]">
-                          <div className="w-10 h-10 rounded-full bg-white/10 text-zinc-300 flex items-center justify-center mx-auto">
-                            <Camera className="w-5 h-5 text-red-400" />
-                          </div>
-                          <p className="text-xs text-zinc-300">
-                            Arrastra tu imagen aquí o haz clic en <strong>&ldquo;Upload&rdquo;</strong>
-                          </p>
-                          <span className="text-[10px] text-zinc-500 block">
-                            Recomendado: 1200 x 1200 px con fondo blanco o neutro.
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Field 6: Specs */}
-                      <div className="p-3 rounded-xl bg-[#111116] border border-white/10 space-y-2">
-                        <label className="font-mono font-bold text-zinc-300 uppercase block">
-                          Especificaciones Técnicas (Viñetas)
-                        </label>
-                        <div className="space-y-1">
-                          <div className="px-2.5 py-1 rounded bg-[#1C1C26] text-zinc-300 font-mono text-[11px] flex items-center justify-between">
-                            <span>• Acero Inoxidable 304 Grado Alimenticio</span>
-                            <Check className="w-3.5 h-3.5 text-emerald-400" />
-                          </div>
-                          <div className="px-2.5 py-1 rounded bg-[#1C1C26] text-zinc-300 font-mono text-[11px] flex items-center justify-between">
-                            <span>• Pantalla Táctil LED Indicadora de Temperatura</span>
-                            <Check className="w-3.5 h-3.5 text-emerald-400" />
-                          </div>
-                        </div>
-                        <button
-                          type="button"
-                          disabled
-                          className="w-full py-1.5 rounded bg-white/5 border border-white/10 text-zinc-400 text-[10px] font-mono"
-                        >
-                          + Add item (Añadir otra característica)
-                        </button>
-                      </div>
-
-                      {/* Field 7: Active Checkbox */}
-                      <div className="p-3 rounded-xl bg-[#111116] border border-white/10 flex items-center justify-between">
-                        <div>
-                          <strong className="text-xs text-white block">¿Producto Activo / Visible?</strong>
-                          <span className="text-[10px] text-zinc-400">
-                            Marcado = Visible en la web.
-                          </span>
-                        </div>
-                        <div className="w-5 h-5 rounded bg-emerald-500 text-white flex items-center justify-center">
-                          <Check className="w-3.5 h-3.5" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom Action Bar (The crucial Publish button) */}
-                  <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#13131B] -mx-6 -mb-6 p-4 rounded-b-2xl">
-                    <div className="flex items-center gap-2 text-xs text-zinc-400">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>Todos los cambios guardados automáticamente como borrador.</span>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        className="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-montserrat font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.4)]"
-                      >
-                        <CheckCircle2 className="w-4 h-4" />
-                        <span>Publish (Publicar en Vivo)</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ============================================================== */}
-        {/* TAB 2: EDITAR PRECIOS Y TEXTOS                                */}
-        {/* ============================================================== */}
-        {activeTab === "editar" && (
-          <div className="space-y-8 animate-fadeIn">
-            <div className="p-6 rounded-2xl bg-[#181822] border border-white/10 space-y-4">
-              <div className="inline-flex items-center gap-1.5 text-blue-400 text-xs font-mono font-bold uppercase">
-                <Edit3 className="w-4 h-4" />
-                MODIFICAR PRECIOS O FOTOGRAFÍAS EN TIEMPO REAL
-              </div>
-              <h3 className="text-xl sm:text-2xl font-montserrat font-black text-white uppercase tracking-tight">
-                ¿Cómo cambiar el precio de un producto en 15 segundos?
-              </h3>
-              <p className="text-sm text-zinc-300 leading-relaxed max-w-3xl">
-                Los precios de los productos en Colombia cambian por tirajes, dólar o promociones. Con este panel, tu cliente o tú pueden cambiar cualquier precio instantáneamente sin esperar despliegues ni programadores:
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                <div className="p-4 rounded-xl bg-[#121217] border border-white/10 space-y-2">
-                  <span className="text-blue-400 font-mono font-bold text-xs block">PASO 1</span>
-                  <strong className="text-white text-xs sm:text-sm block">Abre la lista de productos</strong>
-                  <p className="text-xs text-zinc-400">
-                    En la columna izquierda de `/admin`, haz clic sobre el producto que deseas actualizar (ej. <em>Termo Temperatura 500 ml</em>).
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#121217] border border-white/10 space-y-2">
-                  <span className="text-blue-400 font-mono font-bold text-xs block">PASO 2</span>
-                  <strong className="text-white text-xs sm:text-sm block">Edita el valor o la foto</strong>
-                  <p className="text-xs text-zinc-400">
-                    Borra el valor anterior y escribe el nuevo (ej: de <code>$25.635 COP</code> a <code>$23.900 COP</code>).
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#121217] border border-white/10 space-y-2">
-                  <span className="text-blue-400 font-mono font-bold text-xs block">PASO 3</span>
-                  <strong className="text-white text-xs sm:text-sm block">Presiona &ldquo;Publish&rdquo;</strong>
-                  <p className="text-xs text-zinc-400">
-                    Al hacer clic en el botón verde inferior, la página pública en <code>/catalogo</code> mostrará el nuevo precio de inmediato.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Visual comparison mockup */}
-            <div className="p-6 rounded-2xl bg-[#151520] border border-white/10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div className="space-y-4">
-                <span className="text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider block">
-                  EDICIÓN EN VIVO
-                </span>
-                <h4 className="text-xl font-montserrat font-bold text-white uppercase">
-                  Reemplazo de Fotografía en 1 Clic
+                <h4 className="font-montserrat font-bold text-sm text-zinc-950">
+                  Ingresa al panel
                 </h4>
-                <p className="text-xs text-zinc-300 leading-relaxed">
-                  Si tomaste una mejor foto con tu celular o un fotógrafo profesional te entregó nuevas tomas de producto:
+                <p className="text-xs text-zinc-600 leading-relaxed break-words">
+                  Abre{" "}
+                  <Link
+                    href="/admin"
+                    className="text-[#E30613] font-mono hover:underline font-semibold"
+                  >
+                    /admin
+                  </Link>{" "}
+                  en tu navegador. En la columna izquierda, pulsa en{" "}
+                  <strong>Producto del Catálogo</strong>.
                 </p>
-                <ul className="text-xs text-zinc-300 space-y-2 pl-5 list-disc marker:text-blue-400">
-                  <li>Pasa el cursor sobre la foto actual en el formulario.</li>
-                  <li>Haz clic en los tres puntos <code>...</code> en la esquina de la foto.</li>
-                  <li>Selecciona <strong>&ldquo;Replace&rdquo; (Reemplazar)</strong> y sube la nueva foto.</li>
-                  <li>Presiona <strong>Publish</strong>. La foto antigua se elimina del CDN y se muestra la nueva en alta calidad.</li>
-                </ul>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#0E0E14] border border-white/15 space-y-3">
-                <div className="flex items-center justify-between text-xs font-mono text-zinc-400 border-b border-white/10 pb-2">
-                  <span>ACCIONES SOBRE LA FOTO</span>
-                  <span className="text-blue-400">Editor Sanity</span>
-                </div>
-                <div className="relative h-44 w-full rounded-xl bg-[#1A1A24] overflow-hidden flex items-center justify-center border border-white/10">
-                  <Image
-                    src="/products/termo-temperatura.jpg"
-                    alt="Ejemplo Termo"
-                    width={220}
-                    height={160}
-                    className="object-contain"
-                  />
-                  <div className="absolute top-2 right-2 flex items-center gap-1.5 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono border border-white/20 text-white">
-                    <span>Edit</span>
-                    <span>•</span>
-                    <span className="text-red-400">Replace</span>
-                  </div>
-                </div>
-                <p className="text-[11px] text-zinc-400 text-center font-mono">
-                  ✨ Sanity recorta y genera automáticamente versiones WebP optimizadas para móviles y PC.
+              <div className="p-5 sm:p-6 rounded-3xl bg-white/75 backdrop-blur-2xl border border-white/90 shadow-[0_8px_30px_rgb(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] ring-1 ring-zinc-950/5 space-y-2 hover:bg-white/90 transition-all min-w-0">
+                <span className="font-mono text-xs font-bold text-[#E30613] block">
+                  PASO 2
+                </span>
+                <h4 className="font-montserrat font-bold text-sm text-zinc-950">
+                  Completa los datos técnicos
+                </h4>
+                <p className="text-xs text-zinc-600 leading-relaxed break-words">
+                  Indica nombre comercial, referencia interna de fábrica, precio
+                  en COP, tiraje mínimo requerido y categoría.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-3xl bg-white/75 backdrop-blur-2xl border border-white/90 shadow-[0_8px_30px_rgb(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] ring-1 ring-zinc-950/5 space-y-2 hover:bg-white/90 transition-all min-w-0">
+                <span className="font-mono text-xs font-bold text-[#E30613] block">
+                  PASO 3
+                </span>
+                <h4 className="font-montserrat font-bold text-sm text-zinc-950">
+                  Publica el cambio
+                </h4>
+                <p className="text-xs text-zinc-600 leading-relaxed break-words">
+                  Haz clic en el botón <strong>Publish</strong> en la
+                  esquina inferior derecha. El artículo queda visible
+                  inmediatamente en{" "}
+                  <Link
+                    href="/catalogo"
+                    className="text-[#E30613] font-mono hover:underline font-semibold"
+                  >
+                    /catalogo
+                  </Link>
+                  .
                 </p>
               </div>
             </div>
-          </div>
-        )}
 
-        {/* ============================================================== */}
-        {/* TAB 3: OCULTAR O ELIMINAR                                     */}
-        {/* ============================================================== */}
-        {activeTab === "eliminar" && (
-          <div className="space-y-8 animate-fadeIn">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Option A: Ocultar temporalmente (Recomendada) */}
-              <div className="p-6 rounded-2xl bg-[#181822] border border-white/10 hover:border-amber-500/40 transition-all space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
-                  <EyeOff className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold block mb-1">
-                    MÉTODO RECOMENDADO
-                  </span>
-                  <h3 className="text-lg font-montserrat font-bold text-white uppercase">
-                    Ocultar Producto Agotado (Sin Borrar)
-                  </h3>
-                </div>
-                <p className="text-xs text-zinc-300 leading-relaxed">
-                  Si un termo, libreta o esfero se agotó temporalmente en bodega, <strong>NO es necesario borrarlo</strong>. Puedes pausarlo para no perder los textos ni la foto:
+            {/* Visual Mapping: Field in Studio -> Public Catalog Card */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 space-y-6 min-w-0">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#E30613] block mb-1">
+                  CORRESPONDENCIA DE CAMPOS
+                </span>
+                <h3 className="font-montserrat font-bold text-lg sm:text-xl text-zinc-950">
+                  ¿Cómo se refleja cada campo en la tarjeta pública?
+                </h3>
+                <p className="text-xs text-zinc-600 mt-1 leading-relaxed">
+                  Cada dato ingresado en el editor alimenta la ficha interactiva
+                  del producto y el mensaje automático generado para WhatsApp.
                 </p>
+              </div>
 
-                <div className="p-3.5 rounded-xl bg-[#111116] border border-white/10 space-y-2 text-xs">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-zinc-300">¿Producto Activo / Visible?</span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30">
-                      DESMARCADO
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start min-w-0">
+                {/* Form fields summary */}
+                <div className="lg:col-span-7 space-y-2.5 text-xs min-w-0">
+                  <div className="p-3.5 rounded-2xl bg-white/70 backdrop-blur-sm border border-zinc-200/70 shadow-2xs flex items-start justify-between gap-3 min-w-0">
+                    <div className="min-w-0">
+                      <strong className="text-zinc-950 block font-semibold">
+                        1. Nombre del Producto
+                      </strong>
+                      <span className="text-zinc-500 text-[11px] block truncate">
+                        Título principal del artículo visible para los clientes.
+                      </span>
+                    </div>
+                    <code className="text-[11px] font-mono text-zinc-800 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-200 shrink-0">
+                      name
+                    </code>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-white/70 backdrop-blur-sm border border-zinc-200/70 shadow-2xs flex items-start justify-between gap-3 min-w-0">
+                    <div className="min-w-0">
+                      <strong className="text-zinc-950 block font-semibold">
+                        2. Referencia de Producción
+                      </strong>
+                      <span className="text-zinc-500 text-[11px] block truncate">
+                        Código de catálogo que el cliente copia al cotizar.
+                      </span>
+                    </div>
+                    <code className="text-[11px] font-mono text-zinc-800 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-200 shrink-0">
+                      reference
+                    </code>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-white/70 backdrop-blur-sm border border-zinc-200/70 shadow-2xs flex items-start justify-between gap-3 min-w-0">
+                    <div className="min-w-0">
+                      <strong className="text-zinc-950 block font-semibold">
+                        3. Precio Unitario en COP
+                      </strong>
+                      <span className="text-zinc-500 text-[11px] block break-words">
+                        Ej: $25.635 COP. Si escribes 25000, la web lo formatea
+                        automáticamente.
+                      </span>
+                    </div>
+                    <code className="text-[11px] font-mono text-red-700 bg-red-50 px-2 py-0.5 rounded border border-red-200 shrink-0 font-bold">
+                      priceCOP
+                    </code>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-white/70 backdrop-blur-sm border border-zinc-200/70 shadow-2xs flex items-start justify-between gap-3 min-w-0">
+                    <div className="min-w-0">
+                      <strong className="text-zinc-950 block font-semibold">
+                        4. Tiraje Mínimo de Pedido
+                      </strong>
+                      <span className="text-zinc-500 text-[11px] block truncate">
+                        Cantidad mínima de fabricación industrial (ej: Mínimo 50
+                        uds).
+                      </span>
+                    </div>
+                    <code className="text-[11px] font-mono text-zinc-800 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-200 shrink-0">
+                      minOrder
+                    </code>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-white/70 backdrop-blur-sm border border-zinc-200/70 shadow-2xs flex items-start justify-between gap-3 min-w-0">
+                    <div className="min-w-0">
+                      <strong className="text-zinc-950 block font-semibold">
+                        5. Especificaciones Técnicas (Viñetas)
+                      </strong>
+                      <span className="text-zinc-500 text-[11px] block break-words">
+                        Materiales, capacidades y técnicas de marcado (Láser,
+                        Tampografía, UV).
+                      </span>
+                    </div>
+                    <code className="text-[11px] font-mono text-zinc-800 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-200 shrink-0">
+                      specs
+                    </code>
+                  </div>
+                </div>
+
+                {/* Simulated Glass Product Card */}
+                <div className="lg:col-span-5 p-5 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/90 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-zinc-950/5 space-y-4 min-w-0 w-full">
+                  <div className="relative h-48 rounded-2xl bg-zinc-50/80 border border-zinc-200/70 overflow-hidden flex items-center justify-center p-4">
+                    <Image
+                      src="/products/termo-temperatura.jpg"
+                      alt="Ejemplo Ficha Producto"
+                      width={200}
+                      height={160}
+                      className="object-contain"
+                    />
+                    <span className="absolute top-2.5 left-2.5 text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-zinc-950/90 backdrop-blur-xs text-white">
+                      TERMOS &amp; BOTELLAS
                     </span>
                   </div>
-                  <p className="text-[11px] text-zinc-400">
-                    1. Desmarca la casilla en el formulario. <br />
-                    2. Haz clic en <strong>Publish</strong>. <br />
-                    3. El producto se oculta de la web al instante. Cuando vuelvas a tener inventario, simplemente vuelve a marcar la casilla y presiona <em>Publish</em>.
+
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-zinc-500 font-mono text-[11px]">
+                        Ref. Termo Temperatura 500 ml
+                      </span>
+                      <span className="text-zinc-500 font-mono text-[11px]">
+                        Mínimo 50 uds
+                      </span>
+                    </div>
+
+                    <h4 className="font-montserrat font-bold text-sm text-zinc-900 leading-snug">
+                      Termo Inteligente Digital con Sensor LED
+                    </h4>
+
+                    <div className="flex flex-wrap gap-1">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 text-zinc-700">
+                        Acero 304
+                      </span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 text-zinc-700">
+                        Sensor LED
+                      </span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 text-zinc-700">
+                        500 ml
+                      </span>
+                    </div>
+
+                    <div className="pt-3 border-t border-zinc-100 flex items-center justify-between">
+                      <div>
+                        <span className="text-[10px] text-zinc-500 font-mono block">
+                          Desde:
+                        </span>
+                        <span className="font-montserrat font-black text-base text-zinc-950">
+                          $25.635 COP
+                        </span>
+                      </div>
+                      <span className="px-3 py-1.5 rounded-xl bg-[#E30613] text-white font-montserrat font-bold text-[11px] uppercase tracking-wider">
+                        Cotizar
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ============================================================== */}
+        {/* TAB 2: EDITAR PRECIOS & TEXTOS                                 */}
+        {/* ============================================================== */}
+        {activeTab === "editar" && (
+          <div className="space-y-6 w-full min-w-0">
+            <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 space-y-5 min-w-0">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#E30613] block mb-1">
+                  ACTUALIZACIÓN DE PRECIOS
+                </span>
+                <h3 className="font-montserrat font-bold text-lg sm:text-xl text-zinc-950">
+                  ¿Cómo cambiar el precio de un artículo en vivo?
+                </h3>
+                <p className="text-xs text-zinc-600 mt-1 max-w-2xl leading-relaxed">
+                  Los precios en la plataforma soportan tanto montos directos
+                  como rangos según volumen de pedido.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 min-w-0">
+                <div className="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-zinc-200/70 shadow-2xs space-y-2 min-w-0">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 font-bold block">
+                    Caso 1 • Precio fijo unitario
+                  </span>
+                  <h4 className="font-montserrat font-bold text-sm text-zinc-950">
+                    Escribir el valor en el campo priceCOP
+                  </h4>
+                  <p className="text-xs text-zinc-600 leading-relaxed">
+                    Puedes escribir <code>$25.635 COP</code> o simplemente{" "}
+                    <code>25000</code>. La web se encarga de formatear los
+                    puntos de miles y la sigla COP automáticamente.
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-zinc-200/70 shadow-2xs space-y-2 min-w-0">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 font-bold block">
+                    Caso 2 • Escala de volumen
+                  </span>
+                  <h4 className="font-montserrat font-bold text-sm text-zinc-950">
+                    Rangos según cantidad requerida
+                  </h4>
+                  <p className="text-xs text-zinc-600 leading-relaxed">
+                    Si el costo disminuye por escala (ej: esferos publicitarios),
+                    puedes ingresar: <code>$500 - $580 COP</code>.
                   </p>
                 </div>
               </div>
 
-              {/* Option B: Eliminar permanentemente */}
-              <div className="p-6 rounded-2xl bg-[#181822] border border-white/10 hover:border-red-500/40 transition-all space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center">
-                  <Trash2 className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-red-400 font-bold block mb-1">
-                    ELIMINACIÓN DEFINITIVA
-                  </span>
-                  <h3 className="text-lg font-montserrat font-bold text-white uppercase">
-                    Borrar un Producto de la Base de Datos
-                  </h3>
-                </div>
-                <p className="text-xs text-zinc-300 leading-relaxed">
-                  Si una referencia fue descontinuada de fábrica y nunca volverá a producirse, puedes borrarla por completo:
-                </p>
-
-                <div className="p-3.5 rounded-xl bg-[#111116] border border-white/10 space-y-2 text-xs">
-                  <strong className="text-white block font-mono">Paso a paso:</strong>
-                  <ol className="text-[11px] text-zinc-300 space-y-1.5 pl-4 list-decimal">
-                    <li>Abre el producto en el editor de `/admin`.</li>
-                    <li>En la esquina inferior derecha (al lado del botón verde <em>Publish</em>), haz clic en el botón de tres puntos horizontales <code>...</code>.</li>
-                    <li>Selecciona la opción en rojo <strong>&ldquo;Delete&rdquo; (Eliminar)</strong>.</li>
-                    <li>Confirma la eliminación. El artículo se borrará de forma permanente.</li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-
-            {/* Tip Alert */}
-            <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-              <div className="text-xs text-zinc-300 leading-relaxed">
-                <strong className="text-amber-300 block mb-0.5">Consejo para ventas:</strong>
-                Recomendamos preferir <strong>desmarcar &ldquo;¿Producto Activo?&rdquo;</strong> en lugar de eliminar, para que el cliente conserve el historial de referencias cotizadas y precios históricos.
+              {/* Step by step instructions */}
+              <div className="p-5 rounded-2xl bg-zinc-50/80 border border-zinc-200/80 space-y-3 min-w-0">
+                <h4 className="font-montserrat font-bold text-xs uppercase tracking-wider text-zinc-900">
+                  Instrucciones paso a paso:
+                </h4>
+                <ol className="list-decimal pl-4 space-y-1.5 text-xs text-zinc-600">
+                  <li>
+                    Entra a{" "}
+                    <Link
+                      href="/admin"
+                      className="font-semibold text-[#E30613] hover:underline"
+                    >
+                      /admin
+                    </Link>{" "}
+                    y haz clic sobre el producto que deseas actualizar.
+                  </li>
+                  <li>
+                    Modifica el campo <strong>Precio en COP (priceCOP)</strong>.
+                  </li>
+                  <li>
+                    Si deseas actualizar las especificaciones, agrega o edita los
+                    elementos del listado de viñetas.
+                  </li>
+                  <li>
+                    Pulsa <strong>Publish</strong>. La actualización impacta la
+                    web en milisegundos.
+                  </li>
+                </ol>
               </div>
             </div>
           </div>
         )}
 
         {/* ============================================================== */}
-        {/* TAB 4: BUENAS PRÁCTICAS DE FOTOGRAFÍA                         */}
+        {/* TAB 3: FOTOS & GALERÍA                                         */}
         {/* ============================================================== */}
         {activeTab === "fotos" && (
-          <div className="space-y-8 animate-fadeIn">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-5 rounded-2xl bg-[#181822] border border-white/10 space-y-3">
-                <span className="text-xs font-mono text-emerald-400 font-bold uppercase block">
-                  1. FONDO LIMPIO
+          <div className="space-y-6 w-full min-w-0">
+            <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 space-y-5 min-w-0">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#E30613] block mb-1">
+                  GESTIÓN MULTIMEDIA
                 </span>
-                <h4 className="font-montserrat font-bold text-white uppercase text-sm">
-                  Fondo Blanco o Neutro
-                </h4>
-                <p className="text-xs text-zinc-300 leading-relaxed">
-                  Toma las fotografías sobre una mesa con fondo blanco, cartulina o caja de luz. Evita fondos con elementos que distraigan la atención de tu logo y producto.
+                <h3 className="font-montserrat font-bold text-lg sm:text-xl text-zinc-950">
+                  Fotografía de producto y galería secundaria
+                </h3>
+                <p className="text-xs text-zinc-600 mt-1 max-w-2xl leading-relaxed">
+                  Para que el catálogo luzca impecable y profesional, sigue estas
+                  recomendaciones de encuadre y formato.
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#181822] border border-white/10 space-y-3">
-                <span className="text-xs font-mono text-emerald-400 font-bold uppercase block">
-                  2. PROPORCIÓN CUADRADA
-                </span>
-                <h4 className="font-montserrat font-bold text-white uppercase text-sm">
-                  Resolución 1200 x 1200 px
-                </h4>
-                <p className="text-xs text-zinc-300 leading-relaxed">
-                  Las fotos cuadradas (1:1) o ligeramente rectangulares (4:3) se adaptan perfectamente tanto a computadores como a pantallas de celular sin recortar los bordes.
-                </p>
-              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 min-w-0">
+                <div className="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-zinc-200/70 shadow-2xs space-y-2 min-w-0">
+                  <div className="w-8 h-8 rounded-xl bg-red-50 text-[#E30613] flex items-center justify-center">
+                    <Camera className="w-4 h-4" />
+                  </div>
+                  <h4 className="font-montserrat font-bold text-xs text-zinc-950 uppercase">
+                    1. Proporción cuadrada o 4:3
+                  </h4>
+                  <p className="text-xs text-zinc-600 leading-relaxed">
+                    Fotografía con fondo blanco o neutro para que el artículo sea
+                    el protagonista en la tarjeta y en la ficha de producto.
+                  </p>
+                </div>
 
-              <div className="p-5 rounded-2xl bg-[#181822] border border-white/10 space-y-3">
-                <span className="text-xs font-mono text-emerald-400 font-bold uppercase block">
-                  3. FORMATOS COMPATIBLES
-                </span>
-                <h4 className="font-montserrat font-bold text-white uppercase text-sm">
-                  JPG, PNG o WebP
-                </h4>
-                <p className="text-xs text-zinc-300 leading-relaxed">
-                  Puedes subir fotos tomadas directamente con tu celular (iPhone o Android). El CMS se encarga automáticamente de comprimir y optimizar el peso sin perder nitidez.
-                </p>
+                <div className="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-zinc-200/70 shadow-2xs space-y-2 min-w-0">
+                  <div className="w-8 h-8 rounded-xl bg-red-50 text-[#E30613] flex items-center justify-center">
+                    <Layers className="w-4 h-4" />
+                  </div>
+                  <h4 className="font-montserrat font-bold text-xs text-zinc-950 uppercase">
+                    2. Galería de fotos extra
+                  </h4>
+                  <p className="text-xs text-zinc-600 leading-relaxed">
+                    Dentro del campo <strong>Galería Secundaria</strong> puedes
+                    subir fotos de detalle: acercamiento del logo, textura del
+                    sustrato o empaque.
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-zinc-200/70 shadow-2xs space-y-2 min-w-0">
+                  <div className="w-8 h-8 rounded-xl bg-red-50 text-[#E30613] flex items-center justify-center">
+                    <Smartphone className="w-4 h-4" />
+                  </div>
+                  <h4 className="font-montserrat font-bold text-xs text-zinc-950 uppercase">
+                    3. Fotos desde el celular
+                  </h4>
+                  <p className="text-xs text-zinc-600 leading-relaxed">
+                    Puedes ingresar a <code>/admin</code> desde tu celular y
+                    subir fotos tomadas directamente en planta con la cámara.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Practical Checklist */}
-            <div className="p-6 rounded-2xl bg-[#151520] border border-white/10 space-y-4">
-              <div className="flex items-center gap-2 text-sm font-montserrat font-bold text-white uppercase">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                <span>Checklist de Calidad para el Catálogo</span>
+            <div className="p-5 rounded-3xl bg-zinc-900 text-white shadow-xl space-y-2">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-red-400 font-bold block">
+                CONSEJO TÉCNICO DE PRODUCCIÓN
+              </span>
+              <p className="text-xs text-zinc-300 leading-relaxed">
+                El panel administrativo es totalmente compatible con teléfonos
+                móviles. Puedes ingresar desde Chrome o Safari en tu smartphone,
+                tomar la fotografía directamente con la cámara del dispositivo y
+                publicarla al instante; el servidor la comprime y optimiza a
+                formato WebP sin saturar la red.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* ============================================================== */}
+        {/* TAB 4: PAUSAR O ELIMINAR                                      */}
+        {/* ============================================================== */}
+        {activeTab === "eliminar" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 min-w-0">
+            {/* Opción A: Desactivar (Recomendada) */}
+            <div className="p-6 sm:p-7 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 space-y-4 min-w-0">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-800 text-xs font-mono font-bold">
+                <EyeOff className="w-3.5 h-3.5 text-[#E30613]" />
+                OPCIÓN RECOMENDADA
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-zinc-300">
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-[#101017] border border-white/5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>El producto está bien iluminado y sin sombras duras.</span>
-                </div>
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-[#101017] border border-white/5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>El precio en COP incluye el símbolo de pesos ($).</span>
-                </div>
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-[#101017] border border-white/5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Se especifica la cantidad mínima (ej. Mínimo 25 o 50 uds).</span>
-                </div>
-                <div className="flex items-center gap-2 p-3 rounded-lg bg-[#101017] border border-white/5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Las especificaciones indican el material (Acero, Cartón, Poliéster).</span>
-                </div>
+
+              <h4 className="font-montserrat font-bold text-base text-zinc-950">
+                Pausar producto (Agotado temporal)
+              </h4>
+
+              <p className="text-xs text-zinc-600 leading-relaxed">
+                Si un artículo se quedó sin inventario o cambió de temporada,
+                desmarca la casilla{" "}
+                <strong>&ldquo;¿Producto Activo / Visible?&rdquo;</strong> y
+                presiona <em>Publish</em>.
+              </p>
+
+              <div className="p-4 rounded-2xl bg-zinc-50/80 border border-zinc-200/80 text-xs text-zinc-700 space-y-1.5 min-w-0">
+                <strong className="text-zinc-950 block font-semibold">
+                  Ventajas:
+                </strong>
+                <ul className="list-disc pl-4 space-y-1 text-zinc-600 text-[11px]">
+                  <li>El producto desaparece al instante de la web pública.</li>
+                  <li>
+                    Conservas la fotografía, especificaciones y precios para
+                    reactivarlo en un clic cuando vuelva a entrar inventario.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Opción B: Eliminar definitivamente */}
+            <div className="p-6 sm:p-7 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 space-y-4 min-w-0">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-800 text-xs font-mono font-bold">
+                <Trash2 className="w-3.5 h-3.5 text-[#E30613]" />
+                BORRADO PERMANENTE
+              </div>
+
+              <h4 className="font-montserrat font-bold text-base text-zinc-950">
+                Eliminar artículo definitivamente
+              </h4>
+
+              <p className="text-xs text-zinc-600 leading-relaxed">
+                Para artículos descontinuados que no volverán a producirse:
+              </p>
+
+              <ol className="list-decimal pl-4 space-y-1.5 text-xs text-zinc-600">
+                <li>
+                  Abre el documento en{" "}
+                  <Link
+                    href="/admin"
+                    className="font-medium text-zinc-900 hover:underline"
+                  >
+                    /admin
+                  </Link>
+                  .
+                </li>
+                <li>
+                  Haz clic en los tres puntos horizontales (<code>...</code>) en
+                  la esquina inferior derecha.
+                </li>
+                <li>
+                  Selecciona <strong>Delete</strong> y confirma.
+                </li>
+              </ol>
+
+              <div className="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200/80 text-[11px] text-amber-900">
+                Nota: Esta acción borra el registro de la base de datos de Sanity
+                y no se puede deshacer.
               </div>
             </div>
           </div>
         )}
 
         {/* ============================================================== */}
-        {/* TAB 5: PREGUNTAS FRECUENTES (FAQ)                              */}
+        {/* TAB 5: PREGUNTAS FRECUENTES (FAQ) & AJUSTES GLOBALES           */}
         {/* ============================================================== */}
         {activeTab === "faq" && (
-          <div className="space-y-4 animate-fadeIn">
-            <div className="p-5 rounded-xl bg-[#181822] border border-white/10 space-y-2">
-              <strong className="text-white text-sm block font-montserrat">
-                ¿Cuánto tiempo tarda en verse un cambio en la página web?
-              </strong>
-              <p className="text-xs text-zinc-300 leading-relaxed">
-                ¡Es instantáneo! En el momento en que haces clic en <strong>Publish</strong> en el panel de `/admin`, cualquier persona que entre a la web o refresque la página verá los nuevos productos, precios o fotos de inmediato.
-              </p>
+          <div className="space-y-6 w-full min-w-0">
+            {/* Global Settings Sub-Panel */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 space-y-5 min-w-0">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#E30613] block mb-1">
+                  AJUSTES GLOBALES DE CONTACTO &amp; TARIFARIOS
+                </span>
+                <h3 className="font-montserrat font-bold text-lg sm:text-xl text-zinc-950">
+                  Control de WhatsApp, Catálogos PDF y Avisos
+                </h3>
+                <p className="text-xs text-zinc-600 mt-1 max-w-2xl leading-relaxed">
+                  En el panel, dentro de{" "}
+                  <strong>Configuración General de la Web</strong>, puedes
+                  modificar datos corporativos clave sin requerir intervención de
+                  programación.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 min-w-0">
+                <div className="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-zinc-200/70 shadow-2xs space-y-2 min-w-0">
+                  <div className="w-8 h-8 rounded-xl bg-red-50 text-[#E30613] flex items-center justify-center">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <h4 className="font-montserrat font-bold text-xs text-zinc-950 uppercase">
+                    1. Línea de WhatsApp
+                  </h4>
+                  <p className="text-xs text-zinc-600 leading-relaxed">
+                    Si el asesor comercial de planta cambia de línea, actualiza
+                    el número con código de país (ej: <code>573163200181</code>).
+                    Todas las cotizaciones del catálogo se dirigen a la nueva
+                    línea.
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-zinc-200/70 shadow-2xs space-y-2 min-w-0">
+                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
+                    <FileDown className="w-4 h-4" />
+                  </div>
+                  <h4 className="font-montserrat font-bold text-xs text-zinc-950 uppercase">
+                    2. Catálogos en PDF
+                  </h4>
+                  <p className="text-xs text-zinc-600 leading-relaxed">
+                    Sube las nuevas ediciones del Catálogo Maestro o de Esferos.
+                    Los botones de descarga pública entregarán el nuevo
+                    documento inmediatamente.
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-white/70 backdrop-blur-md border border-zinc-200/70 shadow-2xs space-y-2 min-w-0">
+                  <div className="w-8 h-8 rounded-xl bg-red-50 text-[#E30613] flex items-center justify-center">
+                    <Megaphone className="w-4 h-4" />
+                  </div>
+                  <h4 className="font-montserrat font-bold text-xs text-zinc-950 uppercase">
+                    3. Barra de Anuncios
+                  </h4>
+                  <p className="text-xs text-zinc-600 leading-relaxed">
+                    Activa la casilla para mostrar avisos de temporada
+                    (&ldquo;Cierre de pedidos fin de año&rdquo;, promociones por
+                    volumen) en la cabecera del catálogo.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="p-5 rounded-xl bg-[#181822] border border-white/10 space-y-2">
-              <strong className="text-white text-sm block font-montserrat">
-                ¿Puedo usar el panel desde mi celular?
-              </strong>
-              <p className="text-xs text-zinc-300 leading-relaxed">
-                Sí. La interfaz de Sanity Studio es 100% responsiva. Puedes abrir <code>tu-web.com/admin</code> desde Chrome o Safari en tu smartphone, tomar una foto con la cámara del celular y publicarla directamente.
-              </p>
-            </div>
+            {/* FAQ Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-w-0">
+              <div className="p-5 sm:p-6 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_8px_30px_rgb(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] ring-1 ring-zinc-950/5 space-y-2 min-w-0">
+                <h4 className="font-montserrat font-bold text-xs sm:text-sm text-zinc-950">
+                  ¿Cuánto tiempo tarda en reflejarse un cambio en la web?
+                </h4>
+                <p className="text-xs text-zinc-600 leading-relaxed">
+                  El reflejo es instantáneo. Al pulsar <strong>Publish</strong> en
+                  el panel de Sanity, cualquier cliente que visite o recargue{" "}
+                  <Link
+                    href="/catalogo"
+                    className="text-[#E30613] hover:underline font-mono"
+                  >
+                    /catalogo
+                  </Link>{" "}
+                  verá los nuevos precios, fotos o referencias de inmediato.
+                </p>
+              </div>
 
-            <div className="p-5 rounded-xl bg-[#181822] border border-white/10 space-y-2">
-              <strong className="text-white text-sm block font-montserrat">
-                ¿Tiene algún costo mensual mantener este panel?
-              </strong>
-              <p className="text-xs text-zinc-300 leading-relaxed">
-                No. El plan gratuito de Sanity incluye hasta 20 usuarios administradores, 500.000 lecturas al mes y 100 GB de fotos en CDN, lo cual es más que suficiente para catálogos corporativos sin pagar un solo peso.
-              </p>
-            </div>
+              <div className="p-5 sm:p-6 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_8px_30px_rgb(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] ring-1 ring-zinc-950/5 space-y-2 min-w-0">
+                <h4 className="font-montserrat font-bold text-xs sm:text-sm text-zinc-950">
+                  ¿Puedo crear nuevas categorías de productos?
+                </h4>
+                <p className="text-xs text-zinc-600 leading-relaxed">
+                  Sí. Puedes ingresar a la sección <strong>Categorías</strong> del
+                  panel o hacer clic en el botón <strong>+</strong> dentro del
+                  selector de categoría de cualquier producto para añadir una nueva
+                  sección (ej: &ldquo;Gorras &amp; Textil Corporativo&rdquo;).
+                </p>
+              </div>
 
-            <div className="p-5 rounded-xl bg-[#181822] border border-white/10 space-y-2">
-              <strong className="text-white text-sm block font-montserrat">
-                ¿Qué pasa si borro un producto por error?
-              </strong>
-              <p className="text-xs text-zinc-300 leading-relaxed">
-                Sanity guarda un historial de revisiones. Sin embargo, para evitar accidentes, siempre recomendamos usar la casilla <strong>&ldquo;¿Producto Activo?&rdquo;</strong> para desmarcarlo en lugar de eliminarlo permanentemente.
-              </p>
+              <div className="p-5 sm:p-6 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_8px_30px_rgb(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] ring-1 ring-zinc-950/5 space-y-2 min-w-0">
+                <h4 className="font-montserrat font-bold text-xs sm:text-sm text-zinc-950">
+                  ¿Qué formato de imagen es el más adecuado?
+                </h4>
+                <p className="text-xs text-zinc-600 leading-relaxed">
+                  Formatos JPG, PNG o WebP tomados con buena iluminación. El CMS
+                  redimensiona y optimiza el archivo de forma automática para que
+                  cargue velozmente en conexiones móviles.
+                </p>
+              </div>
+
+              <div className="p-5 sm:p-6 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_8px_30px_rgb(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] ring-1 ring-zinc-950/5 space-y-2 min-w-0">
+                <h4 className="font-montserrat font-bold text-xs sm:text-sm text-zinc-950">
+                  ¿Cómo agregar más usuarios al panel?
+                </h4>
+                <p className="text-xs text-zinc-600 leading-relaxed">
+                  Desde{" "}
+                  <a
+                    href="https://sanity.io/manage"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#E30613] hover:underline font-mono"
+                  >
+                    sanity.io/manage
+                  </a>{" "}
+                  puedes invitar a otros miembros del equipo comercial con su
+                  correo electrónico de Google o corporativo sin costo adicional.
+                </p>
+              </div>
             </div>
           </div>
         )}
 
-        {/* Bottom Navigation CTA */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Bottom Navigation */}
+        <div className="pt-6 border-t border-zinc-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 min-w-0">
           <Link
             href="/catalogo"
-            className="text-xs font-montserrat font-bold text-zinc-400 hover:text-white uppercase transition-colors"
+            className="text-xs font-montserrat font-bold text-zinc-600 hover:text-zinc-950 uppercase tracking-wider transition-colors inline-flex items-center gap-1"
           >
             ← Volver al Catálogo Público
           </Link>
 
           <Link
             href="/admin"
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#C50510] via-[#E30613] to-[#FF1E27] text-white font-montserrat font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(227,6,19,0.4)] transition-all flex items-center gap-2"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all shadow-xs"
           >
             <span>Ir al Editor de Catálogo (/admin)</span>
-            <ChevronRight className="w-4 h-4" />
+            <ArrowRight className="w-3.5 h-3.5 text-[#E30613]" />
           </Link>
         </div>
       </div>

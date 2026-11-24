@@ -377,7 +377,7 @@ _Generado desde la plataforma web oficial de Impresos Americana._ Deseo confirma
                   <select
                     value={category}
                     onChange={(e) => changeCategory(e.target.value as ProductCategory)}
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3.5 text-zinc-900 font-montserrat font-bold text-sm appearance-none focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors cursor-pointer"
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3.5 text-zinc-900 font-montserrat font-bold text-base sm:text-sm appearance-none focus:bg-white focus:outline-none focus:border-[#E30613] transition-colors cursor-pointer"
                   >
                     {categories.map((c) => (
                       <option key={c.id} value={c.id} className="bg-white text-zinc-900">
