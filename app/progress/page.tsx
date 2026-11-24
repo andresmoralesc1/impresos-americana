@@ -122,21 +122,6 @@ export default function ProgressPage() {
       ],
     },
     {
-      id: "dielines",
-      title: "8. Prepress Template Center & Mechanical Dielines",
-      file: "components/DielineTemplates.tsx",
-      status: "APPROVED",
-      score: "100/100",
-      criticVerdict:
-        "Self-service engineering portal for agency art directors. Provides direct instant vector downloads of structural die-cut blueprints (.AI & .PDF compatible SVG) for floor POP stands, rigid boxes, folders, and roll-ups with cut, crease, and bleed layers.",
-      targetRef: "Commercial Prepress & Mechanical Blueprint Guidelines",
-      checks: [
-        "Instant vector dieline downloads for Adobe Illustrator",
-        "Layered cut, fold/crease, and bleed guidelines",
-        "Prepress technical checklist (CMYK FOGRA39, curves, 300 DPI)",
-      ],
-    },
-    {
       id: "process",
       title: "9. Industrial Workflow & Trust Pipeline",
       file: "components/ProcessSection.tsx",

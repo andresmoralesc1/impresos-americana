@@ -63,8 +63,8 @@ export function ServicesOverview() {
         "Cajas plegadizas en sulfatada calibres 14 a 18 pt y cajas e-commerce en microcorrugado anti-impacto. Acabados con barniz UV sectorizado, estampado foil y kits corporativos.",
       image: "/images/real/kit-corporativo.jpg",
       highlights: ["Sulfatada 14-18 pt", "Microcorrugado Onda E", "Planos vectoriales"],
-      ctaText: "Ver Troqueles",
-      ctaLink: "/plantillas",
+      ctaText: "Cotizar Empaques",
+      ctaLink: "/cotizador",
     },
     {
       id: "litografia",

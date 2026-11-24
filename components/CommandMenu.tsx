@@ -76,20 +76,6 @@ export function CommandMenu({ isOpen, onClose, onOpenSampleModal }: CommandMenuP
       actionUrl: "/cotizador",
     },
     {
-      id: "troquel-pop-160",
-      title: "Plano de Troquel: Exhibidor POP 160x55 cm",
-      category: "Troquel",
-      description: "Vector listo para Illustrator con líneas de corte y hendido",
-      actionUrl: "/plantillas",
-    },
-    {
-      id: "troquel-caja",
-      title: "Plano de Troquel: Caja Rígida Imantada 25x20 cm",
-      category: "Troquel",
-      description: "Dieline mecánico con sangría perimetral de 5 mm",
-      actionUrl: "/plantillas",
-    },
-    {
       id: "cat-maestro-pdf",
       title: "Descargar Catálogo Maestro Impresos Americana (PDF)",
       category: "Catálogo PDF",

@@ -170,14 +170,6 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/plantillas"
-                    className="inline-block py-0.5 hover:text-[#E30613] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#E30613] rounded"
-                  >
-                    Planos & Troqueles (.AI / .PDF)
-                  </Link>
-                </li>
-                <li>
-                  <Link
                     href="/proyectos"
                     className="inline-block py-0.5 hover:text-[#E30613] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#E30613] rounded"
                   >

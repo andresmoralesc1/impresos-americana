@@ -74,7 +74,6 @@ export function Navbar() {
     { name: "Servicios", href: "/servicios" },
     { name: "Proyectos", href: "/proyectos" },
     { name: "Catálogo", href: "/catalogo" },
-    { name: "Plantillas", href: "/plantillas" },
     { name: "Contacto", href: "/contacto" },
   ];
 

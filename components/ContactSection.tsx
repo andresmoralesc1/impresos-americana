@@ -564,21 +564,6 @@ _Solicitud generada a través del formulario oficial de contacto de Impresos Ame
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
             />
-
-            {/* Floating Glassmorphic Location Pin Card */}
-            <div className="hidden sm:block absolute top-4 left-4 z-20 max-w-xs bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-zinc-200 shadow-xl">
-              <div className="flex items-center gap-2 text-xs font-montserrat font-bold text-zinc-950 uppercase tracking-wider mb-1">
-                <span className="w-2 h-2 rounded-full bg-[#E30613] animate-ping" />
-                <span>Impresos Americana S.A.S.</span>
-              </div>
-              <p className="text-[11px] text-zinc-600 font-medium">
-                Calle 16 # 4-37, Barrio San Nicolás, Cali
-              </p>
-              <div className="mt-2 pt-2 border-t border-zinc-100 flex items-center justify-between text-[10px] text-zinc-500 font-mono">
-                <span>Sector Gráfico & Litográfico</span>
-                <span className="text-emerald-700 font-bold">Muelle de Carga</span>
-              </div>
-            </div>
           </div>
 
           {/* Quick Transit & Access Tips */}
