@@ -16,11 +16,23 @@ import {
   Printer,
   TrendingDown,
 } from "lucide-react";
-import { ThreePOPViewer } from "./ThreePOPViewer";
+import dynamic from "next/dynamic";
 import { generateQuotePDF } from "@/lib/generateQuotePDF";
 import { PreflightModal } from "./PreflightModal";
 import { triggerHaptic } from "@/lib/haptics";
 import confetti from "canvas-confetti";
+
+const ThreePOPViewer = dynamic(
+  () => import("./ThreePOPViewer").then((m) => m.ThreePOPViewer),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-[350px] flex items-center justify-center bg-zinc-900 rounded-2xl text-zinc-400 text-xs font-mono">
+        Cargando simulador 3D...
+      </div>
+    ),
+  }
+);
 
 type ProductCategory = "pop" | "gran-formato" | "litografia" | "empaques";
 

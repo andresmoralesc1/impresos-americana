@@ -20,11 +20,6 @@ import {
 import { triggerHaptic } from "@/lib/haptics";
 import type { PreflightReport } from "./PreflightModal";
 
-const ShaderBackground = dynamic(
-  () => import("@/components/ui/green-border").then((m) => m.ShaderBackground),
-  { ssr: false }
-);
-
 const SampleBoxModal = dynamic(
   () => import("./SampleBoxModal").then((m) => m.SampleBoxModal),
   { ssr: false }
@@ -203,49 +198,29 @@ export function Hero() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           {/* Top Operational Status Pill */}
           <div className="flex justify-center mb-5">
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35 }}
-              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-zinc-900 text-white text-[11px] font-mono shadow-xs border border-zinc-800"
-            >
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-zinc-900 text-white text-[11px] font-mono shadow-xs border border-zinc-800">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-zinc-300 font-medium">PLANTA DIRECTA EN CALI</span>
               <span className="text-zinc-600">•</span>
               <span className="text-red-400 font-bold uppercase tracking-wider">SAN NICOLÁS</span>
-            </motion.div>
+            </div>
           </div>
 
-          {/* Central Display Typography (Punchy, Editorial & Compact) */}
+          {/* Central Display Typography (Punchy, Editorial & Compact - SSR First Paint) */}
           <div className="text-center max-w-4xl mx-auto mb-8">
-            <motion.h1
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.05 }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-montserrat font-black uppercase tracking-[-0.035em] text-zinc-950 leading-[1.02] sm:leading-[0.98]"
-            >
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-montserrat font-black uppercase tracking-[-0.035em] text-zinc-950 leading-[1.02] sm:leading-[0.98]">
               INGENIERÍA GRÁFICA & <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-950 via-[#E30613] to-red-600">
                 PRODUCCIÓN INDUSTRIAL
               </span>
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.15 }}
-              className="mt-4 text-xs sm:text-base text-zinc-600 max-w-2xl mx-auto leading-relaxed font-normal"
-            >
+            <p className="mt-4 text-xs sm:text-base text-zinc-600 max-w-2xl mx-auto leading-relaxed font-normal">
               Fabricación directa de material POP de alto impacto, gran formato UV y litografía de alta tirada. Desde prototipo estructural en 24h hasta distribución masiva en toda Colombia sin intermediarios.
-            </motion.p>
+            </p>
 
             {/* Primary Action CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.2 }}
-              className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3"
-            >
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
                 href="/cotizador"
                 onClick={() => triggerHaptic(12)}
@@ -265,15 +240,10 @@ export function Hero() {
                 <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366]" />
                 <span>Asesor de Planta Inmediato</span>
               </a>
-            </motion.div>
+            </div>
 
             {/* High-Value B2B Lead Magnet Tools Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.25 }}
-              className="mt-4 flex flex-wrap items-center justify-center gap-2.5"
-            >
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
               <button
                 type="button"
                 onClick={() => {
@@ -297,7 +267,7 @@ export function Hero() {
                 <FileCheck2 className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Pre-chequeo Técnico de Archivo / PDF</span>
               </button>
-            </motion.div>
+            </div>
 
             {/* Micro Trust Strip */}
             <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-[11px] font-mono text-zinc-500">
@@ -331,10 +301,8 @@ export function Hero() {
             onMouseLeave={() => setIsAutoPlayPaused(false)}
             className="mt-8 rounded-3xl bg-white border border-zinc-200 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] overflow-hidden relative"
           >
-            {/* Subtle Ambient Shader Edge Glow */}
-            <div className="absolute inset-0 pointer-events-none opacity-40">
-              <ShaderBackground className="w-full h-full" palette="brand" />
-            </div>
+            {/* Ambient Subdued Edge Glow (Hardware Accelerated CSS) */}
+            <div className="absolute -inset-[1px] bg-gradient-to-r from-red-500/10 via-zinc-200/40 to-red-500/10 rounded-3xl pointer-events-none -z-10" />
 
             <div className="relative z-10 p-4 sm:p-6 lg:p-8">
               {/* Top Navigation Tabs with Dynamic Progress Indicator */}
@@ -468,6 +436,7 @@ export function Hero() {
                           alt={currentSlide.title}
                           fill
                           priority
+                          fetchPriority="high"
                           sizes="(max-width: 1024px) 100vw, 55vw"
                           className="object-cover group-hover:scale-105 transition-transform duration-700"
                         />

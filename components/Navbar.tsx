@@ -26,11 +26,18 @@ export function Navbar() {
   const [sampleModalOpen, setSampleModalOpen] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      if (total > 0) {
-        setScrollProgress(Math.min(100, Math.max(0, (window.scrollY / total) * 100)));
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          const total = document.documentElement.scrollHeight - window.innerHeight;
+          if (total > 0) {
+            setScrollProgress(Math.min(100, Math.max(0, (window.scrollY / total) * 100)));
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
