@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Hero } from "@/components/Hero";
+import { LithoPosterHero } from "@/components/LithoPosterHero";
 import { ServicesOverview } from "@/components/ServicesOverview";
 import { ProcessSection } from "@/components/ProcessSection";
 import { FeaturedProjects } from "@/components/FeaturedProjects";
@@ -19,8 +19,8 @@ export default function Home() {
 
   return (
     <div className="text-zinc-900 selection:bg-[#E30613] selection:text-white">
-      {/* 1. Hero Principal con Showcase de Fotos Reales */}
-      <Hero />
+      {/* 1. Hero Principal con Tipografía Viva Litográfica & POP */}
+      <LithoPosterHero />
 
       {/* 2. Franja de Confianza / Sectores Atendidos (Modern Trust Strip) */}
       <div className="border-t border-b border-zinc-200/80 bg-zinc-50/70 py-4 sm:py-5 overflow-hidden">

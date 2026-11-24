@@ -10,7 +10,7 @@ interface LithoPosterHeroProps {
   initialShowCharacter?: boolean;
 }
 
-export function LithoPosterHero({ initialShowCharacter = false }: LithoPosterHeroProps) {
+export function LithoPosterHero({ initialShowCharacter = true }: LithoPosterHeroProps) {
   const [showCharacter, setShowCharacter] = useState(initialShowCharacter);
 
   return (
