@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { NextStudio } from "next-sanity/studio";
 import config from "@/sanity.config";
@@ -14,20 +14,69 @@ import {
   ShieldAlert,
   Copy,
   Check,
+  Lock,
+  Eye,
+  EyeOff,
+  LogOut,
+  KeyRound,
+  ShieldCheck,
 } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
 
+const ADMIN_PASSWORD = "Lamismadesiempre";
+const AUTH_STORAGE_KEY = "ia_admin_auth";
+
 export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [copiedKey, setCopiedKey] = useState(false);
 
-  // If Sanity is already connected with a real Project ID, render Sanity Studio directly
-  if (isSanityConfigured) {
-    return (
-      <div className="fixed inset-0 z-50 bg-white">
-        <NextStudio config={config} />
-      </div>
-    );
-  }
+  // Check session storage on client mount
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem(AUTH_STORAGE_KEY);
+      if (stored === "true") {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    } catch {
+      setIsAuthenticated(false);
+    }
+  }, []);
+
+  const handleLogin = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    triggerHaptic(10);
+    setErrorMsg(null);
+
+    if (passwordInput.trim() === ADMIN_PASSWORD) {
+      try {
+        sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
+      } catch {
+        // fallback
+      }
+      setIsAuthenticated(true);
+      setPasswordInput("");
+    } else {
+      triggerHaptic(20);
+      setErrorMsg("Contraseña incorrecta. Verifica la clave proporcionada.");
+    }
+  };
+
+  const handleLogout = () => {
+    triggerHaptic(10);
+    try {
+      sessionStorage.removeItem(AUTH_STORAGE_KEY);
+    } catch {
+      // fallback
+    }
+    setIsAuthenticated(false);
+    setPasswordInput("");
+    setErrorMsg(null);
+  };
 
   const handleCopyEnv = () => {
     triggerHaptic(10);
@@ -37,9 +86,148 @@ export default function AdminPage() {
     setTimeout(() => setCopiedKey(false), 2500);
   };
 
+  // Prevent hydration flicker while checking session
+  if (isAuthenticated === null) {
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-red-500 border-t-transparent animate-spin" />
+      </div>
+    );
+  }
+
+  // Login Gate Screen
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen w-full relative bg-gradient-to-br from-zinc-900 via-zinc-950 to-black text-white flex items-center justify-center p-4 selection:bg-[#E30613] selection:text-white overflow-hidden">
+        {/* Ambient lighting */}
+        <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-red-600/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute -bottom-32 right-1/4 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[160px] pointer-events-none" />
+
+        <div className="max-w-md w-full relative z-10 space-y-6">
+          {/* Card */}
+          <div className="p-7 sm:p-8 rounded-3xl bg-zinc-900/80 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.15)] space-y-6">
+            {/* Header */}
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-xs font-mono font-bold text-red-400">
+                <Lock className="w-3.5 h-3.5 text-[#E30613]" />
+                PANEL PROTEGIDO
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-montserrat font-black uppercase tracking-tight text-white">
+                Impresos Americana
+              </h1>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Ingresa la contraseña de administración para acceder al editor de catálogo y configuración.
+              </p>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-400 block">
+                  Contraseña del Administrador
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={passwordInput}
+                    onChange={(e) => {
+                      setPasswordInput(e.target.value);
+                      if (errorMsg) setErrorMsg(null);
+                    }}
+                    placeholder="••••••••••••••••"
+                    autoFocus
+                    required
+                    className="w-full px-4 py-3 pr-11 rounded-xl bg-zinc-800/80 border border-white/10 text-white placeholder-zinc-500 text-sm font-mono focus:outline-hidden focus:ring-2 focus:ring-[#E30613] focus:border-transparent transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    tabIndex={-1}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white p-1 transition-colors"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="w-4 h-4" />
+                    ) : (
+                      <Eye className="w-4 h-4" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {errorMsg && (
+                <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-red-300 flex items-center gap-2 animate-shake">
+                  <ShieldAlert className="w-4 h-4 text-red-400 shrink-0" />
+                  <span>{errorMsg}</span>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="w-full py-3.5 px-4 rounded-xl bg-[#E30613] hover:bg-[#c50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-red-600/30 active:scale-[0.99] flex items-center justify-center gap-2"
+              >
+                <KeyRound className="w-4 h-4" />
+                <span>Desbloquear Panel</span>
+              </button>
+            </form>
+
+            <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400">
+              <Link
+                href="/"
+                className="hover:text-white transition-colors"
+              >
+                ← Volver al sitio
+              </Link>
+              <Link
+                href="/guia-admin"
+                className="text-red-400 hover:text-red-300 font-semibold transition-colors"
+              >
+                Guía de Admin →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Authenticated: If Sanity is connected with a real Project ID, render NextStudio directly with logout bar
+  if (isSanityConfigured) {
+    return (
+      <div className="fixed inset-0 z-50 bg-white">
+        <div className="absolute top-2 right-4 z-[999999] flex items-center gap-2">
+          <button
+            onClick={handleLogout}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900/90 hover:bg-zinc-900 text-white text-xs font-montserrat font-semibold shadow-lg backdrop-blur-md transition-all"
+            title="Cerrar Sesión de Administrador"
+          >
+            <LogOut className="w-3.5 h-3.5 text-red-400" />
+            <span>Cerrar Sesión</span>
+          </button>
+        </div>
+        <NextStudio config={config} />
+      </div>
+    );
+  }
+
+  // Authenticated: Sanity setup & instruction dashboard
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 p-4 sm:p-8 lg:p-12 flex flex-col items-center justify-center">
       <div className="max-w-4xl w-full space-y-8">
+        {/* Top Session Bar */}
+        <div className="flex items-center justify-between p-3 px-4 rounded-2xl bg-white border border-zinc-200/90 shadow-2xs">
+          <div className="flex items-center gap-2 text-xs font-mono text-zinc-700">
+            <ShieldCheck className="w-4 h-4 text-[#E30613]" />
+            <span>Sesión activa como Administrador</span>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 text-xs font-montserrat font-semibold transition-all"
+          >
+            <LogOut className="w-3.5 h-3.5 text-zinc-500" />
+            <span>Cerrar Sesión</span>
+          </button>
+        </div>
+
         {/* Brand Header */}
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-xs font-mono font-bold text-[#E30613]">
@@ -67,8 +255,8 @@ export default function AdminPage() {
         {/* 4 Core Capabilities Overview Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* 1. Subir */}
-          <div className="p-5 rounded-2xl bg-white border border-zinc-200 hover:border-emerald-500/50 transition-all space-y-3 shadow-sm group">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+          <div className="p-5 rounded-2xl bg-white border border-zinc-200 hover:border-red-500/50 transition-all space-y-3 shadow-sm group">
+            <div className="w-10 h-10 rounded-xl bg-red-50 text-[#E30613] border border-red-200 flex items-center justify-center group-hover:scale-110 transition-transform">
               <UploadCloud className="w-5 h-5" />
             </div>
             <h3 className="font-montserrat font-bold text-sm text-zinc-950 uppercase tracking-wider">
@@ -77,7 +265,7 @@ export default function AdminPage() {
             <p className="text-xs text-zinc-600 leading-relaxed">
               Crea artículos en segundos con nombre, referencia, precio en COP, pedido mínimo y fotos con compresión automática CDN.
             </p>
-            <div className="pt-1 text-[11px] font-mono text-emerald-600">
+            <div className="pt-1 text-[11px] font-mono text-[#E30613]">
               ✓ Galería de fotos múltiples
             </div>
           </div>
@@ -189,8 +377,8 @@ export default function AdminPage() {
                   >
                     {copiedKey ? (
                       <>
-                        <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        <span className="text-emerald-600">Copiado</span>
+                        <Check className="w-3.5 h-3.5 text-[#E30613]" />
+                        <span className="text-[#E30613] font-semibold">Copiado</span>
                       </>
                     ) : (
                       <>

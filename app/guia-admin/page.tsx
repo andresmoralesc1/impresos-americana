@@ -22,6 +22,8 @@ import {
   Megaphone,
   Smartphone,
   Copy,
+  Lock,
+  Globe,
 } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
 
@@ -31,6 +33,8 @@ export default function GuiaAdminPage() {
   >("crear");
   const [shared, setShared] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [copiedAdminPass, setCopiedAdminPass] = useState(false);
+  const [copiedNcUser, setCopiedNcUser] = useState(false);
 
   const handlePrint = () => {
     triggerHaptic(10);
@@ -58,6 +62,20 @@ export default function GuiaAdminPage() {
     window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
     setShared(true);
     setTimeout(() => setShared(false), 3000);
+  };
+
+  const handleCopyAdminPass = () => {
+    triggerHaptic(10);
+    navigator.clipboard.writeText("Lamismadesiempre");
+    setCopiedAdminPass(true);
+    setTimeout(() => setCopiedAdminPass(false), 2000);
+  };
+
+  const handleCopyNcUser = () => {
+    triggerHaptic(10);
+    navigator.clipboard.writeText("impresosamericana");
+    setCopiedNcUser(true);
+    setTimeout(() => setCopiedNcUser(false), 2000);
   };
 
   return (
@@ -89,12 +107,26 @@ export default function GuiaAdminPage() {
                 Panel Sanity Studio v4
               </span>
             </div>
-            <p className="text-xs text-zinc-600 truncate">
-              Ruta directa de acceso:{" "}
+            <div className="flex flex-wrap items-center gap-2 text-xs text-zinc-600">
+              <span>Ruta:</span>
               <code className="px-2 py-0.5 rounded-md bg-white/90 border border-zinc-200 font-mono text-zinc-950 font-bold text-[11px] shadow-2xs">
                 /admin
               </code>
-            </p>
+              <span className="text-zinc-300">|</span>
+              <span>Clave:</span>
+              <button
+                onClick={handleCopyAdminPass}
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-red-50 hover:bg-red-100 border border-red-200 font-mono text-[#E30613] font-bold text-[11px] shadow-2xs transition-colors"
+                title="Copiar contraseña del panel"
+              >
+                <span>Lamismadesiempre</span>
+                {copiedAdminPass ? (
+                  <Check className="w-3 h-3 text-[#E30613]" />
+                ) : (
+                  <Copy className="w-3 h-3 text-red-400" />
+                )}
+              </button>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-2 w-full md:w-auto shrink-0">
@@ -672,6 +704,141 @@ export default function GuiaAdminPage() {
         {/* ============================================================== */}
         {activeTab === "faq" && (
           <div className="space-y-6 w-full min-w-0">
+            {/* Credentials & Access Information Card */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 space-y-6 min-w-0">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#E30613] block mb-1">
+                  SEGURIDAD &amp; GESTIÓN DEL SERVICIO
+                </span>
+                <h3 className="font-montserrat font-bold text-lg sm:text-xl text-zinc-950">
+                  Credenciales del Panel y Dominio Namecheap
+                </h3>
+                <p className="text-xs text-zinc-600 mt-1 max-w-2xl leading-relaxed">
+                  Datos oficiales para administrar el catálogo web de Impresos Americana y configurar el dominio corporativo <code>impresosamericana.com</code>.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 min-w-0">
+                {/* 1. Panel Web */}
+                <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950 text-white space-y-4 shadow-md flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/20 border border-red-500/30 text-red-400 text-[11px] font-mono font-bold">
+                      <Lock className="w-3.5 h-3.5 text-[#E30613]" />
+                      PANEL WEB (/ADMIN)
+                    </div>
+                    <h4 className="font-montserrat font-black text-base text-white uppercase tracking-tight">
+                      Acceso al Gestor de Catálogo
+                    </h4>
+                    <p className="text-xs text-zinc-300 leading-relaxed">
+                      El panel está protegido con contraseña. Ingresa desde cualquier navegador a la ruta <code>/admin</code> para desbloquear la sesión.
+                    </p>
+
+                    <div className="space-y-2 pt-1 font-mono text-xs">
+                      <div className="p-3 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-between gap-2">
+                        <span className="text-zinc-400 text-[11px]">Ruta:</span>
+                        <span className="text-white font-bold text-[11px] sm:text-xs truncate">/admin</span>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-between gap-2">
+                        <span className="text-zinc-400 text-[11px]">Contraseña:</span>
+                        <div className="flex items-center gap-2">
+                          <code className="text-red-400 font-bold font-mono text-sm">Lamismadesiempre</code>
+                          <button
+                            onClick={handleCopyAdminPass}
+                            className="p-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors"
+                            title="Copiar contraseña"
+                          >
+                            {copiedAdminPass ? (
+                              <Check className="w-3.5 h-3.5 text-red-400" />
+                            ) : (
+                              <Copy className="w-3.5 h-3.5" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link
+                    href="/admin"
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-[#E30613] hover:bg-[#c50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all shadow-md"
+                  >
+                    <span>Abrir Panel /admin</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
+                {/* 2. Namecheap */}
+                <div className="p-5 sm:p-6 rounded-2xl bg-white border border-zinc-200/90 shadow-2xs space-y-4 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-mono font-bold">
+                      <Globe className="w-3.5 h-3.5 text-blue-600" />
+                      DOMINIO NAMECHEAP
+                    </div>
+                    <h4 className="font-montserrat font-black text-base text-zinc-950 uppercase tracking-tight">
+                      Gestión DNS &amp; Dominio
+                    </h4>
+                    <p className="text-xs text-zinc-600 leading-relaxed">
+                      Acceso al registrador Namecheap para renovaciones, vinculación de servidores DNS y correos corporativos.
+                    </p>
+
+                    <div className="space-y-2 pt-1 font-mono text-xs">
+                      <div className="p-2.5 rounded-xl bg-zinc-50 border border-zinc-200 flex items-center justify-between gap-2">
+                        <span className="text-zinc-500 text-[11px]">Portal:</span>
+                        <a
+                          href="https://www.namecheap.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#E30613] font-bold hover:underline inline-flex items-center gap-1 text-[11px]"
+                        >
+                          namecheap.com
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+
+                      <div className="p-2.5 rounded-xl bg-zinc-50 border border-zinc-200 flex items-center justify-between gap-2">
+                        <span className="text-zinc-500 text-[11px]">Username:</span>
+                        <div className="flex items-center gap-2">
+                          <code className="text-zinc-900 font-bold text-xs">impresosamericana</code>
+                          <button
+                            onClick={handleCopyNcUser}
+                            className="p-1 rounded bg-white hover:bg-zinc-100 border border-zinc-200 text-zinc-600 transition-colors"
+                            title="Copiar usuario"
+                          >
+                            {copiedNcUser ? (
+                              <Check className="w-3.5 h-3.5 text-[#E30613]" />
+                            ) : (
+                              <Copy className="w-3.5 h-3.5" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="p-2.5 rounded-xl bg-zinc-50 border border-zinc-200 flex items-center justify-between gap-2">
+                        <span className="text-zinc-500 text-[11px]">Email:</span>
+                        <span className="text-zinc-800 text-[11px]">Correo proporcionado por el cliente</span>
+                      </div>
+
+                      <div className="p-2.5 rounded-xl bg-zinc-50 border border-zinc-200 flex items-center justify-between gap-2">
+                        <span className="text-zinc-500 text-[11px]">Contraseña:</span>
+                        <span className="text-[#E30613] font-bold text-[11px]">La clave enviada al WhatsApp</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a
+                    href="https://www.namecheap.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-all shadow-xs"
+                  >
+                    <span>Ir a Namecheap.com</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
             {/* Global Settings Sub-Panel */}
             <div className="p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 space-y-5 min-w-0">
               <div>

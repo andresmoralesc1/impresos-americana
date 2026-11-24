@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: ["/admin/", "/admin", "/api/", "/_next/"],
       },
     ],
     sitemap: "https://impresosamericana.com/sitemap.xml",
