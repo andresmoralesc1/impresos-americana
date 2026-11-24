@@ -4,18 +4,14 @@ import "./globals.css";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "600", "700", "900"],
   variable: "--font-montserrat",
   display: "swap",
-  preload: true,
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
   display: "swap",
-  preload: true,
 });
 
 export const viewport: Viewport = {
