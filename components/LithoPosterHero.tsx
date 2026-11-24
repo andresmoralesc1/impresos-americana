@@ -1,106 +1,383 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState, useRef } from "react";
 import Link from "next/link";
-import WavingPortfolioLanding from "@/components/ui/waving-portfolio-landing";
-import { MessageCircle, Sparkles, UserCheck, Layers } from "lucide-react";
+import {
+  Sparkles,
+  MessageCircle,
+  ArrowRight,
+  ShieldCheck,
+  Cpu,
+  Layers,
+  Truck,
+} from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
 
-interface LithoPosterHeroProps {
-  initialShowCharacter?: boolean;
+// #region Condensed Monoline Capital Glyphs
+const WIDE: Record<string, number> = { A: 1.04, M: 1.3, N: 1.04, Q: 1.02, V: 1.04, W: 1.44, X: 1.02 };
+
+function glyphWidth(ch: string, w: number, s: number): number {
+  if (ch === "I") return s;
+  if (ch === " ") return w * 0.5;
+  return w * (WIDE[ch] ?? 1);
 }
 
-export function LithoPosterHero({ initialShowCharacter = true }: LithoPosterHeroProps) {
-  const [showCharacter, setShowCharacter] = useState(initialShowCharacter);
+function glyphPath(ch: string, w: number, h: number, s: number): string {
+  const i = s / 2;
+  const x0 = i;
+  const x1 = w - i;
+  const y0 = i;
+  const y1 = h - i;
+  const xm = w / 2;
+  const ym = h / 2;
+  const bw = x1 - x0;
+  const bh = y1 - y0;
+  const r = bw / 2;
+  const c = Math.min(bw * 0.62, bh / 4);
+  const q = (...parts: (string | number)[]) =>
+    parts.map((p) => (typeof p === "number" ? String(Math.round(p * 10) / 10) : p)).join(" ");
+  const arc = (rad: number, sweep: 0 | 1, x: number, y: number) => q("A", rad, rad, 0, 0, sweep, x, y);
+  const stadium = q("M", x0, y0 + r) + arc(r, 1, x1, y0 + r) + q("L", x1, y1 - r) + arc(r, 1, x0, y1 - r) + "Z";
+  const open = q("M", x1, y0 + r) + arc(r, 0, x0, y0 + r) + q("L", x0, y1 - r) + arc(r, 0, x1, y1 - r);
+  const bowl = (yb: number) => {
+    const k = Math.min(c, (yb - y0) / 2);
+    return q("M", x0, y1, "L", x0, y0, "L", x1 - k, y0) + arc(k, 1, x1, y0 + k) + q("L", x1, yb - k) + arc(k, 1, x1 - k, yb) + q("L", x0, yb);
+  };
+  switch (ch) {
+    case "A": {
+      const ay = y0 + bh * 0.64;
+      const t = (y1 - ay) / bh;
+      return q("M", x0, y1, "L", xm, y0, "L", x1, y1, "M", x0 + (xm - x0) * t, ay, "L", x1 - (x1 - xm) * t, ay);
+    }
+    case "B": {
+      const yb = y0 + bh * 0.47;
+      const xt = x1 - s * 0.4;
+      const ct = Math.min(c, (yb - y0) / 2, xt - x0);
+      const cb = Math.min(c, (y1 - yb) / 2, bw);
+      return (
+        q("M", x0, yb, "L", xt - ct, yb) + arc(ct, 0, xt, yb - ct) + q("L", xt, y0 + ct) + arc(ct, 0, xt - ct, y0) +
+        q("L", x0, y0, "L", x0, y1, "L", x1 - cb, y1) + arc(cb, 0, x1, y1 - cb) + q("L", x1, yb + cb) + arc(cb, 0, x1 - cb, yb) +
+        q("L", x0, yb)
+      );
+    }
+    case "C":
+      return open;
+    case "D": {
+      const k = Math.min(bw * 0.75, bh / 2);
+      return q("M", x0, y0, "L", x1 - k, y0) + arc(k, 1, x1, y0 + k) + q("L", x1, y1 - k) + arc(k, 1, x1 - k, y1) + q("L", x0, y1) + "Z";
+    }
+    case "E":
+      return q("M", x1, y0, "L", x0, y0, "L", x0, y1, "L", x1, y1, "M", x0, ym, "L", x1 - bw * 0.12, ym);
+    case "F":
+      return q("M", x1, y0, "L", x0, y0, "L", x0, y1, "M", x0, ym - bh * 0.02, "L", x1 - bw * 0.12, ym - bh * 0.02);
+    case "G":
+      return open + q("L", x1, ym + bh * 0.04, "L", xm, ym + bh * 0.04);
+    case "H":
+      return q("M", x0, y0, "L", x0, y1, "M", x1, y0, "L", x1, y1, "M", x0, ym, "L", x1, ym);
+    case "I":
+      return q("M", xm, y0, "L", xm, y1);
+    case "J":
+      return q("M", x1, y0, "L", x1, y1 - r) + arc(r, 1, x0, y1 - r) + q("L", x0, y1 - r - bh * 0.06);
+    case "K":
+      return q("M", x0, y0, "L", x0, y1, "M", x1, y0, "L", x0, y0 + bh * 0.62, "M", x0 + bw * 0.28, y0 + bh * 0.47, "L", x1, y1);
+    case "L":
+      return q("M", x0, y0, "L", x0, y1, "L", x1, y1);
+    case "M":
+      return q("M", x0, y1, "L", x0, y0, "L", xm, y0 + bh * 0.55, "L", x1, y0, "L", x1, y1);
+    case "N":
+      return q("M", x0, y1, "L", x0, y0, "L", x1, y1, "L", x1, y0);
+    case "O":
+      return stadium;
+    case "P":
+      return bowl(y0 + bh * 0.52);
+    case "Q":
+      return stadium + q("M", xm + bw * 0.1, y1 - bh * 0.16, "L", x1 + s * 0.2, y1 + s * 0.3);
+    case "R":
+      return bowl(y0 + bh * 0.5) + q("M", x0 + bw * 0.42, y0 + bh * 0.5, "L", x1, y1);
+    case "S":
+      return q("M", x1, y0 + r) + arc(r, 0, x0, y0 + r) + q("C", x0, ym - bh * 0.02, x1, ym + bh * 0.02, x1, y1 - r) + arc(r, 1, x0, y1 - r);
+    case "T":
+      return q("M", x0, y0, "L", x1, y0, "M", xm, y0, "L", xm, y1);
+    case "U":
+      return q("M", x0, y0, "L", x0, y1 - r) + arc(r, 0, x1, y1 - r) + q("L", x1, y0);
+    case "V":
+      return q("M", x0, y0, "L", xm, y1, "L", x1, y0);
+    case "W": {
+      const k = bw * 0.24;
+      return q("M", x0, y0, "L", x0 + k, y1, "L", xm, y0 + bh * 0.3, "L", x1 - k, y1, "L", x1, y0);
+    }
+    case "X":
+      return q("M", x0, y0, "L", x1, y1, "M", x1, y0, "L", x0, y1);
+    case "Y":
+      return q("M", x0, y0, "L", xm, ym - bh * 0.04, "L", x1, y0, "M", xm, ym - bh * 0.04, "L", xm, y1);
+    case "Z":
+      return q("M", x0, y0, "L", x1, y0, "L", x0, y1, "L", x1, y1);
+    default:
+      return "";
+  }
+}
+// #endregion
+
+const AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const hash = (n: number) => {
+  const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
+  return x - Math.floor(x);
+};
+
+// Word pool focused specifically on Impresos Americana identity
+const LITHO_WORDS = [
+  "LITOGRAFIA",
+  "OFFSET",
+  "HEIDELBERG",
+  "MATERIALPOP",
+  "EXHIBIDORES",
+  "EMPAQUES",
+  "CALI",
+  "IMPRESOS",
+  "AMERICANA",
+  "GRANFORMATO",
+  "TROQUEL",
+  "PLIEGOS",
+  "PRODUCCION",
+  "COLOR",
+  "FOGRA",
+];
+
+type BurstBit = { ch: string; dx: number; dy: number; rot: number };
+type Burst = { id: number; x: number; y: number; bits: BurstBit[] };
+
+export function LithoPosterHero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [bursts, setBursts] = useState<Burst[]>([]);
+  const burstId = useRef(0);
+
+  // Generate 8 continuous streaming typographic lanes
+  const rows = useMemo(() => {
+    return Array.from({ length: 8 }, (_, row) => {
+      let x = 0;
+      const half: { ch: string; x: number; w: number }[] = [];
+      const wordSource = LITHO_WORDS[row % LITHO_WORDS.length] + AZ;
+
+      // 36 characters per lane
+      for (let k = 0; k < 36; k++) {
+        const ch = wordSource[Math.floor(hash(row * 89 + k * 17) * wordSource.length)] || "A";
+        const w = glyphWidth(ch, 56, 10);
+        half.push({ ch, x, w });
+        x += w + 24;
+      }
+      return {
+        row,
+        half,
+        span: x,
+        duration: 22 + (row % 4) * 6, // Smooth, hypnotic, cinematic speed
+        dir: row % 2 === 0 ? "l" : "r",
+      };
+    });
+  }, []);
+
+  // Throw interactive letters on click/touch on the background canvas
+  const handleThrowLetters = (e: React.PointerEvent) => {
+    // Only fire if clicking on the background, not on interactive links or buttons
+    const target = e.target as HTMLElement;
+    if (target.closest("a, button, input")) return;
+
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const pool = "POPLITOGRAFIAIMPRESOS";
+    const bits: BurstBit[] = Array.from({ length: 8 }, (_, i) => {
+      const a = (i / 8) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
+      const d = 50 + Math.random() * 80;
+      return {
+        ch: pool[Math.floor(Math.random() * pool.length)],
+        dx: Math.cos(a) * d,
+        dy: Math.sin(a) * d,
+        rot: (Math.random() - 0.5) * 60,
+      };
+    });
+
+    const id = ++burstId.current;
+    setBursts((cur) => [...cur.slice(-4), { id, x, y, bits }]);
+    setTimeout(() => {
+      setBursts((cur) => cur.filter((b) => b.id !== id));
+    }, 950);
+  };
 
   return (
-    <section className="relative w-full overflow-hidden bg-white border-b border-zinc-200">
-      {/* Dynamic Typography Poster Canvas */}
-      <div className="relative w-full h-[85vh] sm:h-[90vh] min-h-[580px] max-h-[860px]">
-        <WavingPortfolioLanding
-          name="Impresos Americana S.A.S."
-          year="Cali • Colombia"
-          roles={["Material POP & Gran Formato", "Litografía Offset Heidelberg"]}
-          lettersLeft={["P", "LIT"]}
-          giantLetter="O"
-          lettersRight={["P", "GRAFIA"]}
-          title="Impresos Americana - Fabricación de Material POP y Litografía Comercial"
-          signature="IA/CALI"
-          accent="#E30613"
-          paper="#FFFFFF"
-          ink="#141414"
-          intro={true}
-          showCharacter={showCharacter}
-          height="100%"
-        />
+    <section
+      ref={containerRef}
+      onPointerDown={handleThrowLetters}
+      className="relative w-full overflow-hidden bg-gradient-to-b from-slate-50 via-white to-zinc-50 border-b border-zinc-200/80 min-h-[640px] lg:min-h-[720px] flex items-center justify-center py-16 sm:py-20 select-none"
+    >
+      {/* ============================================================== */}
+      {/* 1. CONTINUOUS STREAMING TYPOGRAPHY BACKGROUND (NO HUMAN)      */}
+      {/* ============================================================== */}
+      <div
+        className="absolute inset-[-20%] pointer-events-none flex flex-col justify-center gap-4 sm:gap-6 opacity-[0.14] rotate-[-5deg] overflow-hidden z-0"
+        aria-hidden="true"
+      >
+        {rows.map(({ row, half, span, duration, dir }) => (
+          <div key={row} className="h-16 sm:h-20 flex-none overflow-visible">
+            <svg
+              className={`block h-full w-auto max-w-none ${
+                dir === "l" ? "animate-litho-marq-left" : "animate-litho-marq-right"
+              }`}
+              viewBox={`0 -4 ${span * 2} 148`}
+              style={{ animationDuration: `${duration}s` }}
+              fill="none"
+              strokeLinecap="square"
+              strokeMiterlimit={4}
+            >
+              {[0, span].map((off) =>
+                half.map((g, k) => {
+                  const d = glyphPath(g.ch, g.w, 140, 10);
+                  const isRed = (row + k) % 4 === 0;
+                  return (
+                    <g key={`${off}-${k}`} transform={`translate(${off + g.x} 0)`}>
+                      <path
+                        d={d}
+                        stroke={isRed ? "#E30613" : "#0F172A"}
+                        strokeWidth={10}
+                      />
+                      {row % 2 === 1 && (
+                        <path d={d} stroke="#FFFFFF" strokeWidth={3} />
+                      )}
+                    </g>
+                  );
+                })
+              )}
+            </svg>
+          </div>
+        ))}
+      </div>
 
-        {/* Ambient Top Subtle Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
+      {/* Subtle Specular Ambient Highlights */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-64 bg-red-500/5 rounded-full blur-[140px] pointer-events-none z-1" />
+      <div className="absolute bottom-0 right-10 w-96 h-96 bg-slate-300/20 rounded-full blur-[140px] pointer-events-none z-1" />
 
-        {/* Character Toggle Pill (Top-Right under Navbar) */}
-        <div className="absolute top-20 sm:top-24 right-4 sm:right-8 z-20">
-          <button
-            type="button"
-            onClick={() => {
-              triggerHaptic(8);
-              setShowCharacter(!showCharacter);
-            }}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-zinc-200 text-[11px] font-mono font-medium text-zinc-700 hover:text-zinc-950 shadow-xs transition-colors cursor-pointer"
-            title={showCharacter ? "Ocultar ilustración (Solo letras)" : "Mostrar personaje animado"}
-          >
-            {showCharacter ? (
-              <>
-                <Layers className="w-3.5 h-3.5 text-[#E30613]" />
-                <span className="hidden sm:inline">Modo Solo Tipografía</span>
-                <span className="sm:hidden">Letras</span>
-              </>
-            ) : (
-              <>
-                <UserCheck className="w-3.5 h-3.5 text-zinc-500" />
-                <span className="hidden sm:inline">Activar Personaje</span>
-                <span className="sm:hidden">Personaje</span>
-              </>
-            )}
-          </button>
+      {/* Subtle Grid dots overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:32px_32px] opacity-20 pointer-events-none z-1" />
+
+      {/* ============================================================== */}
+      {/* 2. FOREGROUND CONTENT WRITTEN DIRECTLY OVER THE STREAM         */}
+      {/* ============================================================== */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center">
+        
+        {/* Eyebrow Badge */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-xl border border-zinc-200/90 shadow-xs mb-6 sm:mb-8 ring-1 ring-zinc-950/5">
+          <span className="w-2 h-2 rounded-full bg-[#E30613] animate-pulse" />
+          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-800">
+            Planta de Litografía &amp; Material POP • San Nicolás, Cali
+          </span>
         </div>
 
-        {/* Bottom Floating Glass Action Strip */}
-        <div className="absolute bottom-6 sm:bottom-8 left-4 right-4 z-20 max-w-3xl mx-auto">
-          <div className="p-3.5 sm:p-4 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.08),inset_0_1px_1px_rgba(255,255,255,0.95)] ring-1 ring-zinc-950/5 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="text-center sm:text-left pl-1">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#E30613] block">
-                Planta Directa • Barrio San Nicolás, Cali
-              </span>
-              <p className="text-xs font-montserrat font-bold text-zinc-900 mt-0.5">
-                Pasa el mouse sobre las letras para re-girarlas o haz clic en los dados
-              </p>
-            </div>
+        {/* Main Headline */}
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-montserrat font-black uppercase tracking-tight text-zinc-950 leading-[1.06] mb-6">
+          Ingeniería en <span className="text-[#E30613]">Material POP</span>, Empaques &amp; Litografía
+        </h1>
 
-            <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
-              <Link
-                href="/cotizador"
-                onClick={() => triggerHaptic(10)}
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-sm transition-all active:scale-95"
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Cotizar en Línea</span>
-              </Link>
+        {/* Value Proposition Description */}
+        <p className="text-sm sm:text-lg lg:text-xl text-zinc-700 max-w-3xl mx-auto leading-relaxed font-normal mb-8 sm:mb-10">
+          Fabricación industrial de exhibidores de piso reforzados, cajas rígidas, catálogos en offset y gran formato UV en Cali con despacho coordinado a toda Colombia.
+        </p>
 
-              <a
-                href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20vi%20su%20p%C3%A1gina%20y%20deseo%20asesor%C3%ADa%20para%20un%20proyecto."
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => triggerHaptic(8)}
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-white font-montserrat font-semibold text-xs uppercase tracking-wider transition-all"
-              >
-                <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
-                <span>WhatsApp</span>
-              </a>
-            </div>
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto mb-10 sm:mb-12">
+          <Link
+            href="/cotizador"
+            onClick={() => triggerHaptic(10)}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-[#E30613] hover:bg-[#c50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-lg shadow-red-500/25 transition-all transform hover:scale-[1.02] active:scale-95"
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>Cotizar Proyecto en 3D</span>
+          </Link>
+
+          <a
+            href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20y%20cotizaci%C3%B3n%20para%20un%20proyecto."
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => triggerHaptic(8)}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-zinc-950 hover:bg-zinc-800 text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-md transition-all active:scale-95"
+          >
+            <MessageCircle className="w-4 h-4 text-[#25D366]" />
+            <span>Hablar por WhatsApp</span>
+          </a>
+
+          <Link
+            href="/proyectos"
+            onClick={() => triggerHaptic(8)}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white/90 hover:bg-white text-zinc-800 border border-zinc-200 font-montserrat font-semibold text-xs uppercase tracking-wider shadow-xs transition-all"
+          >
+            <span>Ver Proyectos</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#E30613]" />
+          </Link>
+        </div>
+
+        {/* Capabilities Trust Bar */}
+        <div className="p-3 sm:p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-zinc-200/80 shadow-2xs flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-zinc-700">
+          <div className="flex items-center gap-2 font-mono text-[11px] font-semibold">
+            <Cpu className="w-3.5 h-3.5 text-[#E30613]" />
+            <span>Offset Heidelberg Speedmaster</span>
+          </div>
+          <span className="text-zinc-300 hidden sm:inline">•</span>
+          <div className="flex items-center gap-2 font-mono text-[11px] font-semibold">
+            <Layers className="w-3.5 h-3.5 text-[#E30613]" />
+            <span>Corte Digital Zünd &amp; Láser CNC</span>
+          </div>
+          <span className="text-zinc-300 hidden sm:inline">•</span>
+          <div className="flex items-center gap-2 font-mono text-[11px] font-semibold">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#E30613]" />
+            <span>Carga 45 kg por Bandeja</span>
+          </div>
+          <span className="text-zinc-300 hidden sm:inline">•</span>
+          <div className="flex items-center gap-2 font-mono text-[11px] font-semibold">
+            <Truck className="w-3.5 h-3.5 text-[#E30613]" />
+            <span>Despacho a Toda Colombia</span>
           </div>
         </div>
+
+        {/* Interactive hint */}
+        <p className="text-[11px] text-zinc-500 font-mono mt-4">
+          Toca o haz clic sobre el fondo para lanzar tipos móviles de imprenta
+        </p>
       </div>
+
+      {/* ============================================================== */}
+      {/* 3. BURST PARTICLES ON CANVAS CLICK                             */}
+      {/* ============================================================== */}
+      {bursts.map((b) => (
+        <div
+          key={b.id}
+          className="absolute pointer-events-none z-20"
+          style={{ left: b.x, top: b.y }}
+          aria-hidden="true"
+        >
+          {b.bits.map((bit, n) => (
+            <svg
+              key={n}
+              className="absolute left-[-9px] top-[-18px] w-6 h-9 overflow-visible animate-litho-bit"
+              viewBox="-3 -3 26 38"
+              style={
+                {
+                  "--dx": `${bit.dx}px`,
+                  "--dy": `${bit.dy}px`,
+                  "--rot": `${bit.rot}deg`,
+                } as React.CSSProperties
+              }
+            >
+              <path
+                d={glyphPath(bit.ch, glyphWidth(bit.ch, 14, 3.4), 32, 3.4)}
+                fill="none"
+                stroke={n % 2 === 0 ? "#E30613" : "#0F172A"}
+                strokeWidth={3.4}
+                strokeLinecap="square"
+              />
+            </svg>
+          ))}
+        </div>
+      ))}
     </section>
   );
 }
-export default LithoPosterHero;
