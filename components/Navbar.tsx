@@ -4,10 +4,18 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import { Menu, X, Search, MessageCircle, Box } from "lucide-react";
 import { IALogo } from "./Logo";
-import { SampleBoxModal } from "./SampleBoxModal";
-import { CommandMenu } from "./CommandMenu";
+
+const SampleBoxModal = dynamic(
+  () => import("./SampleBoxModal").then((m) => m.SampleBoxModal),
+  { ssr: false }
+);
+const CommandMenu = dynamic(
+  () => import("./CommandMenu").then((m) => m.CommandMenu),
+  { ssr: false }
+);
 
 export function Navbar() {
   const pathname = usePathname();

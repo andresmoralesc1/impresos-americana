@@ -537,6 +537,13 @@ export function ShaderBackground({
     function render(now: number) {
       raf = 0
       if (disposed || !visible || !inView || !canvasRef.current || !gl) return
+
+      // Throttle render loop to ~30fps to avoid main-thread blocking and preserve battery
+      if (lastNow !== null && now - lastNow < 32) {
+        requestRender()
+        return
+      }
+
       const currentCanvas = canvasRef.current
       const dt = lastNow === null ? 0 : Math.min((now - lastNow) / 1000, 0.1)
       lastNow = now
@@ -569,6 +576,15 @@ export function ShaderBackground({
         UNIFORMS.cursorRadius,
       )
       gl.drawArrays(gl.TRIANGLES, 0, 3)
+
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 768
+      const prefersReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      if (isMobile || prefersReduced) {
+        // Draw static frame and do not loop indefinitely on mobile
+        lastNow = null
+        return
+      }
+
       const pointerSettling =
         Math.abs(targetX - mouseX) > 0.001 ||
         Math.abs(targetY - mouseY) > 0.001 ||

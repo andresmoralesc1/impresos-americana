@@ -1,18 +1,39 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import {
   ArrowRight,
   Sparkles,
   MessageCircle,
   Check,
   ChevronRight,
+  Box,
+  FileCheck2,
+  Pause,
+  Play,
 } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
-import { ShaderBackground } from "@/components/ui/green-border";
+import type { PreflightReport } from "./PreflightModal";
+
+const ShaderBackground = dynamic(
+  () => import("@/components/ui/green-border").then((m) => m.ShaderBackground),
+  { ssr: false }
+);
+
+const SampleBoxModal = dynamic(
+  () => import("./SampleBoxModal").then((m) => m.SampleBoxModal),
+  { ssr: false }
+);
+
+const PreflightModal = dynamic(
+  () => import("./PreflightModal").then((m) => m.PreflightModal),
+  { ssr: false }
+);
 
 interface ShowcaseSlide {
   id: string;
@@ -27,6 +48,8 @@ interface ShowcaseSlide {
 }
 
 export function Hero() {
+  const router = useRouter();
+
   const slides: ShowcaseSlide[] = [
     {
       id: "pop",
@@ -114,328 +137,455 @@ export function Hero() {
 
   const [activeSlideIdx, setActiveSlideIdx] = useState(0);
   const [activeHotspot, setActiveHotspot] = useState<number | null>(null);
+  const [isSampleBoxOpen, setIsSampleBoxOpen] = useState(false);
+  const [isPreflightOpen, setIsPreflightOpen] = useState(false);
+  const [isAutoPlayPaused, setIsAutoPlayPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
+
   const currentSlide = slides[activeSlideIdx];
+
+  // Auto-progreso sutil del slider (cada 6.5s) con pausa interactiva
+  useEffect(() => {
+    if (isAutoPlayPaused || activeHotspot !== null || isSampleBoxOpen || isPreflightOpen) {
+      return;
+    }
+
+    const duration = 6500;
+    const intervalTime = 50;
+    const increment = (intervalTime / duration) * 100;
+
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          setActiveSlideIdx((curr) => (curr + 1) % slides.length);
+          return 0;
+        }
+        return prev + increment;
+      });
+    }, intervalTime);
+
+    return () => clearInterval(timer);
+  }, [isAutoPlayPaused, activeHotspot, isSampleBoxOpen, isPreflightOpen, slides.length]);
 
   const handleTabChange = (idx: number) => {
     triggerHaptic(10);
     setActiveSlideIdx(idx);
     setActiveHotspot(null);
+    setProgress(0);
+  };
+
+  const handleFileApproved = (file: File, report: PreflightReport) => {
+    setIsPreflightOpen(false);
+    triggerHaptic(15);
+    if (typeof window !== "undefined") {
+      try {
+        sessionStorage.setItem("last_preflight_file", file.name);
+        sessionStorage.setItem("last_preflight_score", String(report.overallScore));
+      } catch {
+        // Ignorado en caso de cuota de storage
+      }
+    }
+    router.push("/cotizador");
   };
 
   return (
-    <section
-      id="hero"
-      className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-white text-zinc-950"
-    >
-      {/* Modern Hairline Architectural Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f4f4f5_1px,transparent_1px),linear-gradient(to_bottom,#f4f4f5_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+    <>
+      <section
+        id="hero"
+        className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-white text-zinc-950"
+      >
+        {/* Modern Hairline Architectural Grid Background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#f4f4f5_1px,transparent_1px),linear-gradient(to_bottom,#f4f4f5_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
-      {/* Soft Ambient Red Energy Core */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[480px] bg-red-500/5 rounded-full blur-[140px] pointer-events-none" />
+        {/* Soft Ambient Red Energy Core */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[480px] bg-red-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        {/* Top Operational Status Pill */}
-        <div className="flex justify-center mb-6">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-zinc-900 text-white text-xs font-mono shadow-sm border border-zinc-800"
-          >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-zinc-300 font-medium">PLANTA DIRECTA EN CALI</span>
-            <span className="text-zinc-600">•</span>
-            <span className="text-red-400 font-bold uppercase tracking-wider">SAN NICOLÁS</span>
-          </motion.div>
-        </div>
-
-        {/* Central Display Typography (Modern Editorial Contrast) */}
-        <div className="text-center max-w-5xl mx-auto mb-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-montserrat font-black uppercase tracking-[-0.035em] text-zinc-950 leading-[0.98] sm:leading-[0.96]"
-          >
-            INGENIERÍA GRÁFICA & <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-950 via-[#E30613] to-red-600">
-              PRODUCCIÓN INDUSTRIAL
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-6 text-sm sm:text-base lg:text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed font-normal"
-          >
-            Fabricación directa de material POP de alto impacto, gran formato UV y litografía de alta tirada. Desde prototipo estructural en 24h hasta distribución masiva en toda Colombia sin intermediarios.
-          </motion.p>
-
-          {/* Action CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5"
-          >
-            <Link
-              href="/cotizador"
-              onClick={() => triggerHaptic(12)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-lg shadow-red-500/20 hover:shadow-xl hover:shadow-red-500/30 transition-all duration-200 active:scale-95 group"
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+          {/* Top Operational Status Pill */}
+          <div className="flex justify-center mb-5">
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35 }}
+              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-zinc-900 text-white text-[11px] font-mono shadow-xs border border-zinc-800"
             >
-              <span>Configurar Cotización Online</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-
-            <a
-              href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20quisiera%20asesor%C3%ADa%20técnica%20directa%20con%20planta."
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => triggerHaptic(8)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-900 border border-zinc-200/80 font-montserrat font-semibold text-xs uppercase tracking-wider transition-all duration-200 active:scale-95"
-            >
-              <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366]" />
-              <span>Asesor de Planta Inmediato</span>
-            </a>
-          </motion.div>
-
-          {/* Micro Trust Strip */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-mono text-zinc-500">
-            <span className="flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Sin intermediarios</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Prototipado CAD en 24h</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Factura Electrónica DIAN</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Despacho a 32 departamentos</span>
-            </span>
-          </div>
-        </div>
-
-        {/* ======================================================== */}
-        {/* EXPANSIVE INTERACTIVE SHOWCASE DECK (The Modern Stage)   */}
-        {/* ======================================================== */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 rounded-3xl bg-white border border-zinc-200 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] overflow-hidden relative"
-        >
-          {/* Subtle Ambient Shader Edge Glow */}
-          <div className="absolute inset-0 pointer-events-none opacity-40">
-            <ShaderBackground className="w-full h-full" palette="brand" />
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-zinc-300 font-medium">PLANTA DIRECTA EN CALI</span>
+              <span className="text-zinc-600">•</span>
+              <span className="text-red-400 font-bold uppercase tracking-wider">SAN NICOLÁS</span>
+            </motion.div>
           </div>
 
-          <div className="relative z-10 p-4 sm:p-6 lg:p-8">
-            {/* Top Navigation Tabs */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-4 border-b border-zinc-100 scrollbar-none">
-              {slides.map((slide, idx) => {
-                const isActive = activeSlideIdx === idx;
-                return (
-                  <button
-                    key={slide.id}
-                    type="button"
-                    onClick={() => handleTabChange(idx)}
-                    className={`relative px-4 sm:px-5 py-2.5 rounded-xl font-montserrat text-xs font-bold whitespace-nowrap transition-all duration-200 flex items-center gap-2 ${
-                      isActive
-                        ? "bg-zinc-950 text-white shadow-md"
-                        : "bg-zinc-100/80 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-200/70"
-                    }`}
-                  >
-                    <span>{slide.tabLabel}</span>
-                    {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#E30613]" />
-                    )}
-                  </button>
-                );
-              })}
+          {/* Central Display Typography (Punchy, Editorial & Compact) */}
+          <div className="text-center max-w-4xl mx-auto mb-8">
+            <motion.h1
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.05 }}
+              className="text-3xl sm:text-5xl lg:text-6xl font-montserrat font-black uppercase tracking-[-0.035em] text-zinc-950 leading-[1.02] sm:leading-[0.98]"
+            >
+              INGENIERÍA GRÁFICA & <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-950 via-[#E30613] to-red-600">
+                PRODUCCIÓN INDUSTRIAL
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.15 }}
+              className="mt-4 text-xs sm:text-base text-zinc-600 max-w-2xl mx-auto leading-relaxed font-normal"
+            >
+              Fabricación directa de material POP de alto impacto, gran formato UV y litografía de alta tirada. Desde prototipo estructural en 24h hasta distribución masiva en toda Colombia sin intermediarios.
+            </motion.p>
+
+            {/* Primary Action CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.2 }}
+              className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3"
+            >
+              <Link
+                href="/cotizador"
+                onClick={() => triggerHaptic(12)}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-lg shadow-red-500/20 hover:shadow-xl hover:shadow-red-500/30 transition-all duration-200 active:scale-95 group"
+              >
+                <span>Configurar Cotización Online</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+
+              <a
+                href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20quisiera%20asesor%C3%ADa%20técnica%20directa%20con%20planta."
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => triggerHaptic(8)}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-900 border border-zinc-200/90 font-montserrat font-semibold text-xs uppercase tracking-wider transition-all duration-200 active:scale-95"
+              >
+                <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366]" />
+                <span>Asesor de Planta Inmediato</span>
+              </a>
+            </motion.div>
+
+            {/* High-Value B2B Lead Magnet Tools Bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.25 }}
+              className="mt-4 flex flex-wrap items-center justify-center gap-2.5"
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  triggerHaptic(8);
+                  setIsSampleBoxOpen(true);
+                }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-300/80 text-[11px] font-mono font-medium shadow-2xs hover:border-[#E30613] hover:text-[#E30613] transition-all cursor-pointer"
+              >
+                <Box className="w-3.5 h-3.5 text-[#E30613]" />
+                <span>Solicitar Muestrario Físico a tu Empresa</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  triggerHaptic(8);
+                  setIsPreflightOpen(true);
+                }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-300/80 text-[11px] font-mono font-medium shadow-2xs hover:border-emerald-600 hover:text-emerald-700 transition-all cursor-pointer"
+              >
+                <FileCheck2 className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Pre-chequeo Técnico de Archivo / PDF</span>
+              </button>
+            </motion.div>
+
+            {/* Micro Trust Strip */}
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-[11px] font-mono text-zinc-500">
+              <span className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Sin intermediarios</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Prototipado CAD en 24h</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Factura Electrónica DIAN</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Despacho a 32 departamentos</span>
+              </span>
+            </div>
+          </div>
+
+          {/* ======================================================== */}
+          {/* EXPANSIVE INTERACTIVE SHOWCASE DECK (The Modern Stage)   */}
+          {/* ======================================================== */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            onMouseEnter={() => setIsAutoPlayPaused(true)}
+            onMouseLeave={() => setIsAutoPlayPaused(false)}
+            className="mt-8 rounded-3xl bg-white border border-zinc-200 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] overflow-hidden relative"
+          >
+            {/* Subtle Ambient Shader Edge Glow */}
+            <div className="absolute inset-0 pointer-events-none opacity-40">
+              <ShaderBackground className="w-full h-full" palette="brand" />
             </div>
 
-            {/* Stage Body: High Resolution Media + Telemetry HUD */}
-            <div className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              {/* Left Details Panel */}
-              <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-                <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-red-50 text-[10px] font-mono font-bold text-[#E30613] uppercase tracking-wider mb-3">
-                    <Sparkles className="w-3 h-3" />
-                    <span>{currentSlide.tag}</span>
+            <div className="relative z-10 p-4 sm:p-6 lg:p-8">
+              {/* Top Navigation Tabs with Dynamic Progress Indicator */}
+              <div className="flex items-center justify-between gap-3 pb-3 border-b border-zinc-100">
+                <div className="flex items-center gap-2 overflow-x-auto scrollbar-none py-1">
+                  {slides.map((slide, idx) => {
+                    const isActive = activeSlideIdx === idx;
+                    return (
+                      <button
+                        key={slide.id}
+                        type="button"
+                        onClick={() => handleTabChange(idx)}
+                        className={`relative px-4 sm:px-5 py-2.5 rounded-xl font-montserrat text-xs font-bold whitespace-nowrap transition-all duration-200 flex items-center gap-2 overflow-hidden ${
+                          isActive
+                            ? "bg-zinc-950 text-white shadow-md"
+                            : "bg-zinc-100/80 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-200/70"
+                        }`}
+                      >
+                        <span>{slide.tabLabel}</span>
+                        {isActive && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#E30613]" />
+                        )}
+
+                        {/* Progress bar inside active tab button */}
+                        {isActive && (
+                          <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-zinc-800">
+                            <div
+                              className="h-full bg-[#E30613] transition-[width] duration-75 ease-linear"
+                              style={{ width: `${progress}%` }}
+                            />
+                          </div>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Autoplay Pause / Play indicator button */}
+                <button
+                  type="button"
+                  onClick={() => setIsAutoPlayPaused(!isAutoPlayPaused)}
+                  className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-mono text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-colors shrink-0"
+                  title={isAutoPlayPaused ? "Reanudar rotación automática" : "Pausar rotación automática"}
+                >
+                  {isAutoPlayPaused ? (
+                    <>
+                      <Play className="w-3 h-3 text-[#E30613]" />
+                      <span>Reanudar</span>
+                    </>
+                  ) : (
+                    <>
+                      <Pause className="w-3 h-3 text-zinc-400" />
+                      <span>Pausar</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Stage Body: High Resolution Media + Telemetry HUD */}
+              <div className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                {/* Left Details Panel */}
+                <div className="lg:col-span-5 flex flex-col justify-between space-y-5">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-red-50 text-[10px] font-mono font-bold text-[#E30613] uppercase tracking-wider mb-2.5">
+                      <Sparkles className="w-3 h-3" />
+                      <span>{currentSlide.tag}</span>
+                    </div>
+
+                    <h3 className="font-montserrat font-black text-xl sm:text-2xl lg:text-3xl text-zinc-950 uppercase leading-tight tracking-tight">
+                      {currentSlide.title}
+                    </h3>
+
+                    <p className="mt-2.5 text-xs sm:text-sm text-zinc-600 leading-relaxed">
+                      {currentSlide.subtitle}
+                    </p>
                   </div>
 
-                  <h3 className="font-montserrat font-black text-2xl sm:text-3xl text-zinc-950 uppercase leading-tight tracking-tight">
-                    {currentSlide.title}
-                  </h3>
+                  {/* Technical Specs Matrix */}
+                  <div className="grid grid-cols-2 gap-3 p-3.5 rounded-2xl bg-zinc-50 border border-zinc-200/80">
+                    {currentSlide.specs.map((spec, spIdx) => (
+                      <div key={spIdx} className="space-y-0.5">
+                        <span className="text-[10px] font-mono text-zinc-500 uppercase block">
+                          {spec.label}
+                        </span>
+                        <span className="text-xs font-montserrat font-bold text-zinc-950 block">
+                          {spec.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
 
-                  <p className="mt-3 text-xs sm:text-sm text-zinc-600 leading-relaxed">
-                    {currentSlide.subtitle}
-                  </p>
-                </div>
-
-                {/* Technical Specs Matrix */}
-                <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-zinc-50 border border-zinc-200/80">
-                  {currentSlide.specs.map((spec, spIdx) => (
-                    <div key={spIdx} className="space-y-0.5">
-                      <span className="text-[10px] font-mono text-zinc-500 uppercase block">
-                        {spec.label}
-                      </span>
-                      <span className="text-xs font-montserrat font-bold text-zinc-950 block">
-                        {spec.value}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Action Row */}
-                <div className="flex flex-col sm:flex-row items-stretch gap-2.5">
-                  <Link
-                    href={`/cotizador`}
-                    onClick={() => triggerHaptic(8)}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-zinc-950 hover:bg-[#E30613] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
-                  >
-                    <span>Cotizar en Línea</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </Link>
-
-                  <a
-                    href={`https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20quisiera%20cotizar%20${encodeURIComponent(currentSlide.quoteQuery)}.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => triggerHaptic(8)}
-                    className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 border border-zinc-200 font-montserrat font-semibold text-xs"
-                  >
-                    <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>WhatsApp</span>
-                  </a>
-                </div>
-              </div>
-
-              {/* Right Media Stage with Interactive Hotspots */}
-              <div className="lg:col-span-7">
-                <div className="relative h-72 sm:h-96 w-full rounded-2xl bg-zinc-100 border border-zinc-200/90 overflow-hidden shadow-inner group">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentSlide.id}
-                      initial={{ opacity: 0, scale: 0.98 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                      className="relative w-full h-full"
+                  {/* Action Row - Specific to this product category */}
+                  <div className="flex flex-col sm:flex-row items-stretch gap-2.5">
+                    <Link
+                      href={`/cotizador`}
+                      onClick={() => triggerHaptic(8)}
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-zinc-950 hover:bg-[#E30613] text-white font-montserrat font-bold text-xs uppercase tracking-wider transition-colors shadow-2xs"
                     >
-                      <Image
-                        src={currentSlide.src}
-                        alt={currentSlide.title}
-                        fill
-                        priority
-                        sizes="(max-width: 1024px) 100vw, 55vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent pointer-events-none" />
+                      <span>Cotizar esta línea</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </Link>
 
-                      {/* Floating Real Camera Indicator */}
-                      <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono font-bold text-zinc-900 border border-zinc-200 shadow-sm flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E30613]" />
-                        <span>PRODUCCIÓN REAL EN PLANTA</span>
-                      </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        triggerHaptic(8);
+                        setIsSampleBoxOpen(true);
+                      }}
+                      className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200/90 font-montserrat font-semibold text-xs transition-colors shadow-2xs cursor-pointer"
+                    >
+                      <Box className="w-3.5 h-3.5 text-[#E30613]" />
+                      <span>Pedir Muestra de Sustrato</span>
+                    </button>
+                  </div>
+                </div>
 
-                      {/* Interactive Hotspots */}
-                      {currentSlide.hotspots.map((spot, hIdx) => {
-                        const isOpen = activeHotspot === hIdx;
-                        return (
-                          <div
-                            key={hIdx}
-                            style={{ top: `${spot.y}%`, left: `${spot.x}%` }}
-                            className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
-                          >
-                            <button
-                              type="button"
-                              onClick={() => {
-                                triggerHaptic(8);
-                                setActiveHotspot(isOpen ? null : hIdx);
-                              }}
-                              className="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/95 text-zinc-900 shadow-lg border border-zinc-200 hover:scale-110 active:scale-95 transition-all group/btn"
-                              aria-label={spot.title}
+                {/* Right Media Stage with Interactive Hotspots */}
+                <div className="lg:col-span-7">
+                  <div className="relative h-72 sm:h-96 w-full rounded-2xl bg-zinc-100 border border-zinc-200/90 overflow-hidden shadow-inner group">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={currentSlide.id}
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
+                        className="relative w-full h-full"
+                      >
+                        <Image
+                          src={currentSlide.src}
+                          alt={currentSlide.title}
+                          fill
+                          priority
+                          sizes="(max-width: 1024px) 100vw, 55vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent pointer-events-none" />
+
+                        {/* Floating Real Camera Indicator */}
+                        <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono font-bold text-zinc-900 border border-zinc-200 shadow-sm flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#E30613]" />
+                          <span>PRODUCCIÓN REAL EN PLANTA</span>
+                        </div>
+
+                        {/* Interactive Hotspots with Safe Edge Popover Positioning */}
+                        {currentSlide.hotspots.map((spot, hIdx) => {
+                          const isOpen = activeHotspot === hIdx;
+                          return (
+                            <div
+                              key={hIdx}
+                              style={{ top: `${spot.y}%`, left: `${spot.x}%` }}
+                              className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
                             >
-                              <span className="w-2.5 h-2.5 rounded-full bg-[#E30613] animate-ping absolute" />
-                              <span className="w-2.5 h-2.5 rounded-full bg-[#E30613] relative z-10" />
-                            </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  triggerHaptic(8);
+                                  setActiveHotspot(isOpen ? null : hIdx);
+                                }}
+                                className="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/95 text-zinc-900 shadow-lg border border-zinc-200 hover:scale-110 active:scale-95 transition-all group/btn cursor-pointer"
+                                aria-label={spot.title}
+                              >
+                                <span className="w-2.5 h-2.5 rounded-full bg-[#E30613] animate-ping absolute" />
+                                <span className="w-2.5 h-2.5 rounded-full bg-[#E30613] relative z-10" />
+                              </button>
 
-                            {/* Hotspot Popover Tooltip */}
-                            <AnimatePresence>
-                              {isOpen && (
-                                <motion.div
-                                  initial={{ opacity: 0, scale: 0.9, y: 8 }}
-                                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                                  exit={{ opacity: 0, scale: 0.9, y: 8 }}
-                                  transition={{ duration: 0.2 }}
-                                  className="absolute bottom-10 left-1/2 -translate-x-1/2 w-52 p-3 rounded-xl bg-zinc-950/95 text-white backdrop-blur-md shadow-2xl border border-zinc-800 text-left z-30"
-                                >
-                                  <span className="text-[10px] font-mono text-[#E30613] font-bold block uppercase tracking-wider">
-                                    DETALLE TÉCNICO
-                                  </span>
-                                  <span className="font-montserrat font-bold text-xs block text-white mt-0.5">
-                                    {spot.title}
-                                  </span>
-                                  <span className="text-[11px] text-zinc-400 block mt-1 leading-snug">
-                                    {spot.desc}
-                                  </span>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </div>
-                        );
-                      })}
+                              {/* Hotspot Popover Tooltip with Responsive Horizontal Edge Handling */}
+                              <AnimatePresence>
+                                {isOpen && (
+                                  <motion.div
+                                    initial={{ opacity: 0, scale: 0.9, y: 8 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.9, y: 8 }}
+                                    transition={{ duration: 0.2 }}
+                                    className={`absolute bottom-10 z-30 w-52 p-3 rounded-xl bg-zinc-950/95 text-white backdrop-blur-md shadow-2xl border border-zinc-800 text-left ${
+                                      spot.x > 50 ? "right-0 translate-x-2" : "left-0 -translate-x-2"
+                                    }`}
+                                  >
+                                    <span className="text-[10px] font-mono text-[#E30613] font-bold block uppercase tracking-wider">
+                                      DETALLE TÉCNICO
+                                    </span>
+                                    <span className="font-montserrat font-bold text-xs block text-white mt-0.5">
+                                      {spot.title}
+                                    </span>
+                                    <span className="text-[11px] text-zinc-400 block mt-1 leading-snug">
+                                      {spot.desc}
+                                    </span>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                          );
+                        })}
 
-                      {/* Bottom Overlay Label */}
-                      <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-white text-xs font-mono">
-                        <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
-                          {currentSlide.title}
-                        </span>
-                        <span className="text-zinc-300 text-[11px] hidden sm:inline">
-                          Toca los puntos para ver detalles
-                        </span>
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
+                        {/* Bottom Overlay Label */}
+                        <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-white text-xs font-mono">
+                          <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
+                            {currentSlide.title}
+                          </span>
+                          <span className="text-zinc-300 text-[11px] hidden sm:inline">
+                            Toca los puntos para ver detalles
+                          </span>
+                        </div>
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* ======================================================== */}
-        {/* REFINED INDUSTRIAL METRICS BAR (Minimalist Hairline)     */}
-        {/* ======================================================== */}
-        <div className="mt-16 pt-8 border-t border-zinc-200">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
-            {metrics.map((metric, idx) => (
-              <div key={idx} className="space-y-1">
-                <div className="flex items-baseline gap-1.5">
-                  <span className="font-montserrat font-black text-2xl sm:text-3xl text-zinc-950 tracking-tight">
-                    {metric.value}
-                  </span>
-                  <span className="font-mono text-xs font-bold text-[#E30613]">
-                    {metric.unit}
-                  </span>
+          {/* ======================================================== */}
+          {/* REFINED INDUSTRIAL METRICS BAR (Minimalist Hairline)     */}
+          {/* ======================================================== */}
+          <div className="mt-14 pt-8 border-t border-zinc-200">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
+              {metrics.map((metric, idx) => (
+                <div key={idx} className="space-y-1">
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="font-montserrat font-black text-2xl sm:text-3xl text-zinc-950 tracking-tight">
+                      {metric.value}
+                    </span>
+                    <span className="font-mono text-xs font-bold text-[#E30613]">
+                      {metric.unit}
+                    </span>
+                  </div>
+                  <div className="font-montserrat font-bold text-xs text-zinc-800 uppercase tracking-wider">
+                    {metric.label}
+                  </div>
+                  <div className="text-[11px] font-mono text-zinc-500">
+                    {metric.note}
+                  </div>
                 </div>
-                <div className="font-montserrat font-bold text-xs text-zinc-800 uppercase tracking-wider">
-                  {metric.label}
-                </div>
-                <div className="text-[11px] font-mono text-zinc-500">
-                  {metric.note}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Modal de Muestrario Físico (Sample Box) */}
+      <SampleBoxModal
+        isOpen={isSampleBoxOpen}
+        onClose={() => setIsSampleBoxOpen(false)}
+      />
+
+      {/* Modal de Preflight Técnico de Archivos */}
+      <PreflightModal
+        isOpen={isPreflightOpen}
+        onClose={() => setIsPreflightOpen(false)}
+        onFileApproved={handleFileApproved}
+      />
+    </>
   );
 }
