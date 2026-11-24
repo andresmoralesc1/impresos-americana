@@ -16,10 +16,12 @@ interface ProjectItem {
   categoryLabel: string;
   specs: string[];
   clientSector: string;
+  imageSrc: string;
   imageAlt: string;
   size: "large" | "medium" | "small";
   gradient: string;
   badge?: string;
+  description: string;
 }
 
 export function BentoGrid() {
@@ -46,76 +48,94 @@ export function BentoGrid() {
 
   const projects: ProjectItem[] = [
     {
-      id: "supermercados",
-      title: "Campaña de Lanzamiento - Supermercados",
+      id: "stand-modular",
+      title: "Stands & Exhibidores Modulares de Punto de Venta",
       category: "Material POP",
-      categoryLabel: "Material POP & Gran Formato",
-      specs: ["Cartón Corrugado 4mm", "Góndolas & Cabezotes", "Barniz UV Brillante"],
-      clientSector: "Consumo Masivo / Retail Nacional",
-      imageAlt: "Exhibidores de supermercado y vallas de gran formato para cadena de retail",
+      categoryLabel: "Material POP & Stands",
+      specs: ["Cartón Corrugado 4mm", "Cabezote Curvo UV", "Ensamble Sin Herramientas"],
+      clientSector: "Consumo Masivo & Retail",
+      imageSrc: "/images/real/exhibidor-3d-stand.jpg",
+      imageAlt: "Exhibidor modular de piso en cartón corrugado estructural con bandejas reforzadas",
       size: "large",
       gradient: "from-white to-zinc-50/50",
-      badge: "Caso de Éxito",
+      badge: "Destacado POP",
+      description:
+        "Ingeniería estructural en cartón corrugado de alta densidad con capacidad de carga distribuida, impresión litográfica directa y barniz de protección UV.",
     },
     {
       id: "bebidas",
-      title: "Exhibidores de Piso para Bebidas",
+      title: "Exhibidores de Piso para Bebidas & Licores",
       category: "Material POP",
-      categoryLabel: "Material POP",
-      specs: ["Capacidad 45 kg", "Troquelado Modular", "Fácil Armado Sin Pegante"],
-      clientSector: "Bebidas & Licores",
-      imageAlt: "Exhibidores de piso en cartón corrugado estructural con logo impreso",
+      categoryLabel: "Material POP Estructural",
+      specs: ["Capacidad 45 kg por Nivel", "Tratamiento Anti-Humedad", "Troquelado de Precisión"],
+      clientSector: "Bebidas & Alimentos",
+      imageSrc: "/images/real/exhibidor-bebidas.jpg",
+      imageAlt: "Exhibidor de piso reforzado para botellas y licores fabricado en Cali",
       size: "medium",
       gradient: "from-white to-zinc-50/50",
       badge: "Alta Resistencia",
+      description:
+        "Estructura reforzada con tratamiento hidrófugo para resistir condensación y peso elevado. Cero pandeo tras periodos prolongados de exhibición en punto de venta.",
     },
     {
       id: "acrilico",
-      title: "Señalética e Impresión en Acrílico",
+      title: "Señalética Corporativa & Acrílico Cristal",
       category: "Gran Formato",
-      categoryLabel: "Gran Formato",
-      specs: ["Acrílico Cristal 6mm", "Cama Plana UV", "Corte Láser CNC"],
-      clientSector: "Banca & Corporativo",
-      imageAlt: "Señalética corporativa con acabados de acrílico cristal y corte láser",
+      categoryLabel: "Gran Formato & Acrílico",
+      specs: ["Acrílico Cristal 6mm", "Cama Plana UV 1440 DPI", "Distanciadores en Acero Inoxidable"],
+      clientSector: "Banca, Salud & Corporativo",
+      imageSrc: "/images/real/senaletica-acrilico.jpg",
+      imageAlt: "Señalética corporativa en acrílico cristal cortado con láser CNC e impresión UV",
       size: "small",
       gradient: "from-white to-zinc-50/50",
-      badge: "PREMIUM IMPRESIÓN",
+      badge: "Acabado Premium",
+      description:
+        "Corte láser de bordes pulidos y pulido a la llama con impresión de tinta UV flexible en reverso. Máxima durabilidad en interiores y áreas de recepción.",
     },
     {
       id: "kit-corporativo",
-      title: "Kit Corporativo de Fin de Año",
+      title: "Kits de Bienvenida & Merchandising Ejecutivo",
       category: "Merchandising",
-      categoryLabel: "Merchandising",
-      specs: ["Caja Rígida Imantada", "Agenda Cuero Ecológico", "Mug Cerámica Mate"],
-      clientSector: "Tecnología & Finanzas",
-      imageAlt: "Kit de merchandising corporativo negro mate con acentos rojos y termo",
+      categoryLabel: "Merchandising Corporativo",
+      specs: ["Caja Rígida de Cierre Imantado", "Libreta Cuero Sintético", "Termo Aislado con Grabado Láser"],
+      clientSector: "Tecnología & Banca",
+      imageSrc: "/images/real/kit-corporativo.jpg",
+      imageAlt: "Kit de bienvenida y merchandising corporativo con termo, libreta y bolígrafo grabado",
       size: "small",
       gradient: "from-white to-zinc-50/50",
-      badge: "Edición Limitada",
+      badge: "Edición Ejecutiva",
+      description:
+        "Conjunto de bienvenida premium personalizado con estampado metalizado, grabado láser de fibra y estuche de cartón rígido con forro plastificado mate.",
     },
     {
       id: "litografia-catalogos",
-      title: "Catálogos de Lujo & Papelería Ejecutiva",
+      title: "Papelería Corporativa & Carpetas de Presentación",
       category: "Litografía",
-      categoryLabel: "Litografía",
-      specs: ["Propalcote 300g", "Foil Estampado Oro", "Encuadernación Hot-Melt"],
+      categoryLabel: "Litografía Comercial",
+      specs: ["Propalcote 300g", "Bolsillo Troquelado", "Plastificado Mate & Brillo UV"],
       clientSector: "Automotriz & Moda",
-      imageAlt: "Catálogos litográficos con acabados de lujo y barniz sectorizado",
+      imageSrc: "/images/real/litografia-papeleria.jpg",
+      imageAlt: "Carpetas corporativas y papelería litográfica de alta gama producida en Cali",
       size: "medium",
       gradient: "from-white to-zinc-50/50",
       badge: "Color Certificado",
+      description:
+        "Impresión offset con fidelidad de color según estándares de manual de marca. Acabados especiales en barniz sectorizado y troqueles funcionales para tarjetas de presentación.",
     },
     {
-      id: "vallas-gran-formato",
-      title: "Vallas & Fachadas Comerciales",
-      category: "Gran Formato",
-      categoryLabel: "Gran Formato",
-      specs: ["Lona Banner 13oz Blackout", "Tintas UV Exterior 3 Años", "Soldadura Térmica"],
-      clientSector: "Inmobiliario & Centros Comerciales",
-      imageAlt: "Impresión de gran formato y vallas publicitarias en lona de alta durabilidad",
+      id: "esferos-publicitarios",
+      title: "Artículos Publicitarios & Bolígrafos Grabados",
+      category: "Merchandising",
+      categoryLabel: "Merchandising & Artículos Publicitarios",
+      specs: ["Cuerpo Metálico Soft-Touch", "Grabado Láser de Fibra", "Tinta Gel de Alta Duración"],
+      clientSector: "Campañas Institucionales & Eventos",
+      imageSrc: "/images/real/esferos-metalicos.jpg",
+      imageAlt: "Bolígrafos y esferos metálicos grabados con tecnología láser de fibra óptica",
       size: "large",
       gradient: "from-white to-zinc-50/50",
-      badge: "Resistencia UV",
+      badge: "Grabado Láser",
+      description:
+        "Bolígrafos metálicos de gama ejecutiva con grabado permanente por ablación láser. Presentación en estuches individuales o en paquetes corporativos por volumen.",
     },
   ];
 
@@ -125,22 +145,22 @@ export function BentoGrid() {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="proyectos" className="py-24 bg-white relative overflow-hidden">
+    <section id="proyectos" className="py-16 sm:py-24 bg-white relative overflow-hidden">
       {/* Subtle ambient lighting */}
       <div className="absolute top-1/2 -right-40 w-96 h-96 bg-[#E30613]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-xs font-mono font-bold text-[#E30613] mb-3 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-xs font-mono font-bold text-[#E30613] mb-3 shadow-2xs">
             <span className="w-2 h-2 rounded-full bg-[#E30613]" />
-            CASOS REALES EN RETAIL COLOMBIANO
+            PRODUCCIONES REALES EN PUNTO DE VENTA
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black uppercase text-zinc-950 tracking-tight leading-none mb-4">
             NUESTRO TRABAJO EN ACCIÓN
           </h2>
           <p className="text-zinc-600 text-sm sm:text-base leading-relaxed font-normal">
-            Fabricaciones e instalaciones reales en cadenas de supermercados, retail farmacéutico, eventos feriales y sedes corporativas en toda Colombia.
+            Fabricaciones e instalaciones industriales para exhibición comercial, stands modulares, eventos feriales y dotación corporativa en toda Colombia.
           </p>
 
           {/* Category Filter Pills with Item Counts */}
@@ -178,7 +198,7 @@ export function BentoGrid() {
           </div>
         </div>
 
-        {/* Bento Grid layout with interactive Cursor Spotlight */}
+        {/* Bento Grid layout with real photography */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence>
             {filteredProjects.map((project, index) => {
@@ -200,16 +220,16 @@ export function BentoGrid() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Bottom Banner matching Image 2 */}
-        <div className="mt-16 rounded-2xl bg-gradient-to-r from-[#8F0008] via-[#E30613] to-[#B3000B] p-6 sm:p-8 shadow-[0_15px_40px_rgba(227,6,19,0.35)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+        {/* Bottom Banner */}
+        <div className="mt-16 rounded-3xl bg-gradient-to-r from-[#8F0008] via-[#E30613] to-[#B3000B] p-6 sm:p-8 shadow-[0_15px_40px_rgba(227,6,19,0.35)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/15 via-transparent to-transparent pointer-events-none" />
 
           <div className="relative z-10 text-center md:text-left">
             <h3 className="text-xl sm:text-2xl lg:text-3xl font-montserrat font-black text-white uppercase tracking-tight leading-tight">
-              ¿LISTO PARA EXHIBIR TU MARCA EN PUNTOS DE VENTA NACIONALES?
+              ¿LISTO PARA EXHIBIR TU MARCA CON CALIDAD INDUSTRIAL?
             </h3>
-            <p className="text-white text-sm font-medium mt-1 max-w-xl">
-              Ingeniería de empaque, prototipado estructural en 24h y despacho industrial desde Cali a toda Colombia.
+            <p className="text-white/90 text-xs sm:text-sm font-medium mt-1.5 max-w-xl">
+              Ingeniería estructural, prototipado rápido en 24h y despacho coordinado desde Cali a cualquier ciudad de Colombia.
             </p>
           </div>
 
@@ -229,7 +249,7 @@ export function BentoGrid() {
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white border border-zinc-200 shadow-2xl p-6 sm:p-8"
+            className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white border border-zinc-200 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between pb-4 border-b border-zinc-200 mb-6">
@@ -243,7 +263,7 @@ export function BentoGrid() {
               </div>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors"
+                className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors shrink-0"
                 aria-label="Cerrar modal"
               >
                 <X className="w-5 h-5" />
@@ -251,6 +271,21 @@ export function BentoGrid() {
             </div>
 
             <div className="space-y-6">
+              {/* Modal Image */}
+              <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden bg-zinc-100 border border-zinc-200">
+                <Image
+                  src={selectedProject.imageSrc}
+                  alt={selectedProject.imageAlt}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Description */}
+              <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
+                {selectedProject.description}
+              </p>
+
               <div className="bg-zinc-50 rounded-2xl p-4 border border-zinc-100">
                 <span className="text-xs font-mono font-bold uppercase text-zinc-500 block mb-2">
                   Especificaciones Técnicas & Materiales
@@ -280,9 +315,9 @@ export function BentoGrid() {
                   href={`https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20estoy%20interesado%20en%20un%20proyecto%20similar%20a%20${encodeURIComponent(selectedProject.title)}%20(${encodeURIComponent(selectedProject.categoryLabel)}).`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-montserrat font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all"
+                  className="flex-1 py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-montserrat font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all text-center"
                 >
-                  <MessageCircle className="w-4 h-4 fill-white" />
+                  <MessageCircle className="w-4 h-4 fill-white shrink-0" />
                   <span>Cotizar por WhatsApp</span>
                 </a>
 
@@ -290,7 +325,7 @@ export function BentoGrid() {
                   href="/cotizador"
                   className="py-3.5 px-6 rounded-xl bg-[#E30613] hover:bg-[#C50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all text-center"
                 >
-                  <Sparkles className="w-4 h-4" />
+                  <Sparkles className="w-4 h-4 shrink-0" />
                   <span>Ir al Cotizador 3D</span>
                 </Link>
               </div>
@@ -352,126 +387,26 @@ function BentoCard({
       {/* Decorative corner slash in bottom right */}
       <div className="absolute bottom-0 right-0 w-0 h-0 border-style-solid border-b-[34px] border-l-[34px] border-b-[#E30613] border-l-transparent z-10 pointer-events-none" />
 
-      {/* Visual Simulation Stage */}
-      <div className={`relative w-full ${isLarge ? "h-64 sm:h-72" : "h-56"} bg-zinc-50 overflow-hidden flex items-center justify-center p-6 border-b border-zinc-100`}>
-        {project.id === "supermercados" && (
-          <div className="w-full h-full relative flex items-center justify-center">
-            <svg viewBox="0 0 460 220" fill="none" className="w-full h-full max-h-56">
-              <line x1="20" y1="40" x2="440" y2="40" stroke="#E2E8F0" strokeWidth="2" />
-              <line x1="20" y1="90" x2="440" y2="90" stroke="#E2E8F0" strokeWidth="2" />
-              <line x1="20" y1="140" x2="440" y2="140" stroke="#E2E8F0" strokeWidth="2" />
-
-              <rect x="40" y="20" width="160" height="90" rx="4" fill="#E30613" />
-              <rect x="46" y="26" width="148" height="78" rx="2" fill="#0F172A" />
-              <text x="120" y="58" textAnchor="middle" fill="#FFFFFF" fontSize="13" fontFamily="Montserrat" fontWeight="900">
-                PUNTO DE VENTA
-              </text>
-              <text x="120" y="74" textAnchor="middle" fill="#E30613" fontSize="9" fontFamily="Inter" fontWeight="700">
-                IMPACTO NACIONAL
-              </text>
-
-              <path d="M260 50L360 40L380 200L250 210Z" fill="#C50510" />
-              <path d="M280 60L350 50L360 190L270 200Z" fill="#334155" />
-              <polygon points="280,100 350,92 345,108 276,116" fill="#D97706" />
-              <polygon points="277,140 347,132 342,148 273,156" fill="#D97706" />
-              <polygon points="274,180 344,172 339,188 270,196" fill="#D97706" />
-
-              <rect x="180" y="10" width="220" height="30" rx="3" fill="#E30613" />
-              <text x="290" y="29" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontFamily="Montserrat" fontWeight="800">
-                CAMPAÑA NACIONAL DE VERANO
-              </text>
-            </svg>
-          </div>
-        )}
-
-        {project.id === "bebidas" && (
-          <div className="w-full h-full relative flex items-center justify-center">
-            <svg viewBox="0 0 240 200" fill="none" className="h-full">
-              <path d="M60 30L180 30L170 190L70 190Z" fill="#D97706" />
-              <path d="M60 30L180 30L175 60H65Z" fill="#E30613" />
-              <text x="120" y="50" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontFamily="Montserrat" fontWeight="800">
-                BEBIDAS PREMIUM
-              </text>
-              <rect x="75" y="90" width="90" height="8" rx="1" fill="#B45309" />
-              <rect x="85" y="70" width="12" height="20" rx="2" fill="#E30613" />
-              <rect x="105" y="70" width="12" height="20" rx="2" fill="#FFFFFF" />
-              <rect x="125" y="70" width="12" height="20" rx="2" fill="#1E293B" />
-              <rect x="145" y="70" width="12" height="20" rx="2" fill="#E30613" />
-              <rect x="73" y="140" width="94" height="8" rx="1" fill="#B45309" />
-              <rect x="83" y="120" width="12" height="20" rx="2" fill="#FFFFFF" />
-              <rect x="103" y="120" width="12" height="20" rx="2" fill="#E30613" />
-              <rect x="123" y="120" width="12" height="20" rx="2" fill="#FFFFFF" />
-              <rect x="143" y="120" width="12" height="20" rx="2" fill="#1E293B" />
-              <text x="120" y="178" textAnchor="middle" fill="#FFFFFF" fontSize="8" fontFamily="Montserrat" fontWeight="800">
-                IMPRESOS AMERICANA
-              </text>
-            </svg>
-          </div>
-        )}
-
-        {project.id === "acrilico" && (
-          <div className="w-full h-full relative flex items-center justify-center">
-            <svg viewBox="0 0 240 180" fill="none" className="h-full">
-              <rect x="40" y="30" width="160" height="110" rx="8" fill="rgba(241,245,249,0.8)" stroke="#CBD5E1" strokeWidth="2" />
-              <circle cx="55" cy="45" r="4" fill="#94A3B8" />
-              <circle cx="185" cy="45" r="4" fill="#94A3B8" />
-              <circle cx="55" cy="125" r="4" fill="#94A3B8" />
-              <circle cx="185" cy="125" r="4" fill="#94A3B8" />
-              <circle cx="85" cy="75" r="10" fill="#E30613" />
-              <text x="105" y="80" fill="#0F172A" fontSize="12" fontFamily="Montserrat" fontWeight="800">
-                SEÑALÉTICA UV
-              </text>
-              <text x="105" y="95" fill="#64748B" fontSize="8" fontFamily="Inter">
-                Acrílico Cristal 6mm
-              </text>
-              <line x1="60" y1="110" x2="180" y2="110" stroke="#E30613" strokeWidth="2" />
-            </svg>
-          </div>
-        )}
-
-        {project.id === "kit-corporativo" && (
-          <div className="w-full h-full relative flex items-center justify-center p-2">
-            <Image
-              src="/products/libreta-ejecutiva.jpg"
-              alt="Kit Corporativo de Agendas y Termos Impresos Americana"
-              width={480}
-              height={320}
-              className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-        )}
-
-        {project.id === "litografia-catalogos" && (
-          <div className="w-full h-full relative flex items-center justify-center p-2">
-            <Image
-              src="/products/catalogo-cover.jpg"
-              alt="Catálogo Litográfico Impresos Americana"
-              width={480}
-              height={320}
-              className="w-full h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-        )}
-
-        {project.id === "vallas-gran-formato" && (
-          <div className="w-full h-full relative flex items-center justify-center">
-            <svg viewBox="0 0 360 200" fill="none" className="w-full h-full">
-              <line x1="180" y1="80" x2="180" y2="180" stroke="#94A3B8" strokeWidth="8" />
-              <rect x="60" y="30" width="240" height="90" rx="3" fill="#0F172A" stroke="#CBD5E1" strokeWidth="2" />
-              <rect x="65" y="35" width="230" height="80" fill="#E30613" />
-              <text x="180" y="70" textAnchor="middle" fill="#FFFFFF" fontSize="16" fontFamily="Montserrat" fontWeight="900">
-                GRAN FORMATO UV
-              </text>
-              <text x="180" y="90" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontFamily="Inter" fontWeight="600">
-                ALTA RESOLUCIÓN • 1440 DPI
-              </text>
-            </svg>
-          </div>
-        )}
+      {/* Real Photography Container */}
+      <div
+        className={`relative w-full ${isLarge ? "h-64 sm:h-72" : "h-56"} bg-zinc-100 overflow-hidden flex items-center justify-center p-3 border-b border-zinc-100 cursor-pointer`}
+        onClick={onSelect}
+      >
+        <div className="relative w-full h-full rounded-2xl overflow-hidden bg-zinc-900/5">
+          <Image
+            src={project.imageSrc}
+            alt={project.imageAlt}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+          />
+          {/* Subtle gradient vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </div>
 
         {/* Badge top-right */}
         {project.badge && (
-          <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md border border-zinc-200 px-2.5 py-1 rounded-md text-[10px] font-montserrat font-bold text-zinc-800 uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+          <div className="absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-md border border-zinc-200 px-2.5 py-1 rounded-md text-[10px] font-montserrat font-bold text-zinc-800 uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-[#E30613]" />
             {project.badge}
           </div>
@@ -482,12 +417,12 @@ function BentoCard({
           type="button"
           onClick={onCopySpecs}
           title="Copiar ficha técnica al portapapeles"
-          className="absolute top-3 left-3 bg-white/95 backdrop-blur-md border border-zinc-200 px-2.5 py-1 rounded-md text-[10px] font-mono text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 flex items-center gap-1.5 shadow-sm transition-colors"
+          className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-md border border-zinc-200 px-2.5 py-1 rounded-md text-[10px] font-mono text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 flex items-center gap-1.5 shadow-sm transition-colors"
         >
           {isCopied ? (
             <>
-              <Check className="w-3 h-3 text-emerald-600" />
-              <span className="text-emerald-700 font-bold">Copiado</span>
+              <Check className="w-3 h-3 text-[#E30613]" />
+              <span className="text-[#E30613] font-bold">Copiado</span>
             </>
           ) : (
             <>
@@ -530,7 +465,7 @@ function BentoCard({
           </div>
         </div>
 
-        {/* Bottom CTA to quote this exact product */}
+        {/* Bottom CTA to view details */}
         <div className="pt-3 border-t border-zinc-100 flex items-center justify-between">
           <button
             type="button"

@@ -7,12 +7,12 @@ import { triggerHaptic } from "@/lib/haptics";
 export function CaseStudiesSection() {
   const cases = [
     {
-      brand: "Líder de Consumo Masivo en Supermercados",
+      brand: "Marca Líder de Consumo Masivo & Retail",
       metric: "+28%",
-      metricLabel: "Rotación en Góndola",
+      metricLabel: "Rotación en Punto de Venta",
       headline: "Despliegue Nacional de 320 Exhibidores Modulares",
       description:
-        "Fabricación y distribución coordinada de exhibidores de piso en cartón corrugado estructural 4mm con cabezote curvo y barniz UV para tiendas Éxito, Jumbo y Carulla.",
+        "Fabricación y distribución coordinada de exhibidores de piso en cartón corrugado estructural 4mm con cabezote curvo y barniz UV para más de 300 puntos de venta en Colombia.",
       tags: ["Cartón Corrugado 4mm", "320 Puntos de Venta", "Cali / Bogotá / Medellín"],
       highlight: "Tiempo de entrega récord: 6 días hábiles",
     },

@@ -69,7 +69,7 @@ export function Hero() {
       id: "gran-formato",
       tabLabel: "02 / Gran Formato",
       tag: "Cama Plana UV & Fachadas",
-      title: "Gran Formato UV & Activación en Supermercados",
+      title: "Gran Formato UV & Activación en Puntos de Venta",
       subtitle: "Producción de góndolas, cabezotes y publicidad exterior con tintas UV curables resistentes a la intemperie y radiación solar.",
       src: "/images/real/pop-supermercados.jpg",
       specs: [

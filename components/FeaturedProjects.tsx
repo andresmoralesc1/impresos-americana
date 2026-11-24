@@ -19,12 +19,12 @@ interface FeaturedItem {
 export function FeaturedProjects() {
   const featured: FeaturedItem[] = [
     {
-      id: "supermercados",
-      title: "Campaña Nacional en Supermercados & Vallas",
-      category: "Material POP & Gran Formato",
-      clientSector: "Consumo Masivo / Retail Nacional",
-      specs: ["Cartón Corrugado 4mm", "Góndolas & Cabezotes", "Valla Exterior UV"],
-      image: "/images/real/pop-supermercados.jpg",
+      id: "stand-modular",
+      title: "Stands & Exhibidores Modulares de Punto de Venta",
+      category: "Material POP & Stands",
+      clientSector: "Consumo Masivo & Retail Nacional",
+      specs: ["Cartón Corrugado 4mm", "Cabezote Curvo UV", "Ensamble Rápido"],
+      image: "/images/real/exhibidor-3d-stand.jpg",
       badge: "Instalación en Retail",
     },
     {

@@ -34,7 +34,7 @@ export function ServicesOverview() {
       title: "Material POP & Exhibidores de Piso",
       tagline: "Ingeniería de cartón corrugado y MDF",
       description:
-        "Diseño y fabricación de exhibidores modulares de alta resistencia estructural para supermercados y farmacias. Resistencia de 15 a 40 kg por entrepaño y ensamble rápido sin herramientas.",
+        "Diseño y fabricación de exhibidores modulares de alta resistencia estructural para retail comercial y farmacias. Resistencia de 15 a 40 kg por entrepaño y ensamble rápido sin herramientas.",
       image: "/images/real/exhibidor-bebidas.jpg",
       highlights: ["Corrugado & MDF", "Muestra Zünd 24h", "Tirajes 25 a 10.000+ uds"],
       ctaText: "Cotizar POP",

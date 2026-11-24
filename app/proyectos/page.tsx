@@ -5,18 +5,18 @@ import { BentoGrid } from "@/components/BentoGrid";
 import { CaseStudiesSection } from "@/components/CaseStudiesSection";
 
 export const metadata: Metadata = {
-  title: "Casos Reales en Retail & Portafolio de Proyectos",
+  title: "Portafolio de Proyectos & Casos Reales | Impresos Americana",
   description:
-    "Proyectos destacados de material POP, stands de piso, exhibidores de mostrador y señalética fabricados para Éxito, Carulla, Jumbo y marcas líderes en Colombia.",
+    "Proyectos destacados de material POP, stands modulares, exhibidores de piso, litografía comercial, gran formato y merchandising corporativo fabricados en Cali para toda Colombia.",
 };
 
 export default function ProyectosPage() {
   return (
-    <div>
+    <div className="min-h-screen bg-white">
       <PageHeader
-        badge="CASOS REALES EN RETAIL COLOMBIANO"
+        badge="INGENIERÍA GRÁFICA & PRODUCCIÓN REAL"
         title="PORTAFOLIO DE PROYECTOS EN ACCIÓN"
-        description="Soluciones de ingeniería gráfica e impacto visual fabricadas e instaladas en puntos de venta nacionales. Explora especificaciones técnicas, materiales y detalles constructivos."
+        description="Soluciones de exhibición comercial, stands modulares, señalética y litografía industrial fabricadas en nuestra planta de Cali con cobertura y despacho a nivel nacional."
         breadcrumbs={[{ label: "Proyectos" }]}
       />
 
