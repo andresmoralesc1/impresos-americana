@@ -67,7 +67,7 @@ export function ProductShowcase() {
           <Link
             href="/catalogo"
             onClick={() => triggerHaptic(8)}
-            className="inline-flex items-center justify-center gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-[#E30613] hover:text-[#C50510] transition-colors shrink-0 py-2.5 px-4.5 rounded-xl bg-red-50 hover:bg-red-100/70 border border-red-200 min-h-[44px] w-full sm:w-auto shadow-xs"
+            className="inline-flex items-center justify-center gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-red-800 hover:text-red-950 transition-colors shrink-0 py-2.5 px-4.5 rounded-xl bg-red-50 hover:bg-red-100/70 border border-red-200 min-h-[44px] w-full sm:w-auto shadow-xs"
           >
             <span>Explorar catálogo completo (+50 referencias)</span>
             <ArrowRight className="w-3.5 h-3.5" />

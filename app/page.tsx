@@ -82,7 +82,7 @@ export default function Home() {
               href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20tengo%20un%20proyecto%20para%20cotizar%20directamente%20con%20planta."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#20BD5A] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-md shadow-emerald-500/20 hover:shadow-lg transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#0f7648] hover:bg-[#0c5c38] text-white font-montserrat font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-md shadow-emerald-800/20 hover:shadow-lg transition-all"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
               <span>Chatear por WhatsApp (+57 316 320 0181)</span>

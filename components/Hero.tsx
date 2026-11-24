@@ -366,14 +366,14 @@ export function Hero() {
                 {/* Left Details Panel */}
                 <div className="lg:col-span-5 flex flex-col justify-between space-y-5">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-red-50 text-[10px] font-mono font-bold text-[#E30613] uppercase tracking-wider mb-2.5">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-red-50 border border-red-200 text-[10px] font-mono font-bold text-red-800 uppercase tracking-wider mb-2.5">
                       <Sparkles className="w-3 h-3" />
                       <span>{currentSlide.tag}</span>
                     </div>
 
-                    <h3 className="font-montserrat font-black text-xl sm:text-2xl lg:text-3xl text-zinc-950 uppercase leading-tight tracking-tight">
+                    <h2 className="font-montserrat font-black text-xl sm:text-2xl lg:text-3xl text-zinc-950 uppercase leading-tight tracking-tight">
                       {currentSlide.title}
-                    </h3>
+                    </h2>
 
                     <p className="mt-2.5 text-xs sm:text-sm text-zinc-600 leading-relaxed">
                       {currentSlide.subtitle}

@@ -75,7 +75,7 @@ export function Footer() {
                 <MapPin className="w-4 h-4 text-[#E30613] shrink-0 mt-0.5" />
                 <span>
                   Calle 16 # 4-37, Barrio San Nicolás <br />
-                  <span className="text-zinc-500">Cali, Valle del Cauca, Colombia • C.P. 760010</span>
+                  <span className="text-zinc-600">Cali, Valle del Cauca, Colombia • C.P. 760010</span>
                 </span>
               </div>
               <div className="flex items-center gap-2.5 text-zinc-700">
@@ -123,9 +123,9 @@ export function Footer() {
 
           {/* Quick Links: Services */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="font-montserrat font-bold text-xs uppercase tracking-wider text-zinc-950">
+            <h3 className="font-montserrat font-bold text-xs uppercase tracking-wider text-zinc-950">
               Líneas de Producción
-            </h4>
+            </h3>
             <nav aria-label="Líneas de producción gráfica">
               <ul className="space-y-1.5 text-xs text-zinc-600">
                 <li>
@@ -190,23 +190,23 @@ export function Footer() {
 
           {/* Colombian Department Delivery Coverage */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-montserrat font-bold text-xs uppercase tracking-wider text-zinc-950">
+            <h3 className="font-montserrat font-bold text-xs uppercase tracking-wider text-zinc-950">
               Cobertura Nacional de Despachos
-            </h4>
-            <p className="text-[11px] text-zinc-500 leading-relaxed">
+            </h3>
+            <p className="text-[11px] text-zinc-600 leading-relaxed">
               Envíos diarios coordinados con transportadoras de carga y guías con seguimiento en tiempo real:
             </p>
             <div className="flex flex-wrap gap-1.5 pt-1">
               {coverageCities.map((city, idx) => (
                 <span
                   key={idx}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white text-zinc-700 border border-zinc-200/90 shadow-2xs font-medium"
+                  className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white text-zinc-800 border border-zinc-200/90 shadow-2xs font-medium"
                 >
                   {city}
                 </span>
               ))}
             </div>
-            <p className="text-[10px] text-zinc-400 font-mono pt-1">
+            <p className="text-[10px] text-zinc-600 font-medium font-mono pt-1">
               • Tiempos habituales: 24h a 48h hábiles en ciudades principales.
             </p>
           </div>
@@ -214,7 +214,7 @@ export function Footer() {
           {/* Instant Contact & DIAN compliance badge */}
           <div className="lg:col-span-3 space-y-4">
             <div className="rounded-2xl bg-white border border-zinc-200 p-5 shadow-xs">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-700 font-bold block mb-1">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-800 font-bold block mb-1">
                 Atención Inmediata
               </span>
               <p className="text-xs text-zinc-950 font-semibold mb-3">
@@ -224,7 +224,7 @@ export function Footer() {
                 href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20necesito%20cotizaci%C3%B3n%20urgente%20para%20un%20proyecto."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-montserrat font-bold text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-xs hover:shadow-md min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#25D366]"
+                className="w-full inline-flex items-center justify-center gap-2 bg-[#0f7648] hover:bg-[#0c5c38] text-white font-montserrat font-bold text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-xs hover:shadow-md min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0f7648]"
               >
                 <MessageCircle className="w-4 h-4" />
                 WhatsApp Directo
@@ -241,7 +241,7 @@ export function Footer() {
         </div>
 
         {/* DIAN and Legal Footer Bar */}
-        <div className="pt-8 border-t border-zinc-200 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-zinc-500 font-mono">
+        <div className="pt-8 border-t border-zinc-200 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-zinc-600 font-medium font-mono">
           <div className="text-center md:text-left">
             © {new Date().getFullYear()} Impresos Americana S.A.S. • NIT 900.384.912-4 • Todos los derechos reservados.
           </div>
