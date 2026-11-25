@@ -212,7 +212,7 @@ export function LithoPosterHero() {
       {/* 1. CONTINUOUS STREAMING TYPOGRAPHY BACKGROUND (LIGHT PAPER)   */}
       {/* ============================================================== */}
       <div
-        className="absolute inset-[-20%] pointer-events-none flex flex-col justify-center gap-4 sm:gap-6 opacity-[0.22] rotate-[-5deg] overflow-hidden z-0"
+        className="absolute inset-[-20%] pointer-events-none flex flex-col justify-center gap-4 sm:gap-6 opacity-[0.32] rotate-[-5deg] overflow-hidden z-0"
         aria-hidden="true"
       >
         {rows.map(({ row, half, span, duration, dir }) => (
@@ -262,15 +262,15 @@ export function LithoPosterHero() {
       {/* ============================================================== */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center">
         
-        {/* Main Central Presentation Card with Frosted Glossy Backdrop */}
-        <div className="w-full bg-gradient-to-b from-white/70 via-white/40 to-white/50 backdrop-blur-md rounded-3xl border border-white/80 shadow-[0_8px_32px_0_rgba(15,23,42,0.06)] ring-1 ring-white/60 p-6 sm:p-10 md:p-12 flex flex-col items-center">
+        {/* Main Central Presentation Card with Ultra-Clear Crystal Glossy Backdrop */}
+        <div className="w-full bg-white/20 sm:bg-white/25 backdrop-blur-[6px] rounded-3xl border border-white/60 shadow-[0_8px_32px_0_rgba(15,23,42,0.05)] ring-1 ring-white/40 p-6 sm:p-10 md:p-12 flex flex-col items-center">
           {/* Main Headline: Clean, Punchy & High Contrast */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-montserrat font-black uppercase tracking-tight text-zinc-950 leading-[1.08] mb-5">
             Ingeniería Gráfica &amp; <span className="text-[#E30613]">Producción Industrial</span>
           </h1>
 
           {/* Value Proposition Description */}
-          <p className="text-sm sm:text-base lg:text-lg text-zinc-700 max-w-2xl mx-auto leading-relaxed font-normal mb-8">
+          <p className="text-sm sm:text-base lg:text-lg text-zinc-850 max-w-2xl mx-auto leading-relaxed font-medium mb-8">
             Fabricación directa en San Nicolás, Cali: exhibidores de piso reforzados, cajas rígidas, catálogos en offset y gran formato UV con despacho coordinado a toda Colombia sin intermediarios.
           </p>
 
@@ -309,8 +309,8 @@ export function LithoPosterHero() {
           </div>
 
           {/* Despacho a Toda Colombia */}
-          <div className="pt-5 border-t border-zinc-200/60 w-full flex items-center justify-center">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/70 border border-white/90 text-xs font-mono font-medium text-zinc-800 shadow-2xs">
+          <div className="pt-5 border-t border-zinc-900/10 w-full flex items-center justify-center">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/40 border border-white/60 text-xs font-mono font-semibold text-zinc-900 shadow-2xs backdrop-blur-xs">
               <Truck className="w-3.5 h-3.5 text-[#E30613]" />
               <span>Despacho a toda Colombia</span>
             </div>
