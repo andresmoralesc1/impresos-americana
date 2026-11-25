@@ -262,8 +262,8 @@ export function LithoPosterHero() {
       {/* ============================================================== */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center">
         
-        {/* Main Central Presentation Card with Ultra-Clear Crystal Glossy Glass (No Heavy Blur) */}
-        <div className="w-full bg-white/5 sm:bg-white/10 backdrop-blur-[1.5px] rounded-3xl border border-white/80 shadow-[0_16px_40px_rgba(0,0,0,0.06)] ring-1 ring-white/60 p-6 sm:p-10 md:p-12 flex flex-col items-center">
+        {/* Main Central Presentation Card with Frosted Glossy Glass */}
+        <div className="w-full bg-white/10 sm:bg-white/15 backdrop-blur-[3.5px] rounded-3xl border border-white/80 shadow-[0_16px_40px_rgba(0,0,0,0.06)] ring-1 ring-white/60 p-6 sm:p-10 md:p-12 flex flex-col items-center">
           {/* Main Headline: Clean, Punchy & High Contrast */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-montserrat font-black uppercase tracking-tight text-zinc-950 leading-[1.08] mb-5">
             Ingeniería Gráfica &amp; <span className="text-[#E30613]">Producción Industrial</span>
