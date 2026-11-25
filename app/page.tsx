@@ -8,45 +8,12 @@ import { ProductShowcase } from "@/components/ProductShowcase";
 import { MessageCircle, MapPin, ArrowRight } from "lucide-react";
 
 export default function Home() {
-  const sectors = [
-    "Consumo Masivo & Retail",
-    "Farmacéutico & Salud",
-    "Cosmética & Cuidado Personal",
-    "Alimentos & Bebidas",
-    "Sector Automotriz & Banca",
-    "Agencias de Publicidad",
-  ];
-
   return (
     <div className="text-zinc-900 selection:bg-[#E30613] selection:text-white">
       {/* 1. Hero Principal con Tipografía Viva Litográfica & POP */}
       <LithoPosterHero />
 
-      {/* 2. Franja de Confianza / Sectores Atendidos (Modern Trust Strip) */}
-      <div className="border-t border-b border-zinc-200/80 bg-zinc-50/70 py-4 sm:py-5 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-4 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200/80 text-[10px] font-mono font-bold text-red-800 shrink-0 shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E30613] animate-pulse" />
-              <span>PRODUCCIÓN DIRECTA PARA</span>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center lg:justify-end gap-2 sm:gap-2.5">
-              {sectors.map((sector, idx) => (
-                <span
-                  key={idx}
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white border border-zinc-200/90 text-xs font-montserrat font-semibold text-zinc-800 shadow-2xs hover:border-[#E30613]/50 hover:text-zinc-950 transition-all duration-200 whitespace-nowrap"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E30613] shrink-0" />
-                  <span>{sector}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Servicios Industriales Principales (4 Pilares con Fotos Reales) */}
+      {/* 2. Servicios Industriales Principales (4 Pilares con Fotos Reales) */}
       <ServicesOverview />
 
       {/* 4. Flujo de Trabajo Industrial en 4 Pasos */}

@@ -6,10 +6,6 @@ import {
   Sparkles,
   MessageCircle,
   ArrowRight,
-  ShieldCheck,
-  Cpu,
-  Layers,
-  Truck,
 } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
 
@@ -215,11 +211,11 @@ export function LithoPosterHero() {
       {/* 1. CONTINUOUS STREAMING TYPOGRAPHY BACKGROUND (LIGHT PAPER)   */}
       {/* ============================================================== */}
       <div
-        className="absolute inset-[-20%] pointer-events-none flex flex-col justify-center gap-4 sm:gap-6 opacity-[0.14] rotate-[-5deg] overflow-hidden z-0"
+        className="absolute inset-[-20%] pointer-events-none flex flex-col justify-center gap-4 sm:gap-6 opacity-[0.22] rotate-[-5deg] overflow-hidden z-0"
         aria-hidden="true"
       >
         {rows.map(({ row, half, span, duration, dir }) => (
-          <div key={row} className="h-16 sm:h-20 flex-none overflow-visible">
+          <div key={row} className={`h-16 sm:h-20 flex-none overflow-visible ${row >= 4 ? "hidden md:block" : ""}`}>
             <svg
               className={`block h-full w-auto max-w-none ${
                 dir === "l" ? "animate-litho-marq-left" : "animate-litho-marq-right"
@@ -265,21 +261,8 @@ export function LithoPosterHero() {
       {/* ============================================================== */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center">
         
-        {/* Main Central Presentation Card with Frosted Backdrop */}
-        <div className="w-full bg-white/80 backdrop-blur-xl rounded-3xl border border-zinc-200/90 p-6 sm:p-10 md:p-12 shadow-xl shadow-zinc-950/5 ring-1 ring-zinc-950/5 flex flex-col items-center">
-          
-          {/* Eyebrow Badge: 100% Localized (Zero 'planta litografica', Zero 'material pop') */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-zinc-900 text-white shadow-xs mb-5 sm:mb-6 border border-zinc-800">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] sm:text-[11px] font-mono font-medium text-zinc-300">
-              PLANTA DIRECTA EN CALI
-            </span>
-            <span className="text-zinc-600">•</span>
-            <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-red-400">
-              SAN NICOLÁS
-            </span>
-          </div>
-
+        {/* Main Central Presentation Card with Frosted Glossy Backdrop */}
+        <div className="w-full bg-gradient-to-b from-white/70 via-white/40 to-white/50 backdrop-blur-md rounded-3xl border border-white/80 shadow-[0_8px_32px_0_rgba(15,23,42,0.06)] ring-1 ring-white/60 p-6 sm:p-10 md:p-12 flex flex-col items-center">
           {/* Main Headline: Clean, Punchy & High Contrast */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-montserrat font-black uppercase tracking-tight text-zinc-950 leading-[1.08] mb-5">
             Ingeniería Gráfica &amp; <span className="text-[#E30613]">Producción Industrial</span>
@@ -291,65 +274,39 @@ export function LithoPosterHero() {
           </p>
 
           {/* Action Buttons (CTAs) */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
             <Link
               href="/cotizador"
               onClick={() => triggerHaptic(10)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#E30613] hover:bg-[#c50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-lg shadow-red-500/25 transition-all transform hover:scale-[1.02] active:scale-95"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 sm:py-4 rounded-xl bg-[#E30613] hover:bg-[#c50510] text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-lg shadow-red-500/25 transition-all transform hover:scale-[1.02] active:scale-95 min-h-[46px]"
             >
               <Sparkles className="w-4 h-4" />
               <span>Cotizar Proyecto en 3D</span>
             </Link>
 
-            <a
-              href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20directa%20en%20planta%20para%20un%20proyecto."
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => triggerHaptic(8)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-montserrat font-bold text-xs uppercase tracking-wider shadow-md transition-all active:scale-95"
-            >
-              <MessageCircle className="w-4 h-4 text-[#25D366]" />
-              <span>Hablar por WhatsApp</span>
-            </a>
+            <div className="grid grid-cols-2 gap-2.5 w-full sm:flex sm:w-auto">
+              <a
+                href="https://wa.me/573163200181?text=Hola%20Impresos%20Americana,%20deseo%20asesor%C3%ADa%20directa%20en%20planta%20para%20un%20proyecto."
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => triggerHaptic(8)}
+                className="inline-flex items-center justify-center gap-2 px-3 py-3 sm:px-7 sm:py-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-montserrat font-bold text-[11px] sm:text-xs uppercase tracking-wider shadow-md transition-all active:scale-95 text-center min-h-[44px]"
+              >
+                <MessageCircle className="w-4 h-4 text-[#25D366] shrink-0" />
+                <span className="truncate">WhatsApp</span>
+              </a>
 
-            <Link
-              href="/proyectos"
-              onClick={() => triggerHaptic(8)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200/90 font-montserrat font-semibold text-xs uppercase tracking-wider shadow-2xs transition-all"
-            >
-              <span>Ver Proyectos</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#E30613]" />
-            </Link>
-          </div>
-
-          {/* Capabilities Trust Bar */}
-          <div className="w-full pt-6 border-t border-zinc-200/80 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-zinc-700">
-            <div className="flex items-center gap-2 font-mono text-[11px] font-medium">
-              <Cpu className="w-3.5 h-3.5 text-[#E30613]" />
-              <span>Heidelberg Speedmaster</span>
-            </div>
-            <span className="text-zinc-300 hidden sm:inline">•</span>
-            <div className="flex items-center gap-2 font-mono text-[11px] font-medium">
-              <Layers className="w-3.5 h-3.5 text-[#E30613]" />
-              <span>Corte Digital Zünd &amp; Láser CNC</span>
-            </div>
-            <span className="text-zinc-300 hidden sm:inline">•</span>
-            <div className="flex items-center gap-2 font-mono text-[11px] font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#E30613]" />
-              <span>Carga 45 kg por Bandeja</span>
-            </div>
-            <span className="text-zinc-300 hidden sm:inline">•</span>
-            <div className="flex items-center gap-2 font-mono text-[11px] font-medium">
-              <Truck className="w-3.5 h-3.5 text-[#E30613]" />
-              <span>Despacho a Toda Colombia</span>
+              <Link
+                href="/proyectos"
+                onClick={() => triggerHaptic(8)}
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-3 sm:px-6 sm:py-4 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200/90 font-montserrat font-semibold text-[11px] sm:text-xs uppercase tracking-wider shadow-2xs hover:border-zinc-300 transition-all text-center min-h-[44px]"
+              >
+                <span>Proyectos</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#E30613] shrink-0" />
+              </Link>
             </div>
           </div>
         </div>
-
-        {/* Interactive hint */}
-        <p className="text-[11px] text-zinc-400 font-mono mt-4">
-          Toca o haz clic sobre el fondo para lanzar tipos móviles de imprenta
-        </p>
       </div>
 
       {/* ============================================================== */}

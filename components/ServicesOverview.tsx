@@ -155,7 +155,7 @@ export function ServicesOverview() {
                 <Link
                   href={service.ctaLink}
                   onClick={() => triggerHaptic(8)}
-                  className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-red-800 hover:text-red-950 transition-colors py-2.5 px-3.5 sm:p-0 rounded-xl bg-red-50/80 sm:bg-transparent border border-red-200 sm:border-0 min-h-[42px] sm:min-h-0"
+                  className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-2 text-xs font-montserrat font-bold uppercase tracking-wider text-red-800 hover:text-red-950 transition-colors py-2.5 px-3.5 sm:p-0 rounded-xl bg-red-50/80 sm:bg-transparent border border-red-200 sm:border-0 min-h-[44px] sm:min-h-0"
                 >
                   <span>{service.ctaText}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
