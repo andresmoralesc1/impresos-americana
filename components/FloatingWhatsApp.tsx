@@ -62,7 +62,7 @@ export function FloatingWhatsApp() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp a +57 316 320 0181"
-        className="pointer-events-auto relative group flex items-center justify-center p-3.5 sm:p-4 rounded-full bg-gradient-to-tr from-[#20ba59] to-[#25D366] hover:from-[#1eb054] hover:to-[#22c55e] text-white shadow-[0_4px_25px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_35px_rgba(37,211,102,0.65)] transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-500/40"
+        className="pointer-events-auto relative group flex items-center justify-center p-3.5 sm:p-4 rounded-full bg-[#0f7648] hover:bg-[#0c5c38] text-white shadow-[0_4px_20px_rgba(15,118,72,0.35)] hover:shadow-[0_8px_30px_rgba(15,118,72,0.5)] transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-500/40"
       >
         {/* Pulsing beacon indicator */}
         <span className="absolute -top-1 -right-1 flex h-4 w-4">

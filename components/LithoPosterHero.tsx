@@ -290,16 +290,20 @@ export function LithoPosterHero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => triggerHaptic(8)}
-                className="inline-flex items-center justify-center gap-2 px-3 py-3 sm:px-7 sm:py-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-montserrat font-bold text-[11px] sm:text-xs uppercase tracking-wider shadow-md transition-all active:scale-95 text-center min-h-[44px]"
+                className="group inline-flex items-center justify-center gap-2 px-3 py-3 sm:px-6 sm:py-4 rounded-xl bg-white/90 hover:bg-white text-zinc-900 border border-zinc-200/90 hover:border-emerald-500/50 shadow-2xs hover:shadow-md transition-all font-montserrat font-bold text-[11px] sm:text-xs uppercase tracking-wider active:scale-95 text-center min-h-[44px]"
               >
-                <MessageCircle className="w-4 h-4 text-[#25D366] shrink-0" />
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <MessageCircle className="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform shrink-0" />
                 <span className="truncate">WhatsApp</span>
               </a>
 
               <Link
                 href="/proyectos"
                 onClick={() => triggerHaptic(8)}
-                className="inline-flex items-center justify-center gap-1.5 px-3 py-3 sm:px-6 sm:py-4 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200/90 font-montserrat font-semibold text-[11px] sm:text-xs uppercase tracking-wider shadow-2xs hover:border-zinc-300 transition-all text-center min-h-[44px]"
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-3 sm:px-6 sm:py-4 rounded-xl bg-white/90 hover:bg-white text-zinc-900 border border-zinc-200/90 hover:border-zinc-300 shadow-2xs hover:shadow-md transition-all font-montserrat font-semibold text-[11px] sm:text-xs uppercase tracking-wider active:scale-95 text-center min-h-[44px]"
               >
                 <span>Proyectos</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#E30613] shrink-0" />
