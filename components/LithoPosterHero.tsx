@@ -6,6 +6,7 @@ import {
   Sparkles,
   MessageCircle,
   ArrowRight,
+  Truck,
 } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
 
@@ -274,7 +275,7 @@ export function LithoPosterHero() {
           </p>
 
           {/* Action Buttons (CTAs) */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto mb-6">
             <Link
               href="/cotizador"
               onClick={() => triggerHaptic(10)}
@@ -304,6 +305,14 @@ export function LithoPosterHero() {
                 <span>Proyectos</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#E30613] shrink-0" />
               </Link>
+            </div>
+          </div>
+
+          {/* Despacho a Toda Colombia */}
+          <div className="pt-5 border-t border-zinc-200/60 w-full flex items-center justify-center">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/70 border border-white/90 text-xs font-mono font-medium text-zinc-800 shadow-2xs">
+              <Truck className="w-3.5 h-3.5 text-[#E30613]" />
+              <span>Despacho a toda Colombia</span>
             </div>
           </div>
         </div>
