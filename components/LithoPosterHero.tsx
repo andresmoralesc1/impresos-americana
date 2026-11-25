@@ -6,7 +6,6 @@ import {
   Sparkles,
   MessageCircle,
   ArrowRight,
-  Truck,
 } from "lucide-react";
 import { triggerHaptic } from "@/lib/haptics";
 
@@ -212,7 +211,7 @@ export function LithoPosterHero() {
       {/* 1. CONTINUOUS STREAMING TYPOGRAPHY BACKGROUND (LIGHT PAPER)   */}
       {/* ============================================================== */}
       <div
-        className="absolute inset-[-20%] pointer-events-none flex flex-col justify-center gap-4 sm:gap-6 opacity-[0.55] rotate-[-5deg] overflow-hidden z-0"
+        className="absolute inset-[-20%] pointer-events-none flex flex-col justify-center gap-4 sm:gap-6 opacity-[0.40] rotate-[-5deg] overflow-hidden z-0"
         aria-hidden="true"
       >
         {rows.map(({ row, half, span, duration, dir }) => (
@@ -262,20 +261,20 @@ export function LithoPosterHero() {
       {/* ============================================================== */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center">
         
-        {/* Main Central Presentation Card with Frosted Glossy Glass */}
-        <div className="w-full bg-white/10 sm:bg-white/15 backdrop-blur-[3.5px] rounded-3xl border border-white/80 shadow-[0_16px_40px_rgba(0,0,0,0.06)] ring-1 ring-white/60 p-6 sm:p-10 md:p-12 flex flex-col items-center">
+        {/* Main Central Presentation Card with Enhanced Contrast Frosted Glass */}
+        <div className="w-full bg-white/40 sm:bg-white/50 backdrop-blur-md rounded-3xl border border-white/90 shadow-[0_20px_50px_rgba(0,0,0,0.07)] ring-1 ring-white/70 p-6 sm:p-10 md:p-12 flex flex-col items-center">
           {/* Main Headline: Clean, Punchy & High Contrast */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-montserrat font-black uppercase tracking-tight text-zinc-950 leading-[1.08] mb-5">
             Ingeniería Gráfica &amp; <span className="text-[#E30613]">Producción Industrial</span>
           </h1>
 
           {/* Value Proposition Description */}
-          <p className="text-sm sm:text-base lg:text-lg text-zinc-900 max-w-2xl mx-auto leading-relaxed font-medium mb-8">
+          <p className="text-sm sm:text-base lg:text-lg text-zinc-800 max-w-2xl mx-auto leading-relaxed font-normal mb-8">
             Fabricación directa en San Nicolás, Cali: exhibidores de piso reforzados, cajas rígidas, catálogos en offset y gran formato UV con despacho coordinado a toda Colombia sin intermediarios.
           </p>
 
           {/* Action Buttons (CTAs) */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto mb-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
             <Link
               href="/cotizador"
               onClick={() => triggerHaptic(10)}
@@ -305,14 +304,6 @@ export function LithoPosterHero() {
                 <span>Proyectos</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#E30613] shrink-0" />
               </Link>
-            </div>
-          </div>
-
-          {/* Despacho a Toda Colombia */}
-          <div className="pt-5 border-t border-zinc-900/10 w-full flex items-center justify-center">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/40 border border-white/60 text-xs font-mono font-semibold text-zinc-900 shadow-2xs backdrop-blur-xs">
-              <Truck className="w-3.5 h-3.5 text-[#E30613]" />
-              <span>Despacho a toda Colombia</span>
             </div>
           </div>
         </div>
